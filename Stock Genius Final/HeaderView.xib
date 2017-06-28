@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HeaderView" customModule="Stock_Genius_Final" customModuleProvider="target">
+            <connections>
+                <outlet property="adjustableContainerView" destination="PCa-fe-R59" id="lPG-Zv-6gw"/>
+                <outlet property="adjustableViewBottomConstraint" destination="wGO-TL-79p" id="P9x-PF-0Pb"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="gNc-jX-OGh"/>
+                <outlet property="mainLabel" destination="p08-cN-jHz" id="R5M-x2-xYO"/>
+                <outlet property="mainLabelTopConstraint" destination="c9m-uq-3Bf" id="EQ8-ca-pMh"/>
+                <outlet property="secondaryLabel" destination="YSW-in-SpT" id="1FE-P8-sz7"/>
+                <outlet property="seperatorView" destination="Cq1-MJ-uyK" id="dVl-YV-vs2"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PCa-fe-R59">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Identified from 13-F data on 3.31.2017" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YSW-in-SpT">
+                            <rect key="frame" x="10" y="84" width="355" height="15"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="15" id="46G-ef-Lak"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Picks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p08-cN-jHz">
+                            <rect key="frame" x="10" y="45" width="355" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="eUk-1u-lOa"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </label>
+                        <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cq1-MJ-uyK">
+                            <rect key="frame" x="10" y="109" width="355" height="1"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="TGs-rW-W0t"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="Cq1-MJ-uyK" secondAttribute="bottom" id="22w-Mm-DsH"/>
+                        <constraint firstAttribute="bottom" secondItem="YSW-in-SpT" secondAttribute="bottom" constant="11" id="Oea-9t-NdK"/>
+                        <constraint firstItem="p08-cN-jHz" firstAttribute="leading" secondItem="PCa-fe-R59" secondAttribute="leading" constant="10" id="ThC-Ep-lb0"/>
+                        <constraint firstItem="Cq1-MJ-uyK" firstAttribute="leading" secondItem="PCa-fe-R59" secondAttribute="leading" constant="10" id="YQs-pb-7nu"/>
+                        <constraint firstItem="YSW-in-SpT" firstAttribute="leading" secondItem="PCa-fe-R59" secondAttribute="leadingMargin" constant="2" id="c0G-Uh-29j"/>
+                        <constraint firstItem="p08-cN-jHz" firstAttribute="top" secondItem="PCa-fe-R59" secondAttribute="top" constant="45" id="c9m-uq-3Bf"/>
+                        <constraint firstAttribute="trailing" secondItem="Cq1-MJ-uyK" secondAttribute="trailing" constant="10" id="gAb-Zk-1Ut"/>
+                        <constraint firstItem="YSW-in-SpT" firstAttribute="leading" secondItem="PCa-fe-R59" secondAttribute="leading" constant="10" id="nks-Uc-yHq"/>
+                        <constraint firstAttribute="trailing" secondItem="p08-cN-jHz" secondAttribute="trailing" constant="10" id="pX2-5K-wb4"/>
+                        <constraint firstItem="YSW-in-SpT" firstAttribute="leading" secondItem="PCa-fe-R59" secondAttribute="leadingMargin" constant="2" id="pkI-V1-JUY"/>
+                        <constraint firstAttribute="trailing" secondItem="YSW-in-SpT" secondAttribute="trailing" constant="10" id="tLH-tJ-NtA"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="PCa-fe-R59" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="E3Z-gJ-6R0"/>
+                <constraint firstItem="PCa-fe-R59" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KiS-hY-pOK"/>
+                <constraint firstAttribute="trailing" secondItem="PCa-fe-R59" secondAttribute="trailing" id="qay-UC-f4u"/>
+                <constraint firstAttribute="bottom" secondItem="PCa-fe-R59" secondAttribute="bottom" id="wGO-TL-79p"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="95.5" y="-219"/>
+        </view>
+    </objects>
+</document>
