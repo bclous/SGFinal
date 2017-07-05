@@ -1,18 +1,18 @@
 //
-//  PastPicksSectionHeaderView.swift
+//  PastPicksPerformanceView.swift
 //  Stock Genius Final
 //
-//  Created by Brian Clouser on 6/29/17.
+//  Created by Brian Clouser on 7/5/17.
 //  Copyright © 2017 Clouser. All rights reserved.
 //
 
 import UIKit
 
-class PastPicksSectionHeaderView: UIView {
+class PastPicksPerformanceView: UIView {
 
+    @IBOutlet weak var SGGraphView: UIView!
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var timePeriodLabel: UILabel!
+    @IBOutlet weak var indexGraphView: UIView!
     
     override init(frame: CGRect) { // for using CustomView in code
         super.init(frame: frame)
@@ -25,7 +25,7 @@ class PastPicksSectionHeaderView: UIView {
     }
     
     private func commonInit() {
-        Bundle.main.loadNibNamed("PastPicksSectionHeaderView", owner: self, options: nil)
+        Bundle.main.loadNibNamed("PastPicksPerformanceView", owner: self, options: nil)
         guard let content = contentView else { return }
         self.addSubview(content)
         content.translatesAutoresizingMaskIntoConstraints = false
@@ -35,12 +35,8 @@ class PastPicksSectionHeaderView: UIView {
         content.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         contentView.backgroundColor = SGConstants.mainBlackColor
         
+        SGGraphView.layer.cornerRadius = 5
+        indexGraphView.layer.cornerRadius = 5
+        
     }
-    
-    public func formatViewWithPortfolio(_ portfolio: PastPortfolio) {
-        nameLabel.text = portfolio.name
-        timePeriodLabel.text = portfolio.dateString(date: portfolio.startDate) + " - " + portfolio.dateString(date: portfolio.endDate)
-    }
-
-
 }

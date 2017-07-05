@@ -1,18 +1,18 @@
 //
-//  PastPicksSectionHeaderView.swift
+//  NextUpdateView.swift
 //  Stock Genius Final
 //
-//  Created by Brian Clouser on 6/29/17.
+//  Created by Brian Clouser on 7/1/17.
 //  Copyright © 2017 Clouser. All rights reserved.
 //
 
 import UIKit
 
-class PastPicksSectionHeaderView: UIView {
+class NextUpdateView: UIView {
 
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var timePeriodLabel: UILabel!
+    @IBOutlet weak var mainLabel: UILabel!
+    
     
     override init(frame: CGRect) { // for using CustomView in code
         super.init(frame: frame)
@@ -25,7 +25,7 @@ class PastPicksSectionHeaderView: UIView {
     }
     
     private func commonInit() {
-        Bundle.main.loadNibNamed("PastPicksSectionHeaderView", owner: self, options: nil)
+        Bundle.main.loadNibNamed("NextUpdateView", owner: self, options: nil)
         guard let content = contentView else { return }
         self.addSubview(content)
         content.translatesAutoresizingMaskIntoConstraints = false
@@ -33,14 +33,13 @@ class PastPicksSectionHeaderView: UIView {
         content.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         content.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         content.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        contentView.backgroundColor = SGConstants.mainBlackColor
         
     }
     
-    public func formatViewWithPortfolio(_ portfolio: PastPortfolio) {
-        nameLabel.text = portfolio.name
-        timePeriodLabel.text = portfolio.dateString(date: portfolio.startDate) + " - " + portfolio.dateString(date: portfolio.endDate)
+    public func updateViewWithDays(_ days: Int) {
+    
+        let dayString = days == 1 ? "day" : "days"
+        mainLabel.text = "Next pick update: \(days)" + " " + dayString
     }
-
 
 }

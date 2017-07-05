@@ -21,6 +21,10 @@ class PastPicksStockCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        contentView.backgroundColor = SGConstants.mainBlackColor
+        percentageChangeContainerView.layer.cornerRadius = 5
+        directionImageView.image = UIImage(named: "upImage")
+        percentageChangeContainerView.backgroundColor = SGConstants.mainGreenColor
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

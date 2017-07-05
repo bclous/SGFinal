@@ -1,14 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6El-mJ-Gim">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6El-mJ-Gim">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Item-->
+        <scene sceneID="WRv-Ci-B0N">
+            <objects>
+                <viewController id="n4x-we-uY2" customClass="CalculatorVC" customModule="Stock_Genius_Final" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9AT-ha-q31"/>
+                        <viewControllerLayoutGuide type="bottom" id="EVo-NW-cIK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hcN-OU-Fcu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HHN-ZA-6LN" customClass="HeaderView" customModule="Stock_Genius_Final" customModuleProvider="target">
+                                <rect key="frame" x="-0.5" y="44" width="375" height="110"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="f6H-So-VvP"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LLg-Ok-G53">
+                                <rect key="frame" x="0.0" y="94" width="375" height="524"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="HHN-ZA-6LN" firstAttribute="top" secondItem="9AT-ha-q31" secondAttribute="bottom" constant="-20" id="0PN-Ag-kNK"/>
+                            <constraint firstItem="HHN-ZA-6LN" firstAttribute="width" secondItem="hcN-OU-Fcu" secondAttribute="width" id="7fw-2F-t14"/>
+                            <constraint firstItem="LLg-Ok-G53" firstAttribute="width" secondItem="hcN-OU-Fcu" secondAttribute="width" id="JVh-Wy-SbH"/>
+                            <constraint firstItem="HHN-ZA-6LN" firstAttribute="centerX" secondItem="hcN-OU-Fcu" secondAttribute="centerX" id="bwa-Wh-GQK"/>
+                            <constraint firstItem="LLg-Ok-G53" firstAttribute="top" secondItem="9AT-ha-q31" secondAttribute="bottom" constant="30" id="dtj-Ek-l5f"/>
+                            <constraint firstItem="EVo-NW-cIK" firstAttribute="top" secondItem="LLg-Ok-G53" secondAttribute="bottom" id="foQ-tD-qtA"/>
+                            <constraint firstItem="LLg-Ok-G53" firstAttribute="centerX" secondItem="hcN-OU-Fcu" secondAttribute="centerX" id="w2Q-0U-aw5"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="Nwa-kc-6mr"/>
+                    <connections>
+                        <outlet property="headerView" destination="HHN-ZA-6LN" id="fqA-2D-VqY"/>
+                        <outlet property="mainTableView" destination="LLg-Ok-G53" id="TmS-5L-w1V"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fAQ-1S-J5a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2558" y="707"/>
+        </scene>
         <!--Item-->
         <scene sceneID="yIl-x8-aO8">
             <objects>
@@ -29,7 +73,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Z11-46-VCX">
-                                <rect key="frame" x="0.0" y="104" width="375" height="514"/>
+                                <rect key="frame" x="0.0" y="94" width="375" height="524"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="basicCell" textLabel="fAG-ND-NQv" style="IBUITableViewCellStyleDefault" id="brq-Zp-U5M">
@@ -51,12 +95,22 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFX-Lh-kfK" customClass="NextUpdateView" customModule="Stock_Genius_Final" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="588" width="375" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="4Co-PL-MJO"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="zFX-Lh-kfK" firstAttribute="centerX" secondItem="Jmf-Br-R1H" secondAttribute="centerX" id="65T-nb-9Mr"/>
                             <constraint firstItem="ceF-R2-DQO" firstAttribute="width" secondItem="Jmf-Br-R1H" secondAttribute="width" id="FUk-hJ-QDP"/>
-                            <constraint firstItem="Z11-46-VCX" firstAttribute="top" secondItem="MiS-Zk-NI8" secondAttribute="bottom" constant="40" id="JjI-YI-b2t"/>
+                            <constraint firstItem="Z11-46-VCX" firstAttribute="top" secondItem="MiS-Zk-NI8" secondAttribute="bottom" constant="30" id="JjI-YI-b2t"/>
                             <constraint firstItem="ceF-R2-DQO" firstAttribute="top" secondItem="MiS-Zk-NI8" secondAttribute="bottom" constant="-20" id="M1x-9v-8HS"/>
+                            <constraint firstItem="zFX-Lh-kfK" firstAttribute="width" secondItem="Jmf-Br-R1H" secondAttribute="width" id="Sxh-gx-Br1"/>
+                            <constraint firstItem="jQw-e6-zRZ" firstAttribute="top" secondItem="zFX-Lh-kfK" secondAttribute="bottom" id="aPj-66-531"/>
                             <constraint firstItem="ceF-R2-DQO" firstAttribute="centerX" secondItem="Jmf-Br-R1H" secondAttribute="centerX" id="jDY-e0-aaF"/>
                             <constraint firstItem="Z11-46-VCX" firstAttribute="leading" secondItem="Jmf-Br-R1H" secondAttribute="leading" id="nPj-gK-v9z"/>
                             <constraint firstItem="jQw-e6-zRZ" firstAttribute="top" secondItem="Z11-46-VCX" secondAttribute="bottom" id="tgV-3y-KXX"/>
@@ -72,7 +126,52 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mNa-rn-92X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2567" y="-66"/>
+            <point key="canvasLocation" x="1758" y="708"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="Z3m-cX-eNz">
+            <objects>
+                <viewController id="h2R-2s-HGS" customClass="PastPicksVC" customModule="Stock_Genius_Final" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kHL-Le-orV"/>
+                        <viewControllerLayoutGuide type="bottom" id="7cI-Io-OXd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yoN-Jl-k4X">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HIy-nh-fab" customClass="HeaderView" customModule="Stock_Genius_Final" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="375" height="110"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="OV4-mA-kjU"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wYT-C1-UL7">
+                                <rect key="frame" x="0.0" y="94" width="375" height="524"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="HIy-nh-fab" firstAttribute="centerX" secondItem="yoN-Jl-k4X" secondAttribute="centerX" id="AEr-a5-YXM"/>
+                            <constraint firstItem="HIy-nh-fab" firstAttribute="width" secondItem="yoN-Jl-k4X" secondAttribute="width" id="CE7-gd-OGG"/>
+                            <constraint firstItem="wYT-C1-UL7" firstAttribute="top" secondItem="kHL-Le-orV" secondAttribute="bottom" constant="30" id="O8W-yq-ikp"/>
+                            <constraint firstItem="7cI-Io-OXd" firstAttribute="top" secondItem="wYT-C1-UL7" secondAttribute="bottom" id="SxI-rI-8Aj"/>
+                            <constraint firstItem="wYT-C1-UL7" firstAttribute="width" secondItem="yoN-Jl-k4X" secondAttribute="width" id="it3-Js-t2z"/>
+                            <constraint firstItem="HIy-nh-fab" firstAttribute="top" secondItem="kHL-Le-orV" secondAttribute="bottom" constant="-20" id="qkK-W3-Owu"/>
+                            <constraint firstItem="wYT-C1-UL7" firstAttribute="centerX" secondItem="yoN-Jl-k4X" secondAttribute="centerX" id="vR2-Kw-LJo"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="7sG-oq-K88"/>
+                    <connections>
+                        <outlet property="headerView" destination="HIy-nh-fab" id="ZbQ-zv-aO7"/>
+                        <outlet property="mainTableView" destination="wYT-C1-UL7" id="oPX-eh-tf2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Clo-fO-YRy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="993" y="707"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5UK-oD-Jb9">
@@ -95,7 +194,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="nQc-iW-Cj3">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="oIQ-VY-l3h" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="oIQ-VY-l3h" customClass="TabBarController" customModule="Stock_Genius_Final" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="S37-gx-muM"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="82h-Tf-ziU">
@@ -105,6 +204,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="GGX-60-1TX" kind="relationship" relationship="viewControllers" id="eUd-m1-3W8"/>
+                        <segue destination="h2R-2s-HGS" kind="relationship" relationship="viewControllers" id="gHH-Ob-fM6"/>
+                        <segue destination="n4x-we-uY2" kind="relationship" relationship="viewControllers" id="SuA-iv-mmf"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tQe-1U-8Ca" userLabel="First Responder" sceneMemberID="firstResponder"/>

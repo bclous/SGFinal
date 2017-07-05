@@ -24,6 +24,12 @@ class MainStockCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        percentageChangeContainerView.layer.cornerRadius = 10
+        //percentageChangeLabel.text = "1.9%"
+        dollarPriceLabel.text = "114.54"
+        companyNameLabel.text = "Apple Inc."
+        contentView.backgroundColor = SGConstants.mainBlackColor
+        customBackgroundView.alpha = 0.03
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -45,6 +51,7 @@ class MainStockCell: UITableViewCell {
         percentageChangeContainerView.backgroundColor = isPositive ? SGConstants.mainGreenColor : SGConstants.mainRedColor
         percentageChangeLabel.text = stock.percentageString(startPx: startingPx, endPx: stock.adjPriceCurrent)
         percentageChangeDirectionLabel.text = isPositive ? "+" : "-"
+
     
     }
 

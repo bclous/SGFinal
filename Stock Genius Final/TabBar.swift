@@ -30,9 +30,9 @@ class TabBar: UIView {
     weak var delegate : TabBarDelegate?
     var currentChoice : TabBarChoice = .currentPicks
     var activeImageAlpha : CGFloat = 1.0
-    var inactiveImageAlpha : CGFloat = 0.5
+    var inactiveImageAlpha : CGFloat = 0.25
     var activeLabelAlpha : CGFloat = 1.0
-    var inactiveLabelAlpha : CGFloat = 0.5
+    var inactiveLabelAlpha : CGFloat = 0.25
     
     
     override init(frame: CGRect) { // for using CustomView in code
@@ -54,9 +54,8 @@ class TabBar: UIView {
         content.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         content.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         content.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        index0Label.text = "PAST PICKS"
-        index1Label.text = "CURRENT"
-        index2Label.text = "SHARE CALC"
+        
+        adjustTabBarForChoice(.currentPicks)
     }
 
     @IBAction func buttonTapped(_ sender: UIButton) {
@@ -83,6 +82,7 @@ class TabBar: UIView {
         index0Label.alpha = index == .pastPicks ? activeLabelAlpha : inactiveLabelAlpha
         index1Label.alpha = index == .currentPicks ? activeLabelAlpha : inactiveLabelAlpha
         index2Label.alpha = index == .calculator ? activeLabelAlpha : inactiveLabelAlpha
+       
     }
 
 }

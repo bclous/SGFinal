@@ -77,6 +77,23 @@ class HeaderView: UIView {
         layoutIfNeeded()
         
     }
+    
+    public func formatHeaderViewForVC(_ type: TabBarChoice) {
+        
+        switch type {
+        case .currentPicks:
+            mainLabel.text = "Current Picks"
+            secondaryLabel.text = "Identified from 13-F data on 3/31/17"
+        case .calculator:
+            mainLabel.text = "Share Calculator"
+            secondaryLabel.text = "Tap to edit investment amount"
+        case .pastPicks:
+            mainLabel.text = "Past Picks"
+            secondaryLabel.text = "1/1/2010 - 3/1/2010 (24 quarters)"
+        }
+        
+        
+    }
 
 
 }

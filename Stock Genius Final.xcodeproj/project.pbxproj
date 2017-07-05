@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F16DF8D1F0D1815006C531E /* CalculatorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DF8C1F0D1815006C531E /* CalculatorVC.swift */; };
+		0F16DF8F1F0D1820006C531E /* PastPicksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DF8E1F0D1820006C531E /* PastPicksVC.swift */; };
+		0F16DF911F0D1AAE006C531E /* ShareCalcHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DF901F0D1AAE006C531E /* ShareCalcHeaderView.swift */; };
+		0F16DF931F0D1C1C006C531E /* ShareCalcCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DF921F0D1C1C006C531E /* ShareCalcCell.swift */; };
+		0F16DF951F0D265A006C531E /* PastPicksPerformanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DF941F0D265A006C531E /* PastPicksPerformanceView.swift */; };
 		0F2651D11F0535A100754D0F /* MainStockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2651C81F0535A100754D0F /* MainStockCell.xib */; };
 		0F2651D21F0535A100754D0F /* ShareCalcCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2651C91F0535A100754D0F /* ShareCalcCell.xib */; };
 		0F2651D31F0535A100754D0F /* ShareCalcHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2651CA1F0535A100754D0F /* ShareCalcHeader.xib */; };
@@ -27,6 +32,10 @@
 		0F2651EC1F05542A00754D0F /* PastPicksSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2651EB1F05542A00754D0F /* PastPicksSummaryCell.swift */; };
 		0F2651EE1F05583E00754D0F /* MainStockSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2651ED1F05583E00754D0F /* MainStockSummaryCell.swift */; };
 		0F2651F01F055D3C00754D0F /* PastPicksSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2651EF1F055D3C00754D0F /* PastPicksSectionHeaderView.swift */; };
+		0F5BE8F91F07F0FC00607D87 /* NextUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5BE8F81F07F0FC00607D87 /* NextUpdateView.swift */; };
+		0F5BE8FB1F07F51400607D87 /* MainStocksSectionHeaderToggle.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F5BE8FA1F07F51400607D87 /* MainStocksSectionHeaderToggle.xib */; };
+		0F5BE8FD1F07F5E200607D87 /* MainStocksSectionHeaderToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5BE8FC1F07F5E200607D87 /* MainStocksSectionHeaderToggle.swift */; };
+		0F5BE8FF1F07FCBC00607D87 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5BE8FE1F07FCBC00607D87 /* TabBarController.swift */; };
 		AB2FB9921F029BB700CA72B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FB9911F029BB700CA72B2 /* AppDelegate.swift */; };
 		AB2FB9941F029BB700CA72B2 /* CurrentPicksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FB9931F029BB700CA72B2 /* CurrentPicksVC.swift */; };
 		AB2FB9971F029BB700CA72B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB2FB9951F029BB700CA72B2 /* Main.storyboard */; };
@@ -41,6 +50,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F16DF8C1F0D1815006C531E /* CalculatorVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorVC.swift; sourceTree = "<group>"; };
+		0F16DF8E1F0D1820006C531E /* PastPicksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastPicksVC.swift; sourceTree = "<group>"; };
+		0F16DF901F0D1AAE006C531E /* ShareCalcHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCalcHeaderView.swift; sourceTree = "<group>"; };
+		0F16DF921F0D1C1C006C531E /* ShareCalcCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCalcCell.swift; sourceTree = "<group>"; };
+		0F16DF941F0D265A006C531E /* PastPicksPerformanceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastPicksPerformanceView.swift; sourceTree = "<group>"; };
 		0F2651C81F0535A100754D0F /* MainStockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainStockCell.xib; path = "../../SG supplement/SG supplement/MainStockCell.xib"; sourceTree = "<group>"; };
 		0F2651C91F0535A100754D0F /* ShareCalcCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShareCalcCell.xib; path = "../../SG supplement/SG supplement/ShareCalcCell.xib"; sourceTree = "<group>"; };
 		0F2651CA1F0535A100754D0F /* ShareCalcHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShareCalcHeader.xib; path = "../../SG supplement/SG supplement/ShareCalcHeader.xib"; sourceTree = "<group>"; };
@@ -61,6 +75,10 @@
 		0F2651EB1F05542A00754D0F /* PastPicksSummaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastPicksSummaryCell.swift; sourceTree = "<group>"; };
 		0F2651ED1F05583E00754D0F /* MainStockSummaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainStockSummaryCell.swift; sourceTree = "<group>"; };
 		0F2651EF1F055D3C00754D0F /* PastPicksSectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastPicksSectionHeaderView.swift; sourceTree = "<group>"; };
+		0F5BE8F81F07F0FC00607D87 /* NextUpdateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextUpdateView.swift; sourceTree = "<group>"; };
+		0F5BE8FA1F07F51400607D87 /* MainStocksSectionHeaderToggle.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainStocksSectionHeaderToggle.xib; sourceTree = "<group>"; };
+		0F5BE8FC1F07F5E200607D87 /* MainStocksSectionHeaderToggle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainStocksSectionHeaderToggle.swift; sourceTree = "<group>"; };
+		0F5BE8FE1F07FCBC00607D87 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		AB2FB98E1F029BB700CA72B2 /* Stock Genius Final.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stock Genius Final.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB2FB9911F029BB700CA72B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB2FB9931F029BB700CA72B2 /* CurrentPicksVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentPicksVC.swift; sourceTree = "<group>"; };
@@ -122,26 +140,35 @@
 				AB2FB9911F029BB700CA72B2 /* AppDelegate.swift */,
 				AB2FB9931F029BB700CA72B2 /* CurrentPicksVC.swift */,
 				AB2FB9951F029BB700CA72B2 /* Main.storyboard */,
+				0F16DF8C1F0D1815006C531E /* CalculatorVC.swift */,
+				0F16DF8E1F0D1820006C531E /* PastPicksVC.swift */,
+				0F5BE8FE1F07FCBC00607D87 /* TabBarController.swift */,
 				AB2FB9AC1F02CF8300CA72B2 /* SGConstants.swift */,
+				AB2FB9A81F02BB2800CA72B2 /* TabBar.swift */,
 				AB2FB9A61F029D6C00CA72B2 /* TabBar.xib */,
 				AB2FB9AA1F02CF0200CA72B2 /* HeaderView.xib */,
 				AB2FB9AE1F02E5E600CA72B2 /* HeaderView.swift */,
 				0F2651E61F053C2500754D0F /* Model */,
-				AB2FB9A81F02BB2800CA72B2 /* TabBar.swift */,
 				0F2651C81F0535A100754D0F /* MainStockCell.xib */,
 				0F2651DA1F05366D00754D0F /* MainStockCell.swift */,
 				0F2651C91F0535A100754D0F /* ShareCalcCell.xib */,
+				0F16DF921F0D1C1C006C531E /* ShareCalcCell.swift */,
 				0F2651CA1F0535A100754D0F /* ShareCalcHeader.xib */,
+				0F16DF901F0D1AAE006C531E /* ShareCalcHeaderView.swift */,
 				0F2651CB1F0535A100754D0F /* PastPicksStockCell.xib */,
 				0F2651E91F05467800754D0F /* PastPicksStockCell.swift */,
 				0F2651CC1F0535A100754D0F /* PastPicksSummaryCell.xib */,
+				0F5BE8FA1F07F51400607D87 /* MainStocksSectionHeaderToggle.xib */,
+				0F5BE8FC1F07F5E200607D87 /* MainStocksSectionHeaderToggle.swift */,
 				0F2651EB1F05542A00754D0F /* PastPicksSummaryCell.swift */,
 				0F2651CD1F0535A100754D0F /* PastPicksPerformanceView.xib */,
+				0F16DF941F0D265A006C531E /* PastPicksPerformanceView.swift */,
 				0F2651CE1F0535A100754D0F /* MainStockSummaryCell.xib */,
 				0F2651ED1F05583E00754D0F /* MainStockSummaryCell.swift */,
 				0F2651CF1F0535A100754D0F /* PastPicksSectionHeaderView.xib */,
 				0F2651EF1F055D3C00754D0F /* PastPicksSectionHeaderView.swift */,
 				0F2651D01F0535A100754D0F /* NextUpdateView.xib */,
+				0F5BE8F81F07F0FC00607D87 /* NextUpdateView.swift */,
 				AB2FB99B1F029BB700CA72B2 /* Assets.xcassets */,
 				AB2FB99D1F029BB700CA72B2 /* LaunchScreen.storyboard */,
 				AB2FB9A01F029BB700CA72B2 /* Info.plist */,
@@ -212,6 +239,7 @@
 			files = (
 				0F2651D41F0535A100754D0F /* PastPicksStockCell.xib in Resources */,
 				AB2FB99F1F029BB700CA72B2 /* LaunchScreen.storyboard in Resources */,
+				0F5BE8FB1F07F51400607D87 /* MainStocksSectionHeaderToggle.xib in Resources */,
 				AB2FB9AB1F02CF0200CA72B2 /* HeaderView.xib in Resources */,
 				0F2651D21F0535A100754D0F /* ShareCalcCell.xib in Resources */,
 				0F2651D71F0535A100754D0F /* MainStockSummaryCell.xib in Resources */,
@@ -234,10 +262,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F16DF951F0D265A006C531E /* PastPicksPerformanceView.swift in Sources */,
+				0F16DF911F0D1AAE006C531E /* ShareCalcHeaderView.swift in Sources */,
 				0F2651F01F055D3C00754D0F /* PastPicksSectionHeaderView.swift in Sources */,
+				0F16DF8F1F0D1820006C531E /* PastPicksVC.swift in Sources */,
 				0F2651DF1F05390A00754D0F /* PastStock.swift in Sources */,
+				0F16DF931F0D1C1C006C531E /* ShareCalcCell.swift in Sources */,
+				0F5BE8FD1F07F5E200607D87 /* MainStocksSectionHeaderToggle.swift in Sources */,
 				0F2651E51F053BAE00754D0F /* NewsItem.swift in Sources */,
 				AB2FB9941F029BB700CA72B2 /* CurrentPicksVC.swift in Sources */,
+				0F16DF8D1F0D1815006C531E /* CalculatorVC.swift in Sources */,
 				AB2FB9AF1F02E5E600CA72B2 /* HeaderView.swift in Sources */,
 				0F2651E81F053E4600754D0F /* Stock.swift in Sources */,
 				AB2FB9921F029BB700CA72B2 /* AppDelegate.swift in Sources */,
@@ -246,6 +280,8 @@
 				0F2651DB1F05366D00754D0F /* MainStockCell.swift in Sources */,
 				0F2651EA1F05467800754D0F /* PastPicksStockCell.swift in Sources */,
 				AB2FB9AD1F02CF8300CA72B2 /* SGConstants.swift in Sources */,
+				0F5BE8FF1F07FCBC00607D87 /* TabBarController.swift in Sources */,
+				0F5BE8F91F07F0FC00607D87 /* NextUpdateView.swift in Sources */,
 				0F2651EC1F05542A00754D0F /* PastPicksSummaryCell.swift in Sources */,
 				0F2651EE1F05583E00754D0F /* MainStockSummaryCell.swift in Sources */,
 				0F2651E11F053A4C00754D0F /* CurrentPortfolio.swift in Sources */,
