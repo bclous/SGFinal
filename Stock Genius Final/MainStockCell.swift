@@ -29,7 +29,7 @@ class MainStockCell: UITableViewCell {
         dollarPriceLabel.text = "114.54"
         companyNameLabel.text = "Apple Inc."
         contentView.backgroundColor = SGConstants.mainBlackColor
-        customBackgroundView.alpha = 0.03
+        customBackgroundView.alpha = 0.1
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
