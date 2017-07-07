@@ -28,6 +28,7 @@ class PastStock: Stock {
     public func updatePastStockValues(dictionary: Dictionary<String, Any>) {
         companyName = dictionary["name"] as? String ?? ""
         ticker = dictionary["ticker"] as? String ?? ""
+        note = dictionary["note"] as? String ?? ""
         adjPriceStartDate = dictionary["startPx"] as? Float ?? 0
         adjPriceEndDate = dictionary["endPx"] as? Float ?? 0
         finalPercentageReturn = adjPriceEndDate == 0 ? 0 : 1 - (adjPriceEndDate / adjPriceStartDate)

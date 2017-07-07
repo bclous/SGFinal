@@ -19,8 +19,10 @@ class TabBarController: UITabBarController, TabBarDelegate, DataStoreDelegate {
     
     func pricePullComplete(success: Bool) {
         
-        // reload calculator and current picks
-        // hide splash screen
+        let currentPicksVC = viewControllers?[0] as! CurrentPicksVC
+        currentPicksVC.readyToPresent()
+        let pastPicksVC = viewControllers?[1] as! PastPicksVC
+        pastPicksVC.readyToPresent()
         
     }
     

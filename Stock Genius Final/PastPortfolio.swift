@@ -18,7 +18,6 @@ class PastPortfolio: NSObject {
     var index : PastStock
     var note : String
     
-    
     override init() {
         self.startDate = ""
         self.endDate = ""
@@ -27,6 +26,7 @@ class PastPortfolio: NSObject {
         self.holdings = []
         self.index = PastStock()
         self.note = ""
+        self.rank = 0
         super.init()
     }
     
@@ -56,11 +56,24 @@ class PastPortfolio: NSObject {
         
     }
     
+    public func numberOfRowsForPastPortfolio() -> Int {
+        var notes = 0
+        for stock in holdings {
+            print("\(stock.ticker) has a note of: \(stock.note)")
+            if stock.note != "" {
+                notes += 1
+            }
+        }
+        
+        return 10 + notes
+    }
+    
     public func updatePastPortfolioValues(dictionary: Dictionary<String, Any>) {
         name = dictionary["name"] as? String ?? ""
         startDate = dictionary["startDate"] as? String ?? ""
         endDate = dictionary["endDate"] as? String ?? ""
         note = dictionary["note"] as? String ?? ""
+        rank = dictionary["rank"] as? Int ?? 0
         
         let holdingsDictionary = dictionary["holdings"] as? Dictionary<String, Any>
         if holdingsDictionary != nil {
@@ -82,5 +95,42 @@ class PastPortfolio: NSObject {
             
         }
     }
+    
+    public func notesForPastPortfolio() -> [String] {
+        
+        var notes : [String] = []
+        for stock in holdings {
+            if stock.note != "" {
+                notes.append(stock.note)
+            }
+        }
+        return notes
+    }
+    
+    public func startDateString() -> String {
+        return stringFromDateString(startDate) ?? startDate
+    }
+    
+    public func endDateString() -> String {
+        
+        return stringFromDateString(endDate) ?? endDate
+        
+    }
+    
+    public func stringFromDateString(_ originalString: String) -> String? {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        let date = dateFormatter.date(from: originalString)
+        dateFormatter.dateFormat = "M.d.yyyy"
+        
+        if let date = date {
+            return dateFormatter.string(from: date)
+        } else {
+            return nil
+        }
+        
+    }
+
     
 }

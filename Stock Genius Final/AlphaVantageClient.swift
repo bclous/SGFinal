@@ -58,10 +58,6 @@ class AlphaVantageClient: NSObject {
         
     }
     
-    
-    
-    
-    
     private func mostRecentPriceFromDate(_ date: Date, response: Dictionary<String, Any>) -> Float? {
         
         let todayPrice = adjustedCloseForDate(date, response: response)

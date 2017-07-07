@@ -25,6 +25,7 @@ class PastPicksStockCell: UITableViewCell {
         percentageChangeContainerView.layer.cornerRadius = 5
         directionImageView.image = UIImage(named: "upImage")
         percentageChangeContainerView.backgroundColor = SGConstants.mainGreenColor
+        companyNameLabel.textColor = SGConstants.fontColorWhiteSecondary
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -39,7 +40,7 @@ class PastPicksStockCell: UITableViewCell {
         tickerLabel.text = stock.ticker
         companyNameLabel.text = stock.companyName
         directionImageView.image = stock.dollarChangeImage(startPx: stock.adjPriceStartDate, endPx: stock.adjPriceEndDate)
-        priceChangeLabel.text = stock.priceString(stock.adjPriceEndDate - stock.adjPriceStartDate)
+        priceChangeLabel.text = stock.priceString(abs(stock.adjPriceEndDate - stock.adjPriceStartDate))
         percentageChangeContainerView.backgroundColor = isPositive ? SGConstants.mainGreenColor : SGConstants.mainRedColor
         percentageChangeLabel.text = stock.percentageString(startPx: stock.adjPriceStartDate, endPx: stock.adjPriceEndDate)
         percentageDirectionLabel.text = isPositive ? "+" : "-"

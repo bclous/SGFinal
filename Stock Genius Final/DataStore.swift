@@ -63,6 +63,18 @@ class DataStore: NSObject, AlphaVantageClientDelegate, FirebaseClientDelegate {
 
     }
     
+    public func pastPortfoliosString() -> String {
+        
+        if pastPortfolios.count == 0 {
+            return "no data"
+        } else {
+            let startString = pastPortfolios[0].startDateString()
+            let endDateString = pastPortfolios.last?.endDateString()
+            
+            return startString + " - " + endDateString! + " (\(pastPortfolios.count) quarters)"
+        }
+    }
+    
     
     // private helper methods
     
@@ -92,7 +104,7 @@ class DataStore: NSObject, AlphaVantageClientDelegate, FirebaseClientDelegate {
     }
     
     private func sortPastPortfolios() {
-       
+        pastPortfolios.sort(by: {$0.rank > $1.rank})
     }
     
     

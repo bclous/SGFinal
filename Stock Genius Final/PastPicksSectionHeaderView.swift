@@ -39,7 +39,7 @@ class PastPicksSectionHeaderView: UIView {
     
     public func formatViewWithPortfolio(_ portfolio: PastPortfolio) {
         nameLabel.text = portfolio.name
-        timePeriodLabel.text = portfolio.startDate + " - " + portfolio.endDate
+        timePeriodLabel.text = portfolio.startDateString() + " - " + portfolio.endDateString()
     }
 
 
