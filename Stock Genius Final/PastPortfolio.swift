@@ -10,21 +10,23 @@ import UIKit
 
 class PastPortfolio: NSObject {
     
-    var startDate : Date
-    var endDate : Date
+    var startDate : String
+    var endDate : String
     var name : String
     var rank : Int
     var holdings : [PastStock]
     var index : PastStock
+    var note : String
     
     
     override init() {
-        self.startDate = Date()
-        self.endDate = Date()
+        self.startDate = ""
+        self.endDate = ""
         self.name = ""
         self.rank = 0
         self.holdings = []
         self.index = PastStock()
+        self.note = ""
         super.init()
     }
     
@@ -54,9 +56,31 @@ class PastPortfolio: NSObject {
         
     }
     
+    public func updatePastPortfolioValues(dictionary: Dictionary<String, Any>) {
+        name = dictionary["name"] as? String ?? ""
+        startDate = dictionary["startDate"] as? String ?? ""
+        endDate = dictionary["endDate"] as? String ?? ""
+        note = dictionary["note"] as? String ?? ""
+        
+        let holdingsDictionary = dictionary["holdings"] as? Dictionary<String, Any>
+        if holdingsDictionary != nil {
+            
+            let keys = holdingsDictionary!.keys
+            for key in keys {
+                let pastStockDictionary = holdingsDictionary![key] as! Dictionary<String, Any>
+                if key == "index" {
+                    index.updatePastStockValues(dictionary: pastStockDictionary)
+                } else {
+                    let newPastStock = PastStock()
+                    newPastStock.updatePastStockValues(dictionary: pastStockDictionary)
+                    holdings.append(newPastStock)
+                }
+                
+            }
+            
+            holdings.sort(by: {$0.rankInPortfolio < $1.rankInPortfolio})
+            
+        }
+    }
     
-    
-    
-    
-
 }

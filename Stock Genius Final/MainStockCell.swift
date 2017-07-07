@@ -45,7 +45,7 @@ class MainStockCell: UITableViewCell {
         tickerLabel.text = stock.ticker
         companyNameLabel.text = stock.companyName
         dollarPriceLabel.text = stock.priceString(stock.adjPriceCurrent)
-        priceChangeLabel.text = stock.priceString(stock.adjPriceCurrent - startingPx)
+        priceChangeLabel.text = stock.priceString(abs(stock.adjPriceCurrent - startingPx))
         priceDirectionImageView.image = stock.dollarChangeImage(startPx: startingPx, endPx: stock.adjPriceCurrent)
         percentageChangeContainerView.layer.cornerRadius = 10
         percentageChangeContainerView.backgroundColor = isPositive ? SGConstants.mainGreenColor : SGConstants.mainRedColor

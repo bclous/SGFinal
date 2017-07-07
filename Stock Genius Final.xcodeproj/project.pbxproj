@@ -12,6 +12,14 @@
 		0F16DF911F0D1AAE006C531E /* ShareCalcHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DF901F0D1AAE006C531E /* ShareCalcHeaderView.swift */; };
 		0F16DF931F0D1C1C006C531E /* ShareCalcCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DF921F0D1C1C006C531E /* ShareCalcCell.swift */; };
 		0F16DF951F0D265A006C531E /* PastPicksPerformanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DF941F0D265A006C531E /* PastPicksPerformanceView.swift */; };
+		0F16DF981F0D8A59006C531E /* TestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DF961F0D8A59006C531E /* TestCell.swift */; };
+		0F16DF991F0D8A59006C531E /* TestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F16DF971F0D8A59006C531E /* TestCell.xib */; };
+		0F16DF9B1F0D8E31006C531E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0F16DF9A1F0D8E31006C531E /* GoogleService-Info.plist */; };
+		0F16DF9D1F0D9461006C531E /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DF9C1F0D9461006C531E /* DataStore.swift */; };
+		0F16DF9F1F0D980A006C531E /* FirebaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DF9E1F0D980A006C531E /* FirebaseClient.swift */; };
+		0F16DFA11F0E6B8C006C531E /* AlphaVantageClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DFA01F0E6B8C006C531E /* AlphaVantageClient.swift */; };
+		0F16DFAC1F0F17D3006C531E /* NextTwentyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DFAA1F0F17D3006C531E /* NextTwentyCell.swift */; };
+		0F16DFAD1F0F17D3006C531E /* NextTwentyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F16DFAB1F0F17D3006C531E /* NextTwentyCell.xib */; };
 		0F2651D11F0535A100754D0F /* MainStockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2651C81F0535A100754D0F /* MainStockCell.xib */; };
 		0F2651D21F0535A100754D0F /* ShareCalcCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2651C91F0535A100754D0F /* ShareCalcCell.xib */; };
 		0F2651D31F0535A100754D0F /* ShareCalcHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2651CA1F0535A100754D0F /* ShareCalcHeader.xib */; };
@@ -47,6 +55,7 @@
 		AB2FB9AB1F02CF0200CA72B2 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB2FB9AA1F02CF0200CA72B2 /* HeaderView.xib */; };
 		AB2FB9AD1F02CF8300CA72B2 /* SGConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FB9AC1F02CF8300CA72B2 /* SGConstants.swift */; };
 		AB2FB9AF1F02E5E600CA72B2 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FB9AE1F02E5E600CA72B2 /* HeaderView.swift */; };
+		C152982D3F833F2BE5B80B8C /* Pods_Stock_Genius_Final.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C74F60C7E6E21DB412592A9 /* Pods_Stock_Genius_Final.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +64,14 @@
 		0F16DF901F0D1AAE006C531E /* ShareCalcHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCalcHeaderView.swift; sourceTree = "<group>"; };
 		0F16DF921F0D1C1C006C531E /* ShareCalcCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCalcCell.swift; sourceTree = "<group>"; };
 		0F16DF941F0D265A006C531E /* PastPicksPerformanceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastPicksPerformanceView.swift; sourceTree = "<group>"; };
+		0F16DF961F0D8A59006C531E /* TestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCell.swift; sourceTree = "<group>"; };
+		0F16DF971F0D8A59006C531E /* TestCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestCell.xib; sourceTree = "<group>"; };
+		0F16DF9A1F0D8E31006C531E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0F16DF9C1F0D9461006C531E /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		0F16DF9E1F0D980A006C531E /* FirebaseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseClient.swift; sourceTree = "<group>"; };
+		0F16DFA01F0E6B8C006C531E /* AlphaVantageClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlphaVantageClient.swift; sourceTree = "<group>"; };
+		0F16DFAA1F0F17D3006C531E /* NextTwentyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextTwentyCell.swift; sourceTree = "<group>"; };
+		0F16DFAB1F0F17D3006C531E /* NextTwentyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NextTwentyCell.xib; sourceTree = "<group>"; };
 		0F2651C81F0535A100754D0F /* MainStockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainStockCell.xib; path = "../../SG supplement/SG supplement/MainStockCell.xib"; sourceTree = "<group>"; };
 		0F2651C91F0535A100754D0F /* ShareCalcCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShareCalcCell.xib; path = "../../SG supplement/SG supplement/ShareCalcCell.xib"; sourceTree = "<group>"; };
 		0F2651CA1F0535A100754D0F /* ShareCalcHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShareCalcHeader.xib; path = "../../SG supplement/SG supplement/ShareCalcHeader.xib"; sourceTree = "<group>"; };
@@ -79,6 +96,8 @@
 		0F5BE8FA1F07F51400607D87 /* MainStocksSectionHeaderToggle.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainStocksSectionHeaderToggle.xib; sourceTree = "<group>"; };
 		0F5BE8FC1F07F5E200607D87 /* MainStocksSectionHeaderToggle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainStocksSectionHeaderToggle.swift; sourceTree = "<group>"; };
 		0F5BE8FE1F07FCBC00607D87 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		16B62DAFE1F169F454536BAB /* Pods-Stock Genius Final.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stock Genius Final.release.xcconfig"; path = "Pods/Target Support Files/Pods-Stock Genius Final/Pods-Stock Genius Final.release.xcconfig"; sourceTree = "<group>"; };
+		7C74F60C7E6E21DB412592A9 /* Pods_Stock_Genius_Final.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stock_Genius_Final.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB2FB98E1F029BB700CA72B2 /* Stock Genius Final.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stock Genius Final.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB2FB9911F029BB700CA72B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB2FB9931F029BB700CA72B2 /* CurrentPicksVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentPicksVC.swift; sourceTree = "<group>"; };
@@ -92,6 +111,7 @@
 		AB2FB9AA1F02CF0200CA72B2 /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		AB2FB9AC1F02CF8300CA72B2 /* SGConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SGConstants.swift; sourceTree = "<group>"; };
 		AB2FB9AE1F02E5E600CA72B2 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		D7A6D99B9C4D2906E749D4F2 /* Pods-Stock Genius Final.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stock Genius Final.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Stock Genius Final/Pods-Stock Genius Final.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,12 +119,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C152982D3F833F2BE5B80B8C /* Pods_Stock_Genius_Final.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06F23E7B7F4C4CAD505C5FFD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D7A6D99B9C4D2906E749D4F2 /* Pods-Stock Genius Final.debug.xcconfig */,
+				16B62DAFE1F169F454536BAB /* Pods-Stock Genius Final.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		0F2651E61F053C2500754D0F /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,11 +148,21 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		95E535158A9275AAFFF6958B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7C74F60C7E6E21DB412592A9 /* Pods_Stock_Genius_Final.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AB2FB9851F029BB700CA72B2 = {
 			isa = PBXGroup;
 			children = (
 				AB2FB9901F029BB700CA72B2 /* Stock Genius Final */,
 				AB2FB98F1F029BB700CA72B2 /* Products */,
+				06F23E7B7F4C4CAD505C5FFD /* Pods */,
+				95E535158A9275AAFFF6958B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -141,7 +181,12 @@
 				AB2FB9931F029BB700CA72B2 /* CurrentPicksVC.swift */,
 				AB2FB9951F029BB700CA72B2 /* Main.storyboard */,
 				0F16DF8C1F0D1815006C531E /* CalculatorVC.swift */,
+				0F16DFA01F0E6B8C006C531E /* AlphaVantageClient.swift */,
 				0F16DF8E1F0D1820006C531E /* PastPicksVC.swift */,
+				0F16DF961F0D8A59006C531E /* TestCell.swift */,
+				0F16DF971F0D8A59006C531E /* TestCell.xib */,
+				0F16DF9C1F0D9461006C531E /* DataStore.swift */,
+				0F16DF9E1F0D980A006C531E /* FirebaseClient.swift */,
 				0F5BE8FE1F07FCBC00607D87 /* TabBarController.swift */,
 				AB2FB9AC1F02CF8300CA72B2 /* SGConstants.swift */,
 				AB2FB9A81F02BB2800CA72B2 /* TabBar.swift */,
@@ -151,6 +196,8 @@
 				0F2651E61F053C2500754D0F /* Model */,
 				0F2651C81F0535A100754D0F /* MainStockCell.xib */,
 				0F2651DA1F05366D00754D0F /* MainStockCell.swift */,
+				0F16DFAA1F0F17D3006C531E /* NextTwentyCell.swift */,
+				0F16DFAB1F0F17D3006C531E /* NextTwentyCell.xib */,
 				0F2651C91F0535A100754D0F /* ShareCalcCell.xib */,
 				0F16DF921F0D1C1C006C531E /* ShareCalcCell.swift */,
 				0F2651CA1F0535A100754D0F /* ShareCalcHeader.xib */,
@@ -172,6 +219,7 @@
 				AB2FB99B1F029BB700CA72B2 /* Assets.xcassets */,
 				AB2FB99D1F029BB700CA72B2 /* LaunchScreen.storyboard */,
 				AB2FB9A01F029BB700CA72B2 /* Info.plist */,
+				0F16DF9A1F0D8E31006C531E /* GoogleService-Info.plist */,
 				AB2FB9981F029BB700CA72B2 /* Stock_Genius_Final.xcdatamodeld */,
 			);
 			path = "Stock Genius Final";
@@ -184,9 +232,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AB2FB9A31F029BB700CA72B2 /* Build configuration list for PBXNativeTarget "Stock Genius Final" */;
 			buildPhases = (
+				0BC8E38538F8CFB26C922A72 /* [CP] Check Pods Manifest.lock */,
 				AB2FB98A1F029BB700CA72B2 /* Sources */,
 				AB2FB98B1F029BB700CA72B2 /* Frameworks */,
 				AB2FB98C1F029BB700CA72B2 /* Resources */,
+				51B2C236F3142DFFEA398768 /* [CP] Embed Pods Frameworks */,
+				DAE7422C4A34954E2FF0E452 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -248,14 +299,65 @@
 				0F2651D81F0535A100754D0F /* PastPicksSectionHeaderView.xib in Resources */,
 				0F2651D51F0535A100754D0F /* PastPicksSummaryCell.xib in Resources */,
 				AB2FB99C1F029BB700CA72B2 /* Assets.xcassets in Resources */,
+				0F16DFAD1F0F17D3006C531E /* NextTwentyCell.xib in Resources */,
 				AB2FB9971F029BB700CA72B2 /* Main.storyboard in Resources */,
+				0F16DF9B1F0D8E31006C531E /* GoogleService-Info.plist in Resources */,
 				AB2FB9A71F029D6C00CA72B2 /* TabBar.xib in Resources */,
+				0F16DF991F0D8A59006C531E /* TestCell.xib in Resources */,
 				0F2651D11F0535A100754D0F /* MainStockCell.xib in Resources */,
 				0F2651D61F0535A100754D0F /* PastPicksPerformanceView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0BC8E38538F8CFB26C922A72 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		51B2C236F3142DFFEA398768 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Stock Genius Final/Pods-Stock Genius Final-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DAE7422C4A34954E2FF0E452 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Stock Genius Final/Pods-Stock Genius Final-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AB2FB98A1F029BB700CA72B2 /* Sources */ = {
@@ -269,20 +371,25 @@
 				0F2651DF1F05390A00754D0F /* PastStock.swift in Sources */,
 				0F16DF931F0D1C1C006C531E /* ShareCalcCell.swift in Sources */,
 				0F5BE8FD1F07F5E200607D87 /* MainStocksSectionHeaderToggle.swift in Sources */,
+				0F16DF9D1F0D9461006C531E /* DataStore.swift in Sources */,
 				0F2651E51F053BAE00754D0F /* NewsItem.swift in Sources */,
 				AB2FB9941F029BB700CA72B2 /* CurrentPicksVC.swift in Sources */,
 				0F16DF8D1F0D1815006C531E /* CalculatorVC.swift in Sources */,
+				0F16DF9F1F0D980A006C531E /* FirebaseClient.swift in Sources */,
 				AB2FB9AF1F02E5E600CA72B2 /* HeaderView.swift in Sources */,
 				0F2651E81F053E4600754D0F /* Stock.swift in Sources */,
 				AB2FB9921F029BB700CA72B2 /* AppDelegate.swift in Sources */,
 				AB2FB99A1F029BB700CA72B2 /* Stock_Genius_Final.xcdatamodeld in Sources */,
 				0F2651DD1F05374900754D0F /* CurrentStock.swift in Sources */,
+				0F16DFAC1F0F17D3006C531E /* NextTwentyCell.swift in Sources */,
+				0F16DF981F0D8A59006C531E /* TestCell.swift in Sources */,
 				0F2651DB1F05366D00754D0F /* MainStockCell.swift in Sources */,
 				0F2651EA1F05467800754D0F /* PastPicksStockCell.swift in Sources */,
 				AB2FB9AD1F02CF8300CA72B2 /* SGConstants.swift in Sources */,
 				0F5BE8FF1F07FCBC00607D87 /* TabBarController.swift in Sources */,
 				0F5BE8F91F07F0FC00607D87 /* NextUpdateView.swift in Sources */,
 				0F2651EC1F05542A00754D0F /* PastPicksSummaryCell.swift in Sources */,
+				0F16DFA11F0E6B8C006C531E /* AlphaVantageClient.swift in Sources */,
 				0F2651EE1F05583E00754D0F /* MainStockSummaryCell.swift in Sources */,
 				0F2651E11F053A4C00754D0F /* CurrentPortfolio.swift in Sources */,
 				AB2FB9A91F02BB2800CA72B2 /* TabBar.swift in Sources */,
@@ -407,6 +514,7 @@
 		};
 		AB2FB9A41F029BB700CA72B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7A6D99B9C4D2906E749D4F2 /* Pods-Stock Genius Final.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = WGMLG78T9W;
@@ -421,6 +529,7 @@
 		};
 		AB2FB9A51F029BB700CA72B2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 16B62DAFE1F169F454536BAB /* Pods-Stock Genius Final.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = WGMLG78T9W;

@@ -19,6 +19,8 @@ class MainStockSummaryCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        contentView.backgroundColor = SGConstants.mainBlackColor
+        percentageChangeContainerView.layer.cornerRadius = 10
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

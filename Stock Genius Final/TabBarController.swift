@@ -8,12 +8,30 @@
 
 import UIKit
 
-class TabBarController: UITabBarController, TabBarDelegate {
+class TabBarController: UITabBarController, TabBarDelegate, DataStoreDelegate {
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addCustomTabBar()
+        DataStore.shared.delegate = self
+    }
+    
+    func pricePullComplete(success: Bool) {
+        
+        // reload calculator and current picks
+        // hide splash screen
+        
+    }
+    
+    func firebasePullComplete(success: Bool) {
+        
+        // load up past picks
+    }
+    
+    func pricePullInProgress(percentageComplete: Float) {
+        
+        // set loading screen
     }
 
     
@@ -26,7 +44,6 @@ class TabBarController: UITabBarController, TabBarDelegate {
         customTabBar.rightAnchor.constraint(equalTo: tabBar.rightAnchor).isActive = true
         customTabBar.heightAnchor.constraint(equalTo: tabBar.heightAnchor).isActive = true
         customTabBar.delegate = self
-        
     }
     
     func indexChosen(_ index: TabBarChoice) {

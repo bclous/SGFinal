@@ -32,11 +32,11 @@ class Stock: NSObject {
     }
     
     public func percentageString(startPx: Float, endPx : Float) -> String {
-        return startPx == 0 ? "-" : percentageString(endPx / startPx)
+        return startPx == 0 ? "-" : percentageString(endPx / startPx - 1) + "%"
     }
     
     private func percentageString( _ change: Float) -> String {
-        return String(format: "%.1f", change * 100)
+        return String(format: "%.1f", abs(change * 100))
     }
     
     public func dollarChangeImage(startPx: Float, endPx: Float) -> UIImage? {
@@ -47,3 +47,4 @@ class Stock: NSObject {
     
 
 }
+    

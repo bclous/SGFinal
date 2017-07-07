@@ -7,16 +7,30 @@
 //
 
 import UIKit
+import Alamofire
 
 class CurrentPicksVC: UIViewController {
 
     @IBOutlet weak var mainTableView: UITableView!
     @IBOutlet weak var headerView: HeaderView!
+    var dataStore : DataStore?
+    var isTodayReturn = true
+    var ready = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         formatTableView()
         view.backgroundColor = SGConstants.mainBlackColor
+        dataStore = DataStore.shared
+        
+    }
+    
+    func readyToPresent() {
+        ready = true
+        mainTableView.reloadData()
+        headerView.secondaryLabel.text = "Identified from 13-F data on " + DataStore.shared.currentPortfolio.startDateString()
+        
     }
 
 }
@@ -25,6 +39,9 @@ extension CurrentPicksVC : UITableViewDelegate, UITableViewDataSource, CurrentPi
     
     func formatTableView() {
         mainTableView.register(UINib(nibName: "MainStockCell", bundle: nil), forCellReuseIdentifier: "mainStockCell")
+        mainTableView.register(UINib(nibName: "NextTwentyCell", bundle: nil), forCellReuseIdentifier: "NextTwentyCell")
+        mainTableView.register(UINib(nibName: "MainStockSummaryCell", bundle: nil), forCellReuseIdentifier: "MainStockSummaryCell")
+        
         mainTableView.delegate = self
         mainTableView.dataSource = self
         mainTableView.separatorStyle = .none
@@ -35,12 +52,29 @@ extension CurrentPicksVC : UITableViewDelegate, UITableViewDataSource, CurrentPi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 0 : 30
+        return section == 0 ? 0 : 31
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "mainStockCell") as! MainStockCell
-        return cell
+        
+    
+        if indexPath.row == 13 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "NextTwentyCell") as! NextTwentyCell
+            return cell
+        } else if indexPath.row > 9 && indexPath.row < 13 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MainStockSummaryCell") as! MainStockSummaryCell
+            if ready {
+                cell.formatCellWithPortfolio(DataStore.shared.currentPortfolio, summaryType: summaryTypeForIndexPath(indexPath), isTodayReturn: isTodayReturn)
+            }
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "mainStockCell") as! MainStockCell
+            if ready {
+                cell.formatCellWithStock(DataStore.shared.currentPortfolio.holdings[arrayIndexFromIndexPath(indexPath)], isOneDayReturn: isTodayReturn)
+            }
+            
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -48,6 +82,8 @@ extension CurrentPicksVC : UITableViewDelegate, UITableViewDataSource, CurrentPi
         clearView.backgroundColor = UIColor.clear
         let toggleView = MainStocksSectionHeaderToggle()
         toggleView.delegate = self
+        toggleView.formatView(todayChosen: isTodayReturn)
+        toggleView.rightLabel.text = "SINCE " + DataStore.shared.currentPortfolio.startDateString()
         return section == 0 ? clearView : toggleView
         
     }
@@ -67,11 +103,41 @@ extension CurrentPicksVC : UITableViewDelegate, UITableViewDataSource, CurrentPi
     }
     
     func toggleTapped(typeChosen: CurrentPicksReturnType) {
-        // refresh table view
+        isTodayReturn = typeChosen == .today
+        mainTableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return false
+    }
+    
+    func arrayIndexFromIndexPath(_ indexPath: IndexPath) -> Int {
+        return indexPath.row < 10 ? indexPath.row : indexPath.row - 4
+    }
+    
+    func summaryTypeForIndexPath(_ indexPath: IndexPath) -> SummaryType {
+        switch indexPath.row {
+        case 10:
+            return .average
+        case 11:
+            return .index
+        case 12:
+            return .plusMinus
+        default:
+            return .average
+
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return section == 0 ? 0 : 31
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let clearView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        clearView.backgroundColor = UIColor.clear
+        return clearView
+
     }
     
 }

@@ -71,7 +71,7 @@ class MainStocksSectionHeaderToggle: UIView {
         rightLabel.text = "SINCE " + date
     }
     
-    private func formatView(todayChosen: Bool) {
+    public func formatView(todayChosen: Bool) {
         
         if isTodayChosen != todayChosen {
             leftView.backgroundColor = todayChosen ? SGConstants.mainBlueColor : SGConstants.mainBlackColor
