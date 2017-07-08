@@ -12,6 +12,7 @@ class PastPicksVC: UIViewController {
 
     @IBOutlet weak var headerView: HeaderView!
     @IBOutlet weak var mainTableView: UITableView!
+    let performanceView = PastPicksPerformanceView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,7 @@ class PastPicksVC: UIViewController {
     func readyToPresent() {
         mainTableView.reloadData()
         headerView.secondaryLabel.text = DataStore.shared.pastPortfoliosString()
+        performanceView.formatPerformanceHeaderView(performance: [DataStore.shared.totalStockGeniusPerformance, DataStore.shared.totalIndexPerformance], frameWidth: view.frame.width)
     }
 
     /*
@@ -48,6 +50,7 @@ extension PastPicksVC : UITableViewDelegate, UITableViewDataSource {
     func formatTableView() {
         mainTableView.register(UINib(nibName: "PastPicksStockCell", bundle: nil), forCellReuseIdentifier: "PastPicksStockCell")
         mainTableView.register(UINib(nibName: "PastPicksNoteCell", bundle: nil), forCellReuseIdentifier: "PastPicksNoteCell")
+        mainTableView.register(UINib(nibName: "PastPicksSummaryCell", bundle: nil), forCellReuseIdentifier: "PastPicksSummaryCell")
         mainTableView.delegate = self
         mainTableView.dataSource = self
         mainTableView.separatorStyle = .none
@@ -77,10 +80,14 @@ extension PastPicksVC : UITableViewDelegate, UITableViewDataSource {
             let stock = portfolio.holdings[indexPath.row]
             cell.formatCellWithPastStock(stock)
             return cell
+        } else if indexPath.row < 13 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PastPicksSummaryCell") as! PastPicksSummaryCell
+            cell.formatCellWithPortfolio(portfolio, summaryType: summaryTypeForIndexPath(indexPath))
+            return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PastPicksNoteCell") as! PastPicksNoteCell
             let notes = portfolio.notesForPastPortfolio()
-            cell.noteLabel.text = notes[indexPath.row - 10]
+            cell.noteLabel.text = notes[indexPath.row - 13]
             return cell
         }
     }
@@ -93,8 +100,7 @@ extension PastPicksVC : UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             return clearView
         } else if section == 1 {
-            let performanceView = PastPicksPerformanceView()
-            return performanceView
+            return self.performanceView
         } else {
             let quarterSummary = PastPicksSectionHeaderView()
             let portfolio = DataStore.shared.pastPortfolios[section - 2]
@@ -113,7 +119,7 @@ extension PastPicksVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.row < 10 ? 52 : 30
+        return indexPath.row < 13 ? 52 : 30
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -134,6 +140,20 @@ extension PastPicksVC : UITableViewDelegate, UITableViewDataSource {
         let clearView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         clearView.backgroundColor = UIColor.clear
         return clearView
+    }
+    
+    private func summaryTypeForIndexPath(_ indexPath: IndexPath) -> SummaryType {
+        switch indexPath.row {
+        case 10:
+            return .average
+        case 11:
+            return .index
+        case 12:
+            return .plusMinus
+        default:
+            return .average
+            
+        }
     }
     
 }

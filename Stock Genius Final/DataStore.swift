@@ -25,11 +25,15 @@ class DataStore: NSObject, AlphaVantageClientDelegate, FirebaseClientDelegate {
     var pricePullComplete = false
     var firebasePullComplete = false
     var APIKey = "5875"
+    var totalIndexPerformance : Float
+    var totalStockGeniusPerformance : Float
     
     private override init() {
         self.currentPortfolio = CurrentPortfolio()
         self.pastPortfolios = []
         self.ref = Database.database().reference()
+        self.totalIndexPerformance = 300
+        self.totalStockGeniusPerformance = 200
         super.init()
         FirebaseClient.shared.performInitialDatabasePull()
         FirebaseClient.shared.delegate = self
@@ -48,15 +52,14 @@ class DataStore: NSObject, AlphaVantageClientDelegate, FirebaseClientDelegate {
         let currentPortfolioDictionary = dictionary["currentPortfolio"] as? Dictionary<String, Any>
         let pastPortfoliosDictionary = dictionary["pastPortfolios"] as? Dictionary<String, Any>
         let appInfo = dictionary["appInfo"] as? Dictionary<String, Any>
+        let performance = dictionary["performance"] as? Dictionary<String, Float>
         
         if currentPortfolioDictionary != nil && pastPortfoliosDictionary != nil && appInfo != nil {
             populateCurrentPortfolio(dictionary: currentPortfolioDictionary!)
             populatePastPortfolios(dictionary: pastPortfoliosDictionary!)
             populateAppWithData(dictionary: appInfo!)
-          
-            
+            populatePerformanceData(dictionary: performance!)
             AlphaVantageClient.shared.updatePricesForCurrentPortfolio()
-            
         } else {
             // send out fail
         }
@@ -101,6 +104,11 @@ class DataStore: NSObject, AlphaVantageClientDelegate, FirebaseClientDelegate {
     
     private func populateAppInfo(dictionary: Dictionary<String, Any>) {
         
+    }
+    
+    private func populatePerformanceData(dictionary: Dictionary<String, Float>) {
+        totalIndexPerformance = dictionary["index"] ?? 200
+        totalStockGeniusPerformance = dictionary["stockGenius"] ?? 300
     }
     
     private func sortPastPortfolios() {

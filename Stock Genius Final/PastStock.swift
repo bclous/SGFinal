@@ -22,7 +22,7 @@ class PastStock: Stock {
     }
     
     public func percentageChangeString() -> String {
-        return String(format: "%.1f", finalPercentageReturn * 100)
+        return String(format: "%.1f", abs(finalPercentageReturn * 100)) + "%"
     }
     
     public func updatePastStockValues(dictionary: Dictionary<String, Any>) {
@@ -31,7 +31,7 @@ class PastStock: Stock {
         note = dictionary["note"] as? String ?? ""
         adjPriceStartDate = dictionary["startPx"] as? Float ?? 0
         adjPriceEndDate = dictionary["endPx"] as? Float ?? 0
-        finalPercentageReturn = adjPriceEndDate == 0 ? 0 : 1 - (adjPriceEndDate / adjPriceStartDate)
+        finalPercentageReturn = adjPriceEndDate == 0 ? 0 : (adjPriceEndDate / adjPriceStartDate) - 1
         rankInPortfolio = dictionary["rank"] as? Int ?? 99
     }
     

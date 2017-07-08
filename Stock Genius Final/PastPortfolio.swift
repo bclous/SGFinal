@@ -35,11 +35,11 @@ class PastPortfolio: NSObject {
         for holding in holdings {
             totalReturn = totalReturn + holding.finalPercentageReturn
         }
-        return holdings.count == 0 ? 0.0 : totalReturn
+        return holdings.count == 0 ? 0.0 : totalReturn / 10.0
     }
     
     public func averageReturnString() -> String {
-        return String(format: "%.1f", averageReturn())
+        return String(format: "%.1f", abs(averageReturn() * 100)) + "%"
     }
     
     public func stockGeniusPlusMinus() -> Float {
@@ -47,7 +47,7 @@ class PastPortfolio: NSObject {
     }
     
     public func stockGeniusPlusMinusString() -> String {
-        return String(format: "%.1f", stockGeniusPlusMinus() * 100)
+        return String(format: "%.1f", abs(stockGeniusPlusMinus() * 100)) + "%"
     }
     
     public func dateString(date: Date) -> String {
@@ -65,7 +65,7 @@ class PastPortfolio: NSObject {
             }
         }
         
-        return 10 + notes
+        return 13 + notes
     }
     
     public func updatePastPortfolioValues(dictionary: Dictionary<String, Any>) {
