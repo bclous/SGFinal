@@ -16,6 +16,8 @@ class CurrentPortfolio: NSObject {
     var note : String
     var holdings : [CurrentStock]
     var index : CurrentStock
+    var calcStocks : [CalculatorStock]
+    var remainingCash : Float = 0
     
     override init() {
         self.startDate = ""
@@ -24,6 +26,7 @@ class CurrentPortfolio: NSObject {
         self.note = ""
         self.holdings = []
         self.index = CurrentStock()
+        self.calcStocks = []
         super.init()
     }
     
@@ -87,6 +90,20 @@ class CurrentPortfolio: NSObject {
             holdings.sort(by: {$0.rankInPortfolio < $1.rankInPortfolio})
         }
         
+        updateCalcStocks()
+        
+    } 
+    
+    
+    private func updateCalcStocks() {
+        for stock in holdings {
+            if stock.rankInPortfolio <= 10 {
+                let calcStock = CalculatorStock(stock: stock)
+                self.calcStocks.append(calcStock)
+            }
+        }
+        
+        calcStocks.sort(by: {$0.stock.adjPriceCurrent < $1.stock.adjPriceCurrent})
     }
     
     public func startDateString() -> String {
@@ -115,4 +132,153 @@ class CurrentPortfolio: NSObject {
         }
 
     }
+    
+    public func minimumInvestmentForCalculator() -> Float {
+        let actualAmount = highestDollarPrice() * 10 / 0.97
+        let rounded = round(actualAmount / 1000) * 1000 + 1000
+        return rounded
+    }
+    
+    private func highestDollarPrice() -> Float {
+        var highest : Float = 0
+        for calcStock in calcStocks {
+            if calcStock.stock.adjPriceCurrent > highest {
+                highest = calcStock.stock.adjPriceCurrent
+            }
+        }
+
+        return highest
+    }
+    
+    public func updateCalculatorValues(portfolioAmount: Int) {
+        
+        resetCalcStockValues()
+        addOriginalAmounts(portfolioAmount: portfolioAmount)
+        addExtraShares(leftoverAmount: extraMoney(portfolioAmount: portfolioAmount))
+        updateRemainingCash(portfolioAmount: portfolioAmount)
+        
+    }
+    
+    private func resetCalcStockValues() {
+        for calcStock in calcStocks {
+            calcStock.shares = 0
+            calcStock.totalMoney = 0
+        }
+    }
+    
+    private func addOriginalAmounts(portfolioAmount: Int) {
+        for calcStock in calcStocks {
+            if calcStock.stock.adjPriceCurrent != 0 {
+                print("adding \(modelAmountPerStock(portfolioAmount: portfolioAmount)) for \(calcStock.stock.ticker)")
+                calcStock.addSharesForDollarAmount(modelAmountPerStock(portfolioAmount: portfolioAmount))
+            }
+        }
+    }
+    
+    private func addExtraShares(leftoverAmount: Float) {
+        
+        var leftover = leftoverAmount
+        
+        for calcStock in calcStocks {
+            if calcStock.stock.adjPriceCurrent <= leftover {
+                calcStock.addSingleShare()
+                leftover = leftover - calcStock.stock.adjPriceCurrent
+                //print("leftover: \(leftover)")
+            }
+        }
+        
+        if leftover > calcStocks[0].stock.adjPriceCurrent {
+            addExtraShares(leftoverAmount: leftover)
+        }
+        
+    }
+    
+    private func updateRemainingCash(portfolioAmount: Int) {
+        let totalAmount = Float(portfolioAmount)
+        let invested = totalMoneyInvested()
+        let remaining = totalAmount - invested
+        remainingCash = remaining
+    }
+    
+    private func modelAmountPerStock(portfolioAmount: Int) -> Float {
+        let total = Float(portfolioAmount) * 0.97
+        return total / Float(nonZeroPricedStocks())
+    }
+    
+    private func nonZeroPricedStocks() -> Int {
+        var index = 0
+        for calcStock in calcStocks {
+            if calcStock.stock.adjPriceCurrent != 0 {
+                index += 1
+            }
+        }
+        
+        return index
+    }
+    
+    private func extraMoney(portfolioAmount: Int) -> Float {
+        
+        var extra : Float = 0
+        
+        for calcStock in calcStocks {
+            let stockExtra = modelAmountPerStock(portfolioAmount: portfolioAmount) - calcStock.totalMoney
+            extra = extra + stockExtra
+        }
+        return extra
+    }
+    
+    private func totalMoneyInvested() -> Float {
+       
+        var total : Float = 0
+        
+        for calcStock in calcStocks {
+            total = calcStock.totalMoney + total
+        }
+        
+        return total
+    }
+    
+}
+
+class CalculatorStock: NSObject {
+    
+    var stock : CurrentStock
+    var shares : Int
+    var totalMoney : Float
+    
+    override init() {
+        self.stock = CurrentStock()
+        self.shares = 0
+        self.totalMoney = 0
+        super.init()
+    }
+    
+    convenience init(stock: CurrentStock) {
+        self.init()
+        self.stock = stock
+        self.shares = 0
+        self.totalMoney = 0
+    }
+    
+    func remainingMoneyForModelAmount(_ amount: Float) -> Float {
+        return amount - totalMoney
+    }
+    
+    func addSharesForDollarAmount(_ amount: Float) {
+    
+        if stock.adjPriceCurrent != 0 {
+            shares = shares + Int(amount / stock.adjPriceCurrent )
+            totalMoney = totalMoney + (Float(shares) * stock.adjPriceCurrent)
+            
+            //print("added \(shares) to \(stock.ticker) for money of \(totalMoney)")
+        }
+    }
+    
+    func addSingleShare() {
+        if stock.adjPriceCurrent != 0 {
+            shares = shares + 1
+            totalMoney = totalMoney + stock.adjPriceCurrent
+        }
+    }
+    
 }

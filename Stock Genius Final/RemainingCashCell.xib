@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="40" id="4R6-Yv-U5A" customClass="RemainingCashCell" customModule="Stock_Genius_Final" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4R6-Yv-U5A" id="mF0-hU-2AD">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="39.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vMa-pH-Mpw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="38.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="6Rm-MQ-XOG">
+                        <rect key="frame" x="0.0" y="0.0" width="247.5" height="38.5"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KpO-Rq-lXf">
+                                <rect key="frame" x="0.0" y="0.0" width="247.5" height="38.5"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PD4-uv-9Zt">
+                                        <rect key="frame" x="246.5" y="0.0" width="1" height="38.5"/>
+                                        <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="1" id="KHm-B8-kvx"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REMAINING CASH:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P6u-FZ-kUU">
+                                        <rect key="frame" x="10" y="-0.5" width="232.5" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="PD4-uv-9Zt" firstAttribute="height" secondItem="KpO-Rq-lXf" secondAttribute="height" id="LXd-SY-AL5"/>
+                                    <constraint firstItem="PD4-uv-9Zt" firstAttribute="centerY" secondItem="KpO-Rq-lXf" secondAttribute="centerY" id="LtB-oM-IbL"/>
+                                    <constraint firstAttribute="trailing" secondItem="PD4-uv-9Zt" secondAttribute="trailing" id="PIY-Qy-pz3"/>
+                                    <constraint firstItem="P6u-FZ-kUU" firstAttribute="leading" secondItem="KpO-Rq-lXf" secondAttribute="leading" constant="10" id="dGq-nP-X0b"/>
+                                    <constraint firstItem="P6u-FZ-kUU" firstAttribute="centerY" secondItem="KpO-Rq-lXf" secondAttribute="centerY" id="dTK-N2-ksL"/>
+                                    <constraint firstAttribute="trailing" secondItem="P6u-FZ-kUU" secondAttribute="trailing" constant="5" id="dhy-Ke-bhk"/>
+                                    <constraint firstItem="P6u-FZ-kUU" firstAttribute="height" secondItem="KpO-Rq-lXf" secondAttribute="height" id="kDp-3V-brE"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                    </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QtF-Kf-4iM">
+                        <rect key="frame" x="252.5" y="0.0" width="112.5" height="39.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstItem="QtF-Kf-4iM" firstAttribute="centerY" secondItem="mF0-hU-2AD" secondAttribute="centerY" id="0lf-2E-r9w"/>
+                    <constraint firstItem="vMa-pH-Mpw" firstAttribute="centerX" secondItem="mF0-hU-2AD" secondAttribute="centerX" id="0ob-hb-Vbj"/>
+                    <constraint firstItem="6Rm-MQ-XOG" firstAttribute="width" secondItem="mF0-hU-2AD" secondAttribute="width" multiplier="0.66" id="8Lh-ER-IO6"/>
+                    <constraint firstItem="6Rm-MQ-XOG" firstAttribute="top" secondItem="mF0-hU-2AD" secondAttribute="top" id="Elz-Dr-SA1"/>
+                    <constraint firstItem="QtF-Kf-4iM" firstAttribute="leading" secondItem="6Rm-MQ-XOG" secondAttribute="trailing" constant="5" id="IGU-va-nzh"/>
+                    <constraint firstAttribute="bottom" secondItem="vMa-pH-Mpw" secondAttribute="bottom" constant="1" id="J7g-Yg-VjD"/>
+                    <constraint firstItem="vMa-pH-Mpw" firstAttribute="width" secondItem="mF0-hU-2AD" secondAttribute="width" id="QXp-Ry-jam"/>
+                    <constraint firstAttribute="bottom" secondItem="6Rm-MQ-XOG" secondAttribute="bottom" constant="1" id="RAh-A6-3tp"/>
+                    <constraint firstAttribute="trailing" secondItem="QtF-Kf-4iM" secondAttribute="trailing" constant="10" id="RGs-RJ-oZ7"/>
+                    <constraint firstItem="vMa-pH-Mpw" firstAttribute="top" secondItem="mF0-hU-2AD" secondAttribute="top" id="Xur-29-ATT"/>
+                    <constraint firstItem="6Rm-MQ-XOG" firstAttribute="leading" secondItem="mF0-hU-2AD" secondAttribute="leading" id="b7K-qK-b1H"/>
+                    <constraint firstItem="QtF-Kf-4iM" firstAttribute="height" secondItem="mF0-hU-2AD" secondAttribute="height" id="yTZ-IB-zlz"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="totalMoneyLabel" destination="QtF-Kf-4iM" id="3D3-ur-Awe"/>
+            </connections>
+            <point key="canvasLocation" x="-369" y="-61"/>
+        </tableViewCell>
+    </objects>
+</document>
