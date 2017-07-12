@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol IntroVCDelegate: class {
+    func userChoice(_ choice: IntroScreenChoice)
+}
+
 class IntroVC: UIViewController, IntroScreenDelegate {
 
     @IBOutlet weak var mainScrollView: UIScrollView!
@@ -18,14 +22,32 @@ class IntroVC: UIViewController, IntroScreenDelegate {
     @IBOutlet weak var girlScrollView: UIScrollView!
     @IBOutlet weak var girlView: GirlView!
     @IBOutlet weak var lastIntroPage: LastIntroPage!
-    
+    weak var delegate : IntroVCDelegate?
+    var isTestMode = true
     var frameWidth : CGFloat = 375
+    var viewHasAppeared = false
+    var readyToPresent = false
+    var images : [UIImage] = []
+    
+    @IBOutlet weak var otherBackgroundImageView: UIImageView!
+    @IBOutlet weak var page1: Page1!
+    @IBOutlet weak var page1Background: UIImageView!
+    @IBOutlet weak var page2: UIImageView!
+    @IBOutlet weak var page3: UIImageView!
+    @IBOutlet weak var page4: UIImageView!
+    @IBOutlet weak var page5: UIImageView!
+    @IBOutlet weak var graphicPage1: UIImageView!
+    @IBOutlet weak var graphicPage2: UIImageView!
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         frameWidth = view.frame.width
         formatScrollView()
         lastIntroPage.delegate = self
+        view.isUserInteractionEnabled = false
+
 
         // Do any additional setup after loading the view.
     }
@@ -36,10 +58,30 @@ class IntroVC: UIViewController, IntroScreenDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        view.isUserInteractionEnabled = false
+        
+        viewHasAppeared = true
+        
+        if readyToPresent {
+            assignImages()
+            layOutAllViews()
+        }
+    }
+    
+    public func readyToPresent(success: Bool) {
+        
+        if viewHasAppeared && success {
+            assignImages()
+            layOutAllViews()
+        } else if success {
+            readyToPresent = true
+        }
+
+    }
+    
+    public func layOutAllViews() {
         
         introSplashScreen.animateLogoToTop {
-            UIView.animate(withDuration: 0.3, animations: { 
+            UIView.animate(withDuration: 0.3, animations: {
                 self.introSplashScreen.alpha = 0
             }, completion: { (complete) in
                 self.girlView.animateGirlImage {
@@ -47,18 +89,62 @@ class IntroVC: UIViewController, IntroScreenDelegate {
                 }
             })
         }
+
+    }
+    
+    public func assignImages() {
+        
+        for index in 0...DataStore.shared.imageNames.count - 1 {
+            let url = DataStore.shared.localURLFromFileName(DataStore.shared.imageNames[index])!
+            let fileName = url.path
+            let image = UIImage(contentsOfFile: fileName)!
+            let imageView = imageViewForIndex(index)
+            imageView.image = image
+        }
+    }
+    
+    public func showSpinnerView() {
+        
+    }
+    
+    public func dismissSpinnerView() {
+        
+    }
+    
+    private func imageViewForIndex(_ index: Int) -> UIImageView {
+        switch index {
+        case 0:
+            return page1Background
+        case 1:
+            return girlView.girlImageView
+        case 2:
+            return self.page1.mainImageView
+        case 3:
+            return self.page2
+        case 4:
+            return self.page3
+        case 5:
+            return self.page4
+        case 6:
+            return self.page5
+        case 7:
+            return self.lastIntroPage.mainImageView
+        case 8:
+            return self.graphicPage1
+        case 9:
+            return self.graphicPage2
+        case 10:
+            return self.otherBackgroundImageView
+        default:
+            return UIImageView()
+        }
     }
     
     
     func introScreenUserInteraction(_ choice: IntroScreenChoice) {
-        switch choice {
-        case .subscribe:
-            print("subscribe")
-        case .restore:
-            print("restore")
-        case .terms:
-            print("terms")
-       
+        delegate?.userChoice(choice)
+        if choice == .terms {
+            // launch modal VC w/ terms
         }
     }
 

@@ -11,15 +11,90 @@ import CoreData
 import Firebase
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, IntroVCDelegate, DataStoreDelegate {
 
     var window: UIWindow?
-
+    var isTestMode = true
+    let introVC : IntroVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "introVC") as! IntroVC
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        checkForFirstTime()
         return true
+    }
+    
+    func userChoice(_ choice: IntroScreenChoice) {
+        /// stuff
+    }
+    
+    func checkForFirstTime() {
+        if !userHasPictures() {
+            DataStore.shared.delegate = self
+            DataStore.shared.peformIntroScreenImagePull()
+            introVC.delegate = self
+            introVC.isTestMode = isTestMode
+            window?.rootViewController = introVC
+        } else {
+            setInitialView()
+        }
+    }
+    
+    func setInitialView() {
+
+        if isPayingUser() && !isTestMode {
+            window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+        } else {
+            let introVC : IntroVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "introVC") as! IntroVC
+            introVC.delegate = self
+            introVC.isTestMode = isTestMode
+            introVC.readyToPresent(success: true)
+            window?.rootViewController = introVC
+        }
+        
+    }
+    
+    func userHasPictures() -> Bool {
+        if UserDefaults.standard.object(forKey: "userHasPictures") == nil {
+            UserDefaults.standard.set(false, forKey: "userHasPictures")
+            return false
+        } else {
+            return UserDefaults.standard.object(forKey: "userHasPictures") as! Bool
+        }
+
+    }
+    
+    func isPayingUser() -> Bool {
+
+        if UserDefaults.standard.object(forKey: "payingUser") == nil {
+            UserDefaults.standard.set(false, forKey: "payingUser")
+            return false
+        } else {
+            return UserDefaults.standard.object(forKey: "payingUser") as! Bool
+        }
+    }
+    
+    func moveToMainViews() {
+        if let window = window {
+            window.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+        }
+    }
+    
+    func initialImagePullComplete(success: Bool) {
+        UserDefaults.standard.set(true, forKey: "userHasPictures")
+        introVC.readyToPresent(success: success)
+    }
+    
+    func firebasePullComplete(success: Bool) {
+        // do nothing
+    }
+    
+    func pricePullComplete(success: Bool) {
+        // do nothing
+    }
+    
+    func pricePullInProgress(percentageComplete: Float) {
+        // do nothing
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

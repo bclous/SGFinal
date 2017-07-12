@@ -18,6 +18,7 @@ class SplashScreenVC: UIViewController, DataStoreDelegate {
         super.viewDidLoad()
         view.backgroundColor = SGConstants.mainBlackColor
         DataStore.shared.delegate = self
+        DataStore.shared.performInitialFirebasePull()
         progressView.progress = 0.0
         progressView.progressTintColor = SGConstants.mainBlueColor
         
@@ -26,6 +27,10 @@ class SplashScreenVC: UIViewController, DataStoreDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func initialImagePullComplete(success: Bool) {
+        // do nothing
     }
     
     func firebasePullComplete(success: Bool) {

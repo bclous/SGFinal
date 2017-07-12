@@ -27,6 +27,7 @@ class LastIntroPage: UIView {
     @IBOutlet weak var restoreButton: UIButton!
     @IBOutlet weak var termsButton: UIButton!
     weak var delegate : IntroScreenDelegate?
+    @IBOutlet weak var mainImageView: UIImageView!
     
     override init(frame: CGRect) { // for using CustomView in code
         super.init(frame: frame)

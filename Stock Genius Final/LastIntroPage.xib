@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LastIntroPage" customModule="Stock_Genius_Final" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="rIQ-sS-DST"/>
+                <outlet property="mainImageView" destination="ssT-g0-C4i" id="Eg7-bd-B9H"/>
                 <outlet property="restoreButton" destination="gyy-RD-yLq" id="yeG-Fo-30l"/>
                 <outlet property="restoreLabel" destination="twE-Mv-h4B" id="B74-RR-GC4"/>
                 <outlet property="subscribeButton" destination="Pw3-rt-KyR" id="LoX-fa-Bfg"/>
@@ -125,7 +126,7 @@
                 <constraint firstItem="twE-Mv-h4B" firstAttribute="top" secondItem="Pw3-rt-KyR" secondAttribute="bottom" constant="30" id="tey-vk-Glw"/>
                 <constraint firstItem="af4-jR-img" firstAttribute="height" secondItem="Fl9-iu-PA8" secondAttribute="height" constant="20" id="uFz-AX-vII"/>
             </constraints>
-            <point key="canvasLocation" x="-204" y="84"/>
+            <point key="canvasLocation" x="-32" y="76"/>
         </view>
     </objects>
 </document>

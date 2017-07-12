@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DdD-1c-2Dh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6El-mJ-Gim">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -178,7 +178,7 @@
         <!--IntroVC-->
         <scene sceneID="9x1-6q-8GV">
             <objects>
-                <viewController id="DdD-1c-2Dh" customClass="IntroVC" customModule="Stock_Genius_Final" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="introVC" id="DdD-1c-2Dh" customClass="IntroVC" customModule="Stock_Genius_Final" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4u8-qT-D6M"/>
                         <viewControllerLayoutGuide type="bottom" id="xUR-kL-jhS"/>
@@ -267,7 +267,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Bsi-KN-i3A">
                                         <rect key="frame" x="0.0" y="0.0" width="2250" height="667"/>
                                         <subviews>
-                                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cyl-Ku-Qhz">
+                                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cyl-Ku-Qhz" customClass="Page1" customModule="Stock_Genius_Final" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
@@ -346,10 +346,19 @@
                         <outlet property="backGroundImage" destination="A3Y-rZ-BeC" id="j5d-q1-twg"/>
                         <outlet property="backgroundScrollView" destination="DZC-NE-yRS" id="nMF-pH-U26"/>
                         <outlet property="girlScrollView" destination="uJF-3Z-PNG" id="igu-ES-6Jk"/>
-                        <outlet property="girlView" destination="s6y-jH-oMF" id="lkj-kf-EwU"/>
+                        <outlet property="girlView" destination="s6y-jH-oMF" id="NCj-Sk-040"/>
+                        <outlet property="graphicPage1" destination="cxh-sW-Ze8" id="OLw-Sd-XpI"/>
+                        <outlet property="graphicPage2" destination="DYn-7J-iJK" id="uEj-4Q-OOe"/>
                         <outlet property="introSplashScreen" destination="Y6A-7S-yYJ" id="snH-7B-byb"/>
                         <outlet property="lastIntroPage" destination="6hr-H9-7Mw" id="RDI-cA-T8V"/>
                         <outlet property="mainScrollView" destination="Pyb-XX-mIE" id="ZYF-n8-Gt1"/>
+                        <outlet property="otherBackgroundImageView" destination="Vu6-OO-FS1" id="akM-3m-xOA"/>
+                        <outlet property="page1" destination="cyl-Ku-Qhz" id="PFc-Hf-w6g"/>
+                        <outlet property="page1Background" destination="A3Y-rZ-BeC" id="OTX-5x-4Rf"/>
+                        <outlet property="page2" destination="PHX-ur-zqw" id="d3K-bp-d3L"/>
+                        <outlet property="page3" destination="NqJ-5P-lW3" id="83Z-0y-feD"/>
+                        <outlet property="page4" destination="AOO-EW-eHE" id="onM-Ou-K1C"/>
+                        <outlet property="page5" destination="BMO-m8-npS" id="EvL-UF-QaV"/>
                         <outlet property="pictureScrollView" destination="8xE-hV-03H" id="N5C-R6-RVn"/>
                     </connections>
                 </viewController>

@@ -13,6 +13,7 @@ protocol DataStoreDelegate: class {
     func firebasePullComplete(success: Bool)
     func pricePullComplete(success: Bool)
     func pricePullInProgress(percentageComplete: Float)
+    func initialImagePullComplete(success: Bool)
 }
 
 class DataStore: NSObject, AlphaVantageClientDelegate, FirebaseClientDelegate {
@@ -27,6 +28,8 @@ class DataStore: NSObject, AlphaVantageClientDelegate, FirebaseClientDelegate {
     var APIKey = "5875"
     var totalIndexPerformance : Float
     var totalStockGeniusPerformance : Float
+    var imageNames = ["page1Background", "girl", "mainPage1", "mainPage2", "mainPage3", "mainPage4", "mainPage5", "mainPage6","graphicPage1", "graphicPage2", "otherBackground"]
+
     
     private override init() {
         self.currentPortfolio = CurrentPortfolio()
@@ -58,6 +61,10 @@ class DataStore: NSObject, AlphaVantageClientDelegate, FirebaseClientDelegate {
     
     func fireBasePullComplete(success: Bool) {
         delegate?.firebasePullComplete(success: success)
+    }
+    
+    func imagePullComplete(success: Bool) {
+        delegate?.initialImagePullComplete(success: success)
     }
     
     public func populateAppWithData(dictionary: Dictionary<String, Any>) {
@@ -125,6 +132,19 @@ class DataStore: NSObject, AlphaVantageClientDelegate, FirebaseClientDelegate {
     
     private func sortPastPortfolios() {
         pastPortfolios.sort(by: {$0.rank > $1.rank})
+    }
+    
+    public func localURLFromFileName(_ name: String) -> URL? {
+        
+        let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        
+        if let docURL = directory {
+            let fileName = "\(name).png"
+            let localURL = docURL.appendingPathComponent(fileName)
+            return localURL
+        } else {
+            return nil
+        }
     }
     
     

@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "BF9925DF753472B5D0C612C083F6BB835EAF85F8",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "BF9925DF753472B5D0C612C083F6BB835EAF85F8" : 9223372036854775807,
+    "84E8E854B38EA111FDAC3C146A09872E405DF5E2" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "828EB75F-4D9D-47C5-93A3-4EBE5749F412",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "BF9925DF753472B5D0C612C083F6BB835EAF85F8" : "SGFinal\/",
+    "84E8E854B38EA111FDAC3C146A09872E405DF5E2" : "StockGenius\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Stock Genius Final",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Stock Genius Final.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/theQwizLLC\/StockGenius.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "84E8E854B38EA111FDAC3C146A09872E405DF5E2"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/bclous\/SGFinal.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "BF9925DF753472B5D0C612C083F6BB835EAF85F8"
+    }
+  ]
+}

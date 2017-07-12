@@ -13,6 +13,7 @@ class GirlView: UIView {
     @IBOutlet var contentView: UIView!
     var topToTopConstraint : NSLayoutConstraint?
     var topToBottomConstraint : NSLayoutConstraint?
+    var girlImageView : UIImageView = UIImageView(image: UIImage(named: "girl"))
     
     override init(frame: CGRect) { // for using CustomView in code
         super.init(frame: frame)
@@ -38,15 +39,15 @@ class GirlView: UIView {
     }
     
     func loadGirlImage() {
-        let girlImage = UIImageView(image: UIImage(named: "girl"))
-        self.addSubview(girlImage)
-        girlImage.translatesAutoresizingMaskIntoConstraints = false
-        girlImage.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1).isActive = true
-        girlImage.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1).isActive = true
-        girlImage.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+       
+        self.addSubview(girlImageView)
+        girlImageView.translatesAutoresizingMaskIntoConstraints = false
+        girlImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1).isActive = true
+        girlImageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1).isActive = true
+        girlImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
         
-        topToTopConstraint = girlImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 0)
-        topToBottomConstraint = girlImage.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
+        topToTopConstraint = girlImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 0)
+        topToBottomConstraint = girlImageView.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
         
         topToBottomConstraint?.isActive = true
         topToTopConstraint?.isActive = false
@@ -63,7 +64,7 @@ class GirlView: UIView {
             completion()
         }
     
-        
     }
+ 
 
 }
