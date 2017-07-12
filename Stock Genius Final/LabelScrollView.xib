@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LabelScrollView" customModule="Stock_Genius_Final" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="HxZ-qz-Y80"/>
+                <outlet property="mainScrollView" destination="eI5-lI-7u6" id="Xee-nX-v0N"/>
+                <outlet property="masterStackView" destination="BRL-wD-8b6" id="GjO-da-Phb"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="365" height="54"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eI5-lI-7u6">
+                    <rect key="frame" x="-0.5" y="0.0" width="365" height="54"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="BRL-wD-8b6">
+                            <rect key="frame" x="0.0" y="0.0" width="1460" height="54"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sry-LF-6RM" customClass="IndividualLabelView" customModule="Stock_Genius_Final" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="365" height="54"/>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TQV-YT-YLy" customClass="IndividualLabelView" customModule="Stock_Genius_Final" customModuleProvider="target">
+                                    <rect key="frame" x="365" y="0.0" width="365" height="54"/>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uyB-KR-Xm1" customClass="IndividualLabelView" customModule="Stock_Genius_Final" customModuleProvider="target">
+                                    <rect key="frame" x="730" y="0.0" width="365" height="54"/>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qXO-Xs-IIM" customClass="IndividualLabelView" customModule="Stock_Genius_Final" customModuleProvider="target">
+                                    <rect key="frame" x="1095" y="0.0" width="365" height="54"/>
+                                </view>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="BRL-wD-8b6" firstAttribute="top" secondItem="eI5-lI-7u6" secondAttribute="top" id="6dt-Au-dBb"/>
+                        <constraint firstAttribute="bottom" secondItem="BRL-wD-8b6" secondAttribute="bottom" id="C7P-Od-CH2"/>
+                        <constraint firstItem="BRL-wD-8b6" firstAttribute="leading" secondItem="eI5-lI-7u6" secondAttribute="leading" id="Sa6-I8-dfL"/>
+                        <constraint firstAttribute="trailing" secondItem="BRL-wD-8b6" secondAttribute="trailing" id="W8w-g3-opm"/>
+                        <constraint firstItem="BRL-wD-8b6" firstAttribute="height" secondItem="eI5-lI-7u6" secondAttribute="height" id="t42-gO-kxb"/>
+                        <constraint firstItem="BRL-wD-8b6" firstAttribute="width" secondItem="eI5-lI-7u6" secondAttribute="width" multiplier="4" id="wbI-0B-7hD"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="eI5-lI-7u6" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Ucs-7a-O79"/>
+                <constraint firstItem="eI5-lI-7u6" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="V6o-sd-Ugg"/>
+                <constraint firstItem="eI5-lI-7u6" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="X32-Y4-OIS"/>
+                <constraint firstItem="eI5-lI-7u6" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="Y1j-4C-QZs"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="48.5" y="-253"/>
+        </view>
+    </objects>
+</document>

@@ -35,14 +35,26 @@ class DataStore: NSObject, AlphaVantageClientDelegate, FirebaseClientDelegate {
         self.totalIndexPerformance = 300
         self.totalStockGeniusPerformance = 200
         super.init()
-        FirebaseClient.shared.performInitialDatabasePull()
         FirebaseClient.shared.delegate = self
         AlphaVantageClient.shared.delegate = self
+    }
+    
+    func peformIntroScreenImagePull() {
+        FirebaseClient.shared.performIntroScreenImagePull()
+    }
+    
+    func performInitialFirebasePull() {
+        FirebaseClient.shared.performInitialDatabasePull()
     }
     
     func pricePullComplete(success: Bool) {
         delegate?.pricePullComplete(success: success)
     }
+    
+    func pricePullInProgressFromAV(percentageComplete: Float) {
+        delegate?.pricePullInProgress(percentageComplete: percentageComplete)
+    }
+
     
     func fireBasePullComplete(success: Bool) {
         delegate?.firebasePullComplete(success: success)

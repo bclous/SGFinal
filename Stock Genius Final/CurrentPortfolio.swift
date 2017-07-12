@@ -92,7 +92,35 @@ class CurrentPortfolio: NSObject {
         
         updateCalcStocks()
         
-    } 
+    }
+    
+    public func nextUpdateTitle() -> String {
+        
+        if let days = daysUntilNextUpdate() {
+            switch days {
+            case 0:
+                return "Next pick update: TONIGHT"
+            case 1:
+                return "Next pick update: TOMORROW"
+            default:
+                return "Next pick update: \(days) days"
+            }
+        } else {
+            return "Next pick update: Not available"
+        }
+    }
+    
+    private func daysUntilNextUpdate() -> Int? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        let endDate = dateFormatter.date(from: self.endDate)
+
+        if let end = endDate {
+            return end.interval(ofComponent: .day, fromDate: Date()) < 0 ? 0 : end.interval(ofComponent: .day, fromDate: Date())
+        }
+        
+        return nil
+    }
     
     
     private func updateCalcStocks() {
@@ -281,4 +309,14 @@ class CalculatorStock: NSObject {
         }
     }
     
+}
+
+extension Date {
+    
+    func interval(ofComponent comp: Calendar.Component, fromDate date: Date) -> Int {
+        let currentCalendar = Calendar.current
+        guard let start = currentCalendar.ordinality(of: comp, in: .era, for: date) else { return 0 }
+        guard let end = currentCalendar.ordinality(of: comp, in: .era, for: self) else { return 0 }
+        return end - start
+    }
 }

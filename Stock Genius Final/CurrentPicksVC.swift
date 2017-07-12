@@ -15,21 +15,14 @@ class CurrentPicksVC: UIViewController {
     @IBOutlet weak var headerView: HeaderView!
     var dataStore : DataStore?
     var isTodayReturn = true
-    var ready = false
-
+    var ready = true
+    @IBOutlet weak var nextUpdateView: NextUpdateView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         formatTableView()
         view.backgroundColor = SGConstants.mainBlackColor
         dataStore = DataStore.shared
-        
-    }
-    
-    func readyToPresent() {
-        ready = true
-        mainTableView.reloadData()
-        headerView.secondaryLabel.text = "Identified from 13-F data on " + DataStore.shared.currentPortfolio.startDateString()
         
     }
 
@@ -48,6 +41,7 @@ extension CurrentPicksVC : UITableViewDelegate, UITableViewDataSource, CurrentPi
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        nextUpdateView.mainLabel.text = DataStore.shared.currentPortfolio.nextUpdateTitle()
         return 2
     }
     

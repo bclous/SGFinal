@@ -38,5 +38,11 @@ class FirebaseClient: NSObject {
         })
         
     }
+    
+    func performIntroScreenFirebasePull() {
+        
+        
+        
+    }
 
 }

@@ -8,34 +8,13 @@
 
 import UIKit
 
-class TabBarController: UITabBarController, TabBarDelegate, DataStoreDelegate {
+class TabBarController: UITabBarController, TabBarDelegate {
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addCustomTabBar()
-        DataStore.shared.delegate = self
     }
-    
-    func pricePullComplete(success: Bool) {
-        
-        let currentPicksVC = viewControllers?[0] as! CurrentPicksVC
-        currentPicksVC.readyToPresent()
-        let pastPicksVC = viewControllers?[1] as! PastPicksVC
-        pastPicksVC.readyToPresent()
-        
-    }
-    
-    func firebasePullComplete(success: Bool) {
-        
-        // load up past picks
-    }
-    
-    func pricePullInProgress(percentageComplete: Float) {
-        
-        // set loading screen
-    }
-
     
     private func addCustomTabBar() {
         let customTabBar = TabBar()

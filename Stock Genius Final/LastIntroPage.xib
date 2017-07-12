@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LastIntroPage" customModule="Stock_Genius_Final" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="rIQ-sS-DST"/>
+                <outlet property="restoreButton" destination="gyy-RD-yLq" id="yeG-Fo-30l"/>
+                <outlet property="restoreLabel" destination="twE-Mv-h4B" id="B74-RR-GC4"/>
+                <outlet property="subscribeButton" destination="Pw3-rt-KyR" id="LoX-fa-Bfg"/>
+                <outlet property="termsButton" destination="af4-jR-img" id="x84-2d-Jr6"/>
+                <outlet property="termsLabel" destination="Fl9-iu-PA8" id="ifP-gC-25b"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ssT-g0-C4i">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pw3-rt-KyR">
+                    <rect key="frame" x="10" y="468" width="355" height="60"/>
+                    <color key="backgroundColor" red="0.26807689109999999" green="0.54880666369999997" blue="0.87033258700000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="GSP-PU-28d"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                    <state key="normal" title="GET STARTED">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="subscribeButtonTapped:" destination="-1" eventType="touchUpInside" id="R7b-i7-Z5J"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fl9-iu-PA8">
+                    <rect key="frame" x="10" y="592.5" width="355" height="14.5"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14.5" id="1e3-iG-q5T"/>
+                    </constraints>
+                    <attributedString key="attributedText">
+                        <fragment content="By continuing you accept our ">
+                            <attributes>
+                                <font key="NSFont" metaFont="cellTitle"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="Terms of Service">
+                            <attributes>
+                                <font key="NSFont" metaFont="cellTitle"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                <integer key="NSUnderline" value="1"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="twE-Mv-h4B">
+                    <rect key="frame" x="10" y="558" width="355" height="14.5"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14.5" id="93y-48-YGZ"/>
+                    </constraints>
+                    <attributedString key="attributedText">
+                        <fragment content="Subscribed on another device?  ">
+                            <attributes>
+                                <font key="NSFont" metaFont="cellTitle"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="Restore your purchase">
+                            <attributes>
+                                <font key="NSFont" metaFont="cellTitle"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                <integer key="NSUnderline" value="1"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyy-RD-yLq">
+                    <rect key="frame" x="165" y="548" width="200" height="34.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="88f-wP-Aeg"/>
+                    </constraints>
+                    <connections>
+                        <action selector="restoreButtonTapped:" destination="-1" eventType="touchUpInside" id="IO5-vA-71F"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="af4-jR-img">
+                    <rect key="frame" x="165" y="582.5" width="200" height="34.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="ZAP-uf-eG0"/>
+                    </constraints>
+                    <connections>
+                        <action selector="termsButtonTapped:" destination="-1" eventType="touchUpInside" id="aMZ-u0-Nfv"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="ssT-g0-C4i" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="01H-bk-Oqw"/>
+                <constraint firstItem="ssT-g0-C4i" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="1ak-QS-ak1"/>
+                <constraint firstItem="Fl9-iu-PA8" firstAttribute="top" secondItem="twE-Mv-h4B" secondAttribute="bottom" constant="20" id="5IA-9i-g0B"/>
+                <constraint firstItem="twE-Mv-h4B" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="5a3-Aq-LsZ"/>
+                <constraint firstItem="af4-jR-img" firstAttribute="centerY" secondItem="Fl9-iu-PA8" secondAttribute="centerY" id="8a8-yn-Zsu"/>
+                <constraint firstItem="Fl9-iu-PA8" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" constant="-20" id="ABt-hG-kVR"/>
+                <constraint firstItem="ssT-g0-C4i" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="AfK-tP-RtP"/>
+                <constraint firstItem="Pw3-rt-KyR" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" constant="-20" id="G5G-dW-ewc"/>
+                <constraint firstItem="gyy-RD-yLq" firstAttribute="height" secondItem="twE-Mv-h4B" secondAttribute="height" constant="20" id="Hed-h1-l8K"/>
+                <constraint firstItem="Fl9-iu-PA8" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Q9j-zR-RbW"/>
+                <constraint firstAttribute="bottom" secondItem="Fl9-iu-PA8" secondAttribute="bottom" constant="60" id="cD6-cj-lFI"/>
+                <constraint firstItem="ssT-g0-C4i" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="dXM-Gt-nMJ"/>
+                <constraint firstItem="twE-Mv-h4B" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" constant="-20" id="hHU-bj-Z4f"/>
+                <constraint firstItem="gyy-RD-yLq" firstAttribute="centerY" secondItem="twE-Mv-h4B" secondAttribute="centerY" id="hZu-FT-o3Q"/>
+                <constraint firstItem="gyy-RD-yLq" firstAttribute="trailing" secondItem="twE-Mv-h4B" secondAttribute="trailing" id="ouC-Kh-ox8"/>
+                <constraint firstItem="Pw3-rt-KyR" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="q4g-gf-SJW"/>
+                <constraint firstItem="af4-jR-img" firstAttribute="trailing" secondItem="Fl9-iu-PA8" secondAttribute="trailing" id="sbG-TI-SG5"/>
+                <constraint firstItem="twE-Mv-h4B" firstAttribute="top" secondItem="Pw3-rt-KyR" secondAttribute="bottom" constant="30" id="tey-vk-Glw"/>
+                <constraint firstItem="af4-jR-img" firstAttribute="height" secondItem="Fl9-iu-PA8" secondAttribute="height" constant="20" id="uFz-AX-vII"/>
+            </constraints>
+            <point key="canvasLocation" x="-204" y="84"/>
+        </view>
+    </objects>
+</document>

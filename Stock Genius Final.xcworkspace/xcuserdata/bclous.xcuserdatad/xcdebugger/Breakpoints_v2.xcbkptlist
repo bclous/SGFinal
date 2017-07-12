@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Stock Genius Final/AlphaVantageClient.swift"
-            timestampString = "521073716.47144"
+            timestampString = "521482460.058207"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "updatePricesForCurrentPortfolio()"
             landmarkType = "7">
             <Locations>
@@ -54,16 +54,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Stock Genius Final/AlphaVantageClient.swift"
-            timestampString = "521073724.608519"
+            filePath = "Stock Genius Final/IntroVC.swift"
+            timestampString = "521581668.442571"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "updatePricesForCurrentPortfolio()"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "formatPictureView(offset:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Stock Genius Final/IntroVC.swift"
+            timestampString = "521581668.442571"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "formatOtherViews(offset:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

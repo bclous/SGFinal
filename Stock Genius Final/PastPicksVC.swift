@@ -19,18 +19,14 @@ class PastPicksVC: UIViewController {
         headerView.formatHeaderViewForVC(.pastPicks)
         view.backgroundColor = SGConstants.mainBlackColor
         formatTableView()
+        performanceView.formatPerformanceHeaderView(performance: [DataStore.shared.totalStockGeniusPerformance, DataStore.shared.totalIndexPerformance], frameWidth: view.frame.width)
+        headerView.secondaryLabel.text = DataStore.shared.pastPortfoliosString()
         
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func readyToPresent() {
-        mainTableView.reloadData()
-        headerView.secondaryLabel.text = DataStore.shared.pastPortfoliosString()
-        performanceView.formatPerformanceHeaderView(performance: [DataStore.shared.totalStockGeniusPerformance, DataStore.shared.totalIndexPerformance], frameWidth: view.frame.width)
     }
 
     /*
