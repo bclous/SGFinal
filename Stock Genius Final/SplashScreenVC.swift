@@ -18,117 +18,86 @@ class SplashScreenVC: UIViewController, DataStoreDelegate, InvalidSubscriptionDe
     let spinnerVC: SpinnerVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "spinnerVC") as! SpinnerVC
     let invalidVC: InvalidSubscriptionVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "invalidSubscriptionVC") as! InvalidSubscriptionVC
     var isTestMode = true
+    var spinnerViewShowing = false
+    var badSubscriptionScreenShowing = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        formatView()
+        DataStore.shared.performInitialFirebasePull()
+    }
+    
+    private func formatView() {
         view.backgroundColor = SGConstants.mainBlackColor
         DataStore.shared.delegate = self
-        DataStore.shared.performInitialFirebasePull()
         progressView.progress = 0.0
         progressView.progressTintColor = SGConstants.mainBlueColor
         invalidVC.delegate = self
         addIAPObservers()
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super .viewDidAppear(animated)
+        checkForValidSubscription()
     }
     
     func checkForValidSubscription() {
-        IAPClient.shared.checkSubscriptionStatus()
-    }
-    
-    func addIAPObservers() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(handleBadSubscription),
-                                               name: IAPClient.subscriptionNoLongerValid,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(handleResubscribe),
-                                               name: IAPClient.purchaseSuccessfulNotification,
-                                               object: nil)
+        let lastPurchaseDate = UserDefaults.standard.object(forKey: "lastPaymentDate") as? Date
+        if let date = lastPurchaseDate {
+            let daysSincePurchase = date.interval(ofComponent: .day, fromDate: Date())
+            if abs(daysSincePurchase) > 35 {
+                handleBadSubscription()
+            }
+        } else {
+            handleBadSubscription()
+        }
+
     }
     
     func subscripeTapped() {
+        
         invalidVC.dismiss(animated: false) {
             self.showSpinnerView()
-            self.handleSubscribeTapped()
+            
+            if IAPClient.shared.IAPProductsAvailable {
+                IAPClient.shared.upgradeToFullVersion(testMode: self.isTestMode)
+            } else {
+                self.presentAlertToUser(title: "Can't connect to Apple", message: "Please try again")
+                IAPClient.shared.fetchProducts()
+            }
         }
     }
     
     func handleBadSubscription() {
+        UserDefaults.standard.set(false, forKey: "payingUser")
         badSubscription = true
         showInvalidVC()
 
     }
     
-    func handleResubscribe() {
-        UserDefaults.standard.set(true, forKey: "payingUser")
-        spinnerVC.dismiss(animated: false) { 
-            if self.readyToSegue {
-                self.performSegue(withIdentifier: "mainSegue", sender: nil)
-            } else {
-                self.badSubscription = false
-            }
-        }
-       
-    }
-    
-    func showInvalidVC() {
-        invalidVC.modalPresentationStyle = .overCurrentContext
-        present(invalidVC, animated: false) {
-            // start IAP
-        }
-    }
-    
-    func dismissInvalidVC() {
-        invalidVC.dismiss(animated:false) { 
-            if self.readyToSegue {
-                self.performSegue(withIdentifier: "mainSegue", sender: nil)
-            } else {
-                self.badSubscription = false
-            }
-        }
-    }
-    
-    public func showSpinnerView() {
+    func handleRestoreAccess() {
         
-        spinnerVC.modalPresentationStyle = .overCurrentContext
-        present(spinnerVC, animated: false) {
-            // start IAP
+        if spinnerViewShowing {
+            dismissSpinnerView()
         }
-    }
-    
-    public func dismissSpinnerView() {
-        spinnerVC.dismiss(animated: false, completion: nil)
-    }
-    
-    func handleSubscribeTapped() {
+        if badSubscriptionScreenShowing {
+            dismissInvalidVC()
+        }
         
-        if IAPClient.shared.IAPProductsAvailable {
-            IAPClient.shared.upgradeToFullVersion(testMode: isTestMode)
+        if self.readyToSegue {
+            self.performSegue(withIdentifier: "mainSegue", sender: nil)
         } else {
-            self.presentAlertToUser(title: "Can't connect to Apple", message: "Please try again")
-            IAPClient.shared.fetchProducts()
+            self.badSubscription = false
         }
-    }
-    
-    func presentAlertToUser(title: String, message:String) {
-        let importAlert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        importAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        self.present(importAlert, animated: true, completion: nil)
-    }
 
-    
-    
-    
-    
- 
-
-    func initialImagePullComplete(success: Bool) {
-        // do nothing
     }
     
-    func firebasePullComplete(success: Bool) {
-        //stff
+    
+    func handleRestoreFailure() {
+        handleBadSubscription()
     }
+    
+    
     
     func pricePullComplete(success: Bool) {
         progressView.progress = 1.0
@@ -163,11 +132,68 @@ class SplashScreenVC: UIViewController, DataStoreDelegate, InvalidSubscriptionDe
             }
         }
     }
-   
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! TabBarController
-
+    
+    func addIAPObservers() {
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleRestoreAccess),
+                                               name: IAPClient.purchaseSuccessfulNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleRestoreAccess),
+                                               name: IAPClient.restoreSuccessfulNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleRestoreFailure),
+                                               name: IAPClient.restoreFailedNotification,
+                                               object: nil)
     }
+    
+    // unused delegate functions
+    
+    func initialImagePullComplete(success: Bool) {
+        // do nothing
+    }
+    
+    func firebasePullComplete(success: Bool) {
+        //stff
+    }
+    
+    // helper methods
+    
+    private func presentAlertToUser(title: String, message:String) {
+        let importAlert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        importAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(importAlert, animated: true, completion: nil)
+    }
+    
+    func showInvalidVC() {
+        invalidVC.modalPresentationStyle = .overCurrentContext
+        present(invalidVC, animated: false) {
+            self.badSubscriptionScreenShowing = true
+        }
+    }
+    
+    func dismissInvalidVC() {
+        invalidVC.dismiss(animated:false) {
+            self.badSubscriptionScreenShowing = false
+        }
+    }
+    
+    public func showSpinnerView() {
+        
+        spinnerVC.modalPresentationStyle = .overCurrentContext
+        present(spinnerVC, animated: false) {
+            self.spinnerViewShowing = true
+        }
+    }
+    
+    public func dismissSpinnerView() {
+        spinnerVC.dismiss(animated: false) {
+            self.spinnerViewShowing = false
+        }
+    }
+
    
 
 }

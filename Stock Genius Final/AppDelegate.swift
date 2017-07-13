@@ -80,8 +80,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, IntroVCDelegate, DataStor
     }
     
     func purchaseComplete() {
-        UserDefaults.standard.set(true, forKey: "payingUser")
+        updateUserSubscriptionStatusForNewPurchase()
         moveToMainViews()
+    }
+    
+    func updateUserSubscriptionStatusForNewPurchase() {
+        UserDefaults.standard.set(true, forKey: "payingUser")
+        UserDefaults.standard.set(Date(), forKey: "lastPaymentDate")
     }
     
     func moveToMainViews() {
@@ -208,6 +213,14 @@ extension AppDelegate: SKPaymentTransactionObserver {
         }
     }
     
+    func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
+        
+        
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: IAPClient.restoreSuccessfulNotification, object: nil)
+        }
+    }
+    
     func handlePurchasingState(for transaction: SKPaymentTransaction, in queue: SKPaymentQueue) {
         print("User is attempting to purchase product id: \(transaction.payment.productIdentifier)")
         // queue.finishTransaction(transaction)
@@ -219,6 +232,7 @@ extension AppDelegate: SKPaymentTransactionObserver {
         
         if isInMainWindow {
             DispatchQueue.main.async {
+                self.updateUserSubscriptionStatusForNewPurchase()
                 NotificationCenter.default.post(name: IAPClient.purchaseSuccessfulNotification, object: nil)
             }
         } else {
@@ -230,7 +244,14 @@ extension AppDelegate: SKPaymentTransactionObserver {
     func handleRestoredState(for transaction: SKPaymentTransaction, in queue: SKPaymentQueue) {
         print("Purchase restored for product id: \(transaction.payment.productIdentifier)")
         queue.finishTransaction(transaction)
-        purchaseComplete()
+        if isInMainWindow {
+            DispatchQueue.main.async {
+                self.updateUserSubscriptionStatusForNewPurchase()
+                NotificationCenter.default.post(name: IAPClient.restoreSuccessfulNotification, object: nil)
+            }
+        } else {
+            purchaseComplete()
+        }
     }
     
     func handleFailedState(for transaction: SKPaymentTransaction, in queue: SKPaymentQueue) {
