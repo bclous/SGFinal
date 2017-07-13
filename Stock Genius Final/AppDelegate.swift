@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Firebase
+import StoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, IntroVCDelegate, DataStoreDelegate {
@@ -16,16 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, IntroVCDelegate, DataStor
     var window: UIWindow?
     var isTestMode = true
     let introVC : IntroVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "introVC") as! IntroVC
+    var isInMainWindow = false
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         checkForFirstTime()
+        SKPaymentQueue.default().add(self)
+        IAPClient.shared.fetchProducts()
         return true
-    }
-    
-    func userChoice(_ choice: IntroScreenChoice) {
-        /// stuff
     }
     
     func checkForFirstTime() {
@@ -40,9 +40,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, IntroVCDelegate, DataStor
         }
     }
     
+    func userChoice(_ choice: IntroScreenChoice) {
+        //stuff
+    }
+    
     func setInitialView() {
 
         if isPayingUser() && !isTestMode {
+            isInMainWindow = true
             window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
         } else {
             let introVC : IntroVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "introVC") as! IntroVC
@@ -74,9 +79,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, IntroVCDelegate, DataStor
         }
     }
     
+    func purchaseComplete() {
+        UserDefaults.standard.set(true, forKey: "payingUser")
+        moveToMainViews()
+    }
+    
     func moveToMainViews() {
+        
         if let window = window {
             window.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+            isInMainWindow = true
         }
     }
     
@@ -167,4 +179,76 @@ class AppDelegate: UIResponder, UIApplicationDelegate, IntroVCDelegate, DataStor
     }
 
 }
+
+extension AppDelegate: SKPaymentTransactionObserver {
+    
+    func paymentQueue(_ queue: SKPaymentQueue,
+                      updatedTransactions transactions: [SKPaymentTransaction]) {
+        
+        for transaction in transactions {
+            switch transaction.transactionState {
+            case .purchasing:
+                handlePurchasingState(for: transaction, in: queue)
+            case .purchased:
+                handlePurchasedState(for: transaction, in: queue)
+            case .restored:
+                handleRestoredState(for: transaction, in: queue)
+            case .failed:
+                handleFailedState(for: transaction, in: queue)
+            case .deferred:
+                handleDeferredState(for: transaction, in: queue)
+            }
+        }
+        
+    }
+    
+    func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: IAPClient.restoreFailedNotification, object: nil)
+        }
+    }
+    
+    func handlePurchasingState(for transaction: SKPaymentTransaction, in queue: SKPaymentQueue) {
+        print("User is attempting to purchase product id: \(transaction.payment.productIdentifier)")
+        // queue.finishTransaction(transaction)
+    }
+    
+    func handlePurchasedState(for transaction: SKPaymentTransaction, in queue: SKPaymentQueue) {
+        print("User purchased product id: \(transaction.payment.productIdentifier)")
+        queue.finishTransaction(transaction)
+        
+        if isInMainWindow {
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: IAPClient.purchaseSuccessfulNotification, object: nil)
+            }
+        } else {
+            purchaseComplete()
+        }
+       
+    }
+    
+    func handleRestoredState(for transaction: SKPaymentTransaction, in queue: SKPaymentQueue) {
+        print("Purchase restored for product id: \(transaction.payment.productIdentifier)")
+        queue.finishTransaction(transaction)
+        purchaseComplete()
+    }
+    
+    func handleFailedState(for transaction: SKPaymentTransaction, in queue: SKPaymentQueue) {
+        print("Purchase failed for product id: \(transaction.payment.productIdentifier)")
+        queue.finishTransaction(transaction)
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: IAPClient.purchaseFailedNotification, object: nil)
+        }
+    }
+    
+    func handleDeferredState(for transaction: SKPaymentTransaction, in queue: SKPaymentQueue) {
+        print("Purchase deferred for product id: \(transaction.payment.productIdentifier)")
+        queue.finishTransaction(transaction)
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: IAPClient.purchaseDeferredNotification, object: nil)
+        }
+    }
+    
+}
+
 

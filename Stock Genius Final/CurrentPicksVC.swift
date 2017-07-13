@@ -25,7 +25,7 @@ class CurrentPicksVC: UIViewController {
         dataStore = DataStore.shared
         
     }
-
+    
 }
 
 extension CurrentPicksVC : UITableViewDelegate, UITableViewDataSource, CurrentPicksToggleDelegate {

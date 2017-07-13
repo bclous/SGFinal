@@ -19,6 +19,9 @@
 		0F16DFAC1F0F17D3006C531E /* NextTwentyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DFAA1F0F17D3006C531E /* NextTwentyCell.swift */; };
 		0F16DFAD1F0F17D3006C531E /* NextTwentyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F16DFAB1F0F17D3006C531E /* NextTwentyCell.xib */; };
 		0F17B7741F16CEF20064533F /* Page1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F17B7731F16CEF20064533F /* Page1.swift */; };
+		0F17B7761F17B71E0064533F /* SpinnerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F17B7751F17B71E0064533F /* SpinnerVC.swift */; };
+		0F17B7781F17BAA30064533F /* IAPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F17B7771F17BAA30064533F /* IAPClient.swift */; };
+		0F17B77A1F17CA180064533F /* InvalidSubscriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F17B7791F17CA180064533F /* InvalidSubscriptionVC.swift */; };
 		0F2651D11F0535A100754D0F /* MainStockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2651C81F0535A100754D0F /* MainStockCell.xib */; };
 		0F2651D21F0535A100754D0F /* ShareCalcCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2651C91F0535A100754D0F /* ShareCalcCell.xib */; };
 		0F2651D31F0535A100754D0F /* ShareCalcHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2651CA1F0535A100754D0F /* ShareCalcHeader.xib */; };
@@ -90,6 +93,9 @@
 		0F16DFAA1F0F17D3006C531E /* NextTwentyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextTwentyCell.swift; sourceTree = "<group>"; };
 		0F16DFAB1F0F17D3006C531E /* NextTwentyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NextTwentyCell.xib; sourceTree = "<group>"; };
 		0F17B7731F16CEF20064533F /* Page1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page1.swift; sourceTree = "<group>"; };
+		0F17B7751F17B71E0064533F /* SpinnerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinnerVC.swift; sourceTree = "<group>"; };
+		0F17B7771F17BAA30064533F /* IAPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IAPClient.swift; path = "../../StockGenius/Stock Genius/IAPClient.swift"; sourceTree = "<group>"; };
+		0F17B7791F17CA180064533F /* InvalidSubscriptionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvalidSubscriptionVC.swift; sourceTree = "<group>"; };
 		0F2651C81F0535A100754D0F /* MainStockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainStockCell.xib; path = "../../SG supplement/SG supplement/MainStockCell.xib"; sourceTree = "<group>"; };
 		0F2651C91F0535A100754D0F /* ShareCalcCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShareCalcCell.xib; path = "../../SG supplement/SG supplement/ShareCalcCell.xib"; sourceTree = "<group>"; };
 		0F2651CA1F0535A100754D0F /* ShareCalcHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShareCalcHeader.xib; path = "../../SG supplement/SG supplement/ShareCalcHeader.xib"; sourceTree = "<group>"; };
@@ -243,6 +249,7 @@
 		0FFB6F441F15582800FD8BC1 /* SplashScreen */ = {
 			isa = PBXGroup;
 			children = (
+				0F17B7791F17CA180064533F /* InvalidSubscriptionVC.swift */,
 				0FFB6F421F15308300FD8BC1 /* SplashScreenVC.swift */,
 				0FFB6F461F15586000FD8BC1 /* IndividualLabelView.xib */,
 				0FFB6F4A1F15590200FD8BC1 /* LabelScrollView.xib */,
@@ -257,6 +264,7 @@
 			children = (
 				0FFB6F4E1F15642200FD8BC1 /* IntroVC.swift */,
 				0FFB6F511F166A6200FD8BC1 /* IntroSplashScreen.xib */,
+				0F17B7751F17B71E0064533F /* SpinnerVC.swift */,
 				0FFB6F531F166AA700FD8BC1 /* IntroSplashScreen.swift */,
 				0F17B7731F16CEF20064533F /* Page1.swift */,
 				0FFB6F591F16AF3B00FD8BC1 /* LastIntroPage.xib */,
@@ -301,6 +309,7 @@
 				0F16DFA01F0E6B8C006C531E /* AlphaVantageClient.swift */,
 				0F16DF9C1F0D9461006C531E /* DataStore.swift */,
 				0F16DF9E1F0D980A006C531E /* FirebaseClient.swift */,
+				0F17B7771F17BAA30064533F /* IAPClient.swift */,
 				0F5BE8FE1F07FCBC00607D87 /* TabBarController.swift */,
 				AB2FB9AC1F02CF8300CA72B2 /* SGConstants.swift */,
 				AB2FB9A81F02BB2800CA72B2 /* TabBar.swift */,
@@ -481,6 +490,8 @@
 				0F2651E51F053BAE00754D0F /* NewsItem.swift in Sources */,
 				AB2FB9941F029BB700CA72B2 /* CurrentPicksVC.swift in Sources */,
 				0F16DF8D1F0D1815006C531E /* CalculatorVC.swift in Sources */,
+				0F17B7761F17B71E0064533F /* SpinnerVC.swift in Sources */,
+				0F17B7781F17BAA30064533F /* IAPClient.swift in Sources */,
 				0FFB6F5C1F16B10300FD8BC1 /* LastIntroPage.swift in Sources */,
 				0FFB6F3D1F13CFAE00FD8BC1 /* RemainingCashCell.swift in Sources */,
 				0F16DF9F1F0D980A006C531E /* FirebaseClient.swift in Sources */,
@@ -510,6 +521,7 @@
 				0F2651E11F053A4C00754D0F /* CurrentPortfolio.swift in Sources */,
 				AB2FB9A91F02BB2800CA72B2 /* TabBar.swift in Sources */,
 				0F2651E31F053AF600754D0F /* PastPortfolio.swift in Sources */,
+				0F17B77A1F17CA180064533F /* InvalidSubscriptionVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -637,7 +649,7 @@
 				INFOPLIST_FILE = "Stock Genius Final/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.clouser-theQwiz.Stock-Genius-Final";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.clouser-theQwiz.StockGeniusNew";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -652,7 +664,7 @@
 				INFOPLIST_FILE = "Stock Genius Final/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.clouser-theQwiz.Stock-Genius-Final";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.clouser-theQwiz.StockGeniusNew";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

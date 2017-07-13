@@ -28,6 +28,7 @@ class IntroVC: UIViewController, IntroScreenDelegate {
     var viewHasAppeared = false
     var readyToPresent = false
     var images : [UIImage] = []
+    let spinnerVC: SpinnerVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "spinnerVC") as! SpinnerVC
     
     @IBOutlet weak var otherBackgroundImageView: UIImageView!
     @IBOutlet weak var page1: Page1!
@@ -47,14 +48,11 @@ class IntroVC: UIViewController, IntroScreenDelegate {
         formatScrollView()
         lastIntroPage.delegate = self
         view.isUserInteractionEnabled = false
+        addIAPObservers()
+        
 
 
         // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -104,11 +102,15 @@ class IntroVC: UIViewController, IntroScreenDelegate {
     }
     
     public func showSpinnerView() {
-        
+    
+        spinnerVC.modalPresentationStyle = .overCurrentContext
+        present(spinnerVC, animated: false) {
+            // start IAP
+        }
     }
     
     public func dismissSpinnerView() {
-        
+        spinnerVC.dismiss(animated: false, completion: nil)
     }
     
     private func imageViewForIndex(_ index: Int) -> UIImageView {
@@ -142,22 +144,81 @@ class IntroVC: UIViewController, IntroScreenDelegate {
     
     
     func introScreenUserInteraction(_ choice: IntroScreenChoice) {
-        delegate?.userChoice(choice)
-        if choice == .terms {
-            // launch modal VC w/ terms
+        
+        switch choice {
+        case .subscribe:
+            handleSubscribeTapped()
+        case .restore:
+            handleRestoreTapped()
+        case .terms:
+            handleTermsTapped()
+        }
+    }
+    
+    func handleTermsTapped() {
+        showSpinnerView()
+    }
+    
+    func handleSubscribeTapped() {
+        
+        if IAPClient.shared.IAPProductsAvailable {
+            showSpinnerView()
+            IAPClient.shared.upgradeToFullVersion(testMode: isTestMode)
+        } else {
+            self.presentAlertToUser(title: "Can't connect to Apple", message: "Please try again")
+            IAPClient.shared.fetchProducts()
+        }
+    }
+    
+    func handleRestoreTapped() {
+        if IAPClient.shared.IAPProductsAvailable {
+            showSpinnerView()
+            IAPClient.shared.restorePreviousPurchase()
+        } else {
+            self.presentAlertToUser(title: "Can't connect to Apple", message: "Please try again")
+            IAPClient.shared.fetchProducts()
         }
     }
 
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func addIAPObservers() {
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handlePurchaseFail(notification:)),
+                                               name: IAPClient.purchaseFailedNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handlePurchaseDeferred(notification:)),
+                                               name: IAPClient.purchaseDeferredNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handlePurchaseFail(notification:)),
+                                               name: IAPClient.restoreFailedNotification,
+                                               object: nil)
     }
-    */
+    
+    
+    
+    func handlePurchaseFail(notification: NSNotification) {
+        dismissSpinnerView()
+    }
+    
+    func handleRestoreFail(notification:NSNotification) {
+        dismissSpinnerView()
+        self.presentAlertToUser(title: "Cannot Restore", message: "No purchase found")
+    }
+    
+    func handlePurchaseDeferred(notification: NSNotification) {
+        dismissSpinnerView()
+        self.presentAlertToUser(title: "Purchase Deferred", message: "Awaiting approval")
+    }
+    
+    func presentAlertToUser(title: String, message:String) {
+        let importAlert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        importAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(importAlert, animated: true, completion: nil)
+    }
+
 
 }
 
