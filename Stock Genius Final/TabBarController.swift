@@ -14,6 +14,7 @@ class TabBarController: UITabBarController, TabBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         addCustomTabBar()
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     
     private func addCustomTabBar() {
