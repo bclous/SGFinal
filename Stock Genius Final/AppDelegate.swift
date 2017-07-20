@@ -78,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, IntroVCDelegate, DataStor
 //            return UserDefaults.standard.object(forKey: "payingUser") as! Bool
 //        }
         
-        return true
+        return false
     }
     
     func purchaseComplete() {

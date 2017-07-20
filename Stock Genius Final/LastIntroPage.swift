@@ -20,6 +20,7 @@ protocol IntroScreenDelegate: class {
 
 class LastIntroPage: UIView {
 
+    @IBOutlet weak var billingLabel: UILabel!
     @IBOutlet weak var restoreLabel: UILabel!
     @IBOutlet weak var termsLabel: UILabel!
     @IBOutlet weak var subscribeButton: UIButton!
@@ -53,6 +54,7 @@ class LastIntroPage: UIView {
         subscribeButton.backgroundColor = SGConstants.mainBlueColor
         termsLabel.textColor = SGConstants.fontColorWhiteSecondary
         restoreLabel.textColor = SGConstants.fontColorWhiteSecondary
+        billingLabel.textColor = SGConstants.fontColorWhiteSecondary
     }
     
     @IBAction func subscribeButtonTapped(_ sender: Any) {
