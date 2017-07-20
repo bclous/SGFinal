@@ -30,7 +30,7 @@ class CalculatorVC: UIViewController, CalculatorInputDelegate, CalcHeaderViewDel
         let minimum = DataStore.shared.currentPortfolio.minimumInvestmentForCalculator()
         let originalAmount = max(minimum, 15000.0)
         DataStore.shared.currentPortfolio.updateCalculatorValues(portfolioAmount: Int(originalAmount))
-        header.formatViewWithInvestmentAmount(Int(originalAmount))
+        header.formatViewWithInvestmentAmount(Int(originalAmount), minimum: Int(minimum))
         mainTableView.reloadData()
     
     }

@@ -64,8 +64,8 @@ class ShareCalcHeaderView: UIView {
         
     }
     
-    public func formatViewWithInvestmentAmount(_ amount: Int) {
-        minimum = amount
+    public func formatViewWithInvestmentAmount(_ amount: Int, minimum: Int) {
+       self.minimum = minimum
         if let minString = numberFormatter.string(from: NSNumber(value: minimum)) {
             minimumString = "Minimum: $ " + minString
         }
