@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Stock Genius Final/IntroVC.swift"
-            timestampString = "521759576.573425"
+            timestampString = "522274291.815033"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
             landmarkName = "imageViewForIndex(_:)"
             landmarkType = "7">
          </BreakpointContent>

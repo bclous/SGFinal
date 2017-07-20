@@ -31,6 +31,7 @@ class IntroVC: UIViewController, IntroScreenDelegate {
     var readyToPresent = false
     var images : [UIImage] = []
     let spinnerVC: SpinnerVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "spinnerVC") as! SpinnerVC
+    let termsVC: TermsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "termsVC") as! TermsVC
     var lastAtIndexZeroRatherThanOne = true
     
     @IBOutlet weak var otherBackgroundImageView: UIImageView!
@@ -165,7 +166,9 @@ class IntroVC: UIViewController, IntroScreenDelegate {
     }
     
     func handleTermsTapped() {
-        showSpinnerView()
+        present(termsVC, animated: true) { 
+            // yup
+        }
     }
     
     func handleSubscribeTapped() {

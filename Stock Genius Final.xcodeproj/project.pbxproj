@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F113C0F1F2143E600D832D6 /* TermsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F113C0E1F2143E600D832D6 /* TermsVC.swift */; };
 		0F16DF8D1F0D1815006C531E /* CalculatorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DF8C1F0D1815006C531E /* CalculatorVC.swift */; };
 		0F16DF8F1F0D1820006C531E /* PastPicksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DF8E1F0D1820006C531E /* PastPicksVC.swift */; };
 		0F16DF911F0D1AAE006C531E /* ShareCalcHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DF901F0D1AAE006C531E /* ShareCalcHeaderView.swift */; };
@@ -84,6 +85,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F113C0E1F2143E600D832D6 /* TermsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsVC.swift; sourceTree = "<group>"; };
 		0F16DF8C1F0D1815006C531E /* CalculatorVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorVC.swift; sourceTree = "<group>"; };
 		0F16DF8E1F0D1820006C531E /* PastPicksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastPicksVC.swift; sourceTree = "<group>"; };
 		0F16DF901F0D1AAE006C531E /* ShareCalcHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCalcHeaderView.swift; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 				0FFB6F511F166A6200FD8BC1 /* IntroSplashScreen.xib */,
 				0F17B77D1F1911840064533F /* CircleTabView.xib */,
 				0F17B7811F1912470064533F /* CircleTabView.swift */,
+				0F113C0E1F2143E600D832D6 /* TermsVC.swift */,
 				0F17B7751F17B71E0064533F /* SpinnerVC.swift */,
 				0FFB6F531F166AA700FD8BC1 /* IntroSplashScreen.swift */,
 				0F17B7731F16CEF20064533F /* Page1.swift */,
@@ -489,6 +492,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F113C0F1F2143E600D832D6 /* TermsVC.swift in Sources */,
 				0F16DF951F0D265A006C531E /* PastPicksPerformanceView.swift in Sources */,
 				0F16DF911F0D1AAE006C531E /* ShareCalcHeaderView.swift in Sources */,
 				0F17B7741F16CEF20064533F /* Page1.swift in Sources */,

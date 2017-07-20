@@ -214,7 +214,7 @@
                                 <rect key="frame" x="-0.5" y="-0.5" width="375" height="667"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="gBC-uH-6mg">
-                                        <rect key="frame" x="0.0" y="0.0" width="1125" height="667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="1500" height="667"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hY4-NW-KZ2">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -225,6 +225,9 @@
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PicsPage2" translatesAutoresizingMaskIntoConstraints="NO" id="DYn-7J-iJK">
                                                 <rect key="frame" x="750" y="0.0" width="375" height="667"/>
                                             </imageView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ywv-KR-qZs">
+                                                <rect key="frame" x="1125" y="0.0" width="375" height="667"/>
+                                            </view>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -232,7 +235,7 @@
                                     <constraint firstAttribute="trailing" secondItem="gBC-uH-6mg" secondAttribute="trailing" id="16r-dG-zKK"/>
                                     <constraint firstItem="gBC-uH-6mg" firstAttribute="leading" secondItem="8xE-hV-03H" secondAttribute="leading" id="Wfs-UF-bUQ"/>
                                     <constraint firstItem="gBC-uH-6mg" firstAttribute="top" secondItem="8xE-hV-03H" secondAttribute="top" id="YK4-p1-rbh"/>
-                                    <constraint firstItem="gBC-uH-6mg" firstAttribute="width" secondItem="8xE-hV-03H" secondAttribute="width" multiplier="3" id="gPI-jL-Xe4"/>
+                                    <constraint firstItem="gBC-uH-6mg" firstAttribute="width" secondItem="8xE-hV-03H" secondAttribute="width" multiplier="4" id="gPI-jL-Xe4"/>
                                     <constraint firstItem="gBC-uH-6mg" firstAttribute="height" secondItem="8xE-hV-03H" secondAttribute="height" id="jbi-gB-Oqp"/>
                                     <constraint firstAttribute="bottom" secondItem="gBC-uH-6mg" secondAttribute="bottom" id="vxM-VO-p3O"/>
                                 </constraints>
@@ -425,6 +428,76 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k3B-vZ-IWR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1346" y="-853"/>
+        </scene>
+        <!--TermsVC-->
+        <scene sceneID="Teo-Sd-BHJ">
+            <objects>
+                <viewController storyboardIdentifier="termsVC" id="bRx-LR-BOm" customClass="TermsVC" customModule="Stock_Genius_Final" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Qcz-RK-ahE"/>
+                        <viewControllerLayoutGuide type="bottom" id="kov-EX-aMe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1th-Ds-qYQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1o7-Df-m2i">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_close" translatesAutoresizingMaskIntoConstraints="NO" id="mYT-36-hi6">
+                                        <rect key="frame" x="337" y="36" width="18" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="U2x-eV-rTG"/>
+                                            <constraint firstAttribute="width" constant="18" id="Uue-L5-qqY"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vka-Ql-yG9">
+                                        <rect key="frame" x="329.5" y="29" width="33" height="32"/>
+                                        <connections>
+                                            <action selector="closeButtonTapped:" destination="bRx-LR-BOm" eventType="touchUpInside" id="Mng-Rs-T4P"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Vka-Ql-yG9" firstAttribute="height" secondItem="mYT-36-hi6" secondAttribute="height" constant="14" id="0QD-6R-s9H"/>
+                                    <constraint firstAttribute="trailing" secondItem="mYT-36-hi6" secondAttribute="trailing" constant="20" id="7Lv-px-udr"/>
+                                    <constraint firstItem="mYT-36-hi6" firstAttribute="centerY" secondItem="1o7-Df-m2i" secondAttribute="centerY" constant="9" id="BhC-c9-RPx"/>
+                                    <constraint firstAttribute="height" constant="72" id="JMO-Lg-pvn"/>
+                                    <constraint firstItem="Vka-Ql-yG9" firstAttribute="centerX" secondItem="mYT-36-hi6" secondAttribute="centerX" id="KoN-H5-Jb4"/>
+                                    <constraint firstItem="Vka-Ql-yG9" firstAttribute="centerY" secondItem="mYT-36-hi6" secondAttribute="centerY" id="cTR-8q-Vl9"/>
+                                    <constraint firstItem="Vka-Ql-yG9" firstAttribute="width" secondItem="mYT-36-hi6" secondAttribute="width" constant="15" id="waf-Kb-Uh8"/>
+                                </constraints>
+                            </view>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G7d-OL-w0C">
+                                <rect key="frame" x="0.0" y="72" width="375" height="595"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="CQw-vV-GBz">
+                                <rect key="frame" x="177.5" y="359" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="G7d-OL-w0C" secondAttribute="trailing" id="5Lx-eO-Nr2"/>
+                            <constraint firstItem="CQw-vV-GBz" firstAttribute="centerY" secondItem="G7d-OL-w0C" secondAttribute="centerY" id="JUa-Ta-dBh"/>
+                            <constraint firstItem="1o7-Df-m2i" firstAttribute="centerX" secondItem="1th-Ds-qYQ" secondAttribute="centerX" id="Nv5-cN-K44"/>
+                            <constraint firstItem="1o7-Df-m2i" firstAttribute="width" secondItem="1th-Ds-qYQ" secondAttribute="width" id="by1-Hm-3ZJ"/>
+                            <constraint firstItem="G7d-OL-w0C" firstAttribute="leading" secondItem="1th-Ds-qYQ" secondAttribute="leading" id="cE7-rJ-sYf"/>
+                            <constraint firstItem="G7d-OL-w0C" firstAttribute="top" secondItem="1o7-Df-m2i" secondAttribute="bottom" id="m1b-gE-NUO"/>
+                            <constraint firstItem="CQw-vV-GBz" firstAttribute="centerX" secondItem="G7d-OL-w0C" secondAttribute="centerX" id="mqG-0A-Dlq"/>
+                            <constraint firstItem="kov-EX-aMe" firstAttribute="top" secondItem="G7d-OL-w0C" secondAttribute="bottom" id="xNF-Yl-jCf"/>
+                            <constraint firstItem="1o7-Df-m2i" firstAttribute="top" secondItem="Qcz-RK-ahE" secondAttribute="bottom" constant="-20" id="yVl-bD-C1C"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="spinner" destination="CQw-vV-GBz" id="iEF-gs-YZy"/>
+                        <outlet property="webview" destination="G7d-OL-w0C" id="oTp-JW-Obc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="znb-kq-MUh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2090" y="-853"/>
         </scene>
         <!--Invalid SubscriptionVC-->
         <scene sceneID="IjV-wj-13l">
@@ -644,6 +717,7 @@
         <image name="PicsPage2" width="750" height="1334"/>
         <image name="bullBackground" width="373" height="667"/>
         <image name="frame" width="824" height="668"/>
+        <image name="ic_close" width="14" height="14"/>
         <image name="iconNoEyes" width="100" height="100"/>
         <image name="page1" width="765" height="1334"/>
         <image name="page2" width="765" height="1334"/>
