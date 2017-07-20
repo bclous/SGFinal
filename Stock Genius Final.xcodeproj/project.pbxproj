@@ -22,6 +22,9 @@
 		0F17B7761F17B71E0064533F /* SpinnerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F17B7751F17B71E0064533F /* SpinnerVC.swift */; };
 		0F17B7781F17BAA30064533F /* IAPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F17B7771F17BAA30064533F /* IAPClient.swift */; };
 		0F17B77A1F17CA180064533F /* InvalidSubscriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F17B7791F17CA180064533F /* InvalidSubscriptionVC.swift */; };
+		0F17B77C1F1904170064533F /* Page1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F17B77B1F1904170064533F /* Page1.xib */; };
+		0F17B77E1F1911840064533F /* CircleTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F17B77D1F1911840064533F /* CircleTabView.xib */; };
+		0F17B7821F1912470064533F /* CircleTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F17B7811F1912470064533F /* CircleTabView.swift */; };
 		0F2651D11F0535A100754D0F /* MainStockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2651C81F0535A100754D0F /* MainStockCell.xib */; };
 		0F2651D21F0535A100754D0F /* ShareCalcCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2651C91F0535A100754D0F /* ShareCalcCell.xib */; };
 		0F2651D31F0535A100754D0F /* ShareCalcHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2651CA1F0535A100754D0F /* ShareCalcHeader.xib */; };
@@ -96,6 +99,9 @@
 		0F17B7751F17B71E0064533F /* SpinnerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinnerVC.swift; sourceTree = "<group>"; };
 		0F17B7771F17BAA30064533F /* IAPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IAPClient.swift; path = "../../StockGenius/Stock Genius/IAPClient.swift"; sourceTree = "<group>"; };
 		0F17B7791F17CA180064533F /* InvalidSubscriptionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvalidSubscriptionVC.swift; sourceTree = "<group>"; };
+		0F17B77B1F1904170064533F /* Page1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Page1.xib; sourceTree = "<group>"; };
+		0F17B77D1F1911840064533F /* CircleTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CircleTabView.xib; sourceTree = "<group>"; };
+		0F17B7811F1912470064533F /* CircleTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleTabView.swift; sourceTree = "<group>"; };
 		0F2651C81F0535A100754D0F /* MainStockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainStockCell.xib; path = "../../SG supplement/SG supplement/MainStockCell.xib"; sourceTree = "<group>"; };
 		0F2651C91F0535A100754D0F /* ShareCalcCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShareCalcCell.xib; path = "../../SG supplement/SG supplement/ShareCalcCell.xib"; sourceTree = "<group>"; };
 		0F2651CA1F0535A100754D0F /* ShareCalcHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShareCalcHeader.xib; path = "../../SG supplement/SG supplement/ShareCalcHeader.xib"; sourceTree = "<group>"; };
@@ -264,9 +270,12 @@
 			children = (
 				0FFB6F4E1F15642200FD8BC1 /* IntroVC.swift */,
 				0FFB6F511F166A6200FD8BC1 /* IntroSplashScreen.xib */,
+				0F17B77D1F1911840064533F /* CircleTabView.xib */,
+				0F17B7811F1912470064533F /* CircleTabView.swift */,
 				0F17B7751F17B71E0064533F /* SpinnerVC.swift */,
 				0FFB6F531F166AA700FD8BC1 /* IntroSplashScreen.swift */,
 				0F17B7731F16CEF20064533F /* Page1.swift */,
+				0F17B77B1F1904170064533F /* Page1.xib */,
 				0FFB6F591F16AF3B00FD8BC1 /* LastIntroPage.xib */,
 				0FFB6F5B1F16B10300FD8BC1 /* LastIntroPage.swift */,
 				0FFB6F551F1676BB00FD8BC1 /* GirlView.xib */,
@@ -406,6 +415,7 @@
 				0FFB6F4B1F15590200FD8BC1 /* LabelScrollView.xib in Resources */,
 				0F2651D71F0535A100754D0F /* MainStockSummaryCell.xib in Resources */,
 				0FFB6F321F10325C00FD8BC1 /* PastPicksNoteCell.xib in Resources */,
+				0F17B77C1F1904170064533F /* Page1.xib in Resources */,
 				0F2651D31F0535A100754D0F /* ShareCalcHeader.xib in Resources */,
 				0F2651D91F0535A100754D0F /* NextUpdateView.xib in Resources */,
 				0F2651D81F0535A100754D0F /* PastPicksSectionHeaderView.xib in Resources */,
@@ -415,6 +425,7 @@
 				AB2FB9971F029BB700CA72B2 /* Main.storyboard in Resources */,
 				0F16DF9B1F0D8E31006C531E /* GoogleService-Info.plist in Resources */,
 				0FFB6F411F13D03500FD8BC1 /* DisclosureCell.xib in Resources */,
+				0F17B77E1F1911840064533F /* CircleTabView.xib in Resources */,
 				0FFB6F471F15586000FD8BC1 /* IndividualLabelView.xib in Resources */,
 				AB2FB9A71F029D6C00CA72B2 /* TabBar.xib in Resources */,
 				0F2651D11F0535A100754D0F /* MainStockCell.xib in Resources */,
@@ -483,6 +494,7 @@
 				0F17B7741F16CEF20064533F /* Page1.swift in Sources */,
 				0F2651F01F055D3C00754D0F /* PastPicksSectionHeaderView.swift in Sources */,
 				0F16DF8F1F0D1820006C531E /* PastPicksVC.swift in Sources */,
+				0F17B7821F1912470064533F /* CircleTabView.swift in Sources */,
 				0F2651DF1F05390A00754D0F /* PastStock.swift in Sources */,
 				0F16DF931F0D1C1C006C531E /* ShareCalcCell.swift in Sources */,
 				0F5BE8FD1F07F5E200607D87 /* MainStocksSectionHeaderToggle.swift in Sources */,

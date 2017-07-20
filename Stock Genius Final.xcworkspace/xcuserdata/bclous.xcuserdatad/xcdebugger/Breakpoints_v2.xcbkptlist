@@ -54,81 +54,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Stock Genius Final/AppDelegate.swift"
-            timestampString = "521656084.31049"
+            filePath = "Stock Genius Final/IntroVC.swift"
+            timestampString = "521759576.573425"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "checkForFirstTime()"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
+            landmarkName = "imageViewForIndex(_:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Stock Genius Final/AppDelegate.swift"
-            timestampString = "521675128.573665"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
-            landmarkName = "initialImagePullComplete(success:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Stock Genius Final/AppDelegate.swift"
-            timestampString = "521675128.573665"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "moveToMainViews()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Stock_Genius_Final.AppDelegate.moveToMainViews () -&gt; ()"
-                  moduleName = "Stock Genius Final"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bclous/Desktop/SGFinal/Stock%20Genius%20Final/AppDelegate.swift"
-                  timestampString = "521675129.711529"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "94"
-                  endingLineNumber = "94"
-                  offsetFromSymbolStart = "24">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Stock_Genius_Final.AppDelegate.moveToMainViews () -&gt; ()"
-                  moduleName = "Stock Genius Final"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bclous/Desktop/SGFinal/Stock%20Genius%20Final/AppDelegate.swift"
-                  timestampString = "521675129.714337"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "94"
-                  endingLineNumber = "94"
-                  offsetFromSymbolStart = "68">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -31,7 +31,7 @@ class PastStock: Stock {
         note = dictionary["note"] as? String ?? ""
         adjPriceStartDate = dictionary["startPx"] as? Float ?? 0
         adjPriceEndDate = dictionary["endPx"] as? Float ?? 0
-        finalPercentageReturn = adjPriceEndDate == 0 ? 0 : (adjPriceEndDate / adjPriceStartDate) - 1
+        finalPercentageReturn = dictionary["totalReturn"] as? Float ?? 0
         rankInPortfolio = dictionary["rank"] as? Int ?? 99
     }
     

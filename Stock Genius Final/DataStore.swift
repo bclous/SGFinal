@@ -90,10 +90,10 @@ class DataStore: NSObject, AlphaVantageClientDelegate, FirebaseClientDelegate {
         if pastPortfolios.count == 0 {
             return "no data"
         } else {
-            let startString = pastPortfolios[0].startDateString()
-            let endDateString = pastPortfolios.last?.endDateString()
+            let startString = pastPortfolios.last?.startDateString()
+            let endDateString = pastPortfolios[0].endDateString()
             
-            return startString + " - " + endDateString! + " (\(pastPortfolios.count) quarters)"
+            return startString! + " - " + endDateString + " (\(pastPortfolios.count) quarters)"
         }
     }
     

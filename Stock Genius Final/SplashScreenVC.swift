@@ -10,6 +10,8 @@ import UIKit
 
 class SplashScreenVC: UIViewController, DataStoreDelegate, InvalidSubscriptionDelegate {
 
+    @IBOutlet weak var logoImage: UIImageView!
+    @IBOutlet weak var noEyesLogoImage: UIImageView!
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var labelScrollView: LabelScrollView!
     var currentLabelPage = 0
@@ -20,6 +22,7 @@ class SplashScreenVC: UIViewController, DataStoreDelegate, InvalidSubscriptionDe
     var isTestMode = true
     var spinnerViewShowing = false
     var badSubscriptionScreenShowing = false
+    var normalLogoShowing = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +42,17 @@ class SplashScreenVC: UIViewController, DataStoreDelegate, InvalidSubscriptionDe
     override func viewDidAppear(_ animated: Bool) {
         super .viewDidAppear(animated)
         checkForValidSubscription()
+        animateLogo()
+    }
+    
+    func animateLogo() {
+        UIView.animate(withDuration: 1.0, animations: {
+            self.logoImage.alpha = self.normalLogoShowing ? 0 : 1
+            self.noEyesLogoImage.alpha = self.normalLogoShowing ? 1 : 0
+        }) { (complete) in
+            self.normalLogoShowing = !self.normalLogoShowing
+            self.animateLogo()
+        }
     }
     
     func checkForValidSubscription() {
@@ -66,6 +80,21 @@ class SplashScreenVC: UIViewController, DataStoreDelegate, InvalidSubscriptionDe
                 IAPClient.shared.fetchProducts()
             }
         }
+    }
+    
+    func restoreTapped() {
+        
+        invalidVC.dismiss(animated: false) {
+            self.showSpinnerView()
+            
+            if IAPClient.shared.IAPProductsAvailable {
+                IAPClient.shared.restorePreviousPurchase()
+            } else {
+                self.presentAlertToUser(title: "Can't connect to Apple", message: "Please try again")
+                IAPClient.shared.fetchProducts()
+            }
+        }
+
     }
     
     func handleBadSubscription() {

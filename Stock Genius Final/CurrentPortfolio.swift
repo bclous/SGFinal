@@ -266,6 +266,15 @@ class CurrentPortfolio: NSObject {
         return total
     }
     
+    func notesArray() -> [String] {
+        var notes : [String] = []
+        for stock in holdings {
+            if stock.note != "" {
+                notes.append(stock.note)
+            }
+        }
+        return notes
+    }
 }
 
 class CalculatorStock: NSObject {
@@ -308,7 +317,7 @@ class CalculatorStock: NSObject {
             totalMoney = totalMoney + stock.adjPriceCurrent
         }
     }
-    
+
 }
 
 extension Date {

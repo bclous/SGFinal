@@ -15,7 +15,7 @@ import StoreKit
 class AppDelegate: UIResponder, UIApplicationDelegate, IntroVCDelegate, DataStoreDelegate {
 
     var window: UIWindow?
-    var isTestMode = true
+    var isTestMode = false
     let introVC : IntroVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "introVC") as! IntroVC
     var isInMainWindow = false
 
@@ -71,12 +71,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, IntroVCDelegate, DataStor
     
     func isPayingUser() -> Bool {
 
-        if UserDefaults.standard.object(forKey: "payingUser") == nil {
-            UserDefaults.standard.set(false, forKey: "payingUser")
-            return false
-        } else {
-            return UserDefaults.standard.object(forKey: "payingUser") as! Bool
-        }
+//        if UserDefaults.standard.object(forKey: "payingUser") == nil {
+//            UserDefaults.standard.set(false, forKey: "payingUser")
+//            return false
+//        } else {
+//            return UserDefaults.standard.object(forKey: "payingUser") as! Bool
+//        }
+        
+        return true
     }
     
     func purchaseComplete() {

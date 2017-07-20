@@ -23,7 +23,8 @@ class CurrentPicksVC: UIViewController {
         formatTableView()
         view.backgroundColor = SGConstants.mainBlackColor
         dataStore = DataStore.shared
-        
+        let headerDateString = DataStore.shared.currentPortfolio.startDateString()
+        headerView.secondaryLabel.text = "Identified from 13-F data on \(headerDateString)"
     }
     
 }
@@ -34,6 +35,7 @@ extension CurrentPicksVC : UITableViewDelegate, UITableViewDataSource, CurrentPi
         mainTableView.register(UINib(nibName: "MainStockCell", bundle: nil), forCellReuseIdentifier: "mainStockCell")
         mainTableView.register(UINib(nibName: "NextTwentyCell", bundle: nil), forCellReuseIdentifier: "NextTwentyCell")
         mainTableView.register(UINib(nibName: "MainStockSummaryCell", bundle: nil), forCellReuseIdentifier: "MainStockSummaryCell")
+        mainTableView.register(UINib(nibName: "PastPicksNoteCell", bundle: nil), forCellReuseIdentifier: "PastPicksNoteCell")
         
         mainTableView.delegate = self
         mainTableView.dataSource = self
@@ -46,12 +48,11 @@ extension CurrentPicksVC : UITableViewDelegate, UITableViewDataSource, CurrentPi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 0 : 31
+        return section == 0 ? 0 : 31 + DataStore.shared.currentPortfolio.notesArray().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-    
         if indexPath.row == 13 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "NextTwentyCell") as! NextTwentyCell
             return cell
@@ -61,12 +62,18 @@ extension CurrentPicksVC : UITableViewDelegate, UITableViewDataSource, CurrentPi
                 cell.formatCellWithPortfolio(DataStore.shared.currentPortfolio, summaryType: summaryTypeForIndexPath(indexPath), isTodayReturn: isTodayReturn)
             }
             return cell
-        } else {
+        } else if indexPath.row < 31 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "mainStockCell") as! MainStockCell
             if ready {
                 cell.formatCellWithStock(DataStore.shared.currentPortfolio.holdings[arrayIndexFromIndexPath(indexPath)], isOneDayReturn: isTodayReturn)
             }
-            
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PastPicksNoteCell") as! PastPicksNoteCell
+            let noteNumber = indexPath.row - 31
+            let notes = DataStore.shared.currentPortfolio.notesArray()
+            let note = notes[noteNumber]
+            cell.noteLabel.text = note
             return cell
         }
     }

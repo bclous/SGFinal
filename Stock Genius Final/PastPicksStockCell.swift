@@ -36,13 +36,13 @@ class PastPicksStockCell: UITableViewCell {
     
     public func formatCellWithPastStock(_ stock: PastStock) {
         
-        let isPositive = stock.adjPriceEndDate >= stock.adjPriceStartDate
+        let isPositive = stock.finalPercentageReturn > 0
         tickerLabel.text = stock.ticker
         companyNameLabel.text = stock.companyName
         directionImageView.image = stock.dollarChangeImage(startPx: stock.adjPriceStartDate, endPx: stock.adjPriceEndDate)
         priceChangeLabel.text = stock.priceString(abs(stock.adjPriceEndDate - stock.adjPriceStartDate))
         percentageChangeContainerView.backgroundColor = isPositive ? SGConstants.mainGreenColor : SGConstants.mainRedColor
-        percentageChangeLabel.text = stock.percentageString(startPx: stock.adjPriceStartDate, endPx: stock.adjPriceEndDate)
+        percentageChangeLabel.text = stock.percentageStringFromDecimal(stock.finalPercentageReturn) + "%"
         percentageDirectionLabel.text = isPositive ? "+" : "-"
         
     }

@@ -35,7 +35,7 @@
                         <constraint firstAttribute="height" constant="60" id="GSP-PU-28d"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                    <state key="normal" title="GET STARTED">
+                    <state key="normal" title="START YOUR 30-DAY FREE TRIAL">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>

@@ -14,6 +14,8 @@ protocol IntroVCDelegate: class {
 
 class IntroVC: UIViewController, IntroScreenDelegate {
 
+    @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet weak var circleTabView: CircleTabView!
     @IBOutlet weak var mainScrollView: UIScrollView!
     @IBOutlet weak var backGroundImage: UIImageView!
     @IBOutlet weak var pictureScrollView: UIScrollView!
@@ -29,8 +31,10 @@ class IntroVC: UIViewController, IntroScreenDelegate {
     var readyToPresent = false
     var images : [UIImage] = []
     let spinnerVC: SpinnerVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "spinnerVC") as! SpinnerVC
+    var lastAtIndexZeroRatherThanOne = true
     
     @IBOutlet weak var otherBackgroundImageView: UIImageView!
+    
     @IBOutlet weak var page1: Page1!
     @IBOutlet weak var page1Background: UIImageView!
     @IBOutlet weak var page2: UIImageView!
@@ -40,19 +44,19 @@ class IntroVC: UIViewController, IntroScreenDelegate {
     @IBOutlet weak var graphicPage1: UIImageView!
     @IBOutlet weak var graphicPage2: UIImageView!
 
-    
-    
+
     override func viewDidLoad() {
+        mainScrollView.alpha = 0
         super.viewDidLoad()
         frameWidth = view.frame.width
         formatScrollView()
         lastIntroPage.delegate = self
         view.isUserInteractionEnabled = false
         addIAPObservers()
-        
-
-
-        // Do any additional setup after loading the view.
+        circleTabView.alpha = 0
+        backgroundView.backgroundColor = SGConstants.mainBlackColor
+        backgroundView.alpha = 0
+   
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -83,7 +87,11 @@ class IntroVC: UIViewController, IntroScreenDelegate {
                 self.introSplashScreen.alpha = 0
             }, completion: { (complete) in
                 self.girlView.animateGirlImage {
-                    self.view.isUserInteractionEnabled = true
+                    UIView.animate(withDuration: 0.4, delay: 0.7, options: [], animations: {
+                        self.mainScrollView.alpha = 1
+                    }, completion: { (complete) in
+                        self.view.isUserInteractionEnabled = true
+                    })
                 }
             })
         }
@@ -93,11 +101,12 @@ class IntroVC: UIViewController, IntroScreenDelegate {
     public func assignImages() {
         
         for index in 0...DataStore.shared.imageNames.count - 1 {
-            let url = DataStore.shared.localURLFromFileName(DataStore.shared.imageNames[index])!
-            let fileName = url.path
-            let image = UIImage(contentsOfFile: fileName)!
-            let imageView = imageViewForIndex(index)
-            imageView.image = image
+            
+                let url = DataStore.shared.localURLFromFileName(DataStore.shared.imageNames[index])!
+                let fileName = url.path
+                let image = UIImage(contentsOfFile: fileName)!
+                let imageView = imageViewForIndex(index)
+                imageView.image = image
         }
     }
     
@@ -232,36 +241,26 @@ extension IntroVC: UIScrollViewDelegate {
         let offset = scrollView.contentOffset.x
         let point = CGPoint(x: offset, y: 0)
         formatOtherViews(offset: point)
+        formatCircleView(offset: point)
         
-//        circlesClearUntilPage1 = scrollView.contentOffset.x == 0 ? true : circlesClearUntilPage1
-//        
-//        if scrollView.contentOffset.x < frameWidth {
-//            circleStackView.alpha = circlesClearUntilPage1 ? 0 : scrollView.contentOffset.x / frameWidth
-//        } else {
-//            circlesClearUntilPage1 = false
-//            circleStackView.alpha = 1
-//        }
-//        
-//        let indexFloat : CGFloat = scrollView.contentOffset.x / frameWidth
-//        var indexInt : Int = 0
-//        
-//        switch indexFloat {
-//        case 0...1.499:
-//            indexInt = 0
-//        case 1.499...2.499:
-//            indexInt = 1
-//        case 2.499...3.499:
-//            indexInt = 2
-//        case 3.499...4.499:
-//            indexInt = 3
-//        case 4.499...6:
-//            indexInt = 4
-//        default:
-//            indexInt = 0
-//        }
-//        
-//        adjustCirclesToIndex(indexInt)
+    }
+    
+    func formatCircleView(offset: CGPoint) {
         
+        if lastAtIndexZeroRatherThanOne {
+            circleTabView.alpha =  offset.x / view.frame.width < 1 ? 0 : 1
+        } else {
+            circleTabView.alpha = offset.x / view.frame.width
+        }
+        
+        if offset.x == 0 {
+            lastAtIndexZeroRatherThanOne = true
+        }
+        if offset.x == view.frame.width {
+            lastAtIndexZeroRatherThanOne = false
+        }
+        
+        circleTabView.formatCircleViewForOffset(offset, frameWidth: view.frame.width)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -274,6 +273,14 @@ extension IntroVC: UIScrollViewDelegate {
         formatBackgroundScrollView(offset: offset)
         formatGirlView(offset: offset)
         formatPictureView(offset: offset)
+        formatBackgroundView(offset: offset)
+    }
+    
+    func formatBackgroundView(offset: CGPoint) {
+        
+        let minOffset : CGFloat = view.frame.width * 4.0
+        backgroundView.alpha = offset.x < minOffset ? 0.0 : (offset.x - minOffset) / view.frame.width
+
     }
     
     func formatPictureView(offset: CGPoint) {

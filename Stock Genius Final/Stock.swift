@@ -32,10 +32,10 @@ class Stock: NSObject {
     }
     
     public func percentageString(startPx: Float, endPx : Float) -> String {
-        return startPx == 0 ? "-" : percentageString(endPx / startPx - 1) + "%"
+        return startPx == 0 ? "-" : percentageStringFromDecimal(endPx / startPx - 1) + "%"
     }
     
-    private func percentageString( _ change: Float) -> String {
+    public func percentageStringFromDecimal( _ change: Float) -> String {
         return String(format: "%.1f", abs(change * 100))
     }
     

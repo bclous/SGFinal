@@ -20,6 +20,8 @@ class MainStockCell: UITableViewCell {
     @IBOutlet weak var percentageChangeContainerView: UIView!
     @IBOutlet weak var percentageChangeLabel: UILabel!
     @IBOutlet weak var percentageChangeDirectionLabel: UILabel!
+    @IBOutlet weak var notTradingView: UIView!
+    @IBOutlet weak var notTradingLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,6 +32,9 @@ class MainStockCell: UITableViewCell {
         companyNameLabel.text = "Apple Inc."
         contentView.backgroundColor = SGConstants.mainBlackColor
         customBackgroundView.alpha = 0.1
+        notTradingLabel.text = "Acquired\nsee notes"
+        notTradingView.layer.cornerRadius = 10
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -40,19 +45,33 @@ class MainStockCell: UITableViewCell {
     
     func formatCellWithStock(_ stock: CurrentStock, isOneDayReturn: Bool) {
         
-        let startingPx = isOneDayReturn ? stock.adjPriceLastClose : stock.adjPriceStartDate
-        let isPositive = stock.adjPriceCurrent >= startingPx
+        let startPeriodPrice = stock.isTrading ? stock.adjPriceStartDate : stock.startingPriceHardCode
+        let startingPx = isOneDayReturn ? stock.adjPriceLastClose : startPeriodPrice
+        let isPositive = stock.isTrading ? stock.adjPriceCurrent >= startingPx : stock.acquiredPrice >= startingPx
         tickerLabel.text = stock.ticker
         companyNameLabel.text = stock.companyName
-        dollarPriceLabel.text = stock.priceString(stock.adjPriceCurrent)
-        priceChangeLabel.text = stock.priceString(abs(stock.adjPriceCurrent - startingPx))
-        priceDirectionImageView.image = stock.dollarChangeImage(startPx: startingPx, endPx: stock.adjPriceCurrent)
+        dollarPriceLabel.text = stock.isTrading ? stock.priceString(stock.adjPriceCurrent) : stock.priceString(stock.acquiredPrice)
+        priceDirectionImageView.image = stock.isTrading ? stock.dollarChangeImage(startPx: startingPx, endPx: stock.adjPriceCurrent) : stock.dollarChangeImage(startPx: startingPx, endPx: stock.acquiredPrice)
         percentageChangeContainerView.layer.cornerRadius = 10
-        percentageChangeContainerView.backgroundColor = isPositive ? SGConstants.mainGreenColor : SGConstants.mainRedColor
-        percentageChangeLabel.text = stock.percentageString(startPx: startingPx, endPx: stock.adjPriceCurrent)
-        percentageChangeDirectionLabel.text = isPositive ? "+" : "-"
-
-    
+        
+        
+        if isOneDayReturn {
+            priceChangeLabel.text = stock.isTrading ? stock.priceString(abs(stock.adjPriceCurrent - startingPx)) : "-"
+            priceDirectionImageView.alpha = stock.isTrading ? 1 : 0
+            let color = isPositive ? SGConstants.mainGreenColor : SGConstants.mainRedColor
+            let changeString = isPositive ? "+" : "-"
+            percentageChangeContainerView.backgroundColor = stock.isTrading ? color : SGConstants.mainBlackColor
+            percentageChangeDirectionLabel.text = stock.isTrading ? changeString : ""
+            percentageChangeLabel.text = stock.isTrading ? stock.percentageString(startPx: startingPx, endPx: stock.adjPriceCurrent) : ""
+            notTradingView.alpha = stock.isTrading ? 0 : 1
+        } else {
+            priceDirectionImageView.alpha = 1
+            priceChangeLabel.text = stock.isTrading ? stock.priceString(abs(stock.adjPriceCurrent - startingPx)) : stock.priceString(abs(stock.acquiredPrice - startingPx))
+            percentageChangeContainerView.backgroundColor = isPositive ? SGConstants.mainGreenColor : SGConstants.mainRedColor
+            percentageChangeLabel.text = stock.isTrading ? stock.percentageString(startPx: startingPx, endPx: stock.adjPriceCurrent) : stock.percentageString(startPx: startingPx, endPx: stock.acquiredPrice)
+            percentageChangeDirectionLabel.text = isPositive ? "+" : "-"
+            notTradingView.alpha = 0
+        }
     }
 
 }

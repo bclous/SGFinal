@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CircleTabView" customModule="Stock_Genius_Final" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="bMX-Lb-LeR"/>
+                <outlet property="mainStackView" destination="Ofi-98-nzn" id="Pi5-mx-IXf"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="92" height="12"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Ofi-98-nzn">
+                    <rect key="frame" x="0.0" y="0.0" width="92" height="12"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ob2-03-gwe">
+                            <rect key="frame" x="0.0" y="0.0" width="12" height="12"/>
+                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PS3-sa-QjT">
+                            <rect key="frame" x="20" y="0.0" width="12" height="12"/>
+                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6BW-9S-CTh">
+                            <rect key="frame" x="40" y="0.0" width="12" height="12"/>
+                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g62-ch-shj">
+                            <rect key="frame" x="60" y="0.0" width="12" height="12"/>
+                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I51-bd-XeH">
+                            <rect key="frame" x="80" y="0.0" width="12" height="12"/>
+                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="Ofi-98-nzn" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="8fi-kf-LUR"/>
+                <constraint firstItem="Ofi-98-nzn" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="AMl-8q-YSL"/>
+                <constraint firstItem="Ofi-98-nzn" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="NsI-PF-Gfd"/>
+                <constraint firstItem="Ofi-98-nzn" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="tFS-zQ-zgK"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-206" y="-273"/>
+        </view>
+    </objects>
+</document>
