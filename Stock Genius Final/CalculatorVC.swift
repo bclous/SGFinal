@@ -28,8 +28,9 @@ class CalculatorVC: UIViewController, CalculatorInputDelegate, CalcHeaderViewDel
         formatCalcInputView()
         view.backgroundColor = SGConstants.mainBlackColor
         let minimum = DataStore.shared.currentPortfolio.minimumInvestmentForCalculator()
-        DataStore.shared.currentPortfolio.updateCalculatorValues(portfolioAmount: Int(minimum))
-        header.formatViewWithInvestmentAmount(Int(minimum))
+        let originalAmount = max(minimum, 150000.0)
+        DataStore.shared.currentPortfolio.updateCalculatorValues(portfolioAmount: Int(originalAmount))
+        header.formatViewWithInvestmentAmount(Int(originalAmount))
         mainTableView.reloadData()
     
     }
