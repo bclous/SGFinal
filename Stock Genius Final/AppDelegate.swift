@@ -15,7 +15,7 @@ import StoreKit
 class AppDelegate: UIResponder, UIApplicationDelegate, IntroVCDelegate, DataStoreDelegate {
 
     var window: UIWindow?
-    var isTestMode = false
+    var isTestMode = true
     let introVC : IntroVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "introVC") as! IntroVC
     var isInMainWindow = false
 
