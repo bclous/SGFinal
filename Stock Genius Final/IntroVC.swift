@@ -31,8 +31,7 @@ class IntroVC: UIViewController, IntroScreenDelegate {
     var readyToPresent = false
     var images : [UIImage] = []
     let spinnerVC: SpinnerVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "spinnerVC") as! SpinnerVC
-    let termsVC: TermsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "termsVC") as! TermsVC
-    var lastAtIndexZeroRatherThanOne = true
+        var lastAtIndexZeroRatherThanOne = true
     
     @IBOutlet weak var otherBackgroundImageView: UIImageView!
     
@@ -161,13 +160,21 @@ class IntroVC: UIViewController, IntroScreenDelegate {
         case .restore:
             handleRestoreTapped()
         case .terms:
-            handleTermsTapped()
+            presentModalForChoice(.terms)
+        case .privacy:
+            presentModalForChoice(.privacy)
+        case .billing:
+            presentModalForChoice(.billing)
         }
     }
     
-    func handleTermsTapped() {
+    func presentModalForChoice(_ choice: IntroScreenChoice) {
+        
+        let termsVC: TermsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "termsVC") as! TermsVC
+        termsVC.choice = choice
+        view.isUserInteractionEnabled = false
         present(termsVC, animated: true) { 
-            // yup
+            self.view.isUserInteractionEnabled = true
         }
     }
     

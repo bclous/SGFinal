@@ -12,6 +12,8 @@ enum IntroScreenChoice {
     case subscribe
     case restore
     case terms
+    case privacy
+    case billing
 }
 
 protocol IntroScreenDelegate: class {
@@ -20,15 +22,15 @@ protocol IntroScreenDelegate: class {
 
 class LastIntroPage: UIView {
 
-    @IBOutlet weak var billingLabel: UILabel!
+   
     @IBOutlet weak var restoreLabel: UILabel!
     @IBOutlet weak var termsLabel: UILabel!
     @IBOutlet weak var subscribeButton: UIButton!
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var restoreButton: UIButton!
-    @IBOutlet weak var termsButton: UIButton!
     weak var delegate : IntroScreenDelegate?
     @IBOutlet weak var mainImageView: UIImageView!
+ 
     
     override init(frame: CGRect) { // for using CustomView in code
         super.init(frame: frame)
@@ -54,15 +56,46 @@ class LastIntroPage: UIView {
         subscribeButton.backgroundColor = SGConstants.mainBlueColor
         termsLabel.textColor = SGConstants.fontColorWhiteSecondary
         restoreLabel.textColor = SGConstants.fontColorWhiteSecondary
-        billingLabel.textColor = SGConstants.fontColorWhiteSecondary
+
+        
+        let mutableAttributedString = NSMutableAttributedString()
+    
+        let privacy = NSAttributedString(string: "Privacy Policy", attributes: [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue])
+        let terms = NSAttributedString(string: "Terms of Service", attributes: [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue])
+        let billing = NSAttributedString(string: "Billing Terms", attributes: [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue])
+        let firstBreak = NSAttributedString(string: ", ")
+        let secondBreak = NSAttributedString(string: ", and ")
+        let intro = NSAttributedString(string: "By continuing you accept our\n")
+        
+        mutableAttributedString.append(intro)
+        mutableAttributedString.append(privacy)
+        mutableAttributedString.append(firstBreak)
+        mutableAttributedString.append(terms)
+        mutableAttributedString.append(secondBreak)
+        mutableAttributedString.append(billing)
+        
+        termsLabel.attributedText = mutableAttributedString
+        
+        
     }
     
     @IBAction func subscribeButtonTapped(_ sender: Any) {
         delegate?.introScreenUserInteraction(.subscribe)
     }
 
-    @IBAction func termsButtonTapped(_ sender: Any) {
-        delegate?.introScreenUserInteraction(.terms)
+    @IBAction func termsButtonTapped(_ sender: UIButton) {
+        
+        switch sender.tag {
+        case 0:
+            delegate?.introScreenUserInteraction(.privacy)
+        case 1:
+            delegate?.introScreenUserInteraction(.terms)
+        case 2:
+            delegate?.introScreenUserInteraction(.billing)
+        default:
+            delegate?.introScreenUserInteraction(.billing)
+        }
+        
     }
     
     @IBAction func restoreButtonTapped(_ sender: Any) {

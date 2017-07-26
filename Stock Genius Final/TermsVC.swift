@@ -10,12 +10,15 @@ import UIKit
 
 class TermsVC: UIViewController {
 
+    @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var webview: UIWebView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    var choice : IntroScreenChoice = .privacy
     
     override func viewDidLoad() {
         super.viewDidLoad()
         formatWebView()
+        headerView.backgroundColor = SGConstants.mainBlackColor
         // Do any additional setup after loading the view.
     }
 
@@ -46,13 +49,26 @@ extension TermsVC: UIWebViewDelegate {
     
     func formatWebView() {
         webview.delegate = self
-        loadWebview()
         spinner.startAnimating()
+        loadWebviewForChoice(self.choice)
     }
     
-    func loadWebview() {
+    func loadWebviewForChoice(_ choice: IntroScreenChoice) {
         
-        let urlString = "https://www.thestockgenius.com/terms"
+        var lastString = ""
+        
+        switch choice {
+        case .privacy:
+            lastString = "privacy"
+        case .billing:
+            lastString = "billing"
+        case .terms:
+            lastString = "terms"
+        default:
+            lastString = "terms"
+        }
+        
+        let urlString = "https://www.thestockgenius.com/" + lastString
         let url = URL(string: urlString)
         if let url = url {
             let request = URLRequest(url: url)

@@ -12,13 +12,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LastIntroPage" customModule="Stock_Genius_Final" customModuleProvider="target">
             <connections>
-                <outlet property="billingLabel" destination="1Hb-m0-91g" id="Z9O-vj-HPK"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="rIQ-sS-DST"/>
                 <outlet property="mainImageView" destination="ssT-g0-C4i" id="Eg7-bd-B9H"/>
                 <outlet property="restoreButton" destination="PtQ-FG-hy9" id="hfQ-w8-M3c"/>
                 <outlet property="restoreLabel" destination="KQ2-sJ-EFr" id="pUF-FL-TOe"/>
                 <outlet property="subscribeButton" destination="Pw3-rt-KyR" id="LoX-fa-Bfg"/>
-                <outlet property="termsButton" destination="m7x-9g-UxA" id="Noq-Hp-Xai"/>
                 <outlet property="termsLabel" destination="Pgv-hA-cTB" id="n8R-fL-UkH"/>
             </connections>
         </placeholder>
@@ -47,39 +45,22 @@
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="6De-mE-Lpy">
                     <rect key="frame" x="10" y="519" width="355" height="103"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O4r-jt-bNS">
-                            <rect key="frame" x="0.0" y="0.0" width="355" height="34.5"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quarterly billing through iTunes.  Cancel anytime in Settings." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Hb-m0-91g">
-                                    <rect key="frame" x="-0.5" y="0.0" width="355" height="34.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                            <constraints>
-                                <constraint firstItem="1Hb-m0-91g" firstAttribute="centerX" secondItem="O4r-jt-bNS" secondAttribute="centerX" id="Xuq-gD-Ex1"/>
-                                <constraint firstItem="1Hb-m0-91g" firstAttribute="width" secondItem="O4r-jt-bNS" secondAttribute="width" id="aQO-vi-h3z"/>
-                                <constraint firstItem="1Hb-m0-91g" firstAttribute="height" secondItem="O4r-jt-bNS" secondAttribute="height" id="hzO-Ys-Wo6"/>
-                                <constraint firstItem="1Hb-m0-91g" firstAttribute="centerY" secondItem="O4r-jt-bNS" secondAttribute="centerY" id="uEQ-Ee-BWZ"/>
-                            </constraints>
-                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iTl-gM-fiL">
-                            <rect key="frame" x="0.0" y="34.5" width="355" height="34"/>
+                            <rect key="frame" x="0.0" y="0.0" width="355" height="51.5"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQ2-sJ-EFr">
-                                    <rect key="frame" x="-0.5" y="0.0" width="355" height="34"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KQ2-sJ-EFr">
+                                    <rect key="frame" x="-0.5" y="0.0" width="355" height="51.5"/>
                                     <attributedString key="attributedText">
                                         <fragment content="Subscribed on another device?  ">
                                             <attributes>
                                                 <font key="NSFont" metaFont="cellTitle"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="Restore your purchase">
                                             <attributes>
                                                 <font key="NSFont" metaFont="cellTitle"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 <integer key="NSUnderline" value="1"/>
                                             </attributes>
                                         </fragment>
@@ -87,7 +68,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PtQ-FG-hy9">
-                                    <rect key="frame" x="177.5" y="0.0" width="177.5" height="34"/>
+                                    <rect key="frame" x="177.5" y="0.0" width="177.5" height="51.5"/>
                                     <connections>
                                         <action selector="restoreButtonTapped:" destination="-1" eventType="touchUpInside" id="sL4-hc-cgf"/>
                                     </connections>
@@ -105,42 +86,85 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PcV-pz-rZq">
-                            <rect key="frame" x="0.0" y="68.5" width="355" height="34.5"/>
+                            <rect key="frame" x="0.0" y="51.5" width="355" height="51.5"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pgv-hA-cTB">
-                                    <rect key="frame" x="-0.5" y="0.0" width="355" height="34.5"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pgv-hA-cTB">
+                                    <rect key="frame" x="-0.5" y="0.0" width="355" height="51.5"/>
                                     <attributedString key="attributedText">
-                                        <fragment content="By subscribing you accept our ">
+                                        <fragment content="By continuing you accept our">
                                             <attributes>
                                                 <font key="NSFont" metaFont="cellTitle"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content="Privacy Policy">
+                                            <attributes>
+                                                <font key="NSFont" metaFont="cellTitle"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                <integer key="NSUnderline" value="1"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content=", ">
+                                            <attributes>
+                                                <font key="NSFont" metaFont="cellTitle"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
                                         <fragment content="Terms of Service">
                                             <attributes>
                                                 <font key="NSFont" metaFont="cellTitle"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                <integer key="NSUnderline" value="1"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content=", and">
+                                            <attributes>
+                                                <font key="NSFont" metaFont="cellTitle"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment content=" Billing Terms">
+                                            <attributes>
+                                                <font key="NSFont" metaFont="cellTitle"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 <integer key="NSUnderline" value="1"/>
                                             </attributes>
                                         </fragment>
                                     </attributedString>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m7x-9g-UxA">
-                                    <rect key="frame" x="177.5" y="0.0" width="177.5" height="34.5"/>
-                                    <connections>
-                                        <action selector="termsButtonTapped:" destination="-1" eventType="touchUpInside" id="Pga-zu-BVS"/>
-                                    </connections>
-                                </button>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="E73-q0-eqY">
+                                    <rect key="frame" x="-0.5" y="0.0" width="355" height="51.5"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZL-N0-kdj">
+                                            <rect key="frame" x="0.0" y="0.0" width="118.5" height="51.5"/>
+                                            <connections>
+                                                <action selector="termsButtonTapped:" destination="-1" eventType="touchUpInside" id="c1o-fS-sOL"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BN3-c0-Idh">
+                                            <rect key="frame" x="118.5" y="0.0" width="118" height="51.5"/>
+                                            <connections>
+                                                <action selector="termsButtonTapped:" destination="-1" eventType="touchUpInside" id="ovb-lX-O0b"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N9d-f0-hFe">
+                                            <rect key="frame" x="236.5" y="0.0" width="118.5" height="51.5"/>
+                                            <connections>
+                                                <action selector="termsButtonTapped:" destination="-1" eventType="touchUpInside" id="wm3-5U-7lZ"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="m7x-9g-UxA" firstAttribute="height" secondItem="PcV-pz-rZq" secondAttribute="height" id="1Pe-6y-U1Y"/>
                                 <constraint firstItem="Pgv-hA-cTB" firstAttribute="centerX" secondItem="PcV-pz-rZq" secondAttribute="centerX" id="461-sL-zB5"/>
-                                <constraint firstItem="m7x-9g-UxA" firstAttribute="centerY" secondItem="PcV-pz-rZq" secondAttribute="centerY" id="Aop-dC-bQY"/>
+                                <constraint firstItem="E73-q0-eqY" firstAttribute="height" secondItem="Pgv-hA-cTB" secondAttribute="height" id="5ik-ZR-iEM"/>
                                 <constraint firstItem="Pgv-hA-cTB" firstAttribute="centerY" secondItem="PcV-pz-rZq" secondAttribute="centerY" id="Dgm-yj-hLA"/>
+                                <constraint firstItem="E73-q0-eqY" firstAttribute="width" secondItem="Pgv-hA-cTB" secondAttribute="width" id="NVg-sn-E5X"/>
                                 <constraint firstItem="Pgv-hA-cTB" firstAttribute="width" secondItem="PcV-pz-rZq" secondAttribute="width" id="Ylq-SD-0EO"/>
-                                <constraint firstItem="m7x-9g-UxA" firstAttribute="width" secondItem="PcV-pz-rZq" secondAttribute="width" multiplier="0.5" id="vBR-y8-YWm"/>
-                                <constraint firstAttribute="trailing" secondItem="m7x-9g-UxA" secondAttribute="trailing" id="vT4-oE-ykO"/>
+                                <constraint firstItem="E73-q0-eqY" firstAttribute="centerX" secondItem="Pgv-hA-cTB" secondAttribute="centerX" id="ZLg-f6-MU0"/>
+                                <constraint firstItem="E73-q0-eqY" firstAttribute="centerY" secondItem="Pgv-hA-cTB" secondAttribute="centerY" id="wdw-za-Pny"/>
                                 <constraint firstItem="Pgv-hA-cTB" firstAttribute="height" secondItem="PcV-pz-rZq" secondAttribute="height" id="yN5-ex-alg"/>
                             </constraints>
                         </view>
@@ -161,7 +185,7 @@
                 <constraint firstItem="Pw3-rt-KyR" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="q4g-gf-SJW"/>
                 <constraint firstAttribute="bottom" secondItem="6De-mE-Lpy" secondAttribute="bottom" constant="45" id="zZ2-Wi-Mnh"/>
             </constraints>
-            <point key="canvasLocation" x="-30.5" y="94.5"/>
+            <point key="canvasLocation" x="-307" y="153"/>
         </view>
     </objects>
 </document>

@@ -219,10 +219,10 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hY4-NW-KZ2">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                             </view>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PicsPage1" translatesAutoresizingMaskIntoConstraints="NO" id="cxh-sW-Ze8">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PicsPage1" translatesAutoresizingMaskIntoConstraints="NO" id="cxh-sW-Ze8">
                                                 <rect key="frame" x="375" y="0.0" width="375" height="667"/>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PicsPage2" translatesAutoresizingMaskIntoConstraints="NO" id="DYn-7J-iJK">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PicsPage2" translatesAutoresizingMaskIntoConstraints="NO" id="DYn-7J-iJK">
                                                 <rect key="frame" x="750" y="0.0" width="375" height="667"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ywv-KR-qZs">
@@ -283,7 +283,7 @@
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="page2" translatesAutoresizingMaskIntoConstraints="NO" id="AOO-EW-eHE">
                                                 <rect key="frame" x="1125" y="0.0" width="375" height="667"/>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BMO-m8-npS">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BMO-m8-npS">
                                                 <rect key="frame" x="1500" y="0.0" width="375" height="667"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6hr-H9-7Mw" customClass="LastIntroPage" customModule="Stock_Genius_Final" customModuleProvider="target">
@@ -491,6 +491,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="headerView" destination="1o7-Df-m2i" id="wY7-H2-ZZx"/>
                         <outlet property="spinner" destination="CQw-vV-GBz" id="iEF-gs-YZy"/>
                         <outlet property="webview" destination="G7d-OL-w0C" id="oTp-JW-Obc"/>
                     </connections>

@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Stock Genius Final/IntroVC.swift"
-            timestampString = "522274291.815033"
+            timestampString = "522771074.39146"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "imageViewForIndex(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -89,13 +89,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Stock Genius Final/CurrentStock.swift"
-            timestampString = "522518231.266188"
+            filePath = "Stock Genius Final/TermsVC.swift"
+            timestampString = "522772145.51093"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "updateCurrentStockValues(dictionary:)"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "loadWebviewForChoice(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
