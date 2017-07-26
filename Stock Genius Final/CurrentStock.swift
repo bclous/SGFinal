@@ -46,6 +46,9 @@ class CurrentStock: Stock {
         note = dictionary["note"] as? String ?? ""
         rankInPortfolio = dictionary["rank"] as? Int ?? 99
         ticker = dictionary["ticker"] as? String ?? ""
+        if ticker == "BSX" {
+            
+        }
         acquiredPrice = dictionary["acquiredPrice"] as? Float ?? 0.0
         startingPriceHardCode = dictionary["startingPriceHardCode"] as? Float ?? 0.0
         

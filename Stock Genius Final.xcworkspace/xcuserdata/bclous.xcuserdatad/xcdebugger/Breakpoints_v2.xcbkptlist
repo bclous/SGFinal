@@ -73,13 +73,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Stock Genius Final/LastIntroPage.swift"
-            timestampString = "522272390.623067"
+            filePath = "Stock Genius Final/MainStockCell.swift"
+            timestampString = "522517596.04579"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "commonInit()"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "formatCellWithStock(_:isOneDayReturn:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Stock Genius Final/CurrentStock.swift"
+            timestampString = "522518231.266188"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "updateCurrentStockValues(dictionary:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
