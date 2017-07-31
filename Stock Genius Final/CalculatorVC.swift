@@ -34,11 +34,6 @@ class CalculatorVC: UIViewController, CalculatorInputDelegate, CalcHeaderViewDel
         mainTableView.reloadData()
     
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     override func viewWillDisappear(_ animated: Bool) {
         if isCalculatorShowing {
@@ -107,10 +102,7 @@ class CalculatorVC: UIViewController, CalculatorInputDelegate, CalcHeaderViewDel
             self.isCalculatorShowing = show
             self.header.headerButton.isEnabled = !show
         }
-        
     }
-    
-
 }
 
 
@@ -156,12 +148,10 @@ extension CalculatorVC : UITableViewDelegate, UITableViewDataSource {
         clearView.backgroundColor = UIColor.clear
         header.delegate = self
         return section == 0 ? clearView : header
-        
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return section == 0 ? 60 : headerHeight
-
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -170,13 +160,7 @@ extension CalculatorVC : UITableViewDelegate, UITableViewDataSource {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         headerView.adjustHeaderViewForOffset(scrollView.contentOffset.y)
-        print("\(scrollView.contentOffset.y)")
-//        if scrollView.contentOffset.y < 0 {
-//            let home = CGPoint(x: 0, y: 0)
-//            scrollView.setContentOffset(home, animated: false)
-//        }
     }
-    
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return false

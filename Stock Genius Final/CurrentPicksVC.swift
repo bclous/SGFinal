@@ -36,7 +36,6 @@ extension CurrentPicksVC : UITableViewDelegate, UITableViewDataSource, CurrentPi
         mainTableView.register(UINib(nibName: "NextTwentyCell", bundle: nil), forCellReuseIdentifier: "NextTwentyCell")
         mainTableView.register(UINib(nibName: "MainStockSummaryCell", bundle: nil), forCellReuseIdentifier: "MainStockSummaryCell")
         mainTableView.register(UINib(nibName: "PastPicksNoteCell", bundle: nil), forCellReuseIdentifier: "PastPicksNoteCell")
-        
         mainTableView.delegate = self
         mainTableView.dataSource = self
         mainTableView.separatorStyle = .none

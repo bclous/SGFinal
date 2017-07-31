@@ -87,8 +87,6 @@ class AlphaVantageClient: NSObject {
         if let startDate = startDate {
             stock.adjPriceStartDate = mostRecentPriceFromDate(startDate, response: response) ?? 0.0
         }
-        
-        
     }
     
     private func mostRecentPriceFromDate(_ date: Date, response: Dictionary<String, Any>) -> Float? {

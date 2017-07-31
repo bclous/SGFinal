@@ -47,8 +47,6 @@ class ShareCalcHeaderView: UIView {
         content.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         contentView.backgroundColor = SGConstants.mainBlackColor
         numberFormatter.numberStyle = NumberFormatter.Style.decimal
-
-        
     }
     
     @IBAction func userTapped(_ sender: Any) {
