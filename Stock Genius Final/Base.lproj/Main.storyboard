@@ -365,6 +365,7 @@
                         <outlet property="graphicPage2" destination="DYn-7J-iJK" id="uEj-4Q-OOe"/>
                         <outlet property="introSplashScreen" destination="Y6A-7S-yYJ" id="snH-7B-byb"/>
                         <outlet property="lastIntroPage" destination="6hr-H9-7Mw" id="RDI-cA-T8V"/>
+                        <outlet property="logoImageView" destination="gaB-Kd-iWd" id="NhR-uu-sKi"/>
                         <outlet property="mainScrollView" destination="Pyb-XX-mIE" id="ZYF-n8-Gt1"/>
                         <outlet property="otherBackgroundImageView" destination="Vu6-OO-FS1" id="akM-3m-xOA"/>
                         <outlet property="page1" destination="bts-A1-eUx" id="p1w-FC-PnZ"/>

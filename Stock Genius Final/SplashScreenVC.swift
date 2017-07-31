@@ -41,8 +41,8 @@ class SplashScreenVC: UIViewController, DataStoreDelegate, InvalidSubscriptionDe
     
     override func viewDidAppear(_ animated: Bool) {
         super .viewDidAppear(animated)
-        checkForValidSubscription()
-        animateLogo()
+       // checkForValidSubscription()
+        //animateLogo()
     }
     
     func animateLogo() {

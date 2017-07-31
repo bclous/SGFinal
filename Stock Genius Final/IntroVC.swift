@@ -33,6 +33,7 @@ class IntroVC: UIViewController, IntroScreenDelegate {
     let spinnerVC: SpinnerVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "spinnerVC") as! SpinnerVC
         var lastAtIndexZeroRatherThanOne = true
     
+    @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var otherBackgroundImageView: UIImageView!
     
     @IBOutlet weak var page1: Page1!
@@ -56,6 +57,9 @@ class IntroVC: UIViewController, IntroScreenDelegate {
         circleTabView.alpha = 0
         backgroundView.backgroundColor = SGConstants.mainBlackColor
         backgroundView.alpha = 0
+        print("\(view.frame.width) by \(view.frame.height)")
+        logoImageView.alpha = view.frame.height == 480 ? 0 : 1
+        
    
     }
     
@@ -100,13 +104,15 @@ class IntroVC: UIViewController, IntroScreenDelegate {
     
     public func assignImages() {
         
+        let isSmall = view.frame.height == 480
+        
         for index in 0...DataStore.shared.imageNames.count - 1 {
             
-                let url = DataStore.shared.localURLFromFileName(DataStore.shared.imageNames[index])!
-                let fileName = url.path
-                let image = UIImage(contentsOfFile: fileName)!
-                let imageView = imageViewForIndex(index)
-                imageView.image = image
+            let url = DataStore.shared.localURLFromFileName(DataStore.shared.imageNames[index])!
+            let fileName = url.path
+            let image = (isSmall && index == 7) ? UIImage(named: "altLastIntro") : UIImage(contentsOfFile: fileName)!
+            let imageView = imageViewForIndex(index)
+            imageView.image = image
         }
     }
     
@@ -123,6 +129,9 @@ class IntroVC: UIViewController, IntroScreenDelegate {
     }
     
     private func imageViewForIndex(_ index: Int) -> UIImageView {
+        
+        
+        
         switch index {
         case 0:
             return page1Background
