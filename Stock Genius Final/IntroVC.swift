@@ -75,13 +75,14 @@ class IntroVC: UIViewController, IntroScreenDelegate {
     
     public func readyToPresent(success: Bool) {
         
-        if viewHasAppeared && success {
-            assignImages()
-            layOutAllViews()
-        } else if success {
-            readyToPresent = true
+        if success {
+            if viewHasAppeared {
+                assignImages()
+                layOutAllViews()
+            } else {
+                readyToPresent = true
+            }
         }
-
     }
     
     public func layOutAllViews() {

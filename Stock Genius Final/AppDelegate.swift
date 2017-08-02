@@ -50,7 +50,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, IntroVCDelegate, DataStor
             isInMainWindow = true
             window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
         } else {
-            let introVC : IntroVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "introVC") as! IntroVC
             introVC.delegate = self
             introVC.isTestMode = isTestMode
             introVC.readyToPresent(success: true)
