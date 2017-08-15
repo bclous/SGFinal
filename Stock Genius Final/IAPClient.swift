@@ -69,6 +69,7 @@ class IAPClient: NSObject, SKProductsRequestDelegate, SKRequestDelegate {
             upgradeProduct = response.products[0].productIdentifier ==
                 "SGTestConsumable" ? response.products[1] as SKProduct : response.products[0] as SKProduct
         } else if response.products.count == 1 {
+            IAPProductsAvailable = true
             upgradeProduct = response.products[0]
             testProduct = response.products[0]
         }  else {

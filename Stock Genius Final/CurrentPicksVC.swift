@@ -47,7 +47,7 @@ extension CurrentPicksVC : UITableViewDelegate, UITableViewDataSource, CurrentPi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 0 : 31 + DataStore.shared.currentPortfolio.notesArray().count
+        return section == 0 ? 0 : 34 + DataStore.shared.currentPortfolio.notesArray().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -61,7 +61,7 @@ extension CurrentPicksVC : UITableViewDelegate, UITableViewDataSource, CurrentPi
                 cell.formatCellWithPortfolio(DataStore.shared.currentPortfolio, summaryType: summaryTypeForIndexPath(indexPath), isTodayReturn: isTodayReturn)
             }
             return cell
-        } else if indexPath.row < 31 {
+        } else if indexPath.row < 34 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "mainStockCell") as! MainStockCell
             if ready {
                 cell.formatCellWithStock(DataStore.shared.currentPortfolio.holdings[arrayIndexFromIndexPath(indexPath)], isOneDayReturn: isTodayReturn)
@@ -69,7 +69,7 @@ extension CurrentPicksVC : UITableViewDelegate, UITableViewDataSource, CurrentPi
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PastPicksNoteCell") as! PastPicksNoteCell
-            let noteNumber = indexPath.row - 31
+            let noteNumber = indexPath.row - 34
             let notes = DataStore.shared.currentPortfolio.notesArray()
             let note = notes[noteNumber]
             cell.noteLabel.text = note

@@ -714,7 +714,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Logo" width="100" height="100"/>
+        <image name="Logo" width="101" height="101"/>
         <image name="PicsPage1" width="750" height="1334"/>
         <image name="PicsPage2" width="750" height="1334"/>
         <image name="bullBackground" width="373" height="667"/>
