@@ -16,6 +16,10 @@ class CurrentStock: Stock {
     var isTrading : Bool
     var acquiredPrice : Float
     var startingPriceHardCode : Float
+    var articles : [Article]
+    var priceHistory : [Date : Float]
+    var hasShortPriceHistory : Bool
+    var hasLongPriceHistory : Bool
     
     override init() {
         self.isTrading = true
@@ -24,6 +28,10 @@ class CurrentStock: Stock {
         self.adjPriceLastClose = 0
         self.acquiredPrice = 0
         self.startingPriceHardCode = 0
+        self.articles = []
+        self.priceHistory = [:]
+        self.hasShortPriceHistory = false
+        self.hasLongPriceHistory = false
         super.init()
     }
     
@@ -46,17 +54,19 @@ class CurrentStock: Stock {
         note = dictionary["note"] as? String ?? ""
         rankInPortfolio = dictionary["rank"] as? Int ?? 99
         ticker = dictionary["ticker"] as? String ?? ""
-        if ticker == "BSX" {
-            
-        }
         acquiredPrice = dictionary["acquiredPrice"] as? Float ?? 0.0
         startingPriceHardCode = dictionary["startingPriceHardCode"] as? Float ?? 0.0
         
+        
     }
     
-    public func startDateFromString(_ dateString: String) -> Date? {
+    public func addToPriceHistory(date: Date, closingPrice: Float) {
+        priceHistory.updateValue(closingPrice, forKey: date)
+    }
+    
+    public func dateFromString(_ dateString: String, dateFormat: String) -> Date? {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy"
+        dateFormatter.dateFormat = dateFormat
         let date = dateFormatter.date(from: dateString)
         return date
     }

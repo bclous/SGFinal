@@ -9,54 +9,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Stock Genius Final/AlphaVantageClient.swift"
-            timestampString = "521482460.058207"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "updatePricesForCurrentPortfolio()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Stock_Genius_Final.AlphaVantageClient.updatePricesForCurrentPortfolio () -&gt; ()"
-                  moduleName = "Stock Genius Final"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bclous/Desktop/SGFinal/Stock%20Genius%20Final/AlphaVantageClient.swift"
-                  timestampString = "521073747.936969"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "36"
-                  endingLineNumber = "36"
-                  offsetFromSymbolStart = "732">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Stock_Genius_Final.AlphaVantageClient.(updatePricesForCurrentPortfolio () -&gt; ()).(closure #1)"
-                  moduleName = "Stock Genius Final"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bclous/Desktop/SGFinal/Stock%20Genius%20Final/AlphaVantageClient.swift"
-                  timestampString = "521073747.938351"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "30"
-                  endingLineNumber = "30"
-                  offsetFromSymbolStart = "32">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Stock Genius Final/IntroVC.swift"
             timestampString = "523415394.180679"
             startingColumnNumber = "9223372036854775807"
@@ -96,6 +48,70 @@
             startingLineNumber = "59"
             endingLineNumber = "59"
             landmarkName = "loadWebviewForChoice(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Stock Genius Final/AlphaVantageClient.swift"
+            timestampString = "525626702.467872"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "mapPricesToStock(_:response:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Stock_Genius_Final.AlphaVantageClient.(mapPricesToStock in _CCBC8CFC3C6C5D78DBEE0B86B93CBD8D) (Stock_Genius_Final.CurrentStock, response : Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; ()"
+                  moduleName = "Stock Genius Final"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclous/Desktop/SGFinal/Stock%20Genius%20Final/AlphaVantageClient.swift"
+                  timestampString = "525626702.584119"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "78"
+                  endingLineNumber = "78"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Stock_Genius_Final.AlphaVantageClient.((mapPricesToStock in _CCBC8CFC3C6C5D78DBEE0B86B93CBD8D) (Stock_Genius_Final.CurrentStock, response : Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; ()).(implicit closure #1)"
+                  moduleName = "Stock Genius Final"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclous/Desktop/SGFinal/Stock%20Genius%20Final/AlphaVantageClient.swift"
+                  timestampString = "525626702.585285"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "78"
+                  endingLineNumber = "78"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Stock Genius Final/AlphaVantageClient.swift"
+            timestampString = "525628833.811455"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "mapPriceHistoryToStock(_:response:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

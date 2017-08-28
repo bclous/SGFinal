@@ -32,7 +32,7 @@ class AlphaVantageClient: NSObject {
         var requestsCompleted = 0
         
         for stock in holdingsPlusIndex {
-            let requestURL = urlStringForStock(stock)
+            let requestURL = urlStringForStock(stock, isLongPull: false)
             let request = Alamofire.request(requestURL)
             
             request.response(queue: queue, responseSerializer: DataRequest.jsonResponseSerializer(), completionHandler: { (response) in
@@ -54,38 +54,60 @@ class AlphaVantageClient: NSObject {
     
     }
     
-    public func pullPricesChained(startingIndex: Int) {
-        var holdingsPlusIndex : [CurrentStock] = DataStore.shared.currentPortfolio.holdings
-        holdingsPlusIndex.append(DataStore.shared.currentPortfolio.index)
-        let currentStockBeingPull = holdingsPlusIndex[startingIndex]
-        pullPriceForSingleStock(currentStockBeingPull, index: startingIndex)
-    }
+
+    public func pullPriceForSingleStock(_ stock: CurrentStock, isLongPull: Bool, completionHandler: @escaping (_ success: Bool) -> ()) {
     
-    private func pullPriceForSingleStock(_ stock: CurrentStock, index: Int) {
-    
-        let requestURL = urlStringForStock(stock)
+        let requestURL = urlStringForStock(stock, isLongPull: isLongPull)
         let request = Alamofire.request(requestURL)
         
         request.responseJSON(completionHandler: { (response) in
             
-            let dictionary = response.value as! Dictionary<String, Any>
-            self.mapPricesToStock(stock, response: dictionary)
-            print("\(index)")
-            if index == 30 {
-                self.delegate?.pricePullComplete(success: true)
+            if response.result.isSuccess {
+                let dictionary = response.value as! Dictionary<String, Any>
+                self.mapPricesToStock(stock, response: dictionary)
+                completionHandler(true)
             } else {
-                self.pullPricesChained(startingIndex: index + 1)
+                completionHandler(false)
             }
         })
-
     }
     
     private func mapPricesToStock(_ stock: CurrentStock, response: Dictionary<String, Any>) {
+        
+        
         stock.adjPriceCurrent = currentPriceFromResponse(response) ?? 0.0
         stock.adjPriceLastClose = lastClosePriceFromResponse(response) ?? 0.0
-        let startDate = stock.startDateFromString(DataStore.shared.currentPortfolio.startDate)
+        let startDate = stock.dateFromString(DataStore.shared.currentPortfolio.startDate, dateFormat: "MM/dd/yyyy")
         if let startDate = startDate {
             stock.adjPriceStartDate = mostRecentPriceFromDate(startDate, response: response) ?? 0.0
+        }
+        mapPriceHistoryToStock(stock, response: response)
+        
+    }
+    
+    
+    private func mapPriceHistoryToStock(_ stock: CurrentStock, response: Dictionary<String, Any>) {
+        
+        let priceHistory = response["Time Series (Daily)"] as? Dictionary<String, Any>
+        if let priceHistory = priceHistory {
+            let keys = priceHistory.keys
+            for key in keys {
+                let date = stock.dateFromString(key, dateFormat: "YYYY-MM-dd")
+                let dateDictionary = priceHistory[key] as? Dictionary<String, String>
+                if let dateDictionary = dateDictionary {
+                    let lastPriceString = dateDictionary["4. close"] ?? "100.00"
+                    let lastPrice = Float(lastPriceString) ?? 100.00
+                    if let date = date {
+                        stock.priceHistory.updateValue(lastPrice, forKey: date)
+                    }
+                }
+            }
+            
+            if keys.count > 120 {
+                stock.hasLongPriceHistory = true
+            } else {
+                stock.hasShortPriceHistory = true
+            }
         }
     }
     
@@ -214,9 +236,9 @@ class AlphaVantageClient: NSObject {
         return nil
     }
     
-    private func urlStringForStock(_ stock: CurrentStock) -> String {
+    private func urlStringForStock(_ stock: CurrentStock, isLongPull: Bool) -> String {
         let ticker = stock.ticker
-        return "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=" + ticker + "&apikey=" + DataStore.shared.APIKey
+        return isLongPull ?  "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=" + ticker + "&outputsize=full&apikey=" + DataStore.shared.APIKey :  "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=" + ticker + "&apikey=" + DataStore.shared.APIKey
     }
     
     

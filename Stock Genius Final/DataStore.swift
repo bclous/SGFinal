@@ -72,12 +72,14 @@ class DataStore: NSObject, AlphaVantageClientDelegate, FirebaseClientDelegate {
         let pastPortfoliosDictionary = dictionary["pastPortfolios"] as? Dictionary<String, Any>
         let appInfo = dictionary["appInfo"] as? Dictionary<String, Any>
         let performance = dictionary["performance"] as? Dictionary<String, Float>
+        let articles = dictionary["articles"] as? [String : Any]
         
-        if currentPortfolioDictionary != nil && pastPortfoliosDictionary != nil && appInfo != nil {
+        if currentPortfolioDictionary != nil && pastPortfoliosDictionary != nil && appInfo != nil && articles != nil {
             populateCurrentPortfolio(dictionary: currentPortfolioDictionary!)
             populatePastPortfolios(dictionary: pastPortfoliosDictionary!)
-            populateAppWithData(dictionary: appInfo!)
+            populateAppInfo(dictionary: appInfo!)
             populatePerformanceData(dictionary: performance!)
+            populateAricles(dictionary: articles!)
             AlphaVantageClient.shared.updatePricesForCurrentPortfolio()
         } else {
             // send out fail
@@ -104,6 +106,26 @@ class DataStore: NSObject, AlphaVantageClientDelegate, FirebaseClientDelegate {
         currentPortfolio.updateCurrentPortfolioValues(dictionary: dictionary)
     }
     
+    private func populateAricles(dictionary: [String : Any]) {
+        
+        let keys = dictionary.keys
+        for key in keys {
+            let articlesForTicker = dictionary[key] as? [String : Any]
+            if let articlesForTicker = articlesForTicker {
+                let stock = currentPortfolio.currentStockFromTicker(key)
+                if let stock = stock {
+                    let newsItem = NewsItem()
+                    newsItem.articleURL = articlesForTicker["articleURL"] as? String ?? ""
+                    newsItem.headline = articlesForTicker["headline"] as? String ?? ""
+                    newsItem.rank = articlesForTicker["rank"] as? Int ?? 0
+                    stock.newsItems.append(newsItem)
+                }
+            }
+        }
+        
+        DataStore.shared.currentPortfolio.sortNewsArticles()
+    }
+    
     private func populatePastPortfolios(dictionary: Dictionary<String, Any>) {
         
         let keys = dictionary.keys
@@ -122,6 +144,7 @@ class DataStore: NSObject, AlphaVantageClientDelegate, FirebaseClientDelegate {
     }
     
     private func populateAppInfo(dictionary: Dictionary<String, Any>) {
+        // do this stuff here for version 1.2
         
     }
     

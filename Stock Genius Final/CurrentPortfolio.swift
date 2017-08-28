@@ -94,6 +94,26 @@ class CurrentPortfolio: NSObject {
         
     }
     
+    
+    public func sortNewsArticles() {
+        for stock in holdings {
+            sortNewsArticlesForStock(stock)
+        }
+    }
+    
+    public func currentStockFromTicker(_ ticker: String) -> CurrentStock? {
+        for stock in holdings {
+            if stock.ticker == ticker {
+                return stock
+            }
+        }
+        return nil
+    }
+    
+    public func sortNewsArticlesForStock(_ stock: CurrentStock) {
+        stock.newsItems.sort(by: {$0.rank > $1.rank})
+    }
+    
     public func nextUpdateTitle() -> String {
         
         if let days = daysUntilNextUpdate() {
