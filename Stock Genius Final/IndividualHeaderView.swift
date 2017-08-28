@@ -39,6 +39,7 @@ class IndividualHeaderView: UIView {
         content.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         content.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         content.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        contentView.backgroundColor = SGConstants.mainBlackColor
         
         
     }
