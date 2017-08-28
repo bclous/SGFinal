@@ -9,6 +9,10 @@
 import UIKit
 import Alamofire
 
+protocol CurrentPicksVCDelegate : class {
+    func currentStockChosen(stock: CurrentStock)
+}
+
 class CurrentPicksVC: UIViewController {
 
     @IBOutlet weak var mainTableView: UITableView!
@@ -17,6 +21,7 @@ class CurrentPicksVC: UIViewController {
     var isTodayReturn = true
     var ready = true
     @IBOutlet weak var nextUpdateView: NextUpdateView!
+    weak var delegate : CurrentPicksVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +31,6 @@ class CurrentPicksVC: UIViewController {
         let headerDateString = DataStore.shared.currentPortfolio.startDateString()
         headerView.secondaryLabel.text = "Identified from 13-F data on \(headerDateString)"
     }
-    
 }
 
 extension CurrentPicksVC : UITableViewDelegate, UITableViewDataSource, CurrentPicksToggleDelegate {
@@ -108,7 +112,19 @@ extension CurrentPicksVC : UITableViewDelegate, UITableViewDataSource, CurrentPi
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return false
+        
+        if indexPath.row < 10 || (indexPath.row > 12 && indexPath.row < 34) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row < 10 || (indexPath.row > 12 && indexPath.row < 34) {
+            let chosenStock = DataStore.shared.currentPortfolio.holdings[arrayIndexFromIndexPath(indexPath)]
+            delegate?.currentStockChosen(stock: chosenStock)
+        }
     }
     
     func arrayIndexFromIndexPath(_ indexPath: IndexPath) -> Int {

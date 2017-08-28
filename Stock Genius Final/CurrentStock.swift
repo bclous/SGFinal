@@ -20,6 +20,7 @@ class CurrentStock: Stock {
     var priceHistory : [Date : Float]
     var hasShortPriceHistory : Bool
     var hasLongPriceHistory : Bool
+    var hasPicturesSaved : Bool
     
     override init() {
         self.isTrading = true
@@ -32,6 +33,7 @@ class CurrentStock: Stock {
         self.priceHistory = [:]
         self.hasShortPriceHistory = false
         self.hasLongPriceHistory = false
+        self.hasPicturesSaved = false
         super.init()
     }
     

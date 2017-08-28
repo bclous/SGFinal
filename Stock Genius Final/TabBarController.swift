@@ -8,8 +8,10 @@
 
 import UIKit
 
-class TabBarController: UITabBarController, TabBarDelegate {
-
+class TabBarController: UITabBarController, TabBarDelegate, CurrentPicksVCDelegate {
+    
+    var chosenStock : CurrentStock?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +28,10 @@ class TabBarController: UITabBarController, TabBarDelegate {
         customTabBar.rightAnchor.constraint(equalTo: tabBar.rightAnchor).isActive = true
         customTabBar.heightAnchor.constraint(equalTo: tabBar.heightAnchor).isActive = true
         customTabBar.delegate = self
+        let currentPicksVC = self.viewControllers?[0] as! CurrentPicksVC
+        currentPicksVC.delegate = self
+        
+        
     }
     
     func indexChosen(_ index: TabBarChoice) {
@@ -39,15 +45,17 @@ class TabBarController: UITabBarController, TabBarDelegate {
         }
     }
     
+    func currentStockChosen(stock: CurrentStock) {
+        chosenStock = stock
+        performSegue(withIdentifier: "individualStockSegue", sender: nil)
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
     }
-    */
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! IndividualStockVC
+        destinationVC.stock = chosenStock
+    }
+    
 
 }
