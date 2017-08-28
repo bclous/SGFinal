@@ -38,6 +38,8 @@
 		0F3A15531F54600C00EFB79F /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3A15521F54600C00EFB79F /* Article.swift */; };
 		0F3A15551F5466E700EFB79F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0F3A15541F5466E700EFB79F /* GoogleService-Info.plist */; };
 		0F3A15571F54847C00EFB79F /* IndividualStockVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3A15561F54847C00EFB79F /* IndividualStockVC.swift */; };
+		0F3A155A1F54A35800EFB79F /* IndividualHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F3A15591F54A35800EFB79F /* IndividualHeaderView.xib */; };
+		0F3A155C1F54A96000EFB79F /* IndividualHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3A155B1F54A96000EFB79F /* IndividualHeaderView.swift */; };
 		0F3E2E2F1F31445E004B8CD9 /* MainStockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F3E2E2E1F31445E004B8CD9 /* MainStockCell.xib */; };
 		0F3E2E311F314472004B8CD9 /* MainStockSummaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F3E2E301F314472004B8CD9 /* MainStockSummaryCell.xib */; };
 		0F3E2E331F31447B004B8CD9 /* NextUpdateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F3E2E321F31447B004B8CD9 /* NextUpdateView.xib */; };
@@ -118,6 +120,8 @@
 		0F3A15521F54600C00EFB79F /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		0F3A15541F5466E700EFB79F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0F3A15561F54847C00EFB79F /* IndividualStockVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndividualStockVC.swift; sourceTree = "<group>"; };
+		0F3A15591F54A35800EFB79F /* IndividualHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IndividualHeaderView.xib; sourceTree = "<group>"; };
+		0F3A155B1F54A96000EFB79F /* IndividualHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndividualHeaderView.swift; sourceTree = "<group>"; };
 		0F3E2E2E1F31445E004B8CD9 /* MainStockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainStockCell.xib; sourceTree = "<group>"; };
 		0F3E2E301F314472004B8CD9 /* MainStockSummaryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainStockSummaryCell.xib; sourceTree = "<group>"; };
 		0F3E2E321F31447B004B8CD9 /* NextUpdateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NextUpdateView.xib; sourceTree = "<group>"; };
@@ -209,6 +213,8 @@
 			isa = PBXGroup;
 			children = (
 				0F3A15561F54847C00EFB79F /* IndividualStockVC.swift */,
+				0F3A15591F54A35800EFB79F /* IndividualHeaderView.xib */,
+				0F3A155B1F54A96000EFB79F /* IndividualHeaderView.swift */,
 			);
 			name = IndividualStock;
 			sourceTree = "<group>";
@@ -422,6 +428,7 @@
 			files = (
 				AB2FB99F1F029BB700CA72B2 /* LaunchScreen.storyboard in Resources */,
 				0F5BE8FB1F07F51400607D87 /* MainStocksSectionHeaderToggle.xib in Resources */,
+				0F3A155A1F54A35800EFB79F /* IndividualHeaderView.xib in Resources */,
 				0F3E2E391F31449B004B8CD9 /* CalculatorInputView.xib in Resources */,
 				0F3E2E2F1F31445E004B8CD9 /* MainStockCell.xib in Resources */,
 				0F3A15551F5466E700EFB79F /* GoogleService-Info.plist in Resources */,
@@ -519,6 +526,7 @@
 				0F3E2E451F31454F004B8CD9 /* IAPClient.swift in Sources */,
 				0F5BE8FD1F07F5E200607D87 /* MainStocksSectionHeaderToggle.swift in Sources */,
 				0F16DF9D1F0D9461006C531E /* DataStore.swift in Sources */,
+				0F3A155C1F54A96000EFB79F /* IndividualHeaderView.swift in Sources */,
 				0F2651E51F053BAE00754D0F /* NewsItem.swift in Sources */,
 				AB2FB9941F029BB700CA72B2 /* CurrentPicksVC.swift in Sources */,
 				0F16DF8D1F0D1815006C531E /* CalculatorVC.swift in Sources */,

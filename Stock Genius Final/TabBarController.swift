@@ -55,6 +55,8 @@ class TabBarController: UITabBarController, TabBarDelegate, CurrentPicksVCDelega
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! IndividualStockVC
         destinationVC.stock = chosenStock
+        let currentPicksVC = self.viewControllers?[0] as! CurrentPicksVC
+        currentPicksVC.mainTableView.reloadData()
     }
     
 

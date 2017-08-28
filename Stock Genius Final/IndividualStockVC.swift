@@ -11,12 +11,12 @@ import UIKit
 class IndividualStockVC: UIViewController {
     
     var stock : CurrentStock?
-    @IBOutlet weak var stockTestLabel: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        stockTestLabel.text = stock?.ticker
+     
     }
 
     override func didReceiveMemoryWarning() {

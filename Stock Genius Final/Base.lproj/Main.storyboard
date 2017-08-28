@@ -725,26 +725,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NKn-27-z4P">
-                                <rect key="frame" x="151" y="323" width="72" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fiw-wb-1tL" customClass="IndividualHeaderView" customModule="Stock_Genius_Final" customModuleProvider="target">
+                                <rect key="frame" x="-0.5" y="43" width="375" height="110"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="wWW-7C-OaQ"/>
+                                </constraints>
+                            </view>
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pp9-NX-an9">
+                                <rect key="frame" x="0.0" y="94" width="375" height="524"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="NKn-27-z4P" firstAttribute="centerX" secondItem="STw-3z-ero" secondAttribute="centerX" id="EmL-8G-8QY"/>
-                            <constraint firstItem="NKn-27-z4P" firstAttribute="centerY" secondItem="STw-3z-ero" secondAttribute="centerY" id="oA5-au-hdL"/>
+                            <constraint firstItem="pp9-NX-an9" firstAttribute="top" secondItem="S4X-Zh-df8" secondAttribute="bottom" constant="30" id="8ni-g9-wqn"/>
+                            <constraint firstItem="pp9-NX-an9" firstAttribute="width" secondItem="STw-3z-ero" secondAttribute="width" id="WgF-Ao-SAS"/>
+                            <constraint firstItem="Fiw-wb-1tL" firstAttribute="centerX" secondItem="STw-3z-ero" secondAttribute="centerX" id="eaL-zk-NrY"/>
+                            <constraint firstItem="Kd7-qk-ymZ" firstAttribute="top" secondItem="pp9-NX-an9" secondAttribute="bottom" id="nCi-YP-mVw"/>
+                            <constraint firstItem="Fiw-wb-1tL" firstAttribute="width" secondItem="STw-3z-ero" secondAttribute="width" id="oDm-IY-nHy"/>
+                            <constraint firstItem="pp9-NX-an9" firstAttribute="centerX" secondItem="STw-3z-ero" secondAttribute="centerX" id="pzc-m3-2F9"/>
+                            <constraint firstItem="Fiw-wb-1tL" firstAttribute="top" secondItem="S4X-Zh-df8" secondAttribute="bottom" constant="-21" id="qhe-jL-TCL"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="stockTestLabel" destination="NKn-27-z4P" id="B2M-tG-b0y"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bkm-nO-xDA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4005.5999999999999" y="-134.48275862068968"/>
+            <point key="canvasLocation" x="3654" y="-134"/>
         </scene>
     </scenes>
     <resources>
