@@ -726,15 +726,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fiw-wb-1tL" customClass="IndividualHeaderView" customModule="Stock_Genius_Final" customModuleProvider="target">
-                                <rect key="frame" x="-0.5" y="43" width="375" height="110"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="110"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="110" id="wWW-7C-OaQ"/>
                                 </constraints>
                             </view>
-                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pp9-NX-an9">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pp9-NX-an9">
                                 <rect key="frame" x="0.0" y="94" width="375" height="524"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -745,9 +745,13 @@
                             <constraint firstItem="Kd7-qk-ymZ" firstAttribute="top" secondItem="pp9-NX-an9" secondAttribute="bottom" id="nCi-YP-mVw"/>
                             <constraint firstItem="Fiw-wb-1tL" firstAttribute="width" secondItem="STw-3z-ero" secondAttribute="width" id="oDm-IY-nHy"/>
                             <constraint firstItem="pp9-NX-an9" firstAttribute="centerX" secondItem="STw-3z-ero" secondAttribute="centerX" id="pzc-m3-2F9"/>
-                            <constraint firstItem="Fiw-wb-1tL" firstAttribute="top" secondItem="S4X-Zh-df8" secondAttribute="bottom" constant="-21" id="qhe-jL-TCL"/>
+                            <constraint firstItem="Fiw-wb-1tL" firstAttribute="top" secondItem="S4X-Zh-df8" secondAttribute="bottom" constant="-20" id="qhe-jL-TCL"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="headerView" destination="Fiw-wb-1tL" id="0q7-CC-SLx"/>
+                        <outlet property="mainTableView" destination="pp9-NX-an9" id="7Vv-hL-vYb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bkm-nO-xDA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -29,6 +29,7 @@ class DataStore: NSObject, AlphaVantageClientDelegate, FirebaseClientDelegate {
     var totalIndexPerformance : Float
     var totalStockGeniusPerformance : Float
     var imageNames = ["page1Background", "girl", "mainPage1", "mainPage2", "mainPage3", "mainPage4", "mainPage5", "mainPage6","graphicPage1", "graphicPage2", "otherBackground"]
+    var individualToggleState : IndividualSegmentType = .sinceStartDate
 
     
     private override init() {

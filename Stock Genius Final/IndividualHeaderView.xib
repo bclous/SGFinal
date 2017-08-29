@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IndividualHeaderView" customModule="Stock_Genius_Final" customModuleProvider="target">
             <connections>
                 <outlet property="adjustableViewBottomConstraint" destination="bkW-xt-emW" id="ZMS-Hz-XT0"/>
+                <outlet property="backButton" destination="9aN-f3-YR3" id="GZa-Pa-dwt"/>
                 <outlet property="backButtonHeightConstraint" destination="JMK-vm-L6P" id="ZaR-do-X5B"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="uWa-2K-KPW"/>
                 <outlet property="mainLabel" destination="XmY-W8-QDf" id="dNL-ur-en6"/>
@@ -56,9 +57,9 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_keyboard_arrow_left_white" translatesAutoresizingMaskIntoConstraints="NO" id="ssC-ff-Wxh">
-                            <rect key="frame" x="10" y="42.5" width="40" height="40"/>
+                            <rect key="frame" x="10" y="47.5" width="30" height="30"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="40" id="JMK-vm-L6P"/>
+                                <constraint firstAttribute="height" constant="30" id="JMK-vm-L6P"/>
                                 <constraint firstAttribute="width" secondItem="ssC-ff-Wxh" secondAttribute="height" multiplier="1:1" id="Qhm-ws-pkJ"/>
                             </constraints>
                         </imageView>
@@ -75,19 +76,41 @@
                                 <constraint firstAttribute="width" secondItem="1Wf-xB-Xff" secondAttribute="height" multiplier="1:1" id="vvF-cN-LUu"/>
                             </constraints>
                         </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9aN-f3-YR3">
+                            <rect key="frame" x="0.0" y="20" width="60" height="90"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="kjU-mp-nqc"/>
+                            </constraints>
+                            <connections>
+                                <action selector="backButtonTapped:" destination="-1" eventType="touchUpInside" id="u2s-PL-aP9"/>
+                            </connections>
+                        </button>
+                        <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gLd-H3-h7n">
+                            <rect key="frame" x="10" y="109" width="356" height="1"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="xy9-W6-dy4"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <constraints>
                         <constraint firstItem="XmY-W8-QDf" firstAttribute="centerX" secondItem="2au-wv-471" secondAttribute="centerX" id="25F-Mc-ALu"/>
                         <constraint firstAttribute="trailing" secondItem="EPM-jv-bVs" secondAttribute="trailing" constant="60" id="2fq-nN-Yzz"/>
+                        <constraint firstItem="gLd-H3-h7n" firstAttribute="width" secondItem="2au-wv-471" secondAttribute="width" constant="-20" id="3VX-8s-o1w"/>
                         <constraint firstItem="EPM-jv-bVs" firstAttribute="leading" secondItem="2au-wv-471" secondAttribute="leading" constant="60" id="49W-hJ-NWX"/>
+                        <constraint firstAttribute="bottom" secondItem="9aN-f3-YR3" secondAttribute="bottom" id="54p-5E-z7e"/>
                         <constraint firstItem="1Wf-xB-Xff" firstAttribute="centerY" secondItem="XYd-pM-oWP" secondAttribute="centerY" id="B2M-CU-req"/>
                         <constraint firstAttribute="trailing" secondItem="g5S-k9-mon" secondAttribute="trailing" constant="10" id="F9Z-1x-jCW"/>
                         <constraint firstAttribute="bottom" secondItem="EPM-jv-bVs" secondAttribute="bottom" constant="11" id="M5I-r4-Vfv"/>
                         <constraint firstItem="g5S-k9-mon" firstAttribute="leading" secondItem="XmY-W8-QDf" secondAttribute="trailing" constant="10" id="Msy-Eo-vdB"/>
+                        <constraint firstItem="9aN-f3-YR3" firstAttribute="leading" secondItem="2au-wv-471" secondAttribute="leading" id="R1P-XC-KKx"/>
+                        <constraint firstAttribute="bottom" secondItem="gLd-H3-h7n" secondAttribute="bottom" id="R8y-EP-K3d"/>
                         <constraint firstItem="ssC-ff-Wxh" firstAttribute="leading" secondItem="2au-wv-471" secondAttribute="leading" constant="10" id="TE1-UX-yHh"/>
+                        <constraint firstItem="9aN-f3-YR3" firstAttribute="top" secondItem="2au-wv-471" secondAttribute="top" constant="20" id="Xna-Ka-t1e"/>
                         <constraint firstAttribute="trailing" secondItem="XYd-pM-oWP" secondAttribute="trailing" constant="10" id="YLU-40-pCQ"/>
                         <constraint firstItem="XmY-W8-QDf" firstAttribute="top" secondItem="2au-wv-471" secondAttribute="top" constant="45" id="YmH-aw-vrT"/>
                         <constraint firstItem="XYd-pM-oWP" firstAttribute="leading" secondItem="1Wf-xB-Xff" secondAttribute="trailing" constant="2" id="Zc2-u8-hFP"/>
+                        <constraint firstItem="gLd-H3-h7n" firstAttribute="centerX" secondItem="2au-wv-471" secondAttribute="centerX" id="eCs-rY-HPU"/>
                         <constraint firstItem="ssC-ff-Wxh" firstAttribute="centerY" secondItem="XmY-W8-QDf" secondAttribute="centerY" id="r5S-4h-Sdu"/>
                         <constraint firstItem="XYd-pM-oWP" firstAttribute="centerY" secondItem="EPM-jv-bVs" secondAttribute="centerY" id="tEp-f8-0CI"/>
                         <constraint firstItem="g5S-k9-mon" firstAttribute="bottom" secondItem="XmY-W8-QDf" secondAttribute="bottom" id="zm4-Zb-nej"/>

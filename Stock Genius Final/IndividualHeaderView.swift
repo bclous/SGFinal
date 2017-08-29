@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol IndividualHeaderViewDelegate : class {
+    func backButtonTapped()
+}
+
 class IndividualHeaderView: UIView {
 
     @IBOutlet var contentView: UIView!
@@ -19,6 +23,8 @@ class IndividualHeaderView: UIView {
     @IBOutlet weak var priceChangeLabel: UILabel!
     @IBOutlet weak var priceChangeImage: UIImageView!
     @IBOutlet weak var backButtonHeightConstraint: NSLayoutConstraint!
+    weak var delegate : IndividualHeaderViewDelegate?
+    @IBOutlet weak var backButton: UIButton!
     
     override init(frame: CGRect) { // for using CustomView in code
         super.init(frame: frame)
@@ -41,6 +47,23 @@ class IndividualHeaderView: UIView {
         content.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         contentView.backgroundColor = SGConstants.mainBlackColor
         
+        
+    }
+    
+    @IBAction func backButtonTapped(_ sender: Any) {
+        
+        delegate?.backButtonTapped()
+        
+    }
+    func formatHeaderViewWithStock(_ stock: CurrentStock) {
+        
+        mainLabel.text = stock.ticker
+        secondaryLabel.text = stock.companyName
+        priceLabel.text = stock.priceString(stock.adjPriceCurrent)
+        let priceChange = abs(stock.adjPriceCurrent - stock.adjPriceLastClose)
+        let image = stock.dollarChangeImage(startPx: stock.adjPriceLastClose, endPx: stock.adjPriceCurrent)
+        priceChangeImage.image = image
+        priceChangeLabel.text = stock.priceString(priceChange)
         
     }
     

@@ -37,6 +37,7 @@ class CurrentStock: Stock {
         super.init()
     }
     
+
     public func percentageReturn(isTodayReturn: Bool) -> Float {
         
         let todayStartingPrice = isTrading ? adjPriceLastClose : acquiredPrice
