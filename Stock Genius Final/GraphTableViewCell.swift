@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import Charts
 
 class GraphTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var lineChart: LineChartView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
