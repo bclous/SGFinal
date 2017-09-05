@@ -13,7 +13,6 @@
 		0F16DF911F0D1AAE006C531E /* ShareCalcHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DF901F0D1AAE006C531E /* ShareCalcHeaderView.swift */; };
 		0F16DF931F0D1C1C006C531E /* ShareCalcCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DF921F0D1C1C006C531E /* ShareCalcCell.swift */; };
 		0F16DF951F0D265A006C531E /* PastPicksPerformanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DF941F0D265A006C531E /* PastPicksPerformanceView.swift */; };
-		0F16DF9B1F0D8E31006C531E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0F16DF9A1F0D8E31006C531E /* GoogleService-Info.plist */; };
 		0F16DF9D1F0D9461006C531E /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DF9C1F0D9461006C531E /* DataStore.swift */; };
 		0F16DF9F1F0D980A006C531E /* FirebaseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DF9E1F0D980A006C531E /* FirebaseClient.swift */; };
 		0F16DFA11F0E6B8C006C531E /* AlphaVantageClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DFA01F0E6B8C006C531E /* AlphaVantageClient.swift */; };
@@ -52,6 +51,7 @@
 		0F5BE8FB1F07F51400607D87 /* MainStocksSectionHeaderToggle.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F5BE8FA1F07F51400607D87 /* MainStocksSectionHeaderToggle.xib */; };
 		0F5BE8FD1F07F5E200607D87 /* MainStocksSectionHeaderToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5BE8FC1F07F5E200607D87 /* MainStocksSectionHeaderToggle.swift */; };
 		0F5BE8FF1F07FCBC00607D87 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5BE8FE1F07FCBC00607D87 /* TabBarController.swift */; };
+		0F5BECA71F5EFA8200DF7F50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0F5BECA61F5EFA8200DF7F50 /* GoogleService-Info.plist */; };
 		0FFB6F311F10325C00FD8BC1 /* PastPicksNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFB6F2F1F10325C00FD8BC1 /* PastPicksNoteCell.swift */; };
 		0FFB6F321F10325C00FD8BC1 /* PastPicksNoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FFB6F301F10325C00FD8BC1 /* PastPicksNoteCell.xib */; };
 		0FFB6F3B1F13CF7100FD8BC1 /* RemainingCashCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FFB6F3A1F13CF6F00FD8BC1 /* RemainingCashCell.xib */; };
@@ -91,7 +91,6 @@
 		0F16DF901F0D1AAE006C531E /* ShareCalcHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCalcHeaderView.swift; sourceTree = "<group>"; };
 		0F16DF921F0D1C1C006C531E /* ShareCalcCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCalcCell.swift; sourceTree = "<group>"; };
 		0F16DF941F0D265A006C531E /* PastPicksPerformanceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastPicksPerformanceView.swift; sourceTree = "<group>"; };
-		0F16DF9A1F0D8E31006C531E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0F16DF9C1F0D9461006C531E /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		0F16DF9E1F0D980A006C531E /* FirebaseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseClient.swift; sourceTree = "<group>"; };
 		0F16DFA01F0E6B8C006C531E /* AlphaVantageClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlphaVantageClient.swift; sourceTree = "<group>"; };
@@ -130,6 +129,7 @@
 		0F5BE8FA1F07F51400607D87 /* MainStocksSectionHeaderToggle.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainStocksSectionHeaderToggle.xib; sourceTree = "<group>"; };
 		0F5BE8FC1F07F5E200607D87 /* MainStocksSectionHeaderToggle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainStocksSectionHeaderToggle.swift; sourceTree = "<group>"; };
 		0F5BE8FE1F07FCBC00607D87 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		0F5BECA61F5EFA8200DF7F50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0FFB6F2F1F10325C00FD8BC1 /* PastPicksNoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastPicksNoteCell.swift; sourceTree = "<group>"; };
 		0FFB6F301F10325C00FD8BC1 /* PastPicksNoteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PastPicksNoteCell.xib; sourceTree = "<group>"; };
 		0FFB6F3A1F13CF6F00FD8BC1 /* RemainingCashCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RemainingCashCell.xib; sourceTree = "<group>"; };
@@ -337,7 +337,7 @@
 				AB2FB99B1F029BB700CA72B2 /* Assets.xcassets */,
 				AB2FB99D1F029BB700CA72B2 /* LaunchScreen.storyboard */,
 				AB2FB9A01F029BB700CA72B2 /* Info.plist */,
-				0F16DF9A1F0D8E31006C531E /* GoogleService-Info.plist */,
+				0F5BECA61F5EFA8200DF7F50 /* GoogleService-Info.plist */,
 				AB2FB9981F029BB700CA72B2 /* Stock_Genius_Final.xcdatamodeld */,
 			);
 			path = "Stock Genius Final";
@@ -410,6 +410,7 @@
 				0F5BE8FB1F07F51400607D87 /* MainStocksSectionHeaderToggle.xib in Resources */,
 				0F3E2E391F31449B004B8CD9 /* CalculatorInputView.xib in Resources */,
 				0F3E2E2F1F31445E004B8CD9 /* MainStockCell.xib in Resources */,
+				0F5BECA71F5EFA8200DF7F50 /* GoogleService-Info.plist in Resources */,
 				0FFB6F5A1F16AF3B00FD8BC1 /* LastIntroPage.xib in Resources */,
 				0FFB6F3B1F13CF7100FD8BC1 /* RemainingCashCell.xib in Resources */,
 				AB2FB9AB1F02CF0200CA72B2 /* HeaderView.xib in Resources */,
@@ -427,7 +428,6 @@
 				0F3E2E351F314482004B8CD9 /* ShareCalcCell.xib in Resources */,
 				AB2FB9971F029BB700CA72B2 /* Main.storyboard in Resources */,
 				0F3E2E331F31447B004B8CD9 /* NextUpdateView.xib in Resources */,
-				0F16DF9B1F0D8E31006C531E /* GoogleService-Info.plist in Resources */,
 				0FFB6F411F13D03500FD8BC1 /* DisclosureCell.xib in Resources */,
 				0F3E2E431F3144F6004B8CD9 /* PastPicksSectionHeaderView.xib in Resources */,
 				0F17B77E1F1911840064533F /* CircleTabView.xib in Resources */,

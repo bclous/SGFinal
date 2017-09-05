@@ -133,7 +133,9 @@ class AlphaVantageClient: NSObject {
     }
     
     public func currentPriceFromResponse(_ response: Dictionary<String, Any>) -> Float? {
+        
         let key = keyForCurrentPrice(response: response)
+        print("\(key)")
         if let key = key {
             let timeSeriesDict = response["Time Series (Daily)"] as? Dictionary<String, Dictionary<String, String>>
             if let timeSeriesDict = timeSeriesDict {
@@ -193,7 +195,17 @@ class AlphaVantageClient: NSObject {
     private func keyForCurrentPrice(response: Dictionary<String, Any>) -> String? {
         
         let metaDataDict = response["Meta Data"] as? Dictionary<String, String>
-        return metaDataDict?["3. Last Refreshed"]
+        let fullDateString = metaDataDict?["3. Last Refreshed"]
+        if let fullDateString = fullDateString {
+            let extraChars = fullDateString.characters.count - 10
+            let endIndex = fullDateString.index(fullDateString.endIndex, offsetBy: -extraChars)
+            return fullDateString.substring(to: endIndex)
+        } else {
+            return nil
+        }
+        
+        
+        
         
     }
     
