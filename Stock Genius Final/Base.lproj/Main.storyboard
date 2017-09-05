@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6El-mJ-Gim">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6El-mJ-Gim">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -500,6 +500,53 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="znb-kq-MUh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2090" y="-853"/>
+        </scene>
+        <!--Unable To ConnectVC-->
+        <scene sceneID="VDM-C8-yFy">
+            <objects>
+                <viewController storyboardIdentifier="unableToConnect" id="Xeq-Rm-3oM" customClass="UnableToConnectVC" customModule="Stock_Genius_Final" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Iui-Bn-O63"/>
+                        <viewControllerLayoutGuide type="bottom" id="hkz-35-Sim"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gXu-qa-B18">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UNABLE TO CONNECT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sky-aK-TNo">
+                                <rect key="frame" x="122.5" y="307" width="130" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ikf-jB-w4p">
+                                <rect key="frame" x="122" y="331.5" width="130" height="27"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="TRY AGAIN">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="tryAgainTapped:" destination="Xeq-Rm-3oM" eventType="touchUpInside" id="1Ab-dX-b1F"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstItem="ikf-jB-w4p" firstAttribute="top" secondItem="Sky-aK-TNo" secondAttribute="bottom" constant="10" id="EAE-LV-UZr"/>
+                            <constraint firstItem="ikf-jB-w4p" firstAttribute="centerX" secondItem="Sky-aK-TNo" secondAttribute="centerX" id="nlJ-0O-qtK"/>
+                            <constraint firstItem="Sky-aK-TNo" firstAttribute="centerY" secondItem="gXu-qa-B18" secondAttribute="centerY" constant="-20" id="odq-rb-qsy"/>
+                            <constraint firstItem="ikf-jB-w4p" firstAttribute="width" secondItem="Sky-aK-TNo" secondAttribute="width" id="qg2-Tr-CqO"/>
+                            <constraint firstItem="Sky-aK-TNo" firstAttribute="centerX" secondItem="gXu-qa-B18" secondAttribute="centerX" id="ujK-eB-W3N"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tryAgainButton" destination="ikf-jB-w4p" id="bMm-cr-CAd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H38-lk-tgd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="526" y="573"/>
         </scene>
         <!--Invalid SubscriptionVC-->
         <scene sceneID="IjV-wj-13l">

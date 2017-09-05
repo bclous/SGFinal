@@ -8,28 +8,24 @@
 
 import UIKit
 
+protocol UnableToConnectVCDelegate : class {
+    func tryAgainTapped()
+}
+
 class UnableToConnectVC: UIViewController {
 
+    @IBOutlet weak var tryAgainButton: UIButton!
+    weak var delegate : UnableToConnectVCDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        tryAgainButton.backgroundColor = SGConstants.mainBlueColor
+        view.backgroundColor = SGConstants.mainBlackColor
+        tryAgainButton.layer.cornerRadius = 10
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func tryAgainTapped(_ sender: Any) {
+        delegate?.tryAgainTapped()
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

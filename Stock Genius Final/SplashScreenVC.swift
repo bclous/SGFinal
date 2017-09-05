@@ -18,7 +18,8 @@ class SplashScreenVC: UIViewController, DataStoreDelegate, InvalidSubscriptionDe
     var badSubscription = false
     var readyToSegue = false
     let spinnerVC: SpinnerVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "spinnerVC") as! SpinnerVC
-    let invalidVC: InvalidSubscriptionVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "invalidSubscriptionVC") as! InvalidSubscriptionVC
+    let invalidVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "invalidSubscriptionVC") as! InvalidSubscriptionVC
+    let unableToConnectVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "unableToConnect") as! UnableToConnectVC
     var isTestMode = true
     var spinnerViewShowing = false
     var badSubscriptionScreenShowing = false
@@ -27,10 +28,14 @@ class SplashScreenVC: UIViewController, DataStoreDelegate, InvalidSubscriptionDe
     override func viewDidLoad() {
         super.viewDidLoad()
         formatView()
+        formatUnableToConnectView()
         refreshSplashView()
     }
     
     func refreshSplashView() {
+        
+        progressView.progress = 0.0
+        
         DataStore.shared.connectAndPopulateData { (success) in
             self.readyToPresent(success)
         }
@@ -45,7 +50,7 @@ class SplashScreenVC: UIViewController, DataStoreDelegate, InvalidSubscriptionDe
                 readyToSegue = true
             }
         } else {
-            // show sorry view
+            present(unableToConnectVC, animated: false, completion: nil)
         }
     }
     
@@ -185,16 +190,7 @@ class SplashScreenVC: UIViewController, DataStoreDelegate, InvalidSubscriptionDe
                                                object: nil)
     }
     
-    // unused delegate functions
-    
-    func initialImagePullComplete(success: Bool) {
-        // do nothing
-    }
-    
-    func firebasePullComplete(success: Bool) {
-        //stff
-    }
-    
+ 
     // helper methods
     
     private func presentAlertToUser(title: String, message:String) {
@@ -232,4 +228,16 @@ class SplashScreenVC: UIViewController, DataStoreDelegate, InvalidSubscriptionDe
 
    
 
+}
+
+extension SplashScreenVC : UnableToConnectVCDelegate {
+    
+    func formatUnableToConnectView() {
+        unableToConnectVC.delegate = self
+    }
+    
+    func tryAgainTapped() {
+        refreshSplashView()
+        unableToConnectVC.dismiss(animated: false, completion: nil)
+    }
 }

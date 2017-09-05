@@ -52,6 +52,7 @@
 		0F5BE8FD1F07F5E200607D87 /* MainStocksSectionHeaderToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5BE8FC1F07F5E200607D87 /* MainStocksSectionHeaderToggle.swift */; };
 		0F5BE8FF1F07FCBC00607D87 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5BE8FE1F07FCBC00607D87 /* TabBarController.swift */; };
 		0F5BECA71F5EFA8200DF7F50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0F5BECA61F5EFA8200DF7F50 /* GoogleService-Info.plist */; };
+		0FDB582D1F5F4C3F00990628 /* UnableToConnectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDB582C1F5F4C3E00990628 /* UnableToConnectVC.swift */; };
 		0FFB6F311F10325C00FD8BC1 /* PastPicksNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFB6F2F1F10325C00FD8BC1 /* PastPicksNoteCell.swift */; };
 		0FFB6F321F10325C00FD8BC1 /* PastPicksNoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FFB6F301F10325C00FD8BC1 /* PastPicksNoteCell.xib */; };
 		0FFB6F3B1F13CF7100FD8BC1 /* RemainingCashCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FFB6F3A1F13CF6F00FD8BC1 /* RemainingCashCell.xib */; };
@@ -130,6 +131,7 @@
 		0F5BE8FC1F07F5E200607D87 /* MainStocksSectionHeaderToggle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainStocksSectionHeaderToggle.swift; sourceTree = "<group>"; };
 		0F5BE8FE1F07FCBC00607D87 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		0F5BECA61F5EFA8200DF7F50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0FDB582C1F5F4C3E00990628 /* UnableToConnectVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnableToConnectVC.swift; sourceTree = "<group>"; };
 		0FFB6F2F1F10325C00FD8BC1 /* PastPicksNoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastPicksNoteCell.swift; sourceTree = "<group>"; };
 		0FFB6F301F10325C00FD8BC1 /* PastPicksNoteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PastPicksNoteCell.xib; sourceTree = "<group>"; };
 		0FFB6F3A1F13CF6F00FD8BC1 /* RemainingCashCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RemainingCashCell.xib; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 				AB2FB9A61F029D6C00CA72B2 /* TabBar.xib */,
 				AB2FB9AA1F02CF0200CA72B2 /* HeaderView.xib */,
 				AB2FB9AE1F02E5E600CA72B2 /* HeaderView.swift */,
+				0FDB582C1F5F4C3E00990628 /* UnableToConnectVC.swift */,
 				0FFB6F501F166A4F00FD8BC1 /* Intro */,
 				0FFB6F441F15582800FD8BC1 /* SplashScreen */,
 				0FFB6F331F1274E300FD8BC1 /* CurrentPicks */,
@@ -494,6 +497,7 @@
 			files = (
 				0F113C0F1F2143E600D832D6 /* TermsVC.swift in Sources */,
 				0F16DF951F0D265A006C531E /* PastPicksPerformanceView.swift in Sources */,
+				0FDB582D1F5F4C3F00990628 /* UnableToConnectVC.swift in Sources */,
 				0F16DF911F0D1AAE006C531E /* ShareCalcHeaderView.swift in Sources */,
 				0F17B7741F16CEF20064533F /* Page1.swift in Sources */,
 				0F2651F01F055D3C00754D0F /* PastPicksSectionHeaderView.swift in Sources */,
