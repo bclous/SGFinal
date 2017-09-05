@@ -135,7 +135,7 @@ class AlphaVantageClient: NSObject {
     public func currentPriceFromResponse(_ response: Dictionary<String, Any>) -> Float? {
         
         let key = keyForCurrentPrice(response: response)
-        print("\(key)")
+        print("\(key!)")
         if let key = key {
             let timeSeriesDict = response["Time Series (Daily)"] as? Dictionary<String, Dictionary<String, String>>
             if let timeSeriesDict = timeSeriesDict {
