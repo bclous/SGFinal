@@ -72,9 +72,6 @@ class AlphaVantageClient: NSObject {
         }
     }
     
-    
-    
-    
     public func pullPricesForStock(_ stock: CurrentStock, completion: @escaping (_ success: Bool) -> ()) {
         let requestURL = urlStringForStock(stock)
         let request = Alamofire.request(requestURL)
@@ -96,7 +93,6 @@ class AlphaVantageClient: NSObject {
                 completion(false)
             }
         }
-        
     }
     
     private func mapPricesToStock(_ stock: CurrentStock, response: Dictionary<String, Any>) {
