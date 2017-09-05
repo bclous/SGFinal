@@ -36,7 +36,7 @@ class AlphaVantageClient: NSObject {
             let request = Alamofire.request(requestURL)
             
             request.response(queue: queue, responseSerializer: DataRequest.jsonResponseSerializer(), completionHandler: { (response) in
-                let dictionary = response.value as! Dictionary<String, Any>
+                let dictionary = response.value as! Dictionary<String, Any> // this needs to be fixed
                 self.mapPricesToStock(stock, response: dictionary)
                 print("Parsing JSON on thread: \(Thread.current) is main thread: \(Thread.isMainThread)")
                 requestsCompleted += 1
@@ -54,31 +54,42 @@ class AlphaVantageClient: NSObject {
     
     }
     
-    public func pullPricesChained(startingIndex: Int) {
-        var holdingsPlusIndex : [CurrentStock] = DataStore.shared.currentPortfolio.holdings
-        holdingsPlusIndex.append(DataStore.shared.currentPortfolio.index)
-        let currentStockBeingPull = holdingsPlusIndex[startingIndex]
-        pullPriceForSingleStock(currentStockBeingPull, index: startingIndex)
-    }
-    
-    private func pullPriceForSingleStock(_ stock: CurrentStock, index: Int) {
-    
+    public func pullPriceHistoryForStock(_ stock: CurrentStock, completion: @escaping (_ success: Bool) -> ()) {
+        
+        let queue = DispatchQueue(label: "com.cnoon.response-queue", qos: .utility, attributes: [.concurrent])
         let requestURL = urlStringForStock(stock)
         let request = Alamofire.request(requestURL)
+    
         
-        request.responseJSON(completionHandler: { (response) in
-            
-            let dictionary = response.value as! Dictionary<String, Any>
-            self.mapPricesToStock(stock, response: dictionary)
-            print("\(index)")
-            if index == 30 {
-                self.delegate?.pricePullComplete(success: true)
-            } else {
-                self.pullPricesChained(startingIndex: index + 1)
-            }
-        })
-
+        
     }
+    
+    
+//    public func pullPricesChained(startingIndex: Int) {
+//        var holdingsPlusIndex : [CurrentStock] = DataStore.shared.currentPortfolio.holdings
+//        holdingsPlusIndex.append(DataStore.shared.currentPortfolio.index)
+//        let currentStockBeingPull = holdingsPlusIndex[startingIndex]
+//        pullPriceForSingleStock(currentStockBeingPull, index: startingIndex)
+//    }
+//    
+//    private func pullPriceForSingleStock(_ stock: CurrentStock, index: Int) {
+//    
+//        let requestURL = urlStringForStock(stock)
+//        let request = Alamofire.request(requestURL)
+//        
+//        request.responseJSON(completionHandler: { (response) in
+//            
+//            let dictionary = response.value as! Dictionary<String, Any>
+//            self.mapPricesToStock(stock, response: dictionary)
+//            print("\(index)")
+//            if index == 30 {
+//                self.delegate?.pricePullComplete(success: true)
+//            } else {
+//                self.pullPricesChained(startingIndex: index + 1)
+//            }
+//        })
+//
+//    }
     
     private func mapPricesToStock(_ stock: CurrentStock, response: Dictionary<String, Any>) {
         stock.adjPriceCurrent = currentPriceFromResponse(response) ?? 0.0
