@@ -10,7 +10,6 @@ import UIKit
 import Alamofire
 
 protocol AlphaVantageClientDelegate: class {
-    func pricePullComplete(success: Bool)
     func pricePullInProgressFromAV(percentageComplete: Float)
 }
 
@@ -21,75 +20,84 @@ class AlphaVantageClient: NSObject {
     let dateFormatter = DateFormatter()
     let userCalendar = Calendar.current
     var delegate : AlphaVantageClientDelegate?
+    var successfulPulls = 0
     
     
-    public func updatePricesForCurrentPortfolio() {
+    public func updatePricesForCurrentPortfolio(completion: @escaping (_ success: Bool) -> ()) {
         
+        successfulPulls = 0
         var holdingsPlusIndex : [CurrentStock] = DataStore.shared.currentPortfolio.holdings
         holdingsPlusIndex.append(DataStore.shared.currentPortfolio.index)
         
-        let queue = DispatchQueue(label: "com.cnoon.response-queue", qos: .utility, attributes: [.concurrent])
-        var requestsCompleted = 0
+        updatePricesForStocks(holdingsPlusIndex) { (goodStocks, badStocks) in
+            if goodStocks.count == 31 {
+                completion(true)
+            } else {
+                self.updatePricesForStocks(badStocks, completion: { (newGoodStocks, newBadStocks) in
+                    if newBadStocks.count == 0 {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                })
+            }
+        }
         
-        for stock in holdingsPlusIndex {
-            let requestURL = urlStringForStock(stock)
-            let request = Alamofire.request(requestURL)
-            
-            request.response(queue: queue, responseSerializer: DataRequest.jsonResponseSerializer(), completionHandler: { (response) in
-                let dictionary = response.value as! Dictionary<String, Any> // this needs to be fixed
-                self.mapPricesToStock(stock, response: dictionary)
-                print("Parsing JSON on thread: \(Thread.current) is main thread: \(Thread.isMainThread)")
-                requestsCompleted += 1
-                print("\(requestsCompleted)")
-                if requestsCompleted == 31 {
-                    DispatchQueue.main.async {
-                        self.delegate?.pricePullComplete(success: true)
+    }
+    
+    public func updatePricesForStocks(_ stocks: [CurrentStock], completion: @escaping (_ successfulStocks: [CurrentStock], _ unsucessfullStocks : [CurrentStock]) -> ()) {
+        
+        var successfulStocks : [CurrentStock] = []
+        var unsuccessfulStocks : [CurrentStock] = []
+        
+        for stock in stocks {
+            pullPricesForStock(stock, completion: { (success) in
+                if success {
+                    successfulStocks.append(stock)
+                    self.successfulPulls += 1
+                    let percentageComplete = Float(self.successfulPulls) / 31.0
+                    self.delegate?.pricePullInProgressFromAV(percentageComplete: percentageComplete )
+                    print("\(percentageComplete)")
+                    if successfulStocks.count + unsuccessfulStocks.count == stocks.count {
+                        completion(successfulStocks, unsuccessfulStocks)
                     }
                 } else {
-                    self.delegate?.pricePullInProgressFromAV(percentageComplete: Float(requestsCompleted) / 31.0)
+                    unsuccessfulStocks.append(stock)
+                    if successfulStocks.count + unsuccessfulStocks.count == stocks.count {
+                        completion(successfulStocks, unsuccessfulStocks)
+                    }
+                    
                 }
-
             })
         }
-    
     }
     
-    public func pullPriceHistoryForStock(_ stock: CurrentStock, completion: @escaping (_ success: Bool) -> ()) {
-        
-        let queue = DispatchQueue(label: "com.cnoon.response-queue", qos: .utility, attributes: [.concurrent])
+    
+    
+    
+    public func pullPricesForStock(_ stock: CurrentStock, completion: @escaping (_ success: Bool) -> ()) {
         let requestURL = urlStringForStock(stock)
         let request = Alamofire.request(requestURL)
-    
+        let queue = DispatchQueue(label: "com.cnoon.response-queue", qos: .utility, attributes: [.concurrent])
         
+        request.response(queue: queue, responseSerializer: DataRequest.jsonResponseSerializer()) { (response) in
+            
+            let responseDictionary = response.value as? [String : Any]
+            let isGoodResponse = !response.result.isFailure && responseDictionary?.count ?? 0 > 0
+            
+            if isGoodResponse {
+                if let responseDictionary = responseDictionary {
+                    self.mapPricesToStock(stock, response: responseDictionary)
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            } else {
+                completion(false)
+            }
+        }
         
     }
-    
-    
-//    public func pullPricesChained(startingIndex: Int) {
-//        var holdingsPlusIndex : [CurrentStock] = DataStore.shared.currentPortfolio.holdings
-//        holdingsPlusIndex.append(DataStore.shared.currentPortfolio.index)
-//        let currentStockBeingPull = holdingsPlusIndex[startingIndex]
-//        pullPriceForSingleStock(currentStockBeingPull, index: startingIndex)
-//    }
-//    
-//    private func pullPriceForSingleStock(_ stock: CurrentStock, index: Int) {
-//    
-//        let requestURL = urlStringForStock(stock)
-//        let request = Alamofire.request(requestURL)
-//        
-//        request.responseJSON(completionHandler: { (response) in
-//            
-//            let dictionary = response.value as! Dictionary<String, Any>
-//            self.mapPricesToStock(stock, response: dictionary)
-//            print("\(index)")
-//            if index == 30 {
-//                self.delegate?.pricePullComplete(success: true)
-//            } else {
-//                self.pullPricesChained(startingIndex: index + 1)
-//            }
-//        })
-//
-//    }
     
     private func mapPricesToStock(_ stock: CurrentStock, response: Dictionary<String, Any>) {
         stock.adjPriceCurrent = currentPriceFromResponse(response) ?? 0.0
@@ -98,6 +106,8 @@ class AlphaVantageClient: NSObject {
         if let startDate = startDate {
             stock.adjPriceStartDate = mostRecentPriceFromDate(startDate, response: response) ?? 0.0
         }
+        
+        print("Mapped \(stock.ticker) for price: \(stock.adjPriceCurrent)")
     }
     
     private func mostRecentPriceFromDate(_ date: Date, response: Dictionary<String, Any>) -> Float? {
@@ -146,7 +156,7 @@ class AlphaVantageClient: NSObject {
     public func currentPriceFromResponse(_ response: Dictionary<String, Any>) -> Float? {
         
         let key = keyForCurrentPrice(response: response)
-        print("\(key!)")
+        
         if let key = key {
             let timeSeriesDict = response["Time Series (Daily)"] as? Dictionary<String, Dictionary<String, String>>
             if let timeSeriesDict = timeSeriesDict {
@@ -159,6 +169,8 @@ class AlphaVantageClient: NSObject {
                 }
             }
         }
+        
+        print("couldn't find key!")
         
         return nil
     }

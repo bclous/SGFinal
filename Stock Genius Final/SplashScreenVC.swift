@@ -27,7 +27,26 @@ class SplashScreenVC: UIViewController, DataStoreDelegate, InvalidSubscriptionDe
     override func viewDidLoad() {
         super.viewDidLoad()
         formatView()
-        DataStore.shared.performInitialFirebasePull()
+        refreshSplashView()
+    }
+    
+    func refreshSplashView() {
+        DataStore.shared.connectAndPopulateData { (success) in
+            self.readyToPresent(success)
+        }
+    }
+    
+    func readyToPresent(_ ready: Bool) {
+        if ready {
+            progressView.progress = 1.0
+            if !badSubscription {
+                performSegue(withIdentifier: "mainSegue", sender: nil)
+            } else {
+                readyToSegue = true
+            }
+        } else {
+            // show sorry view
+        }
     }
     
     private func formatView() {
@@ -124,18 +143,6 @@ class SplashScreenVC: UIViewController, DataStoreDelegate, InvalidSubscriptionDe
     
     func handleRestoreFailure() {
         handleBadSubscription()
-    }
-    
-    
-    
-    func pricePullComplete(success: Bool) {
-        progressView.progress = 1.0
-        if !badSubscription {
-            performSegue(withIdentifier: "mainSegue", sender: nil)
-        } else {
-            readyToSegue = true
-        }
-        
     }
     
     func pricePullInProgress(percentageComplete: Float) {
