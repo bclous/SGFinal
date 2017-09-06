@@ -35,6 +35,7 @@
 		0F2651EC1F05542A00754D0F /* PastPicksSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2651EB1F05542A00754D0F /* PastPicksSummaryCell.swift */; };
 		0F2651EE1F05583E00754D0F /* MainStockSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2651ED1F05583E00754D0F /* MainStockSummaryCell.swift */; };
 		0F2651F01F055D3C00754D0F /* PastPicksSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2651EF1F055D3C00754D0F /* PastPicksSectionHeaderView.swift */; };
+		0F3333EA1F60303400FBE4BF /* BDCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3333E91F60303400FBE4BF /* BDCHelper.swift */; };
 		0F3E2E2F1F31445E004B8CD9 /* MainStockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F3E2E2E1F31445E004B8CD9 /* MainStockCell.xib */; };
 		0F3E2E311F314472004B8CD9 /* MainStockSummaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F3E2E301F314472004B8CD9 /* MainStockSummaryCell.xib */; };
 		0F3E2E331F31447B004B8CD9 /* NextUpdateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F3E2E321F31447B004B8CD9 /* NextUpdateView.xib */; };
@@ -114,6 +115,7 @@
 		0F2651EB1F05542A00754D0F /* PastPicksSummaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastPicksSummaryCell.swift; sourceTree = "<group>"; };
 		0F2651ED1F05583E00754D0F /* MainStockSummaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainStockSummaryCell.swift; sourceTree = "<group>"; };
 		0F2651EF1F055D3C00754D0F /* PastPicksSectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastPicksSectionHeaderView.swift; sourceTree = "<group>"; };
+		0F3333E91F60303400FBE4BF /* BDCHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDCHelper.swift; sourceTree = "<group>"; };
 		0F3E2E2E1F31445E004B8CD9 /* MainStockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainStockCell.xib; sourceTree = "<group>"; };
 		0F3E2E301F314472004B8CD9 /* MainStockSummaryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainStockSummaryCell.xib; sourceTree = "<group>"; };
 		0F3E2E321F31447B004B8CD9 /* NextUpdateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NextUpdateView.xib; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 				AB2FB9AA1F02CF0200CA72B2 /* HeaderView.xib */,
 				AB2FB9AE1F02E5E600CA72B2 /* HeaderView.swift */,
 				0FDB582C1F5F4C3E00990628 /* UnableToConnectVC.swift */,
+				0F3333E91F60303400FBE4BF /* BDCHelper.swift */,
 				0FFB6F501F166A4F00FD8BC1 /* Intro */,
 				0FFB6F441F15582800FD8BC1 /* SplashScreen */,
 				0FFB6F331F1274E300FD8BC1 /* CurrentPicks */,
@@ -530,6 +533,7 @@
 				0F16DFAC1F0F17D3006C531E /* NextTwentyCell.swift in Sources */,
 				0FFB6F581F1676E100FD8BC1 /* GirlView.swift in Sources */,
 				0F2651DB1F05366D00754D0F /* MainStockCell.swift in Sources */,
+				0F3333EA1F60303400FBE4BF /* BDCHelper.swift in Sources */,
 				0F2651EA1F05467800754D0F /* PastPicksStockCell.swift in Sources */,
 				AB2FB9AD1F02CF8300CA72B2 /* SGConstants.swift in Sources */,
 				0F5BE8FF1F07FCBC00607D87 /* TabBarController.swift in Sources */,

@@ -13,7 +13,6 @@ class CurrentPicksVC: UIViewController {
 
     @IBOutlet weak var mainTableView: UITableView!
     @IBOutlet weak var headerView: HeaderView!
-    var dataStore : DataStore?
     var isTodayReturn = true
     var ready = true
     @IBOutlet weak var nextUpdateView: NextUpdateView!
@@ -21,8 +20,11 @@ class CurrentPicksVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         formatTableView()
+        formatHeaderView()
         view.backgroundColor = SGConstants.mainBlackColor
-        dataStore = DataStore.shared
+    }
+    
+    func formatHeaderView() {
         let headerDateString = DataStore.shared.currentPortfolio.startDateString()
         headerView.secondaryLabel.text = "Identified from 13-F data on \(headerDateString)"
     }

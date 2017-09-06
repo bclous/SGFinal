@@ -38,41 +38,28 @@ class DataStore: NSObject, AlphaVantageClientDelegate {
         AlphaVantageClient.shared.delegate = self
     }
     
-    func connectAndPopulateData(completion: @escaping(_ success: Bool) -> ()) {
+    public func connectAndPopulateData(completion: @escaping(_ success: Bool) -> ()) {
         
         FirebaseClient.shared.performInitialDatabasePull { (success, result) in
             if success {
-                self.populateAppWithData(dictionary: result)
-                AlphaVantageClient.shared.updatePricesForCurrentPortfolio(completion: { (success) in
-                    DispatchQueue.main.async { completion(success) }
-                })
+                let goodresult = self.populateAppWithData(dictionary: result)
+                if goodresult {
+                    AlphaVantageClient.shared.updatePricesForCurrentPortfolio(completion: { (success) in
+                        DispatchQueue.main.async { completion(success) }
+                    })
+                } else {
+                     DispatchQueue.main.async { completion(false) }
+                }
             } else {
                 DispatchQueue.main.async { completion(false) }
             }
         }
     }
     
-    func pricePullInProgressFromAV(percentageComplete: Float) {
+    public func pricePullInProgressFromAV(percentageComplete: Float) {
         delegate?.pricePullInProgress(percentageComplete: percentageComplete)
     }
     
-    public func populateAppWithData(dictionary: [String : Any]) {
-        let currentPortfolioDictionary = dictionary["currentPortfolio"] as? Dictionary<String, Any>
-        let pastPortfoliosDictionary = dictionary["pastPortfolios"] as? Dictionary<String, Any>
-        let appInfo = dictionary["appInfo"] as? Dictionary<String, Any>
-        let performance = dictionary["performance"] as? Dictionary<String, Float>
-        
-        if currentPortfolioDictionary != nil && pastPortfoliosDictionary != nil && appInfo != nil {
-            populateCurrentPortfolio(dictionary: currentPortfolioDictionary!)
-            populatePastPortfolios(dictionary: pastPortfoliosDictionary!)
-            populateAppWithData(dictionary: appInfo!)
-            populatePerformanceData(dictionary: performance!)
-            
-        } else {
-            // send out fail
-        }
-
-    }
     
     public func pastPortfoliosString() -> String {
         
@@ -87,7 +74,36 @@ class DataStore: NSObject, AlphaVantageClientDelegate {
     }
     
     
+    
+    
     // private helper methods
+    
+    private func populateAppWithData(dictionary: [String : Any]) -> Bool {
+        let currentPortfolioDictionary = dictionary["currentPortfolio"] as? Dictionary<String, Any>
+        let pastPortfoliosDictionary = dictionary["pastPortfolios"] as? Dictionary<String, Any>
+        let appInfo = dictionary["appInfo"] as? Dictionary<String, Any>
+        let performance = dictionary["performance"] as? Dictionary<String, Float>
+        
+        if currentPortfolioDictionary != nil && pastPortfoliosDictionary != nil && appInfo != nil {
+            populateCurrentPortfolio(dictionary: currentPortfolioDictionary!)
+            populatePastPortfolios(dictionary: pastPortfoliosDictionary!)
+            populateAppInfo(dictionary: appInfo!)
+            populatePerformanceData(dictionary: performance!)
+            
+            return true
+            
+        } else {
+            return false
+        }
+        
+    }
+    
+    private func populateAppInfo(dictionary: [String : Any]) {
+        let apiKey = dictionary["alphaVantageAPIKey"] as? String
+        if let apiKey = apiKey {
+            AlphaVantageClient.shared.apiKey = apiKey
+        }
+    }
     
     private func populateCurrentPortfolio(dictionary: Dictionary<String, Any>) {
         currentPortfolio.updateCurrentPortfolioValues(dictionary: dictionary)
