@@ -39,7 +39,7 @@ class DataStore: NSObject, AlphaVantageClientDelegate {
     }
     
     public func connectAndPopulateData(completion: @escaping(_ success: Bool) -> ()) {
-        
+    
         FirebaseClient.shared.performInitialDatabasePull { (success, result) in
             if success {
                 let goodresult = self.populateAppWithData(dictionary: result)
@@ -106,10 +106,14 @@ class DataStore: NSObject, AlphaVantageClientDelegate {
     }
     
     private func populateCurrentPortfolio(dictionary: Dictionary<String, Any>) {
+        
+        
         currentPortfolio.updateCurrentPortfolioValues(dictionary: dictionary)
     }
     
     private func populatePastPortfolios(dictionary: Dictionary<String, Any>) {
+        
+        pastPortfolios = []
         
         let keys = dictionary.keys
         

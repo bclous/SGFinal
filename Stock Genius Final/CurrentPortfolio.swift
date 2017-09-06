@@ -33,6 +33,8 @@ class CurrentPortfolio: NSObject {
     
     public func updateCurrentPortfolioValues(dictionary: Dictionary<String, Any>) {
         
+        resetCurrentPortfolio()
+        
         endDate = dictionary["endDate"] as? String ?? ""
         startDate = dictionary["startDate"] as? String ?? ""
         name = dictionary["name"] as? String ?? ""
@@ -60,6 +62,11 @@ class CurrentPortfolio: NSObject {
         
         updateCalcStocks()
         
+    }
+    
+    private func resetCurrentPortfolio() {
+        holdings.removeAll()
+        calcStocks.removeAll()
     }
     
     public func dateForPeriodBegin() -> Date? {

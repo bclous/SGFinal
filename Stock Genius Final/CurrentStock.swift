@@ -126,7 +126,7 @@ class CurrentStock: Stock {
     private func lastClosePriceKey(availableDates: [Date]) -> String? {
         if availableDates.count > 1 {
             
-            if Date().timeIntervalSince(availableDates[0]) > 61000 {
+            if Date().timeIntervalSince(availableDates[0]) > 388800 {
                 let key = availableDates[0].string(withFormat: "yyyy-MM-dd")
                 return key
             } else {
