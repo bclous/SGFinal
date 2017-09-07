@@ -113,26 +113,7 @@ class DataStore: NSObject, AlphaVantageClientDelegate {
         currentPortfolio.updateCurrentPortfolioValues(dictionary: dictionary)
     }
     
-    private func populateAricles(dictionary: [String : Any]) {
-        
-        let keys = dictionary.keys
-        for key in keys {
-            let articlesForTicker = dictionary[key] as? [String : Any]
-            if let articlesForTicker = articlesForTicker {
-                let stock = currentPortfolio.currentStockFromTicker(key)
-                if let stock = stock {
-                    let newsItem = NewsItem()
-                    newsItem.articleURL = articlesForTicker["articleURL"] as? String ?? ""
-                    newsItem.headline = articlesForTicker["headline"] as? String ?? ""
-                    newsItem.rank = articlesForTicker["rank"] as? Int ?? 0
-                    stock.newsItems.append(newsItem)
-                }
-            }
-        }
-        
-        DataStore.shared.currentPortfolio.sortNewsArticles()
-    }
-    
+
     private func populatePastPortfolios(dictionary: Dictionary<String, Any>) {
         
         pastPortfolios = []

@@ -78,7 +78,7 @@ class AlphaVantageClient: NSObject {
     }
     
     public func pullPricesForStock(_ stock: CurrentStock, completion: @escaping (_ success: Bool) -> ()) {
-        let requestURL = urlStringForStock(stock)
+        let requestURL = urlStringForStock(stock, isLongPull: false)
         let request = Alamofire.request(requestURL)
         let queue = DispatchQueue(label: "com.cnoon.response-queue", qos: .utility, attributes: [.concurrent])
         
@@ -92,6 +92,7 @@ class AlphaVantageClient: NSObject {
                 completion(true)
             } else {
                 completion(false)
+                print("failed for: \(stock.ticker)")
             }
         }
     }

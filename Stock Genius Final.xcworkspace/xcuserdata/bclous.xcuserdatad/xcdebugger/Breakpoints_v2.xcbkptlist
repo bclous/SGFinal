@@ -9,81 +9,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Stock Genius Final/IntroVC.swift"
-            timestampString = "523415394.180679"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
-            landmarkName = "imageViewForIndex(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Stock Genius Final/TermsVC.swift"
-            timestampString = "522772145.51093"
-<<<<<<< HEAD
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "loadWebviewForChoice(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Stock Genius Final/AlphaVantageClient.swift"
-            timestampString = "525626702.467872"
-=======
->>>>>>> master
+            timestampString = "526488807.823057"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
-            landmarkName = "mapPricesToStock(_:response:)"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "pullPricesForStock(_:completion:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Stock_Genius_Final.AlphaVantageClient.(mapPricesToStock in _CCBC8CFC3C6C5D78DBEE0B86B93CBD8D) (Stock_Genius_Final.CurrentStock, response : Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; ()"
-                  moduleName = "Stock Genius Final"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bclous/Desktop/SGFinal/Stock%20Genius%20Final/AlphaVantageClient.swift"
-                  timestampString = "525626702.584119"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "78"
-                  endingLineNumber = "78"
-                  offsetFromSymbolStart = "44">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Stock_Genius_Final.AlphaVantageClient.((mapPricesToStock in _CCBC8CFC3C6C5D78DBEE0B86B93CBD8D) (Stock_Genius_Final.CurrentStock, response : Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; ()).(implicit closure #1)"
-                  moduleName = "Stock Genius Final"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bclous/Desktop/SGFinal/Stock%20Genius%20Final/AlphaVantageClient.swift"
-                  timestampString = "525626702.585285"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "78"
-                  endingLineNumber = "78"
-                  offsetFromSymbolStart = "12">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

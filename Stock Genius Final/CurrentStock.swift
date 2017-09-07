@@ -19,7 +19,6 @@ class CurrentStock: Stock {
     var priceHistory : [Date : Float]
     var hasShortPriceHistory : Bool
     var hasLongPriceHistory : Bool
-    var hasPicturesSaved : Bool
     var currentPriceAPIKey : String
     var lastClosePriceAPIKey : String
     var sincePeriodBeginAPIKey : String
