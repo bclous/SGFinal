@@ -9,12 +9,17 @@
 import UIKit
 
 class TabBarController: UITabBarController, TabBarDelegate {
-
     
+    var currentPicksNeedsUpate = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         addCustomTabBar()
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        let currentPicksVC = viewControllers?[0] as? CurrentPicksVC
+        if let currentPicksVC = currentPicksVC {
+            currentPicksVC.needsPriceUpdate = currentPicksNeedsUpate
+        }
     }
     
     private func addCustomTabBar() {

@@ -61,16 +61,27 @@ class CurrentPortfolio: NSObject {
         }
         
         updateCalcStocks()
+        updatePricesFromCache()
         
+    }
+    
+    public func cachePrices() {
+       UserDefaults.standard.set(priceCacheDictionary(), forKey: DataStore.shared.currentPricesKey)
+    }
+    
+    public func updatePricesFromCache() {
+        for stock in holdings {
+            stock.updatePricesFromCache()
+        }
+    }
+    
+    public func dateForPeriodBegin() -> Date? {
+        return Date.dateFromString(startDate, dateFormat: "MM/dd/yyyy")
     }
     
     private func resetCurrentPortfolio() {
         holdings.removeAll()
         calcStocks.removeAll()
-    }
-    
-    public func dateForPeriodBegin() -> Date? {
-        return Date.dateFromString(startDate, dateFormat: "MM/dd/yyyy")
     }
     
     public func priceCacheDictionary() -> [String: [String : Float]] {

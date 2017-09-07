@@ -16,6 +16,7 @@ class CurrentPicksVC: UIViewController {
     var isTodayReturn = true
     var ready = true
     @IBOutlet weak var nextUpdateView: NextUpdateView!
+    var needsPriceUpdate = false
     
     override func viewDidLoad() {
         super.viewDidLoad()

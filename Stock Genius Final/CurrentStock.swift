@@ -19,6 +19,9 @@ class CurrentStock: Stock {
     var currentPriceAPIKey : String
     var lastClosePriceAPIKey : String
     var sincePeriodBeginAPIKey : String
+    let currentPriceKey = "currentPrice"
+    let lastClosePriceKey = "lastClosePrice"
+    let sincePeriodBeginPriceKey = "sincePeriodStartPrice"
     
     override init() {
         self.isTrading = true
@@ -31,6 +34,17 @@ class CurrentStock: Stock {
         lastClosePriceAPIKey = ""
         sincePeriodBeginAPIKey = ""
         super.init()
+    }
+    
+    public func updatePricesFromCache() {
+        let cacheDictionary = UserDefaults.standard.object(forKey: DataStore.shared.currentPricesKey) as? [String : [String : Float]]
+        let stockDictionary = cacheDictionary?[ticker]
+        let cachedCurrentPrice = stockDictionary?[currentPriceKey] ?? 0.0
+        let cachedlastClosePrice = stockDictionary?[lastClosePriceKey] ?? 0.0
+        let cachedSinceStartDatePrice = stockDictionary?[sincePeriodBeginPriceKey] ?? 0.0
+        adjPriceCurrent = cachedCurrentPrice
+        adjPriceLastClose = cachedlastClosePrice
+        adjPriceStartDate = cachedSinceStartDatePrice
     }
     
     public func updateCurrentStockValues(dictionary: Dictionary<String, Any>) {
@@ -68,6 +82,12 @@ class CurrentStock: Stock {
     
     
     // helper methods to update prices
+    
+    private func updatePricesFromCachedValues() {
+        let cachedStocks = UserDefaults.standard.object(forKey: DataStore.shared.currentPricesKey) as? [String : [String : Float]]
+        let cachedStock = cachedStocks?[ticker] as? [String : Float]
+        
+    }
     
     private func updateCurrentPrice(timeSeries: [String : Any]?) {
         let dayDictionary = timeSeries?[currentPriceAPIKey] as? [String : Any]
