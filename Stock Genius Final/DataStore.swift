@@ -101,13 +101,13 @@ class DataStore: NSObject, AlphaVantageClientDelegate {
     private func populateAppInfo(dictionary: [String : Any]) {
         let apiKey = dictionary["alphaVantageAPIKey"] as? String
         if let apiKey = apiKey {
+            self.APIKey = apiKey
             AlphaVantageClient.shared.apiKey = apiKey
         }
     }
     
     private func populateCurrentPortfolio(dictionary: Dictionary<String, Any>) {
-        
-        
+
         currentPortfolio.updateCurrentPortfolioValues(dictionary: dictionary)
     }
     
