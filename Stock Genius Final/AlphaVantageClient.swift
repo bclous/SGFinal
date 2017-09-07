@@ -35,10 +35,12 @@ class AlphaVantageClient: NSObject {
         
         updatePricesForStocks(holdingsPlusIndex) { (goodStocks, badStocks) in
             if goodStocks.count == 31 {
+                DataStore.shared.cacheCurrentPortfolioPrices()
                 completion(true)
             } else {
                 self.updatePricesForStocks(badStocks, completion: { (newGoodStocks, newBadStocks) in
                     if newBadStocks.count == 0 {
+                        DataStore.shared.cacheCurrentPortfolioPrices()
                         completion(true)
                     } else {
                         completion(false)

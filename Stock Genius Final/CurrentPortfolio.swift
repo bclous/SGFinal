@@ -73,6 +73,19 @@ class CurrentPortfolio: NSObject {
         return Date.dateFromString(startDate, dateFormat: "MM/dd/yyyy")
     }
     
+    public func priceCacheDictionary() -> [String: [String : Float]] {
+        var priceDictionary : [String : [String : Float]] = [:]
+        
+        for stock in holdings {
+            let key = stock.ticker
+            let stockDictionary = ["currentPrice" : stock.adjPriceCurrent, "lastClosePrice" : stock.adjPriceLastClose, "sincePeriodStartPrice" : stock.adjPriceStartDate]
+            
+            priceDictionary.updateValue(stockDictionary, forKey: key)
+        }
+        
+        return priceDictionary
+    }
+    
     public func averageReturn(isTodayReturn: Bool) -> Float {
         var totalReturn : Float = 0
         for holding in holdings {

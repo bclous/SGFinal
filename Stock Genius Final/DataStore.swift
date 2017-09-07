@@ -60,6 +60,10 @@ class DataStore: NSObject, AlphaVantageClientDelegate {
         delegate?.pricePullInProgress(percentageComplete: percentageComplete)
     }
     
+    public func cacheCurrentPortfolioPrices() {
+        UserDefaults.standard.set(currentPortfolio.priceCacheDictionary(), forKey: "currentPortfolioPrices")
+    }
+    
     
     public func pastPortfoliosString() -> String {
         
