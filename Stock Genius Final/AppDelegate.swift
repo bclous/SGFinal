@@ -12,7 +12,7 @@ import Firebase
 import StoreKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, IntroVCDelegate, DataStoreDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, DataStoreDelegate {
 
     var window: UIWindow?
     var isTestMode = false
@@ -31,17 +31,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, IntroVCDelegate, DataStor
     func checkForFirstTime() {
         if !userHasPictures() {
             DataStore.shared.delegate = self
-            DataStore.shared.peformIntroScreenImagePull()
-            introVC.delegate = self
             introVC.isTestMode = isTestMode
             window?.rootViewController = introVC
+            FirebaseClient.shared.downloadImagesFromStorage(completion: { (success) in
+                if success {
+                    UserDefaults.standard.set(true, forKey: "userHasPictures")
+                    self.introVC.readyToPresent(success: success)
+                } else {
+                    // show sorry screen
+                }
+            })
         } else {
             setInitialView()
         }
-    }
-    
-    func userChoice(_ choice: IntroScreenChoice) {
-        //stuff
     }
     
     func setInitialView() {
@@ -50,7 +52,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, IntroVCDelegate, DataStor
             isInMainWindow = true
             window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
         } else {
-            introVC.delegate = self
             introVC.isTestMode = isTestMode
             introVC.readyToPresent(success: true)
             window?.rootViewController = introVC

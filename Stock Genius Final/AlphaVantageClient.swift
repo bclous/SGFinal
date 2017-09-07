@@ -10,7 +10,6 @@ import UIKit
 import Alamofire
 
 protocol AlphaVantageClientDelegate: class {
-    func pricePullComplete(success: Bool)
     func pricePullInProgressFromAV(percentageComplete: Float)
 }
 
@@ -21,233 +20,85 @@ class AlphaVantageClient: NSObject {
     let dateFormatter = DateFormatter()
     let userCalendar = Calendar.current
     var delegate : AlphaVantageClientDelegate?
+    var successfulPulls = 0
     
+    let apiPrefix = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol="
+    let apiKeySegment = "&apikey="
+    var apiKey = "5875"
     
-    public func updatePricesForCurrentPortfolio() {
+
+    
+    public func updatePricesForCurrentPortfolio(completion: @escaping (_ success: Bool) -> ()) {
         
+        successfulPulls = 0
         var holdingsPlusIndex : [CurrentStock] = DataStore.shared.currentPortfolio.holdings
         holdingsPlusIndex.append(DataStore.shared.currentPortfolio.index)
         
-        let queue = DispatchQueue(label: "com.cnoon.response-queue", qos: .utility, attributes: [.concurrent])
-        var requestsCompleted = 0
+        updatePricesForStocks(holdingsPlusIndex) { (goodStocks, badStocks) in
+            if goodStocks.count == 31 {
+                completion(true)
+            } else {
+                self.updatePricesForStocks(badStocks, completion: { (newGoodStocks, newBadStocks) in
+                    if newBadStocks.count == 0 {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                })
+            }
+        }
         
-        for stock in holdingsPlusIndex {
-            let requestURL = urlStringForStock(stock, isLongPull: false)
-            let request = Alamofire.request(requestURL)
-            
-            request.response(queue: queue, responseSerializer: DataRequest.jsonResponseSerializer(), completionHandler: { (response) in
-                let dictionary = response.value as! Dictionary<String, Any>
-                self.mapPricesToStock(stock, response: dictionary)
-                print("Parsing JSON on thread: \(Thread.current) is main thread: \(Thread.isMainThread)")
-                requestsCompleted += 1
-                print("\(requestsCompleted)")
-                if requestsCompleted == 31 {
-                    DispatchQueue.main.async {
-                        self.delegate?.pricePullComplete(success: true)
+    }
+    
+    public func updatePricesForStocks(_ stocks: [CurrentStock], completion: @escaping (_ successfulStocks: [CurrentStock], _ unsucessfullStocks : [CurrentStock]) -> ()) {
+        
+        var successfulStocks : [CurrentStock] = []
+        var unsuccessfulStocks : [CurrentStock] = []
+        
+        for stock in stocks {
+            pullPricesForStock(stock, completion: { (success) in
+                if success {
+                    successfulStocks.append(stock)
+                    self.successfulPulls += 1
+                    let percentageComplete = Float(self.successfulPulls) / 31.0
+                    self.delegate?.pricePullInProgressFromAV(percentageComplete: percentageComplete )
+                    print("\(percentageComplete)")
+                    if successfulStocks.count + unsuccessfulStocks.count == stocks.count {
+                        completion(successfulStocks, unsuccessfulStocks)
                     }
                 } else {
-                    self.delegate?.pricePullInProgressFromAV(percentageComplete: Float(requestsCompleted) / 31.0)
+                    unsuccessfulStocks.append(stock)
+                    if successfulStocks.count + unsuccessfulStocks.count == stocks.count {
+                        completion(successfulStocks, unsuccessfulStocks)
+                    }
+                    
                 }
-
             })
         }
-    
     }
     
-
-    public func pullPriceForSingleStock(_ stock: CurrentStock, isLongPull: Bool, completionHandler: @escaping (_ success: Bool) -> ()) {
-    
-        let requestURL = urlStringForStock(stock, isLongPull: isLongPull)
+    public func pullPricesForStock(_ stock: CurrentStock, completion: @escaping (_ success: Bool) -> ()) {
+        let requestURL = urlStringForStock(stock)
         let request = Alamofire.request(requestURL)
+        let queue = DispatchQueue(label: "com.cnoon.response-queue", qos: .utility, attributes: [.concurrent])
         
-        request.responseJSON(completionHandler: { (response) in
+        request.response(queue: queue, responseSerializer: DataRequest.jsonResponseSerializer()) { (response) in
             
-            if response.result.isSuccess {
-                let dictionary = response.value as! Dictionary<String, Any>
-                self.mapPricesToStock(stock, response: dictionary)
-                completionHandler(true)
+            let responseDictionary = response.value as? [String : Any]
+            let isGoodResponse = !response.result.isFailure && responseDictionary?.count ?? 0 > 0 && responseDictionary != nil
+            
+            if isGoodResponse {
+                stock.updatePricesWithResponse(responseDictionary!)
+                completion(true)
             } else {
-                completionHandler(false)
-            }
-        })
-    }
-    
-    private func mapPricesToStock(_ stock: CurrentStock, response: Dictionary<String, Any>) {
-        
-        
-        stock.adjPriceCurrent = currentPriceFromResponse(response) ?? 0.0
-        stock.adjPriceLastClose = lastClosePriceFromResponse(response) ?? 0.0
-        let startDate = stock.dateFromString(DataStore.shared.currentPortfolio.startDate, dateFormat: "MM/dd/yyyy")
-        if let startDate = startDate {
-            stock.adjPriceStartDate = mostRecentPriceFromDate(startDate, response: response) ?? 0.0
-        }
-        mapPriceHistoryToStock(stock, response: response)
-        
-    }
-    
-    
-    private func mapPriceHistoryToStock(_ stock: CurrentStock, response: Dictionary<String, Any>) {
-        
-        let priceHistory = response["Time Series (Daily)"] as? Dictionary<String, Any>
-        if let priceHistory = priceHistory {
-            let keys = priceHistory.keys
-            for key in keys {
-                let date = stock.dateFromString(key, dateFormat: "YYYY-MM-dd")
-                let dateDictionary = priceHistory[key] as? Dictionary<String, String>
-                if let dateDictionary = dateDictionary {
-                    let lastPriceString = dateDictionary["4. close"] ?? "100.00"
-                    let lastPrice = Float(lastPriceString) ?? 100.00
-                    if let date = date {
-                        stock.priceHistory.updateValue(lastPrice, forKey: date)
-                    }
-                }
-            }
-            
-            if keys.count > 120 {
-                stock.hasLongPriceHistory = true
-            } else {
-                stock.hasShortPriceHistory = true
+                completion(false)
             }
         }
-    }
-    
-    private func mostRecentPriceFromDate(_ date: Date, response: Dictionary<String, Any>) -> Float? {
-        
-        let todayPrice = adjustedCloseForDate(date, response: response)
-        
-        if todayPrice != nil {
-            return todayPrice!
-        } else {
-            for index in 1...6 {
-                let newDate = userCalendar.date(byAdding: .day, value: -(index), to: Date())
-                if let newDate = newDate {
-                    let price = adjustedCloseForDate(newDate, response: response)
-                    if let price = price {
-                        return price
-                    }
-                }
-            }
-            
-            return nil
-        }
-        
-    }
-    
-    private func dateForMostRecentPrice(response: Dictionary<String, Any>) -> Date? {
-        
-        for index in 0...6 {
-            
-            let newDate = userCalendar.date(byAdding: .day, value: -(index), to: Date())
-            if let newDate = newDate {
-                dateFormatter.dateFormat = "yyyy-MM-dd"
-                let dateString = dateFormatter.string(from: newDate)
-                let timeSeriesDict = response["Time Series (Daily)"] as? Dictionary<String, Dictionary<String, String>>
-                if let timeSeriesDict = timeSeriesDict {
-                    let keys = timeSeriesDict.keys
-                    if keys.contains(dateString) {
-                        return newDate
-                    }
-                }
-            }
-        }
-        
-        return nil
-    }
-    
-    public func currentPriceFromResponse(_ response: Dictionary<String, Any>) -> Float? {
-        let key = keyForCurrentPrice(response: response)
-        if let key = key {
-            let timeSeriesDict = response["Time Series (Daily)"] as? Dictionary<String, Dictionary<String, String>>
-            if let timeSeriesDict = timeSeriesDict {
-                let dayDict = timeSeriesDict[key]
-                if let dayDict = dayDict {
-                    let price = dayDict["5. adjusted close"]
-                    if let price = price {
-                        return Float(price)
-                    }
-                }
-            }
-        }
-        
-        return nil
-    }
-    
-    public func lastClosePriceFromResponse(_ response: Dictionary<String, Any>) -> Float? {
-        
-        let lastCloseDate = dateForLastClose(response: response)
-        if let lastCloseDate = lastCloseDate {
-                return mostRecentPriceFromDate(lastCloseDate, response: response)
-            }
-        
-        return nil
-        
-    }
-    
-    private func adjustedCloseForDate(_ date: Date, response: Dictionary<String, Any>) -> Float? {
-        
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let primaryKey = dateFormatter.string(from: date)
-        
-        let timeSeriesDict = response["Time Series (Daily)"] as? Dictionary<String, Dictionary<String, String>>
-        if let timeSeriesDict = timeSeriesDict {
-            let dayDict = timeSeriesDict[primaryKey]
-             if let dayDict = dayDict {
-                let price = dayDict["5. adjusted close"]
-                if let price = price {
-                    return Float(price)
-                }
-             }
-        }
-        
-        return nil
-        
-    }
-    
-    private func lastUpdateKeyFromResponse(_ response: Dictionary<String, Any>) -> String? {
-        let metaDataDict = response["Meta Data"] as? Dictionary<String, String>
-        if let metaDataDict = metaDataDict {
-            return metaDataDict["3. Last Refreshed"]
-        }
-        
-        return nil
-    }
-    
-    private func keyForCurrentPrice(response: Dictionary<String, Any>) -> String? {
-        
-        let metaDataDict = response["Meta Data"] as? Dictionary<String, String>
-        return metaDataDict?["3. Last Refreshed"]
-        
-    }
-    
-    private func dateForLastClose(response: Dictionary<String, Any>) -> Date? {
-        
-        let fullTodayKey = keyForCurrentPrice(response: response)
-        let shortKey = fullTodayKey?.components(separatedBy: " ")[0]
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        
-        if let shortKey = shortKey {
-            let shortDate = dateFormatter.date(from: shortKey)
-            if let shortDate = shortDate {
-                let newDate = userCalendar.date(byAdding: .day, value: -1, to: shortDate)
-                return newDate
-            }
-        }
-        
-        return nil
     }
     
     private func urlStringForStock(_ stock: CurrentStock, isLongPull: Bool) -> String {
         let ticker = stock.ticker
-        return isLongPull ?  "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=" + ticker + "&outputsize=full&apikey=" + DataStore.shared.APIKey :  "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=" + ticker + "&apikey=" + DataStore.shared.APIKey
+        return apiPrefix + ticker + apiKeySegment + apiKey
     }
     
-    
-    
-    
-
-    
-    
-    
-    
-
 }

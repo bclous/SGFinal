@@ -30,40 +30,10 @@ class CurrentPortfolio: NSObject {
         super.init()
     }
     
-    public func averageReturn(isTodayReturn: Bool) -> Float {
-        var totalReturn : Float = 0
-        for holding in holdings {
-            if holding.rankInPortfolio <= 10 {
-                totalReturn = totalReturn + holding.percentageReturn(isTodayReturn: isTodayReturn)
-            }
-        }
-        return holdings.count == 0 ? 0.0 : totalReturn / 10.0
-    }
-    
-    public func averageReturnString(isTodayReturn: Bool) -> String {
-        return String(format: "%.1f", abs(averageReturn(isTodayReturn: isTodayReturn)) * 100) + "%"
-    }
-    
-    public func stockGeniusPlusMinus(isTodayReturn: Bool) -> Float {
-        let indexReturn = index.percentageReturn(isTodayReturn: isTodayReturn)
-        let avgReturn = averageReturn(isTodayReturn: isTodayReturn)
-        let roundedIndexReturn = (indexReturn * 1000).rounded() / 1000
-        let roundedAvgReturn = (avgReturn * 1000).rounded() / 1000
-        return roundedAvgReturn - roundedIndexReturn
-    }
-    
-    public func stockGeniusPlusMinusString(isTodayReturn: Bool) ->String {
-        let difference = stockGeniusPlusMinus(isTodayReturn: isTodayReturn)
-        return String(format: "%.1f", abs(difference) * 100) + "%"
-    }
-    
-    public func dateString(date: Date) -> String {
-        let formatter = DateFormatter()
-        return formatter.string(from:date)
-        
-    }
     
     public func updateCurrentPortfolioValues(dictionary: Dictionary<String, Any>) {
+        
+        resetCurrentPortfolio()
         
         endDate = dictionary["endDate"] as? String ?? ""
         startDate = dictionary["startDate"] as? String ?? ""
@@ -94,24 +64,40 @@ class CurrentPortfolio: NSObject {
         
     }
     
-    
-    public func sortNewsArticles() {
-        for stock in holdings {
-            sortNewsArticlesForStock(stock)
-        }
+    private func resetCurrentPortfolio() {
+        holdings.removeAll()
+        calcStocks.removeAll()
     }
     
-    public func currentStockFromTicker(_ ticker: String) -> CurrentStock? {
-        for stock in holdings {
-            if stock.ticker == ticker {
-                return stock
+    public func dateForPeriodBegin() -> Date? {
+        return Date.dateFromString(startDate, dateFormat: "MM/dd/yyyy")
+    }
+    
+    public func averageReturn(isTodayReturn: Bool) -> Float {
+        var totalReturn : Float = 0
+        for holding in holdings {
+            if holding.rankInPortfolio <= 10 {
+                totalReturn = totalReturn + holding.percentageReturn(isTodayReturn: isTodayReturn)
             }
         }
-        return nil
+        return holdings.count == 0 ? 0.0 : totalReturn / 10.0
     }
     
-    public func sortNewsArticlesForStock(_ stock: CurrentStock) {
-        stock.newsItems.sort(by: {$0.rank > $1.rank})
+    public func averageReturnString(isTodayReturn: Bool) -> String {
+        return String(format: "%.1f", abs(averageReturn(isTodayReturn: isTodayReturn)) * 100) + "%"
+    }
+    
+    public func stockGeniusPlusMinus(isTodayReturn: Bool) -> Float {
+        let indexReturn = index.percentageReturn(isTodayReturn: isTodayReturn)
+        let avgReturn = averageReturn(isTodayReturn: isTodayReturn)
+        let roundedIndexReturn = (indexReturn * 1000).rounded() / 1000
+        let roundedAvgReturn = (avgReturn * 1000).rounded() / 1000
+        return roundedAvgReturn - roundedIndexReturn
+    }
+    
+    public func stockGeniusPlusMinusString(isTodayReturn: Bool) ->String {
+        let difference = stockGeniusPlusMinus(isTodayReturn: isTodayReturn)
+        return String(format: "%.1f", abs(difference) * 100) + "%"
     }
     
     public func nextUpdateTitle() -> String {
@@ -130,11 +116,20 @@ class CurrentPortfolio: NSObject {
         }
     }
     
+    public func startDateString() -> String {
+        return startDate.stringByConvertingDateStringFromFormat("MM/dd/yyyy", toFormat: "M.d.yyyy") ?? startDate
+    }
+    
+    public func endDateString() -> String {
+        return endDate.stringByConvertingDateStringFromFormat("MM/dd/yyyy", toFormat: "M.d.yyyy") ?? endDate
+    }
+    
+    
     private func daysUntilNextUpdate() -> Int? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
         let endDate = dateFormatter.date(from: self.endDate)
-
+        
         if let end = endDate {
             return end.interval(ofComponent: .day, fromDate: Date()) < 0 ? 0 : end.interval(ofComponent: .day, fromDate: Date())
         }
@@ -142,6 +137,22 @@ class CurrentPortfolio: NSObject {
         return nil
     }
     
+    // calculator methods
+    
+    public func updateCalculatorValues(portfolioAmount: Int) {
+        
+        resetCalcStockValues()
+        addOriginalAmounts(portfolioAmount: portfolioAmount)
+        addExtraShares(leftoverAmount: extraMoney(portfolioAmount: portfolioAmount))
+        updateRemainingCash(portfolioAmount: portfolioAmount)
+        
+    }
+    
+    public func minimumInvestmentForCalculator() -> Float {
+        let actualAmount = highestDollarPrice() * 10 / 0.97
+        let rounded = round(actualAmount / 1000) * 1000 + 1000
+        return rounded
+    }
     
     private func updateCalcStocks() {
         for stock in holdings {
@@ -154,39 +165,6 @@ class CurrentPortfolio: NSObject {
         calcStocks.sort(by: {$0.stock.adjPriceCurrent < $1.stock.adjPriceCurrent})
     }
     
-    public func startDateString() -> String {
-        return stringFromDateString(startDate) ?? startDate
-    }
-    
-    public func endDateString() -> String? {
-        if endDate == "" {
-            return nil
-        } else {
-            return stringFromDateString(endDate)
-        }
-    }
-    
-    public func stringFromDateString(_ originalString: String) -> String? {
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy"
-        let date = dateFormatter.date(from: originalString)
-        dateFormatter.dateFormat = "M.d.yyyy"
-        
-        if let date = date {
-            return dateFormatter.string(from: date)
-        } else {
-            return nil
-        }
-
-    }
-    
-    public func minimumInvestmentForCalculator() -> Float {
-        let actualAmount = highestDollarPrice() * 10 / 0.97
-        let rounded = round(actualAmount / 1000) * 1000 + 1000
-        return rounded
-    }
-    
     private func highestDollarPrice() -> Float {
         var highest : Float = 0
         for calcStock in calcStocks {
@@ -196,15 +174,6 @@ class CurrentPortfolio: NSObject {
         }
 
         return highest
-    }
-    
-    public func updateCalculatorValues(portfolioAmount: Int) {
-        
-        resetCalcStockValues()
-        addOriginalAmounts(portfolioAmount: portfolioAmount)
-        addExtraShares(leftoverAmount: extraMoney(portfolioAmount: portfolioAmount))
-        updateRemainingCash(portfolioAmount: portfolioAmount)
-        
     }
     
     private func resetCalcStockValues() {
@@ -326,8 +295,6 @@ class CalculatorStock: NSObject {
         if stock.adjPriceCurrent != 0 {
             shares = shares + Int(amount / stock.adjPriceCurrent )
             totalMoney = totalMoney + (Float(shares) * stock.adjPriceCurrent)
-            
-            //print("added \(shares) to \(stock.ticker) for money of \(totalMoney)")
         }
     }
     
@@ -340,12 +307,3 @@ class CalculatorStock: NSObject {
 
 }
 
-extension Date {
-    
-    func interval(ofComponent comp: Calendar.Component, fromDate date: Date) -> Int {
-        let currentCalendar = Calendar.current
-        guard let start = currentCalendar.ordinality(of: comp, in: .era, for: date) else { return 0 }
-        guard let end = currentCalendar.ordinality(of: comp, in: .era, for: self) else { return 0 }
-        return end - start
-    }
-}

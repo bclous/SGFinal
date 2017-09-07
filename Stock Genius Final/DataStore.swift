@@ -10,13 +10,10 @@ import UIKit
 import FirebaseDatabase
 
 protocol DataStoreDelegate: class {
-    func firebasePullComplete(success: Bool)
-    func pricePullComplete(success: Bool)
     func pricePullInProgress(percentageComplete: Float)
-    func initialImagePullComplete(success: Bool)
 }
 
-class DataStore: NSObject, AlphaVantageClientDelegate, FirebaseClientDelegate {
+class DataStore: NSObject, AlphaVantageClientDelegate {
     
     static let shared = DataStore()
     var currentPortfolio : CurrentPortfolio
@@ -39,54 +36,31 @@ class DataStore: NSObject, AlphaVantageClientDelegate, FirebaseClientDelegate {
         self.totalIndexPerformance = 300
         self.totalStockGeniusPerformance = 200
         super.init()
-        FirebaseClient.shared.delegate = self
         AlphaVantageClient.shared.delegate = self
     }
     
-    func peformIntroScreenImagePull() {
-        FirebaseClient.shared.performIntroScreenImagePull()
+    public func connectAndPopulateData(completion: @escaping(_ success: Bool) -> ()) {
+    
+        FirebaseClient.shared.performInitialDatabasePull { (success, result) in
+            if success {
+                let goodresult = self.populateAppWithData(dictionary: result)
+                if goodresult {
+                    AlphaVantageClient.shared.updatePricesForCurrentPortfolio(completion: { (success) in
+                        DispatchQueue.main.async { completion(success) }
+                    })
+                } else {
+                     DispatchQueue.main.async { completion(false) }
+                }
+            } else {
+                DispatchQueue.main.async { completion(false) }
+            }
+        }
     }
     
-    func performInitialFirebasePull() {
-        FirebaseClient.shared.performInitialDatabasePull()
-    }
-    
-    func pricePullComplete(success: Bool) {
-        delegate?.pricePullComplete(success: success)
-    }
-    
-    func pricePullInProgressFromAV(percentageComplete: Float) {
+    public func pricePullInProgressFromAV(percentageComplete: Float) {
         delegate?.pricePullInProgress(percentageComplete: percentageComplete)
     }
-
     
-    func fireBasePullComplete(success: Bool) {
-        delegate?.firebasePullComplete(success: success)
-    }
-    
-    func imagePullComplete(success: Bool) {
-        delegate?.initialImagePullComplete(success: success)
-    }
-    
-    public func populateAppWithData(dictionary: Dictionary<String, Any>) {
-        let currentPortfolioDictionary = dictionary["currentPortfolio"] as? Dictionary<String, Any>
-        let pastPortfoliosDictionary = dictionary["pastPortfolios"] as? Dictionary<String, Any>
-        let appInfo = dictionary["appInfo"] as? Dictionary<String, Any>
-        let performance = dictionary["performance"] as? Dictionary<String, Float>
-        let articles = dictionary["articles"] as? [String : Any]
-        
-        if currentPortfolioDictionary != nil && pastPortfoliosDictionary != nil && appInfo != nil && articles != nil {
-            populateCurrentPortfolio(dictionary: currentPortfolioDictionary!)
-            populatePastPortfolios(dictionary: pastPortfoliosDictionary!)
-            populateAppInfo(dictionary: appInfo!)
-            populatePerformanceData(dictionary: performance!)
-            populateAricles(dictionary: articles!)
-            AlphaVantageClient.shared.updatePricesForCurrentPortfolio()
-        } else {
-            // send out fail
-        }
-
-    }
     
     public func pastPortfoliosString() -> String {
         
@@ -101,9 +75,41 @@ class DataStore: NSObject, AlphaVantageClientDelegate, FirebaseClientDelegate {
     }
     
     
+    
+    
     // private helper methods
     
+    private func populateAppWithData(dictionary: [String : Any]) -> Bool {
+        let currentPortfolioDictionary = dictionary["currentPortfolio"] as? Dictionary<String, Any>
+        let pastPortfoliosDictionary = dictionary["pastPortfolios"] as? Dictionary<String, Any>
+        let appInfo = dictionary["appInfo"] as? Dictionary<String, Any>
+        let performance = dictionary["performance"] as? Dictionary<String, Float>
+        let articles = dictionary["articles"] as? [String : Any]
+        
+        if currentPortfolioDictionary != nil && pastPortfoliosDictionary != nil && appInfo != nil && articles != nil {
+            populateCurrentPortfolio(dictionary: currentPortfolioDictionary!)
+            populatePastPortfolios(dictionary: pastPortfoliosDictionary!)
+            populateAppInfo(dictionary: appInfo!)
+            populatePerformanceData(dictionary: performance!)
+            
+            return true
+
+        } else {
+            return false
+        }
+        
+    }
+    
+    private func populateAppInfo(dictionary: [String : Any]) {
+        let apiKey = dictionary["alphaVantageAPIKey"] as? String
+        if let apiKey = apiKey {
+            self.APIKey = apiKey
+            AlphaVantageClient.shared.apiKey = apiKey
+        }
+    }
+    
     private func populateCurrentPortfolio(dictionary: Dictionary<String, Any>) {
+
         currentPortfolio.updateCurrentPortfolioValues(dictionary: dictionary)
     }
     
@@ -129,6 +135,8 @@ class DataStore: NSObject, AlphaVantageClientDelegate, FirebaseClientDelegate {
     
     private func populatePastPortfolios(dictionary: Dictionary<String, Any>) {
         
+        pastPortfolios = []
+        
         let keys = dictionary.keys
         
         for key in keys {
@@ -143,12 +151,7 @@ class DataStore: NSObject, AlphaVantageClientDelegate, FirebaseClientDelegate {
         sortPastPortfolios()
         
     }
-    
-    private func populateAppInfo(dictionary: Dictionary<String, Any>) {
-        // do this stuff here for version 1.2
-        
-    }
-    
+
     private func populatePerformanceData(dictionary: Dictionary<String, Float>) {
         totalIndexPerformance = dictionary["index"] ?? 200
         totalStockGeniusPerformance = dictionary["stockGenius"] ?? 300

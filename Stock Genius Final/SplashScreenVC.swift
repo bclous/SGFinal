@@ -18,7 +18,8 @@ class SplashScreenVC: UIViewController, DataStoreDelegate, InvalidSubscriptionDe
     var badSubscription = false
     var readyToSegue = false
     let spinnerVC: SpinnerVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "spinnerVC") as! SpinnerVC
-    let invalidVC: InvalidSubscriptionVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "invalidSubscriptionVC") as! InvalidSubscriptionVC
+    let invalidVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "invalidSubscriptionVC") as! InvalidSubscriptionVC
+    let unableToConnectVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "unableToConnect") as! UnableToConnectVC
     var isTestMode = true
     var spinnerViewShowing = false
     var badSubscriptionScreenShowing = false
@@ -27,7 +28,30 @@ class SplashScreenVC: UIViewController, DataStoreDelegate, InvalidSubscriptionDe
     override func viewDidLoad() {
         super.viewDidLoad()
         formatView()
-        DataStore.shared.performInitialFirebasePull()
+        formatUnableToConnectView()
+        refreshSplashView()
+    }
+    
+    func refreshSplashView() {
+        
+        progressView.progress = 0.0
+        
+        DataStore.shared.connectAndPopulateData { (success) in
+            self.readyToPresent(success)
+        }
+    }
+    
+    func readyToPresent(_ ready: Bool) {
+        if ready {
+            progressView.progress = 1.0
+            if !badSubscription {
+                performSegue(withIdentifier: "mainSegue", sender: nil)
+            } else {
+                readyToSegue = true
+            }
+        } else {
+            present(unableToConnectVC, animated: false, completion: nil)
+        }
     }
     
     private func formatView() {
@@ -126,18 +150,6 @@ class SplashScreenVC: UIViewController, DataStoreDelegate, InvalidSubscriptionDe
         handleBadSubscription()
     }
     
-    
-    
-    func pricePullComplete(success: Bool) {
-        progressView.progress = 1.0
-        if !badSubscription {
-            performSegue(withIdentifier: "mainSegue", sender: nil)
-        } else {
-            readyToSegue = true
-        }
-        
-    }
-    
     func pricePullInProgress(percentageComplete: Float) {
         DispatchQueue.main.async {
             self.progressView.setProgress(percentageComplete, animated: true)
@@ -178,16 +190,7 @@ class SplashScreenVC: UIViewController, DataStoreDelegate, InvalidSubscriptionDe
                                                object: nil)
     }
     
-    // unused delegate functions
-    
-    func initialImagePullComplete(success: Bool) {
-        // do nothing
-    }
-    
-    func firebasePullComplete(success: Bool) {
-        //stff
-    }
-    
+ 
     // helper methods
     
     private func presentAlertToUser(title: String, message:String) {
@@ -225,4 +228,16 @@ class SplashScreenVC: UIViewController, DataStoreDelegate, InvalidSubscriptionDe
 
    
 
+}
+
+extension SplashScreenVC : UnableToConnectVCDelegate {
+    
+    func formatUnableToConnectView() {
+        unableToConnectVC.delegate = self
+    }
+    
+    func tryAgainTapped() {
+        refreshSplashView()
+        unableToConnectVC.dismiss(animated: false, completion: nil)
+    }
 }

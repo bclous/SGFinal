@@ -27,6 +27,7 @@
             continueAfterRunningActions = "No"
             filePath = "Stock Genius Final/TermsVC.swift"
             timestampString = "522772145.51093"
+<<<<<<< HEAD
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "59"
@@ -43,6 +44,8 @@
             continueAfterRunningActions = "No"
             filePath = "Stock Genius Final/AlphaVantageClient.swift"
             timestampString = "525626702.467872"
+=======
+>>>>>>> master
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "76"
