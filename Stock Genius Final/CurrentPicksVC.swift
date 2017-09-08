@@ -17,17 +17,47 @@ class CurrentPicksVC: UIViewController {
     var ready = true
     @IBOutlet weak var nextUpdateView: NextUpdateView!
     var needsPriceUpdate = false
+    let sectionHeaderClearView = SectionHeaderClearView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         formatTableView()
         formatHeaderView()
+        formatSectionHeaderClearView()
+        formatAlphaVantageSingleton()
         view.backgroundColor = SGConstants.mainBlackColor
+        if needsPriceUpdate {
+            refreshPrices()
+        }
     }
     
     func formatHeaderView() {
         let headerDateString = DataStore.shared.currentPortfolio.startDateString()
         headerView.secondaryLabel.text = "Identified from 13-F data on \(headerDateString)"
+        headerView.delegate = self
+        
+    }
+    
+    func formatSectionHeaderClearView() {
+        sectionHeaderClearView.formatForCurrentPicks()
+        sectionHeaderClearView.delegate = self
+    }
+    
+    func refreshPrices() {
+        sectionHeaderClearView.rightButton.isEnabled = false
+        headerView.startCurrentPicksPriceRefresh()
+        
+        DataStore.shared.performUpdatePricesPull { (success) in
+            if success {
+                self.headerView.priceRefreshFinished()
+                self.mainTableView.reloadData()
+                self.sectionHeaderClearView.rightButton.isEnabled = true
+            } else {
+                self.headerView.priceRefreshFinished()
+                self.mainTableView.reloadData()
+                self.sectionHeaderClearView.rightButton.isEnabled = true
+            }
+        }
     }
     
 }
@@ -81,13 +111,12 @@ extension CurrentPicksVC : UITableViewDelegate, UITableViewDataSource, CurrentPi
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let clearView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        clearView.backgroundColor = UIColor.clear
+        
         let toggleView = MainStocksSectionHeaderToggle()
         toggleView.delegate = self
         toggleView.formatView(todayChosen: isTodayReturn)
         toggleView.rightLabel.text = "SINCE " + DataStore.shared.currentPortfolio.startDateString()
-        return section == 0 ? clearView : toggleView
+        return section == 0 ? sectionHeaderClearView : toggleView
         
     }
     
@@ -103,6 +132,7 @@ extension CurrentPicksVC : UITableViewDelegate, UITableViewDataSource, CurrentPi
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         headerView.adjustHeaderViewForOffset(scrollView.contentOffset.y)
         print("\(scrollView.contentOffset.y)")
+        sectionHeaderClearView.rightButton.isEnabled = scrollView.contentOffset.y <= 0
     }
     
     func toggleTapped(typeChosen: CurrentPicksReturnType) {
@@ -145,3 +175,29 @@ extension CurrentPicksVC : UITableViewDelegate, UITableViewDataSource, CurrentPi
     
 }
 
+extension CurrentPicksVC : HeaderViewDelegate {
+    
+    func refreshButtonTapped() {
+        refreshPrices()
+    }
+ 
+}
+
+extension CurrentPicksVC : SectionHeaderClearViewDelegate {
+    func sectionHeaderButtonTapped(_ button: SectionHeaderButton) {
+        
+        refreshPrices()
+    }
+}
+
+extension CurrentPicksVC : AlphaVantageClientDelegate {
+    
+    func formatAlphaVantageSingleton() {
+        AlphaVantageClient.shared.delegate = self
+    }
+    
+    func pricePullInProgressFromAV(percentageComplete: Float) {
+        
+        headerView.progressView.setProgress(percentageComplete, animated: true)
+    }
+}

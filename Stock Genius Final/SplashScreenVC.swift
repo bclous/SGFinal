@@ -41,12 +41,13 @@ class SplashScreenVC: UIViewController, DataStoreDelegate {
         DataStore.shared.performInitialFirebasePull { (success) in
             
             if DataStore.shared.appNeedsFullUpdateOnSplashScreen() {
+                self.labelScrollView.isHidden = false
+                self.progressView.isHidden = false
                 DataStore.shared.performUpdatePricesPull(completion: { (success) in
+                    
                     self.readyToPresent(success)
                 })
             } else {
-                self.labelScrollView.isHidden = false
-                self.progressView.isHidden = false
                 DataStore.shared.currentPortfolio.updatePricesFromCache()
                 self.currentPicksNeedsPriceUpdate = success
                 self.readyToPresent(success)

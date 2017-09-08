@@ -24,6 +24,8 @@
 		0F17B77C1F1904170064533F /* Page1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F17B77B1F1904170064533F /* Page1.xib */; };
 		0F17B77E1F1911840064533F /* CircleTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F17B77D1F1911840064533F /* CircleTabView.xib */; };
 		0F17B7821F1912470064533F /* CircleTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F17B7811F1912470064533F /* CircleTabView.swift */; };
+		0F1DE2CD1F62DBC800CFC09E /* SectionHeaderClearView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F1DE2CC1F62DBC800CFC09E /* SectionHeaderClearView.xib */; };
+		0F1DE2CF1F62DC2500CFC09E /* SectionHeaderClearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1DE2CE1F62DC2500CFC09E /* SectionHeaderClearView.swift */; };
 		0F2651DB1F05366D00754D0F /* MainStockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2651DA1F05366D00754D0F /* MainStockCell.swift */; };
 		0F2651DD1F05374900754D0F /* CurrentStock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2651DC1F05374900754D0F /* CurrentStock.swift */; };
 		0F2651DF1F05390A00754D0F /* PastStock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2651DE1F05390A00754D0F /* PastStock.swift */; };
@@ -104,6 +106,8 @@
 		0F17B77B1F1904170064533F /* Page1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Page1.xib; sourceTree = "<group>"; };
 		0F17B77D1F1911840064533F /* CircleTabView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CircleTabView.xib; sourceTree = "<group>"; };
 		0F17B7811F1912470064533F /* CircleTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleTabView.swift; sourceTree = "<group>"; };
+		0F1DE2CC1F62DBC800CFC09E /* SectionHeaderClearView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SectionHeaderClearView.xib; sourceTree = "<group>"; };
+		0F1DE2CE1F62DC2500CFC09E /* SectionHeaderClearView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionHeaderClearView.swift; sourceTree = "<group>"; };
 		0F2651DA1F05366D00754D0F /* MainStockCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainStockCell.swift; sourceTree = "<group>"; };
 		0F2651DC1F05374900754D0F /* CurrentStock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentStock.swift; sourceTree = "<group>"; };
 		0F2651DE1F05390A00754D0F /* PastStock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastStock.swift; sourceTree = "<group>"; };
@@ -208,6 +212,8 @@
 			isa = PBXGroup;
 			children = (
 				AB2FB9931F029BB700CA72B2 /* CurrentPicksVC.swift */,
+				0F1DE2CC1F62DBC800CFC09E /* SectionHeaderClearView.xib */,
+				0F1DE2CE1F62DC2500CFC09E /* SectionHeaderClearView.swift */,
 				0F3E2E2E1F31445E004B8CD9 /* MainStockCell.xib */,
 				0F2651DA1F05366D00754D0F /* MainStockCell.swift */,
 				0F16DFAA1F0F17D3006C531E /* NextTwentyCell.swift */,
@@ -431,6 +437,7 @@
 				0F3E2E371F314488004B8CD9 /* ShareCalcHeader.xib in Resources */,
 				AB2FB99C1F029BB700CA72B2 /* Assets.xcassets in Resources */,
 				0F16DFAD1F0F17D3006C531E /* NextTwentyCell.xib in Resources */,
+				0F1DE2CD1F62DBC800CFC09E /* SectionHeaderClearView.xib in Resources */,
 				0F3E2E351F314482004B8CD9 /* ShareCalcCell.xib in Resources */,
 				AB2FB9971F029BB700CA72B2 /* Main.storyboard in Resources */,
 				0F3E2E331F31447B004B8CD9 /* NextUpdateView.xib in Resources */,
@@ -542,6 +549,7 @@
 				0FFB6F4F1F15642200FD8BC1 /* IntroVC.swift in Sources */,
 				0F16DFA11F0E6B8C006C531E /* AlphaVantageClient.swift in Sources */,
 				0F2651EE1F05583E00754D0F /* MainStockSummaryCell.swift in Sources */,
+				0F1DE2CF1F62DC2500CFC09E /* SectionHeaderClearView.swift in Sources */,
 				0F2651E11F053A4C00754D0F /* CurrentPortfolio.swift in Sources */,
 				AB2FB9A91F02BB2800CA72B2 /* TabBar.swift in Sources */,
 				0F2651E31F053AF600754D0F /* PastPortfolio.swift in Sources */,

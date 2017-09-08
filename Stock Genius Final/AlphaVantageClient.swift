@@ -55,7 +55,7 @@ class AlphaVantageClient: NSObject {
                     successfulStocks.append(stock)
                     self.successfulPulls += 1
                     let percentageComplete = Float(self.successfulPulls) / 31.0
-                    self.delegate?.pricePullInProgressFromAV(percentageComplete: percentageComplete )
+                    DispatchQueue.main.async {self.delegate?.pricePullInProgressFromAV(percentageComplete: percentageComplete )}
                     print("\(percentageComplete)")
                     if successfulStocks.count + unsuccessfulStocks.count == stocks.count {
                         completion(successfulStocks, unsuccessfulStocks)
@@ -85,7 +85,7 @@ class AlphaVantageClient: NSObject {
                 stock.updatePricesWithResponse(responseDictionary!)
                 completion(true)
             } else {
-                print("failed for ticker: \(stock.ticker) result is: \(response.value!)")
+                print("failed for ticker: \(stock.ticker)")
                 completion(false)
             }
         }

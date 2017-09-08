@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol HeaderViewDelegate : class {
+    func refreshButtonTapped()
+}
+
 class HeaderView: UIView {
 
     @IBOutlet weak var adjustableViewBottomConstraint: NSLayoutConstraint!
@@ -16,6 +20,12 @@ class HeaderView: UIView {
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var mainLabel: UILabel!
     @IBOutlet weak var secondaryLabel: UILabel!
+    @IBOutlet weak var refreshButton: UIButton!
+    @IBOutlet weak var refreshImage: UIImageView!
+    @IBOutlet weak var progressView: UIProgressView!
+    var shouldAnimate = false
+    weak var delegate : HeaderViewDelegate?
+    var maxRefreshImageAlpha : CGFloat = 0.9
     
     @IBOutlet weak var seperatorView: UIView!
     override init(frame: CGRect) { // for using CustomView in code
@@ -40,16 +50,21 @@ class HeaderView: UIView {
         
         secondaryLabel.textColor = SGConstants.fontColorWhiteSecondary
         contentView.backgroundColor = SGConstants.mainBlackColor
-
+        progressView.trackTintColor = UIColor.white.withAlphaComponent(0.2)
+        progressView.progressTintColor = SGConstants.mainBlueColor
+        progressView.progress = 0
+       
+        
     }
     
     public func adjustHeaderViewForOffset(_ offset: CGFloat) {
         
         if offset >= 0 && offset <= 60 {
-            
+            refreshButton.isEnabled = offset == 0
             if offset <= 20 {
                 let percentage : CGFloat = 1.0 - offset / 20.0
                 secondaryLabel.alpha = percentage
+                refreshImage.alpha = percentage * maxRefreshImageAlpha
             } else {
                 secondaryLabel.alpha = 0
             }
@@ -63,13 +78,18 @@ class HeaderView: UIView {
             mainLabel.font = mainLabel.font.withSize(fontSize)
             
         } else if offset < 0 {
+            refreshButton.isEnabled = true
+            refreshImage.alpha = maxRefreshImageAlpha
             mainLabel.font = mainLabel.font.withSize(36.0)
             secondaryLabel.alpha = 1
             adjustableViewBottomConstraint.constant = 0
             mainLabelTopConstraint.constant = 45
         } else {
+            refreshButton.isEnabled = false
             mainLabel.font = mainLabel.font.withSize(15.0)
             secondaryLabel.alpha = 0
+            refreshImage.alpha = 0
+
             adjustableViewBottomConstraint.constant = 60
             mainLabelTopConstraint.constant = 15
         }
@@ -84,15 +104,61 @@ class HeaderView: UIView {
         case .currentPicks:
             mainLabel.text = "Current Picks"
             secondaryLabel.text = "Identified from 13-F data on 3/31/17"
+            progressView.alpha = 1
+            refreshButton.isEnabled = true
+            refreshImage.alpha = 0.9
         case .calculator:
             mainLabel.text = "Share Calculator"
             secondaryLabel.text = "Tap to edit investment amount"
+            progressView.alpha = 0
+            refreshButton.isEnabled = false
+            refreshImage.alpha = 0
         case .pastPicks:
             mainLabel.text = "Past Picks"
             secondaryLabel.text = "1/1/2010 - 3/1/2010 (24 quarters)"
+            progressView.alpha = 0
+            refreshButton.isEnabled = false
+            refreshImage.alpha = 0
         }
         
         
+    }
+    
+    public func startCurrentPicksPriceRefresh() {
+        
+        maxRefreshImageAlpha = 0.4
+        refreshImage.alpha = maxRefreshImageAlpha
+        progressView.alpha = 1
+        shouldAnimate = true
+        refreshButton.isEnabled = false
+        rotateView(targetView: refreshImage, duration: 0.25, delay: 0.25, shouldAnimate: shouldAnimate)
+    }
+    
+    public func priceRefreshFinished() {
+        layer.removeAllAnimations()
+        maxRefreshImageAlpha = 0.9
+        refreshImage.alpha = 0.9
+        shouldAnimate = false
+        progressView.alpha = 0
+        refreshButton.isEnabled = true
+        progressView.progress = 0
+    }
+    
+    private func rotateView(targetView: UIView, duration: Double, delay: Double, shouldAnimate: Bool) {
+        
+        if !shouldAnimate {
+            return
+        } else {
+            UIView.animate(withDuration: duration, delay: delay, options: .curveLinear, animations: {
+                targetView.transform = targetView.transform.rotated(by: CGFloat(Double.pi))
+            }) { finished in
+                self.rotateView(targetView: targetView, duration: duration, delay: delay, shouldAnimate: self.shouldAnimate )
+            }
+        }
+    }
+    
+    @IBAction func refreshButtonTapped(_ sender: Any) {
+        delegate?.refreshButtonTapped()
     }
 
 

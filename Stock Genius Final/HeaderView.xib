@@ -17,6 +17,9 @@
                 <outlet property="contentView" destination="iN0-l3-epB" id="gNc-jX-OGh"/>
                 <outlet property="mainLabel" destination="p08-cN-jHz" id="R5M-x2-xYO"/>
                 <outlet property="mainLabelTopConstraint" destination="c9m-uq-3Bf" id="EQ8-ca-pMh"/>
+                <outlet property="progressView" destination="Z6E-be-07y" id="Tka-8G-VZH"/>
+                <outlet property="refreshButton" destination="WP2-Rw-ifV" id="QRz-Eh-njb"/>
+                <outlet property="refreshImage" destination="Wem-Zv-Cun" id="ocd-a5-hOH"/>
                 <outlet property="secondaryLabel" destination="YSW-in-SpT" id="1FE-P8-sz7"/>
                 <outlet property="seperatorView" destination="Cq1-MJ-uyK" id="dVl-YV-vs2"/>
             </connections>
@@ -54,19 +57,47 @@
                                 <constraint firstAttribute="height" constant="1" id="TGs-rW-W0t"/>
                             </constraints>
                         </view>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_autorenew_white" translatesAutoresizingMaskIntoConstraints="NO" id="Wem-Zv-Cun">
+                            <rect key="frame" x="330" y="56" width="25" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="25" id="eJl-KS-HGx"/>
+                                <constraint firstAttribute="height" constant="25" id="n7W-RN-LJ8"/>
+                            </constraints>
+                        </imageView>
+                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Z6E-be-07y">
+                            <rect key="frame" x="10" y="109" width="355" height="1"/>
+                        </progressView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WP2-Rw-ifV">
+                            <rect key="frame" x="300" y="20" width="75" height="90"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="75" id="Lz9-mP-2Hz"/>
+                            </constraints>
+                            <connections>
+                                <action selector="refreshButtonTapped:" destination="-1" eventType="touchUpInside" id="w6Z-PR-TR6"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="Cq1-MJ-uyK" secondAttribute="bottom" id="22w-Mm-DsH"/>
+                        <constraint firstItem="Z6E-be-07y" firstAttribute="width" secondItem="Cq1-MJ-uyK" secondAttribute="width" id="68w-IT-rSr"/>
+                        <constraint firstItem="Z6E-be-07y" firstAttribute="height" secondItem="Cq1-MJ-uyK" secondAttribute="height" id="6Ja-lH-TFv"/>
+                        <constraint firstItem="Z6E-be-07y" firstAttribute="centerX" secondItem="Cq1-MJ-uyK" secondAttribute="centerX" id="Gdr-Ec-7JT"/>
                         <constraint firstAttribute="bottom" secondItem="YSW-in-SpT" secondAttribute="bottom" constant="11" id="Oea-9t-NdK"/>
                         <constraint firstItem="p08-cN-jHz" firstAttribute="leading" secondItem="PCa-fe-R59" secondAttribute="leading" constant="10" id="ThC-Ep-lb0"/>
+                        <constraint firstItem="WP2-Rw-ifV" firstAttribute="top" secondItem="PCa-fe-R59" secondAttribute="top" constant="20" id="UtN-Xp-PpG"/>
                         <constraint firstItem="Cq1-MJ-uyK" firstAttribute="leading" secondItem="PCa-fe-R59" secondAttribute="leading" constant="10" id="YQs-pb-7nu"/>
                         <constraint firstItem="YSW-in-SpT" firstAttribute="leading" secondItem="PCa-fe-R59" secondAttribute="leadingMargin" constant="2" id="c0G-Uh-29j"/>
                         <constraint firstItem="p08-cN-jHz" firstAttribute="top" secondItem="PCa-fe-R59" secondAttribute="top" constant="45" id="c9m-uq-3Bf"/>
                         <constraint firstAttribute="trailing" secondItem="Cq1-MJ-uyK" secondAttribute="trailing" constant="10" id="gAb-Zk-1Ut"/>
+                        <constraint firstAttribute="trailing" secondItem="WP2-Rw-ifV" secondAttribute="trailing" id="ggO-IY-C53"/>
                         <constraint firstItem="YSW-in-SpT" firstAttribute="leading" secondItem="PCa-fe-R59" secondAttribute="leading" constant="10" id="nks-Uc-yHq"/>
+                        <constraint firstItem="Z6E-be-07y" firstAttribute="centerY" secondItem="Cq1-MJ-uyK" secondAttribute="centerY" id="nwU-j7-hKW"/>
                         <constraint firstAttribute="trailing" secondItem="p08-cN-jHz" secondAttribute="trailing" constant="10" id="pX2-5K-wb4"/>
                         <constraint firstItem="YSW-in-SpT" firstAttribute="leading" secondItem="PCa-fe-R59" secondAttribute="leadingMargin" constant="2" id="pkI-V1-JUY"/>
+                        <constraint firstAttribute="bottom" secondItem="WP2-Rw-ifV" secondAttribute="bottom" id="rT7-un-xrR"/>
+                        <constraint firstAttribute="trailing" secondItem="Wem-Zv-Cun" secondAttribute="trailing" constant="20" id="ry6-RJ-Zij"/>
                         <constraint firstAttribute="trailing" secondItem="YSW-in-SpT" secondAttribute="trailing" constant="10" id="tLH-tJ-NtA"/>
+                        <constraint firstItem="Wem-Zv-Cun" firstAttribute="centerY" secondItem="p08-cN-jHz" secondAttribute="centerY" constant="6" id="tje-JA-J0i"/>
                     </constraints>
                 </view>
             </subviews>
@@ -78,7 +109,10 @@
                 <constraint firstAttribute="bottom" secondItem="PCa-fe-R59" secondAttribute="bottom" id="wGO-TL-79p"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="95.5" y="-219"/>
+            <point key="canvasLocation" x="-166" y="-156"/>
         </view>
     </objects>
+    <resources>
+        <image name="ic_autorenew_white" width="24" height="24"/>
+    </resources>
 </document>
