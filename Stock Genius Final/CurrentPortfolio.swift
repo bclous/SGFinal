@@ -73,6 +73,8 @@ class CurrentPortfolio: NSObject {
         for stock in holdings {
             stock.updatePricesFromCache()
         }
+        
+        index.updatePricesFromCache()
     }
     
     public func dateForPeriodBegin() -> Date? {
@@ -93,6 +95,9 @@ class CurrentPortfolio: NSObject {
             
             priceDictionary.updateValue(stockDictionary, forKey: key)
         }
+        
+        let indexDictionary = ["currentPrice" : index.adjPriceCurrent, "lastClosePrice" : index.adjPriceLastClose, "sincePeriodStartPrice" : index.adjPriceStartDate]
+        priceDictionary.updateValue(indexDictionary, forKey: index.ticker)
         
         return priceDictionary
     }
