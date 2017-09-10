@@ -35,16 +35,11 @@ class AlphaVantageClient: NSObject {
         holdingsPlusIndex.append(DataStore.shared.currentPortfolio.index)
         
         updatePricesForStocks(holdingsPlusIndex) { (goodStocks, badStocks) in
-            if goodStocks.count == 31 {
-                completion(true)
+            
+            if badStocks.isEmpty {
+                DispatchQueue.main.async { completion(true) }
             } else {
-                self.updatePricesForStocks(badStocks, completion: { (newGoodStocks, newBadStocks) in
-                    if newBadStocks.count == 0 {
-                        completion(true)
-                    } else {
-                        completion(false)
-                    }
-                })
+                DispatchQueue.main.async { completion(false) }
             }
         }
         
@@ -61,7 +56,7 @@ class AlphaVantageClient: NSObject {
                     successfulStocks.append(stock)
                     self.successfulPulls += 1
                     let percentageComplete = Float(self.successfulPulls) / 31.0
-                    self.delegate?.pricePullInProgressFromAV(percentageComplete: percentageComplete )
+                    DispatchQueue.main.async {self.delegate?.pricePullInProgressFromAV(percentageComplete: percentageComplete )}
                     print("\(percentageComplete)")
                     if successfulStocks.count + unsuccessfulStocks.count == stocks.count {
                         completion(successfulStocks, unsuccessfulStocks)
@@ -91,6 +86,7 @@ class AlphaVantageClient: NSObject {
                 stock.updatePricesWithResponse(responseDictionary!)
                 completion(true)
             } else {
+                print("failed for ticker: \(stock.ticker)")
                 completion(false)
                 print("failed for: \(stock.ticker)")
             }

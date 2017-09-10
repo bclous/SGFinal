@@ -27,6 +27,8 @@ class DataStore: NSObject, AlphaVantageClientDelegate {
     var totalStockGeniusPerformance : Float
     var imageNames = ["page1Background", "girl", "mainPage1", "mainPage2", "mainPage3", "mainPage4", "mainPage5", "mainPage6","graphicPage1", "graphicPage2", "otherBackground"]
     var individualToggleState : IndividualSegmentType = .sinceStartDate
+    let currentPricesKey = "currentPortfolioPrices"
+    let startDateKey = "currentPortfolioStartDate"
 
     
     private override init() {
@@ -39,26 +41,48 @@ class DataStore: NSObject, AlphaVantageClientDelegate {
         AlphaVantageClient.shared.delegate = self
     }
     
-    public func connectAndPopulateData(completion: @escaping(_ success: Bool) -> ()) {
-    
+    public func performInitialFirebasePull(completion: @escaping(_ success: Bool) -> ()) {
+        
         FirebaseClient.shared.performInitialDatabasePull { (success, result) in
             if success {
-                let goodresult = self.populateAppWithData(dictionary: result)
-                if goodresult {
-                    AlphaVantageClient.shared.updatePricesForCurrentPortfolio(completion: { (success) in
-                        DispatchQueue.main.async { completion(success) }
-                    })
-                } else {
-                     DispatchQueue.main.async { completion(false) }
-                }
+                let result = self.populateAppWithData(dictionary: result)
+                completion(result)
             } else {
-                DispatchQueue.main.async { completion(false) }
+                completion(false)
             }
+        }
+    }
+    
+    public func performUpdatePricesPull(completion: @escaping(_ success: Bool) -> ()) {
+        AlphaVantageClient.shared.updatePricesForCurrentPortfolio { (success) in
+            if success {
+                self.currentPortfolio.cachePrices()
+            }
+            completion(success)
+        }
+    }
+    
+    public func appNeedsFullUpdateOnSplashScreen() -> Bool {
+        
+        let cachedCurrentPortfolioStartDate = UserDefaults.standard.object(forKey: startDateKey) as? String ?? ""
+        if cachedCurrentPortfolioStartDate != currentPortfolio.startDate {
+            UserDefaults.standard.set(currentPortfolio.startDate, forKey: startDateKey)
+            return true
+        } else {
+            return !priceCacheExists()
         }
     }
     
     public func pricePullInProgressFromAV(percentageComplete: Float) {
         delegate?.pricePullInProgress(percentageComplete: percentageComplete)
+    }
+    
+    public func priceCacheExists() -> Bool {
+        if UserDefaults.standard.object(forKey: currentPricesKey) != nil {
+            return true
+        } else {
+            return false
+        }
     }
     
     
@@ -111,6 +135,8 @@ class DataStore: NSObject, AlphaVantageClientDelegate {
     private func populateCurrentPortfolio(dictionary: Dictionary<String, Any>) {
 
         currentPortfolio.updateCurrentPortfolioValues(dictionary: dictionary)
+        
+        
     }
     
 

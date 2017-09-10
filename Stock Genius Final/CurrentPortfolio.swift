@@ -61,7 +61,24 @@ class CurrentPortfolio: NSObject {
         }
         
         updateCalcStocks()
+        updatePricesFromCache()
         
+    }
+    
+    public func cachePrices() {
+       UserDefaults.standard.set(priceCacheDictionary(), forKey: DataStore.shared.currentPricesKey)
+    }
+    
+    public func updatePricesFromCache() {
+        for stock in holdings {
+            stock.updatePricesFromCache()
+        }
+        
+        index.updatePricesFromCache()
+    }
+    
+    public func dateForPeriodBegin() -> Date? {
+        return Date.dateFromString(startDate, dateFormat: "MM/dd/yyyy")
     }
     
     private func resetCurrentPortfolio() {
@@ -69,8 +86,20 @@ class CurrentPortfolio: NSObject {
         calcStocks.removeAll()
     }
     
-    public func dateForPeriodBegin() -> Date? {
-        return Date.dateFromString(startDate, dateFormat: "MM/dd/yyyy")
+    public func priceCacheDictionary() -> [String: [String : Float]] {
+        var priceDictionary : [String : [String : Float]] = [:]
+        
+        for stock in holdings {
+            let key = stock.ticker
+            let stockDictionary = ["currentPrice" : stock.adjPriceCurrent, "lastClosePrice" : stock.adjPriceLastClose, "sincePeriodStartPrice" : stock.adjPriceStartDate]
+            
+            priceDictionary.updateValue(stockDictionary, forKey: key)
+        }
+        
+        let indexDictionary = ["currentPrice" : index.adjPriceCurrent, "lastClosePrice" : index.adjPriceLastClose, "sincePeriodStartPrice" : index.adjPriceStartDate]
+        priceDictionary.updateValue(indexDictionary, forKey: index.ticker)
+        
+        return priceDictionary
     }
     
     public func averageReturn(isTodayReturn: Bool) -> Float {

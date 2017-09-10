@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SectionHeaderClearView" customModule="Stock_Genius_Final" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="mLG-F6-P65"/>
+                <outlet property="leftButton" destination="09L-YB-QKc" id="cjm-jg-Fga"/>
+                <outlet property="rightButton" destination="RPP-8v-w7D" id="zfz-xO-4ux"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="395" height="88"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RPP-8v-w7D">
+                    <rect key="frame" x="315" y="0.0" width="80" height="88"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="7qe-b0-hKJ"/>
+                    </constraints>
+                    <connections>
+                        <action selector="rightButtonTapped:" destination="-1" eventType="touchUpInside" id="Krs-XL-UC9"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="09L-YB-QKc">
+                    <rect key="frame" x="0.0" y="0.0" width="80" height="88"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="8H0-my-4bv"/>
+                    </constraints>
+                    <connections>
+                        <action selector="leftButtonTapped:" destination="-1" eventType="touchUpInside" id="a5s-Rk-bde"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="RPP-8v-w7D" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="FjG-Ur-jS9"/>
+                <constraint firstAttribute="bottom" secondItem="RPP-8v-w7D" secondAttribute="bottom" id="Gtg-lk-YZ8"/>
+                <constraint firstAttribute="bottom" secondItem="09L-YB-QKc" secondAttribute="bottom" id="KzE-Ow-fr6"/>
+                <constraint firstItem="09L-YB-QKc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="NHQ-GJ-M8h"/>
+                <constraint firstAttribute="trailing" secondItem="RPP-8v-w7D" secondAttribute="trailing" id="qMq-3m-jqG"/>
+                <constraint firstItem="09L-YB-QKc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="s7E-Ei-cVV"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="43.5" y="-236"/>
+        </view>
+    </objects>
+</document>
