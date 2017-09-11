@@ -11,9 +11,8 @@ import UIKit
 class TabBarController: UITabBarController, TabBarDelegate, CurrentPicksVCDelegate {
     
     var chosenStock : CurrentStock?
-
-    
     var currentPicksNeedsUpate = false
+    var isTodayReturn = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,8 +50,9 @@ class TabBarController: UITabBarController, TabBarDelegate, CurrentPicksVCDelega
         }
     }
     
-    func currentStockChosen(stock: CurrentStock) {
+    func currentStockChosen(stock: CurrentStock, isTodayReturn: Bool) {
         chosenStock = stock
+        self.isTodayReturn = isTodayReturn
         performSegue(withIdentifier: "individualStockSegue", sender: nil)
 
     }
@@ -61,6 +61,7 @@ class TabBarController: UITabBarController, TabBarDelegate, CurrentPicksVCDelega
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! IndividualStockVC
         destinationVC.stock = chosenStock
+        destinationVC.isTodayReturn = isTodayReturn
         let currentPicksVC = self.viewControllers?[0] as! CurrentPicksVC
         currentPicksVC.mainTableView.reloadData()
     }

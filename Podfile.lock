@@ -1,15 +1,12 @@
 PODS:
-  - Alamofire (4.5.0)
-  - Charts (3.0.2):
-    - Charts/Core (= 3.0.2)
-  - Charts/Core (3.0.2)
-  - Firebase/Core (4.1.0):
+  - Alamofire (4.5.1)
+  - Firebase/Core (4.1.1):
     - FirebaseAnalytics (= 4.0.3)
-    - FirebaseCore (= 4.0.5)
-  - Firebase/Database (4.1.0):
+    - FirebaseCore (= 4.0.6)
+  - Firebase/Database (4.1.1):
     - Firebase/Core
-    - FirebaseDatabase (= 4.0.1)
-  - Firebase/Storage (4.1.0):
+    - FirebaseDatabase (= 4.0.2)
+  - Firebase/Storage (4.1.1):
     - Firebase/Core
     - FirebaseStorage (= 2.0.1)
   - FirebaseAnalytics (4.0.3):
@@ -17,14 +14,14 @@ PODS:
     - FirebaseInstanceID (~> 2.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - nanopb (~> 0.3)
-  - FirebaseCore (4.0.5):
+  - FirebaseCore (4.0.6):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - nanopb (~> 0.3)
-  - FirebaseDatabase (4.0.1):
+  - FirebaseDatabase (4.0.2):
     - FirebaseAnalytics (~> 4.0)
     - FirebaseCore (~> 4.0)
     - leveldb-library (~> 1.18)
-  - FirebaseInstanceID (2.0.1):
+  - FirebaseInstanceID (2.0.2):
     - FirebaseCore (~> 4.0)
   - FirebaseStorage (2.0.1):
     - FirebaseAnalytics (~> 4.0)
@@ -40,28 +37,29 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - SwiftChart (0.5.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.4)
-  - Charts
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
+  - SwiftChart
 
 SPEC CHECKSUMS:
-  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
-  Charts: 236d6ccdd0ce6feae151d89e829a7397381a21fd
-  Firebase: ebebf41db7f10e0c7668b6eaaa857fbe599aa478
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  Firebase: 052c0de688fc87b414996eea13e223dd9fee3fa2
   FirebaseAnalytics: 76f754d37ca5b04f36856729b6af3ca0152d1069
-  FirebaseCore: 7d876ea97a830cbe62ba7fbbe7670c833a324ba0
-  FirebaseDatabase: 94c38c783d23dc6679441050772d42e801d06e9e
-  FirebaseInstanceID: 0500e3cb54a1a4e01a8cffcc09323b8bb8fc7e1e
+  FirebaseCore: 28def3c643989c97ea5a69ea5000f5fa9902b9fd
+  FirebaseDatabase: 4d1a10639a42cae26e094296951b53c689e5e191
+  FirebaseInstanceID: c4c7fca62c7b7330caee5da04f19a37ea37bb1c1
   FirebaseStorage: 661fc1f8d4131891d256b62e82a45ace8b3f0c3b
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   leveldb-library: 10fb39c39e243db4af1828441162405bbcec1404
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  SwiftChart: d1d22d2b1c4582f4d561edf97a210059c00ee256
 
-PODFILE CHECKSUM: a6a9e17a158d901afd77621998d5b44bbe2c2b8e
+PODFILE CHECKSUM: 6c62f2c1dfa7872edec5e1864d52a4a47de896b6
 
 COCOAPODS: 1.2.1

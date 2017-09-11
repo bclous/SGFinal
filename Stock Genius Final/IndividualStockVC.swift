@@ -16,11 +16,14 @@ class IndividualStockVC: UIViewController, IndividualHeaderViewDelegate {
     @IBOutlet weak var mainTableView: UITableView!
     let toggleView = IndividualToggleView()
     let performanceView = IndividualPerformanceView()
+    var isTodayReturn = true
+    var timePeriod : IndividualSegmentType = .sixMonths
     
     override func viewDidLoad() {
         super.viewDidLoad()
         formatTableView()
         formatHeaderView()
+        formatToggleView()
     }
     
     func formatHeaderView() {
@@ -50,6 +53,7 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "graphCell") as! GraphTableViewCell
+            cell.formatChartCell(stock: stock!, timePeriod: timePeriod)
             return cell
         } else if indexPath.section == 3 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell") as! NewsItemCell
@@ -138,5 +142,17 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    
+}
+
+extension IndividualStockVC : IndividualToggleViewDelegate {
+    
+    func formatToggleView() {
+        toggleView.delegate = self
+    }
+    
+    func toggleChosen(type: IndividualSegmentType) {
+        timePeriod = type
+    }
     
 }

@@ -50,6 +50,12 @@ extension Date {
         guard let end = currentCalendar.ordinality(of: comp, in: .era, for: self) else { return 0 }
         return end - start
     }
+    
+    public func dateByAdding(value: Int, component: Calendar.Component) -> Date? {
+        let calendar = Calendar.current
+        let newDate = calendar.date(byAdding: component, value: value, to: self)
+        return newDate
+    }
 
 }
 

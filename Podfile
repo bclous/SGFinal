@@ -10,7 +10,7 @@ target 'Stock Genius Final' do
   pod 'Firebase/Core'
   pod 'Firebase/Storage'
   pod 'Alamofire', '~> 4.4'
-  pod ‘Charts’
+  pod ’SwiftChart’
  
 
 end

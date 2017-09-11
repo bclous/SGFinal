@@ -25,6 +25,7 @@ class CurrentStock: Stock {
     let currentPriceKey = "currentPrice"
     let lastClosePriceKey = "lastClosePrice"
     let sincePeriodBeginPriceKey = "sincePeriodStartPrice"
+    var stockPriceDays : [StockPriceDay]
     
     override init() {
         self.isTrading = true
@@ -36,9 +37,10 @@ class CurrentStock: Stock {
         self.priceHistory = [:]
         self.hasShortPriceHistory = false
         self.hasLongPriceHistory = false
-        currentPriceAPIKey = ""
-        lastClosePriceAPIKey = ""
-        sincePeriodBeginAPIKey = ""
+        self.currentPriceAPIKey = ""
+        self.lastClosePriceAPIKey = ""
+        self.sincePeriodBeginAPIKey = ""
+        self.stockPriceDays = []
         super.init()
     }
 
@@ -71,6 +73,12 @@ class CurrentStock: Stock {
         updateCurrentPrice(timeSeries: priceDictionary)
         updateLastClosePrice(timeSeries: priceDictionary)
         updateSincePeriodBegin(timeSeries: priceDictionary)
+        updateStockPriceDays(timeSeries: priceDictionary)
+        
+        print("data for \(ticker):")
+        for stock in stockPriceDays {
+            print("\(stock.date) : \(stock.adjustedClose)")
+        }
     }
 
     public func percentageReturn(isTodayReturn: Bool) -> Float {
@@ -101,10 +109,17 @@ class CurrentStock: Stock {
 
     // helper methods to update prices
     
-    private func updatePricesFromCachedValues() {
-        let cachedStocks = UserDefaults.standard.object(forKey: DataStore.shared.currentPricesKey) as? [String : [String : Float]]
-        let cachedStock = cachedStocks?[ticker] as? [String : Float]
+    private func updateStockPriceDays(timeSeries: [String : Any]?) {
         
+        if let timeSeries = timeSeries {
+            stockPriceDays.removeAll()
+            for (key, value) in timeSeries {
+                let stockPriceDate = StockPriceDay(dateKey: key, responseValue: value as! [String : String])
+                stockPriceDays.append(stockPriceDate)
+            }
+        }
+        stockPriceDays.sort(by: {$0.date > $1.date})
+
     }
     
     private func updateCurrentPrice(timeSeries: [String : Any]?) {
@@ -190,6 +205,80 @@ class CurrentStock: Stock {
         }
         
     }
+    
+    
+    // functions for graph
+    
+    public func graphDataFromType(_ type: IndividualSegmentType) -> [(x: Float, y: Float)] {
+        
+        var graphData : [(x: Float, y: Float)] = []
+        let date = startingDateForSegmentType(type)
+        let data = stockPriceDaysSinceDate(date)
+        
+        if data.count > 0 {
+            let startDate = data[0].date
+            for day in data {
+                let x = Float(day.date.interval(ofComponent: .day, fromDate: startDate))
+                let y = day.adjustedClose
+                let value = (x,y)
+                graphData.append(value)
+            }
+        }
+        
+        graphData.sort { (first, second) -> Bool in
+            first.x < second.x
+        }
+        
+        return graphData
+    }
+    
+    private func startingDateForSegmentType(_ type: IndividualSegmentType) -> Date? {
+        
+        let today = Date()
+        
+        switch type {
+        case .today:
+            return today
+        case .oneWeek:
+            return today.dateByAdding(value: -7, component: .day)
+        case .oneMonth:
+            return today.dateByAdding(value: -1, component: .month)
+        case .threeMonths:
+            return today.dateByAdding(value: -3, component: .month)
+        case .sixMonths:
+            return today.dateByAdding(value: -6, component: .month)
+        case .oneYear:
+            return today.dateByAdding(value: -1, component: .year)
+        case .threeYears:
+            return today.dateByAdding(value: -3, component: .year)
+        case .fiveYears:
+            return today.dateByAdding(value: -5, component: .year)
+        case .sinceStartDate:
+            return DataStore.shared.currentPortfolio.dateForPeriodBegin()
+        }
+        
+    }
+    
+    private func stockPriceDaysSinceDate(_ date: Date?) -> [StockPriceDay] {
+        
+        var graphData : [StockPriceDay] = []
+        
+        if let date = date {
+            for stockPriceDay in stockPriceDays {
+                if stockPriceDay.date >= date {
+                    graphData.append(stockPriceDay)
+                }
+            }
+        }
+        graphData.sort(by: {$0.date < $1.date})
+        return graphData
+    }
+    
+
+    
+
+    
+    
 
 
 }

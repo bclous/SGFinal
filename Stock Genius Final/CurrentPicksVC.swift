@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 
 protocol CurrentPicksVCDelegate : class {
-    func currentStockChosen(stock: CurrentStock)
+    func currentStockChosen(stock: CurrentStock, isTodayReturn: Bool)
 }
 
 class CurrentPicksVC: UIViewController {
@@ -156,7 +156,7 @@ extension CurrentPicksVC : UITableViewDelegate, UITableViewDataSource, CurrentPi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row < 10 || (indexPath.row > 12 && indexPath.row < 34) {
             let chosenStock = DataStore.shared.currentPortfolio.holdings[arrayIndexFromIndexPath(indexPath)]
-            delegate?.currentStockChosen(stock: chosenStock)
+            delegate?.currentStockChosen(stock: chosenStock, isTodayReturn: isTodayReturn)
         }
     }
     
