@@ -20,12 +20,9 @@ class CurrentPicksVC: UIViewController {
     var isTodayReturn = true
     var ready = true
     @IBOutlet weak var nextUpdateView: NextUpdateView!
-<<<<<<< HEAD
     weak var delegate : CurrentPicksVCDelegate?
-=======
     var needsPriceUpdate = false
     let sectionHeaderClearView = SectionHeaderClearView()
->>>>>>> master
     
     override func viewDidLoad() {
         super.viewDidLoad()
