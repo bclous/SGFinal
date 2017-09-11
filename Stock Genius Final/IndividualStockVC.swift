@@ -17,7 +17,7 @@ class IndividualStockVC: UIViewController, IndividualHeaderViewDelegate {
     let toggleView = IndividualToggleView()
     let performanceView = IndividualPerformanceView()
     var isTodayReturn = true
-    var timePeriod : IndividualSegmentType = .sixMonths
+    var timePeriod : IndividualSegmentType = .threeMonths
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,7 +92,7 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource {
         case 0:
             return 100
         case 1:
-            return 150
+            return 200
         case 2:
             return 100
         case 3:

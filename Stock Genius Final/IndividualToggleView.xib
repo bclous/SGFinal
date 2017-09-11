@@ -73,7 +73,7 @@
                     </subviews>
                     <color key="backgroundColor" red="0.9552378654" green="0.0095015831049999992" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                 </stackView>
-                <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r0X-ob-Sin">
+                <view hidden="YES" alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r0X-ob-Sin">
                     <rect key="frame" x="10" y="97" width="355" height="1"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>

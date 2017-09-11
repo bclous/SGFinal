@@ -209,16 +209,16 @@ class CurrentStock: Stock {
     
     // functions for graph
     
-    public func graphDataFromType(_ type: IndividualSegmentType) -> [(x: Float, y: Float)] {
+    public func graphDataFromType(_ type: IndividualSegmentType) -> [(x: Date, y: Float)] {
         
-        var graphData : [(x: Float, y: Float)] = []
+        var graphData : [(x: Date, y: Float)] = []
         let date = startingDateForSegmentType(type)
         let data = stockPriceDaysSinceDate(date)
         
         if data.count > 0 {
-            let startDate = data[0].date
-            for day in data {
-                let x = Float(day.date.interval(ofComponent: .day, fromDate: startDate))
+            for index in 0...data.count - 1 {
+                let day = data[index]
+                let x = day.date
                 let y = day.adjustedClose
                 let value = (x,y)
                 graphData.append(value)
