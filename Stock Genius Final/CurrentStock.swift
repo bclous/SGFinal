@@ -74,11 +74,6 @@ class CurrentStock: Stock {
         updateLastClosePrice(timeSeries: priceDictionary)
         updateSincePeriodBegin(timeSeries: priceDictionary)
         updateStockPriceDays(timeSeries: priceDictionary)
-        
-        print("data for \(ticker):")
-        for stock in stockPriceDays {
-            print("\(stock.date) : \(stock.adjustedClose)")
-        }
     }
 
     public func percentageReturn(isTodayReturn: Bool) -> Float {
@@ -213,6 +208,7 @@ class CurrentStock: Stock {
         
         var graphData : [(x: Date, y: Float)] = []
         let date = startingDateForSegmentType(type)
+        
         let data = stockPriceDaysSinceDate(date)
         
         if data.count > 0 {
@@ -238,7 +234,7 @@ class CurrentStock: Stock {
         
         switch type {
         case .today:
-            return today
+            return today.dateByAdding(value: -1, component: .day)
         case .oneWeek:
             return today.dateByAdding(value: -7, component: .day)
         case .oneMonth:
@@ -265,8 +261,13 @@ class CurrentStock: Stock {
         
         if let date = date {
             for stockPriceDay in stockPriceDays {
-                if stockPriceDay.date >= date {
+                
+                
+                
+                if stockPriceDay.date.dateIsOnSameDayOrAfter(date) {
                     graphData.append(stockPriceDay)
+                } else {
+                   // print("didn't include: \(stockPriceDay.date) for starting date: \(date)")
                 }
             }
         }

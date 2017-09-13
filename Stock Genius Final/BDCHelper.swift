@@ -45,6 +45,32 @@ extension Date {
         return (date1Day == date2Day) && (date1Month == date2Month) && (date1Year == date2Year)
     }
     
+    public func dateIsOnSameDayOrAfter(_ date: Date) -> Bool {
+        let calendar = Calendar.current
+        let year = calendar.component(.year, from: self)
+        let month = calendar.component(.month, from: self)
+        let day = calendar.component(.day, from: self)
+        
+        let startingYear = calendar.component(.year, from: date)
+        let startingMonth = calendar.component(.month, from: date)
+        let startingDay = calendar.component(.day, from: date)
+        
+        if year > startingYear {
+            return true
+        } else if year < startingYear {
+            return false
+        } else {
+            if month > startingMonth {
+                return true
+            } else if month < startingMonth {
+                return false
+            } else {
+                return day >= startingDay
+            }
+        }
+        
+    }
+    
     public static func timeBetween(startingDate: Date, endingDate: Date) -> (years : Int, months: Int, days: Int, hours: Int, minutes: Int, seconds: Int) {
         
         let adjustedStartingDate = startingDate > endingDate ? endingDate : startingDate

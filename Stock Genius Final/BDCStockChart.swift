@@ -37,9 +37,10 @@ class BDCStockChart: UIView {
     public var dateIntervalType : DateIntervalType = .weekly {
         didSet {
             formatDefaultXAxisLabels()
+            formatDefaultYAxisLabels()
             switch dateIntervalType {
             case .daily:
-                xAxisDateFormat = "E"
+                xAxisDateFormat = "E-d"
             case .weekly:
                 xAxisDateFormat = "M/d"
             case .monthly:
@@ -57,8 +58,10 @@ class BDCStockChart: UIView {
     
     private var sortedData : [(x: Date, y: Float)] = []
     private var chartData : [(x: Float, y: Float)] = []
-   
     private let calendar = Calendar.current
+    private var minY : Float = 0
+    private var maxY : Float = 0
+    private var midY : Float = 0
     
     
     var isIntraday = false
@@ -80,6 +83,7 @@ class BDCStockChart: UIView {
         chart.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
         chart.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
         chart.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+        chart.xLabelsSkipLast = false
         
         chartBackgroundColor = SGConstants.mainBlackColor
         backgroundColor = SGConstants.mainBlackColor
@@ -93,6 +97,7 @@ class BDCStockChart: UIView {
         chart.series.removeAll()
         chart.add(series)
         chart.xLabels = xLabels
+        chart.yLabels = [minY, midY, maxY]
         chart.xLabelsFormatter = { self.dateStringFromInt(Int($1))}
         chart.axesColor = UIColor.white.withAlphaComponent(0.2)
         chart.labelColor = UIColor.white.withAlphaComponent(0.9)
@@ -100,11 +105,14 @@ class BDCStockChart: UIView {
         chart.axesColor = UIColor.red
         chart.axesColor = SGConstants.mainBlackColor
         chart.yLabelsOnRightSide = true
+        chart.xLabelsSkipLast = true
 
     }
     
     private func dateStringFromInt(_ int: Int) -> String {
-        let date = sortedData[int].x
+        
+        let adjusted = sortedData.count - 1 == int ? int : int + 1
+        let date = sortedData[adjusted].x
         print("\(date)")
         return date.string(withFormat: xAxisDateFormat)!
     
@@ -274,7 +282,7 @@ class BDCStockChart: UIView {
             dateIntervalType = .yearly
         } else if months >= 6 {
             dateIntervalType = .quarterly
-        } else if days < 7 {
+        } else if days <= 7 {
             dateIntervalType = .daily
         } else if days < 42 {
             dateIntervalType = .weekly
@@ -298,6 +306,46 @@ class BDCStockChart: UIView {
             xLabels = firstInYearIndices()
         }
     }
+    
+    private func formatDefaultYAxisLabels() {
+        
+        minY = sortedData[0].y
+        maxY = 0
+        midY = 0
+        
+        for (_, closingPrice) in sortedData {
+            maxY = closingPrice > maxY ? closingPrice : maxY
+            minY = closingPrice < minY ? closingPrice : minY
+            
+        }
+    
+        var intMaxY = Int((maxY) + 1)
+        var intMinY = Int(minY)
+        print("\(intMinY)")
+        var spread = intMaxY - intMinY
+        var intMidY = 0
+        
+        if spread % 2 == 0 {
+            intMidY = spread / 2 + intMinY
+        } else {
+            if intMinY == 0 {
+                intMaxY += 1
+                spread = intMaxY - intMinY
+                intMidY = spread / 2 + intMinY
+            } else {
+                intMinY -= 1
+                spread = intMaxY - intMinY
+                intMidY = spread / 2 + intMinY
+            }
+        }
+        
+        maxY = Float(intMaxY)
+        midY = Float(intMidY)
+        minY = Float(intMinY)
+        
+    }
+    
+    
     
     
 }
