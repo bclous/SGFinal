@@ -9,12 +9,21 @@
 import UIKit
 import SwiftChart
 
+enum DateIntervalType {
+    case daily
+    case weekly
+    case monthly
+    case quarterly
+    case yearly
+}
+
 class BDCStockChart: UIView {
     
     let chart = Chart()
     public var data : [(x: Date, y: Float)] = [] {
         didSet {
             sortedData = data.sorted(by: {$0.x < $1.x})
+            formatDefaultIntervalType()
             formatChart()
         }
     }
@@ -23,6 +32,26 @@ class BDCStockChart: UIView {
             chart.backgroundColor = chartBackgroundColor
         }
     }
+    public var xAxisDateFormat = "M/yy"
+    
+    public var dateIntervalType : DateIntervalType = .weekly {
+        didSet {
+            switch dateIntervalType {
+            case .daily:
+                xAxisDateFormat = "E"
+            case .weekly:
+                xAxisDateFormat = "M/d"
+            case .monthly:
+                xAxisDateFormat = "MMM"
+            case .quarterly:
+                xAxisDateFormat = "MMM"
+            case .yearly:
+                xAxisDateFormat = "yyyy"
+            }
+        }
+    }
+    
+    
     private var sortedData : [(x: Date, y: Float)] = []
     private var chartData : [(x: Float, y: Float)] = []
     private let calendar = Calendar.current
@@ -58,7 +87,14 @@ class BDCStockChart: UIView {
         let series = ChartSeries(data: chartData)
         series.area = true
         chart.add(series)
+        
+        // need to fix this!!
         chart.xLabels = firstInMonthIndices()
+        
+        ///
+        
+        
+        
         chart.xLabelsFormatter = { self.dateStringFromInt(Int($1))}
         chart.axesColor = UIColor.white.withAlphaComponent(0.2)
         chart.labelColor = UIColor.white.withAlphaComponent(0.9)
@@ -70,9 +106,9 @@ class BDCStockChart: UIView {
     }
     
     private func dateStringFromInt(_ int: Int) -> String {
-        let firstDate = sortedData[0].x
-        let intDate = firstDate.dateByAdding(value: int, component: .day)
-        return intDate?.string(withFormat: "M/yy") ?? ""
+        let date = sortedData[int].x
+        print("\(date)")
+        return date.string(withFormat: xAxisDateFormat)!
     
     }
     
@@ -138,7 +174,7 @@ class BDCStockChart: UIView {
                 let nextDay = sortedData[index + 1]
                 let nextMonth = calendar.component(.month, from: nextDay.x)
                 
-                if nextMonth > firstMonth {
+                if nextMonth != firstMonth {
                     indices.append(index + 1)
                 }
             }
@@ -152,6 +188,29 @@ class BDCStockChart: UIView {
         
         return indicesFloat
 
+    }
+    
+    private func firstInQuarterIndices() -> [Float] {
+        
+        var firstInQuarter : [Float] = []
+        
+        let firstInMonth = firstInMonthIndices()
+        let firstIndex = Int(firstInMonth[0])
+        let firstDate = sortedData[firstIndex].x
+        let firstMonth = calendar.component(.month, from: firstDate)
+        
+        for index in firstInMonth {
+            
+            let idx = Int(index)
+            let date = sortedData[idx].x
+            let month = calendar.component(.month, from: date)
+            let adjustedMonth = month < firstMonth ? month + 12 : month
+            if adjustedMonth % firstMonth == 0 {
+                firstInQuarter.append(Float(idx))
+            }
+        }
+        
+        return firstInQuarter
     }
     
     private func firstInYearIndices() -> [Float] {
@@ -186,7 +245,26 @@ class BDCStockChart: UIView {
         return component == 1 ? 7 : component - 1
     }
     
-    
+    private func formatDefaultIntervalType() {
+        
+        let startDate = sortedData[0].x
+        let lastDate = sortedData[sortedData.count - 1].x
 
-
+        let years  = lastDate.interval(ofComponent: .year, fromDate: startDate)
+        let months = lastDate.interval(ofComponent: .month, fromDate: startDate)
+        let days = lastDate.interval(ofComponent: .day, fromDate: startDate)
+        
+        if years > 0 {
+            dateIntervalType = .yearly
+        } else if months >= 6 {
+            dateIntervalType = .quarterly
+        } else if days < 7 {
+            dateIntervalType = .daily
+        } else if days < 42 {
+            dateIntervalType = .weekly
+        } else {
+            dateIntervalType = .monthly
+        }
+        
+    }
 }

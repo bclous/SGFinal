@@ -10,6 +10,13 @@ import Foundation
 import UIKit
 
 
+class BDCHelper {
+    
+    
+    
+    
+}
+
 
 extension Date {
     
@@ -37,6 +44,85 @@ extension Date {
         
         return (date1Day == date2Day) && (date1Month == date2Month) && (date1Year == date2Year)
     }
+    
+    public static func timeBetween(startingDate: Date, endingDate: Date) -> (years : Int, months: Int, days: Int, hours: Int, minutes: Int, seconds: Int) {
+        
+        let adjustedStartingDate = startingDate > endingDate ? endingDate : startingDate
+        let adjustedEndingDate = startingDate > endingDate ? startingDate : endingDate
+        
+        let calendar = Calendar.current
+        
+        var seconds = 0
+        var minutes = 0
+        var hours = 0
+        var days = 0
+        var months = 0
+        var years = 0
+        var movingDate = adjustedStartingDate
+        
+        func calculateForComoponentType(_ type: Calendar.Component) {
+            movingDate = movingDate.dateByAdding(value: 1, component: type)!
+            if movingDate <= adjustedEndingDate {
+                addOneForType(type)
+                calculateForComoponentType(type)
+            } else {
+                if type == .second {
+                    return
+                } else {
+                    movingDate = movingDate.dateByAdding(value: -1, component: type)!
+                    let nextTypeDown = nextTypeDownTreeFromType(type)
+                    calculateForComoponentType(nextTypeDown)
+                }
+            }
+        }
+        
+        func addOneForType(_ type: Calendar.Component) {
+            switch type {
+            case .second:
+                seconds += 1
+            case .minute:
+                minutes += 1
+            case .hour:
+                hours += 1
+            case .day:
+                days += 1
+            case .month:
+                months += 1
+            case .year:
+                years += 1
+            default:
+                print("ut oh")
+            }
+        }
+        
+        func nextTypeDownTreeFromType(_ type: Calendar.Component) -> Calendar.Component {
+            switch type {
+            case .year:
+                return .month
+            case .month:
+                return .day
+            case .day:
+                return .hour
+            case .hour:
+                return .minute
+            case .minute:
+                return .second
+            case .second:
+                return .second
+            default:
+                return .second
+            }
+
+        }
+        
+        
+        calculateForComoponentType(.year)
+        
+        return (years: years, months: months, days: days, hours: hours, minutes: minutes, seconds: seconds)
+
+        
+    }
+    
     
     public func string(withFormat format: String) -> String? {
         let dateFormatter = DateFormatter()
