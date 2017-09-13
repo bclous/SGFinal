@@ -36,6 +36,7 @@ class BDCStockChart: UIView {
     
     public var dateIntervalType : DateIntervalType = .weekly {
         didSet {
+            formatDefaultXAxisLabels()
             switch dateIntervalType {
             case .daily:
                 xAxisDateFormat = "E"
@@ -51,9 +52,12 @@ class BDCStockChart: UIView {
         }
     }
     
+    public var xLabels : [Float] = []
+    
     
     private var sortedData : [(x: Date, y: Float)] = []
     private var chartData : [(x: Float, y: Float)] = []
+   
     private let calendar = Calendar.current
     
     
@@ -86,19 +90,13 @@ class BDCStockChart: UIView {
         createChartData()
         let series = ChartSeries(data: chartData)
         series.area = true
+        chart.series.removeAll()
         chart.add(series)
-        
-        // need to fix this!!
-        chart.xLabels = firstInMonthIndices()
-        
-        ///
-        
-        
-        
+        chart.xLabels = xLabels
         chart.xLabelsFormatter = { self.dateStringFromInt(Int($1))}
         chart.axesColor = UIColor.white.withAlphaComponent(0.2)
         chart.labelColor = UIColor.white.withAlphaComponent(0.9)
-        chart.gridColor = UIColor.white.withAlphaComponent(0.05)
+        chart.gridColor = UIColor.white.withAlphaComponent(0.1)
         chart.axesColor = UIColor.red
         chart.axesColor = SGConstants.mainBlackColor
         chart.yLabelsOnRightSide = true
@@ -123,6 +121,24 @@ class BDCStockChart: UIView {
             let value = (x,y)
             chartData.append(value)
         }
+    }
+    
+    private func firstInDayIndices() -> [Float] {
+        
+        var indices : [Int] = []
+        
+        for index in 0...sortedData.count - 1 {
+            indices.append(index)
+        }
+        
+        var indicesFloat : [Float] = []
+        
+        for index in indices {
+            indicesFloat.append(Float(index))
+        }
+        
+        return indicesFloat
+
     }
     
     private func firstInWeekIndices() -> [Float] {
@@ -267,4 +283,21 @@ class BDCStockChart: UIView {
         }
         
     }
+    
+    private func formatDefaultXAxisLabels() {
+        switch dateIntervalType {
+        case .daily:
+            xLabels = firstInDayIndices()
+        case .weekly:
+            xLabels = firstInWeekIndices()
+        case .monthly:
+            xLabels = firstInMonthIndices()
+        case .quarterly:
+            xLabels = firstInQuarterIndices()
+        case .yearly:
+            xLabels = firstInYearIndices()
+        }
+    }
+    
+    
 }
