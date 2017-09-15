@@ -40,7 +40,7 @@ class MainStockSummaryCell: UITableViewCell {
         case .index:
             mainLabel.text = "S&P 500 Return"
             let startPrice = isTodayReturn ? portfolio.index.adjPriceLastClose : portfolio.index.adjPriceStartDate
-            percentageChangeLabel.text = portfolio.index.percentageString(startPx: startPrice, endPx: portfolio.index.adjPriceCurrent)
+            percentageChangeLabel.text = portfolio.index.percentageString(startPx: startPrice, endPx: portfolio.index.adjPriceCurrent, decimalPlaces: 1)
             directionLabel.text = portfolio.index.adjPriceCurrent >= startPrice ? "+" : "-"
             percentageChangeContainerView.backgroundColor = portfolio.index.adjPriceCurrent >= startPrice ? SGConstants.mainGreenColor : SGConstants.mainRedColor
         case .plusMinus:

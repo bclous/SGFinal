@@ -14,8 +14,7 @@ class IndividualStockVC: UIViewController, IndividualHeaderViewDelegate {
     
     @IBOutlet weak var headerView: IndividualHeaderView!
     @IBOutlet weak var mainTableView: UITableView!
-    let toggleView = IndividualToggleView()
-    let performanceView = IndividualPerformanceView()
+    let performanceView = BDCStockPerformanceView()
     var isTodayReturn = true
     var timePeriod : IndividualSegmentType = .sinceStartDate
     
@@ -23,7 +22,7 @@ class IndividualStockVC: UIViewController, IndividualHeaderViewDelegate {
         super.viewDidLoad()
         formatTableView()
         formatHeaderView()
-        formatToggleView()
+        formatPerformanceView()
     }
     
     func formatHeaderView() {
@@ -31,6 +30,14 @@ class IndividualStockVC: UIViewController, IndividualHeaderViewDelegate {
         if let stock = stock {
             headerView.formatHeaderViewWithStock(stock)
         }
+    }
+    
+    func formatPerformanceView() {
+        if let stock = stock {
+            performanceView.stocks = (stock: stock, index: DataStore.shared.currentPortfolio.index)
+            performanceView.formatView()
+        }
+        
     }
     
     func backButtonTapped() {
@@ -45,17 +52,13 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource {
     func formatTableView() {
         mainTableView.delegate = self
         mainTableView.dataSource = self
-        mainTableView.register(UINib(nibName: "GraphTableViewCell", bundle: nil), forCellReuseIdentifier: "graphCell")
         mainTableView.register(UINib(nibName: "NewsItemCell", bundle: nil), forCellReuseIdentifier: "newsCell")
         mainTableView.separatorStyle = .none
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "graphCell") as! GraphTableViewCell
-            cell.formatChartCell(stock: stock!, timePeriod: timePeriod)
-            return cell
-        } else if indexPath.section == 3 {
+
+        if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell") as! NewsItemCell
             return cell
         } else {
@@ -65,7 +68,7 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -73,10 +76,8 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource {
         case 0:
             return 0
         case 1:
-            return 1
-        case 2:
             return 0
-        case 3:
+        case 2:
             if let stock = stock {
                 return stock.newsItems.count
             } else {
@@ -94,8 +95,6 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource {
         case 1:
             return 200
         case 2:
-            return 100
-        case 3:
             return 150
         default:
             return 100
@@ -107,10 +106,8 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource {
         case 0:
             return 60
         case 1:
-            return 85
+            return 400
         case 2:
-            return 85
-        case 3:
             return 50
         default:
             return 100
@@ -124,10 +121,8 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource {
             view.isUserInteractionEnabled = false
             return view
         } else if section == 1 {
-            return toggleView
-        } else if section == 2 {
             return performanceView
-        } else {
+        } else  {
             return NewsSectionHeaderView()
         }
     }
@@ -143,17 +138,5 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     
-}
-
-extension IndividualStockVC : IndividualToggleViewDelegate {
-    
-    func formatToggleView() {
-        toggleView.delegate = self
-    }
-    
-    func toggleChosen(type: IndividualSegmentType) {
-        timePeriod = type
-        mainTableView.reloadData()
-    }
     
 }

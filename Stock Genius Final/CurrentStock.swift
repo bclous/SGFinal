@@ -19,6 +19,7 @@ class CurrentStock: Stock {
     var priceHistory : [Date : Float]
     var hasShortPriceHistory : Bool
     var hasLongPriceHistory : Bool
+    var hasIntraDayPriceHistory: Bool
     var currentPriceAPIKey : String
     var lastClosePriceAPIKey : String
     var sincePeriodBeginAPIKey : String
@@ -26,6 +27,7 @@ class CurrentStock: Stock {
     let lastClosePriceKey = "lastClosePrice"
     let sincePeriodBeginPriceKey = "sincePeriodStartPrice"
     var stockPriceDays : [StockPriceDay]
+    var lastToggleSegment : IndividualSegmentType = .sixMonths
     
     override init() {
         self.isTrading = true
@@ -37,6 +39,7 @@ class CurrentStock: Stock {
         self.priceHistory = [:]
         self.hasShortPriceHistory = false
         self.hasLongPriceHistory = false
+        self.hasIntraDayPriceHistory = false
         self.currentPriceAPIKey = ""
         self.lastClosePriceAPIKey = ""
         self.sincePeriodBeginAPIKey = ""
@@ -67,13 +70,14 @@ class CurrentStock: Stock {
         
     }
     
-    public func updatePricesWithResponse(_ response: [String : Any]) {
+    public func updatePricesWithResponse(_ response: [String : Any], callType: AlphaVantageCallType) {
         updateAPIKeysWithResponse(response)
         let priceDictionary = response["Time Series (Daily)"] as? [String : Any]
         updateCurrentPrice(timeSeries: priceDictionary)
         updateLastClosePrice(timeSeries: priceDictionary)
         updateSincePeriodBegin(timeSeries: priceDictionary)
         updateStockPriceDays(timeSeries: priceDictionary)
+        updateHistoryFlags(timeSeries: priceDictionary, callType: callType)
     }
 
     public func percentageReturn(isTodayReturn: Bool) -> Float {
@@ -103,6 +107,25 @@ class CurrentStock: Stock {
     
 
     // helper methods to update prices
+    
+    private func updateHistoryFlags(timeSeries: [String : Any]?, callType: AlphaVantageCallType) {
+        if let timeSeries = timeSeries {
+            if timeSeries.count != 0 {
+                switch callType {
+                case .intraday:
+                    hasIntraDayPriceHistory = true
+                    hasShortPriceHistory = true
+                case .shortHistory:
+                    hasIntraDayPriceHistory = true
+                    hasShortPriceHistory = true
+                case .longHistory:
+                    hasLongPriceHistory = true
+                    hasShortPriceHistory = true
+                    hasIntraDayPriceHistory = true
+                }
+            }
+        }
+    }
     
     private func updateStockPriceDays(timeSeries: [String : Any]?) {
         
@@ -203,6 +226,34 @@ class CurrentStock: Stock {
     
     
     // functions for graph
+    
+    public func performanceReturnFromType(_ type: IndividualSegmentType) -> String {
+        
+        let data = graphDataFromType(type)
+        
+        if data.count > 0 {
+            let firstDay = data[0].y
+            let lastDay = data[data.count - 1].y
+            return percentageString(startPx: firstDay, endPx: lastDay, decimalPlaces: 2)
+        } else {
+            return "-"
+        }
+
+    }
+    
+    public func performanceColorFromType(_ type: IndividualSegmentType) -> UIColor {
+        
+        let data = graphDataFromType(type)
+        
+        if data.count > 0 {
+            let firstDay = data[0].y
+            let lastDay = data[data.count - 1].y
+            return lastDay >= firstDay ? SGConstants.mainGreenColor : SGConstants.mainRedColor
+        } else {
+            return SGConstants.mainGreenColor
+        }
+
+    }
     
     public func graphDataFromType(_ type: IndividualSegmentType) -> [(x: Date, y: Float)] {
         

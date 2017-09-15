@@ -20,12 +20,140 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Stock Genius Final/CurrentStock.swift"
-            timestampString = "527036433.075842"
+            timestampString = "527183880.154702"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
-            landmarkName = "graphDataFromType(_:)"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "updateHistoryFlags(timeSeries:callType:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Stock Genius Final/CurrentStock.swift"
+            timestampString = "527183949.923706"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "updateHistoryFlags(timeSeries:callType:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Stock Genius Final/CurrentStock.swift"
+            timestampString = "527183951.244544"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "updateHistoryFlags(timeSeries:callType:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Stock Genius Final/AlphaVantageClient.swift"
+            timestampString = "527183984.240445"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "pullPricesForStock(_:callType:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Stock Genius Final/CurrentStock.swift"
+            timestampString = "527184027.950153"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+            landmarkName = "updateHistoryFlags(timeSeries:callType:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Stock Genius Final/CurrentStock.swift"
+            timestampString = "527184031.085935"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "updateHistoryFlags(timeSeries:callType:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Stock_Genius_Final.CurrentStock.(updateHistoryFlags in _434670E916730DD64E043C42A3E7A214) (timeSeries : Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;, callType : Stock_Genius_Final.AlphaVantageCallType) -&gt; ()"
+                  moduleName = "Stock Genius Final"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclous/Desktop/SGFinal/Stock%20Genius%20Final/CurrentStock.swift"
+                  timestampString = "527185347.01016"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "112"
+                  endingLineNumber = "112"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Stock_Genius_Final.CurrentStock.(updateHistoryFlags in _434670E916730DD64E043C42A3E7A214) (timeSeries : Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;, callType : Stock_Genius_Final.AlphaVantageCallType) -&gt; ()"
+                  moduleName = "Stock Genius Final"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclous/Desktop/SGFinal/Stock%20Genius%20Final/CurrentStock.swift"
+                  timestampString = "527185347.011474"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "112"
+                  endingLineNumber = "112"
+                  offsetFromSymbolStart = "80">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Stock Genius Final/CurrentStock.swift"
+            timestampString = "527185144.680661"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "updatePricesWithResponse(_:callType:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

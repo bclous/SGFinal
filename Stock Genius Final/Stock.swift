@@ -31,12 +31,12 @@ class Stock: NSObject {
         return String(format: "%.2f", price)
     }
     
-    public func percentageString(startPx: Float, endPx : Float) -> String {
-        return startPx == 0 ? "-" : percentageStringFromDecimal(endPx / startPx - 1) + "%"
+    public func percentageString(startPx: Float, endPx : Float, decimalPlaces: Int) -> String {
+        return startPx == 0 ? "-" : percentageStringFromDecimal((endPx / startPx - 1), decimalPlaces: decimalPlaces) + "%"
     }
     
-    public func percentageStringFromDecimal( _ change: Float) -> String {
-        return String(format: "%.1f", abs(change * 100))
+    public func percentageStringFromDecimal( _ change: Float, decimalPlaces: Int) -> String {
+        return String(format: "%.\(decimalPlaces)f", abs(change * 100))
     }
     
     public func dollarChangeImage(startPx: Float, endPx: Float) -> UIImage? {

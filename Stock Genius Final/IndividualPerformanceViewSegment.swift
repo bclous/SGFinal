@@ -42,14 +42,25 @@ class IndividualPerformanceViewSegment: UIView {
         percentageChangeContainerView.layer.cornerRadius = 5
         percentageChangeContainerView.backgroundColor = SGConstants.mainGreenColor
         percentageChangeSuppView.backgroundColor = SGConstants.mainGreenColor
+        stockLabel.text = "-"
+        percentageChangeLabel.text = "-"
+        percentageChangeContainerView.backgroundColor = UIColor.white.withAlphaComponent(0.1)
         
     }
     
-    public func formatViewForPercentageChange(_ change: Float) {
-        percentageChangeContainerView.backgroundColor = change >= 0 ? SGConstants.mainGreenColor : SGConstants.mainRedColor
-        percentageChangeSuppView.backgroundColor = change >= 0 ? SGConstants.mainGreenColor : SGConstants.mainRedColor
+    public func formatViewForStock(_ stock: CurrentStock, segmentType: IndividualSegmentType) {
         
+        stockLabel.text = stock.ticker == "SPY" ? "S&P 500 Index" : stock.ticker
+        percentageChangeLabel.text = stock.performanceReturnFromType(segmentType)
+        percentageChangeContainerView.backgroundColor = stock.performanceColorFromType(segmentType)
+        percentageChangeSuppView.backgroundColor = percentageChangeContainerView.backgroundColor
         
+    }
+    
+    public func formatViewForLoadingData() {
+        percentageChangeLabel.text = "-"
+        percentageChangeContainerView.backgroundColor = SGConstants.mainGreenColor
+        percentageChangeSuppView.backgroundColor = SGConstants.mainGreenColor
     }
 
 }

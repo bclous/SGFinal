@@ -42,7 +42,7 @@ class PastPicksStockCell: UITableViewCell {
         directionImageView.image = stock.dollarChangeImage(startPx: stock.adjPriceStartDate, endPx: stock.adjPriceEndDate)
         priceChangeLabel.text = stock.priceString(abs(stock.adjPriceEndDate - stock.adjPriceStartDate))
         percentageChangeContainerView.backgroundColor = isPositive ? SGConstants.mainGreenColor : SGConstants.mainRedColor
-        percentageChangeLabel.text = stock.percentageStringFromDecimal(stock.finalPercentageReturn) + "%"
+        percentageChangeLabel.text = stock.percentageStringFromDecimal(stock.finalPercentageReturn, decimalPlaces: 1) + "%"
         percentageDirectionLabel.text = isPositive ? "+" : "-"
         
     }

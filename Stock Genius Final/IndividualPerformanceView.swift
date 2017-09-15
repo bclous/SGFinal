@@ -10,6 +10,8 @@ import UIKit
 
 class IndividualPerformanceView: UIView {
 
+    @IBOutlet weak var stockView: IndividualPerformanceViewSegment!
+    @IBOutlet weak var indexView: IndividualPerformanceViewSegment!
     @IBOutlet var contentView: UIView!
     
     override init(frame: CGRect) { // for using CustomView in code
@@ -35,8 +37,24 @@ class IndividualPerformanceView: UIView {
         // change this
         contentView.backgroundColor = SGConstants.mainBlackColor
         
+    }
+    
+    public func formatViewForStocks(_ stocks: (stock: CurrentStock, index: CurrentStock), segmentType: IndividualSegmentType) {
+        
+        stockView.formatViewForStock(stocks.stock, segmentType: segmentType)
+        indexView.formatViewForStock(stocks.index, segmentType: segmentType)
         
     }
+    
+    public func formatViewForLoadingData() {
+        
+        stockView.formatViewForLoadingData()
+        indexView.formatViewForLoadingData()
+    }
+    
+    
+    
+    
 
 
 }

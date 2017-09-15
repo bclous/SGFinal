@@ -94,8 +94,8 @@ class ToggleSegmentView: UIView {
     
     @IBAction func segmentButtonTapped(_ sender: Any) {
         delegate?.segmentTapped(type: segmentType)
-        DataStore.shared.individualToggleState = segmentType
         
+    
     }
     
 

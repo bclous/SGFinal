@@ -65,7 +65,7 @@ class IndividualToggleView: UIView, IndividualSegmentDelegate {
         }
     }
     
-    func formatToggleViewForType(_ type: IndividualSegmentType) {
+    public func formatToggleViewForType(_ type: IndividualSegmentType) {
         for view in toggleSegments {
             let chosen = type == view.segmentType
             view.formatSegment(chosen: chosen)

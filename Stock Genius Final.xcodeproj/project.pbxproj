@@ -76,6 +76,8 @@
 		0F5BE8FF1F07FCBC00607D87 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5BE8FE1F07FCBC00607D87 /* TabBarController.swift */; };
 		0F5BECA71F5EFA8200DF7F50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0F5BECA61F5EFA8200DF7F50 /* GoogleService-Info.plist */; };
 		0FDB582D1F5F4C3F00990628 /* UnableToConnectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDB582C1F5F4C3E00990628 /* UnableToConnectVC.swift */; };
+		0FDCCBE41F6C0E6000D08C09 /* BDCStockPerformanceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FDCCBE31F6C0E6000D08C09 /* BDCStockPerformanceView.xib */; };
+		0FDCCBE61F6C0E7C00D08C09 /* BDCStockPerformanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDCCBE51F6C0E7C00D08C09 /* BDCStockPerformanceView.swift */; };
 		0FFB6F311F10325C00FD8BC1 /* PastPicksNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFB6F2F1F10325C00FD8BC1 /* PastPicksNoteCell.swift */; };
 		0FFB6F321F10325C00FD8BC1 /* PastPicksNoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FFB6F301F10325C00FD8BC1 /* PastPicksNoteCell.xib */; };
 		0FFB6F3B1F13CF7100FD8BC1 /* RemainingCashCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FFB6F3A1F13CF6F00FD8BC1 /* RemainingCashCell.xib */; };
@@ -178,6 +180,8 @@
 		0F5BE8FE1F07FCBC00607D87 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		0F5BECA61F5EFA8200DF7F50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0FDB582C1F5F4C3E00990628 /* UnableToConnectVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnableToConnectVC.swift; sourceTree = "<group>"; };
+		0FDCCBE31F6C0E6000D08C09 /* BDCStockPerformanceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDCStockPerformanceView.xib; sourceTree = "<group>"; };
+		0FDCCBE51F6C0E7C00D08C09 /* BDCStockPerformanceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDCStockPerformanceView.swift; sourceTree = "<group>"; };
 		0FFB6F2F1F10325C00FD8BC1 /* PastPicksNoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastPicksNoteCell.swift; sourceTree = "<group>"; };
 		0FFB6F301F10325C00FD8BC1 /* PastPicksNoteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PastPicksNoteCell.xib; sourceTree = "<group>"; };
 		0FFB6F3A1F13CF6F00FD8BC1 /* RemainingCashCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RemainingCashCell.xib; sourceTree = "<group>"; };
@@ -258,6 +262,8 @@
 				0F3A155B1F54A96000EFB79F /* IndividualHeaderView.swift */,
 				0F3A155D1F55B12C00EFB79F /* IndividualToggleView.xib */,
 				0F3A15611F55B21200EFB79F /* IndividualToggleView.swift */,
+				0F3A15731F55C9FF00EFB79F /* ToggleSegmentView.xib */,
+				0F3A15751F55CA5700EFB79F /* ToggleSegmentView.swift */,
 				0F3A15631F55B28700EFB79F /* IndividualPerformanceView.xib */,
 				0F3A15651F55B2AA00EFB79F /* IndividualPerformanceView.swift */,
 				0F3A15771F55FB6700EFB79F /* IndividualPerformanceViewSegment.xib */,
@@ -267,10 +273,10 @@
 				0F3A156B1F55B3CA00EFB79F /* GraphTableViewCell.swift */,
 				0F3A156C1F55B3CA00EFB79F /* GraphTableViewCell.xib */,
 				0F5AE2271F671704000DA6C0 /* BDCStockChart.swift */,
+				0FDCCBE31F6C0E6000D08C09 /* BDCStockPerformanceView.xib */,
+				0FDCCBE51F6C0E7C00D08C09 /* BDCStockPerformanceView.swift */,
 				0F3A156F1F55B7B000EFB79F /* NewsItemCell.swift */,
 				0F3A15701F55B7B000EFB79F /* NewsItemCell.xib */,
-				0F3A15731F55C9FF00EFB79F /* ToggleSegmentView.xib */,
-				0F3A15751F55CA5700EFB79F /* ToggleSegmentView.swift */,
 			);
 			name = IndividualStock;
 			sourceTree = "<group>";
@@ -522,6 +528,7 @@
 				0FFB6F471F15586000FD8BC1 /* IndividualLabelView.xib in Resources */,
 				0F3A155E1F55B12C00EFB79F /* IndividualToggleView.xib in Resources */,
 				AB2FB9A71F029D6C00CA72B2 /* TabBar.xib in Resources */,
+				0FDCCBE41F6C0E6000D08C09 /* BDCStockPerformanceView.xib in Resources */,
 				0FFB6F561F1676BB00FD8BC1 /* GirlView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -635,6 +642,7 @@
 				0F5AE2261F66C4DE000DA6C0 /* StockPriceDay.swift in Sources */,
 				0FFB6F4F1F15642200FD8BC1 /* IntroVC.swift in Sources */,
 				0F16DFA11F0E6B8C006C531E /* AlphaVantageClient.swift in Sources */,
+				0FDCCBE61F6C0E7C00D08C09 /* BDCStockPerformanceView.swift in Sources */,
 				0F2651EE1F05583E00754D0F /* MainStockSummaryCell.swift in Sources */,
 				0F1DE2CF1F62DC2500CFC09E /* SectionHeaderClearView.swift in Sources */,
 				0F5AE2281F671704000DA6C0 /* BDCStockChart.swift in Sources */,

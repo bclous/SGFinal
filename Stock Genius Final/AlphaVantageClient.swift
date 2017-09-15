@@ -9,6 +9,12 @@
 import UIKit
 import Alamofire
 
+enum AlphaVantageCallType {
+    case intraday
+    case shortHistory
+    case longHistory
+}
+
 protocol AlphaVantageClientDelegate: class {
     func pricePullInProgressFromAV(percentageComplete: Float)
 }
@@ -51,7 +57,7 @@ class AlphaVantageClient: NSObject {
         var unsuccessfulStocks : [CurrentStock] = []
         
         for stock in stocks {
-            pullPricesForStock(stock, completion: { (success) in
+            pullPricesForStock(stock, callType: .shortHistory, completion: { (success) in
                 if success {
                     successfulStocks.append(stock)
                     self.successfulPulls += 1
@@ -72,8 +78,8 @@ class AlphaVantageClient: NSObject {
         }
     }
     
-    public func pullPricesForStock(_ stock: CurrentStock, completion: @escaping (_ success: Bool) -> ()) {
-        let requestURL = urlStringForStock(stock, isLongPull: false)
+    public func pullPricesForStock(_ stock: CurrentStock, callType: AlphaVantageCallType, completion: @escaping (_ success: Bool) -> ()) {
+        let requestURL = urlStringForStock(stock, type: callType)
         let request = Alamofire.request(requestURL)
         let queue = DispatchQueue(label: "com.cnoon.response-queue", qos: .utility, attributes: [.concurrent])
         
@@ -83,19 +89,30 @@ class AlphaVantageClient: NSObject {
             let isGoodResponse = !response.result.isFailure && responseDictionary?.count ?? 0 > 0 && responseDictionary != nil
             
             if isGoodResponse {
-                stock.updatePricesWithResponse(responseDictionary!)
+                stock.updatePricesWithResponse(responseDictionary!, callType : callType)
                 completion(true)
             } else {
-                print("failed for ticker: \(stock.ticker)")
                 completion(false)
                 print("failed for: \(stock.ticker)")
             }
         }
     }
     
-    private func urlStringForStock(_ stock: CurrentStock, isLongPull: Bool) -> String {
+    private func urlStringForStock(_ stock: CurrentStock, type: AlphaVantageCallType) -> String {
+        
         let ticker = stock.ticker
-        return apiPrefix + ticker + apiKeySegment + apiKey
+        
+        switch type {
+        case .intraday:
+            return apiPrefix + ticker + apiKeySegment + apiKey
+        case .shortHistory:
+            return apiPrefix + ticker + apiKeySegment + apiKey
+        case .longHistory:
+            print ("\(apiPrefix)\(ticker)outputsize=full\(apiKeySegment)\(apiKey)")
+            return apiPrefix + ticker + "&outputsize=full" + apiKeySegment + apiKey
+            
+        }
+        
     }
     
 }

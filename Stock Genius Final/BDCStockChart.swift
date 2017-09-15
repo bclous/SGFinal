@@ -22,9 +22,12 @@ class BDCStockChart: UIView {
     let chart = Chart()
     public var data : [(x: Date, y: Float)] = [] {
         didSet {
-            sortedData = data.sorted(by: {$0.x < $1.x})
-            formatDefaultIntervalType()
-            formatChart()
+            
+            if !data.isEmpty {
+                sortedData = data.sorted(by: {$0.x < $1.x})
+                formatDefaultIntervalType()
+                formatChart()
+            }
         }
     }
     public var chartBackgroundColor = UIColor.black {
@@ -37,7 +40,6 @@ class BDCStockChart: UIView {
     public var dateIntervalType : DateIntervalType = .weekly {
         didSet {
             formatDefaultXAxisLabels()
-            formatDefaultYAxisLabels()
             switch dateIntervalType {
             case .daily:
                 xAxisDateFormat = "E-d"
@@ -59,11 +61,8 @@ class BDCStockChart: UIView {
     private var sortedData : [(x: Date, y: Float)] = []
     private var chartData : [(x: Float, y: Float)] = []
     private let calendar = Calendar.current
-    private var minY : Float = 0
-    private var maxY : Float = 0
-    private var midY : Float = 0
-    
-    
+
+
     var isIntraday = false
 
     override init(frame: CGRect) { // for using CustomView in code
@@ -97,7 +96,7 @@ class BDCStockChart: UIView {
         chart.series.removeAll()
         chart.add(series)
         chart.xLabels = xLabels
-        chart.yLabels = [minY, midY, maxY]
+        chart.yLabels = yAxisLabels()
         chart.xLabelsFormatter = { self.dateStringFromInt(Int($1))}
         chart.axesColor = UIColor.white.withAlphaComponent(0.2)
         chart.labelColor = UIColor.white.withAlphaComponent(0.9)
@@ -122,13 +121,17 @@ class BDCStockChart: UIView {
         
         chartData.removeAll()
         
-        for index in 0...sortedData.count - 1 {
-            let stockDay = sortedData[index]
-            let x = Float(index)
-            let y = stockDay.y
-            let value = (x,y)
-            chartData.append(value)
+        if !sortedData.isEmpty {
+            for index in 0...sortedData.count - 1 {
+                let stockDay = sortedData[index]
+                let x = Float(index)
+                let y = stockDay.y
+                let value = (x,y)
+                chartData.append(value)
+            }
         }
+        
+     
     }
     
     private func firstInDayIndices() -> [Float] {
@@ -307,41 +310,42 @@ class BDCStockChart: UIView {
         }
     }
     
-    private func formatDefaultYAxisLabels() {
+    
+    private func yAxisLabels() -> [Float] {
         
-        minY = sortedData[0].y
-        maxY = 0
-        midY = 0
+        var minY : Float = sortedData[0].y
+        var maxY : Float = 0
         
         for (_, closingPrice) in sortedData {
             maxY = closingPrice > maxY ? closingPrice : maxY
             minY = closingPrice < minY ? closingPrice : minY
-            
         }
-    
+        
         var intMaxY = Int((maxY) + 1)
         var intMinY = Int(minY)
-        print("\(intMinY)")
-        var spread = intMaxY - intMinY
         var intMidY = 0
+        var spread = intMaxY - intMinY
         
-        if spread % 2 == 0 {
-            intMidY = spread / 2 + intMinY
+        if spread < 2 {
+            return [Float(intMinY), Float(intMaxY)]
         } else {
-            if intMinY == 0 {
-                intMaxY += 1
-                spread = intMaxY - intMinY
+            
+            if spread % 2 == 0 {
                 intMidY = spread / 2 + intMinY
             } else {
-                intMinY -= 1
-                spread = intMaxY - intMinY
-                intMidY = spread / 2 + intMinY
+                if intMinY == 0 {
+                    intMaxY += 1
+                    spread = intMaxY - intMinY
+                    intMidY = spread / 2 + intMinY
+                } else {
+                    intMinY -= 1
+                    spread = intMaxY - intMinY
+                    intMidY = spread / 2 + intMinY
+                }
             }
+            
+            return [Float(intMinY), Float(intMidY),Float(intMaxY)]
         }
-        
-        maxY = Float(intMaxY)
-        midY = Float(intMidY)
-        minY = Float(intMinY)
         
     }
     

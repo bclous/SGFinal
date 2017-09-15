@@ -62,13 +62,13 @@ class MainStockCell: UITableViewCell {
             let changeString = isPositive ? "+" : "-"
             percentageChangeContainerView.backgroundColor = stock.isTrading ? color : SGConstants.mainBlackColor
             percentageChangeDirectionLabel.text = stock.isTrading ? changeString : ""
-            percentageChangeLabel.text = stock.isTrading ? stock.percentageString(startPx: startingPx, endPx: stock.adjPriceCurrent) : ""
+            percentageChangeLabel.text = stock.isTrading ? stock.percentageString(startPx: startingPx, endPx: stock.adjPriceCurrent, decimalPlaces: 1) : ""
             notTradingView.alpha = stock.isTrading ? 0 : 1
         } else {
             priceDirectionImageView.alpha = 1
             priceChangeLabel.text = stock.isTrading ? stock.priceString(abs(stock.adjPriceCurrent - startingPx)) : stock.priceString(abs(stock.acquiredPrice - startingPx))
             percentageChangeContainerView.backgroundColor = isPositive ? SGConstants.mainGreenColor : SGConstants.mainRedColor
-            percentageChangeLabel.text = stock.isTrading ? stock.percentageString(startPx: startingPx, endPx: stock.adjPriceCurrent) : stock.percentageString(startPx: startingPx, endPx: stock.acquiredPrice)
+            percentageChangeLabel.text = stock.isTrading ? stock.percentageString(startPx: startingPx, endPx: stock.adjPriceCurrent, decimalPlaces: 1) : stock.percentageString(startPx: startingPx, endPx: stock.acquiredPrice, decimalPlaces: 1)
             percentageChangeDirectionLabel.text = isPositive ? "+" : "-"
             notTradingView.alpha = 0
         }

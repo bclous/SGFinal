@@ -12,6 +12,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IndividualPerformanceView" customModule="Stock_Genius_Final" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="s3O-tJ-0nu"/>
+                <outlet property="indexView" destination="o2c-sL-bJB" id="mdQ-0T-hiT"/>
+                <outlet property="stockView" destination="xIX-8e-GWk" id="gaL-vd-Iil"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
