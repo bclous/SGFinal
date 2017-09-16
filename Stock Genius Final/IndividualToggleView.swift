@@ -70,15 +70,20 @@ class IndividualToggleView: UIView, IndividualSegmentDelegate {
             let chosen = type == view.segmentType
             view.formatSegment(chosen: chosen)
         }
+        
+        
     }
     
     func segmentTapped(type: IndividualSegmentType) {
         
-        for view in toggleSegments {
-            let chosen = type == view.segmentType
-            view.formatSegment(chosen: chosen)
-            delegate?.toggleChosen(type: type)
-        }
+        print("\(Date()) segment Button delegate call in toggle view\n\n\n\n")
+        print("\(Date()) finished updateing toggleviews")
+        
+        delegate?.toggleChosen(type: type)
+        
+        
+        
+        
         
     }
 

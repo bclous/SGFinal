@@ -18,31 +18,23 @@
                 <rect key="frame" x="0.0" y="0.0" width="459" height="208.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Graph is here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V3V-cy-hn1">
-                        <rect key="frame" x="178.5" y="94" width="102.5" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k3l-hr-A2Q" customClass="BDCStockChart" customModule="Stock_Genius_Final" customModuleProvider="target">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k3l-hr-A2Q" customClass="BDCStockPerformanceView" customModule="Stock_Genius_Final" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="459" height="208.5"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.23087176579999999" green="0.87033258700000005" blue="0.21347616550000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.26807689109999999" green="0.54880666369999997" blue="0.87033258700000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="k3l-hr-A2Q" secondAttribute="trailing" id="69y-cj-JLE"/>
-                    <constraint firstItem="V3V-cy-hn1" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="NVi-Fe-ryu"/>
                     <constraint firstItem="k3l-hr-A2Q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="cx0-FE-yQN"/>
                     <constraint firstItem="k3l-hr-A2Q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="jR2-Ez-fQd"/>
                     <constraint firstAttribute="bottom" secondItem="k3l-hr-A2Q" secondAttribute="bottom" id="mgN-Vy-P2q"/>
-                    <constraint firstItem="V3V-cy-hn1" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="r1K-M9-eNM"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="0.26807689109999999" green="0.54880666369999997" blue="0.87033258700000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <connections>
-                <outlet property="chartView" destination="k3l-hr-A2Q" id="ptG-GV-nEi"/>
+                <outlet property="performanceView" destination="k3l-hr-A2Q" id="P6h-FJ-feS"/>
             </connections>
-            <point key="canvasLocation" x="-325" y="21"/>
+            <point key="canvasLocation" x="-747" y="-20"/>
         </tableViewCell>
     </objects>
 </document>

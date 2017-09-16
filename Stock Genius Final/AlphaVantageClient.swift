@@ -57,7 +57,8 @@ class AlphaVantageClient: NSObject {
         var unsuccessfulStocks : [CurrentStock] = []
         
         for stock in stocks {
-            pullPricesForStock(stock, callType: .shortHistory, completion: { (success) in
+            let callType : AlphaVantageCallType = stock.ticker == "SPY" ? .longHistory : .shortHistory
+            pullPricesForStock(stock, callType: callType, completion: { (success) in
                 if success {
                     successfulStocks.append(stock)
                     self.successfulPulls += 1

@@ -58,4 +58,26 @@ struct StockPriceDay {
         self.init(date: date, open: open, high: high, low: low, close: close, adjustedClose: adjustedClose, volume: volume, dividendAmount: dividendAmount, splitCoefficient: splitCoefficient)
     }
     
+    mutating func updateWithResponse(_ response: [String : String]) {
+        
+        let openString = response["1. open"] ?? "0"
+        let highString = response["2. high"] ?? "0"
+        let lowString = response["3. low"] ?? "0"
+        let closeString = response["4. close"] ?? "0"
+        let adjustedCloseString = response["5. adjusted close"] ?? "0"
+        let volumeString = response["6. volume"]  ?? "0"
+        let dividendAmountString = response["7. divident amount"] ?? "0"
+        let splitCoefficientString = response["8. split coefficient"] ?? "0"
+        
+        open = Float(openString) ?? open
+        high = Float(highString) ?? high
+        low = Float(lowString) ?? low
+        close = Float(closeString) ?? close
+        adjustedClose = Float(adjustedCloseString) ?? adjustedClose
+        volume = Int(volumeString) ?? volume
+        dividendAmount = Float(dividendAmountString) ?? dividendAmount
+        splitCoefficient = Float(splitCoefficientString) ?? splitCoefficient
+
+    }
+    
 }

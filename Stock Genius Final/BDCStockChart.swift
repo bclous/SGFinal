@@ -20,16 +20,8 @@ enum DateIntervalType {
 class BDCStockChart: UIView {
     
     let chart = Chart()
-    public var data : [(x: Date, y: Float)] = [] {
-        didSet {
-            
-            if !data.isEmpty {
-                sortedData = data.sorted(by: {$0.x < $1.x})
-                formatDefaultIntervalType()
-                formatChart()
-            }
-        }
-    }
+    public var data : [(x: Date, y: Float)] = []
+    
     public var chartBackgroundColor = UIColor.black {
         didSet {
             chart.backgroundColor = chartBackgroundColor
@@ -39,7 +31,7 @@ class BDCStockChart: UIView {
     
     public var dateIntervalType : DateIntervalType = .weekly {
         didSet {
-            formatDefaultXAxisLabels()
+    
             switch dateIntervalType {
             case .daily:
                 xAxisDateFormat = "E-d"
@@ -54,9 +46,6 @@ class BDCStockChart: UIView {
             }
         }
     }
-    
-    public var xLabels : [Float] = []
-    
     
     private var sortedData : [(x: Date, y: Float)] = []
     private var chartData : [(x: Float, y: Float)] = []
@@ -83,19 +72,33 @@ class BDCStockChart: UIView {
         chart.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
         chart.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
         chart.xLabelsSkipLast = false
+        chart.lineWidth = 1
         
         chartBackgroundColor = SGConstants.mainBlackColor
         backgroundColor = SGConstants.mainBlackColor
     }
     
+    public func formatChartWithData(_ data: [(x: Date, y: Float)]) {
+        if !data.isEmpty {
+            self.data = data
+            sortedData = data.sorted(by: {$0.x < $1.x})
+            formatChart()
+        }
+        
+        print("finished Formatting Chart")
+    }
+    
     private func formatChart() {
+        
         
         createChartData()
         let series = ChartSeries(data: chartData)
         series.area = true
         chart.series.removeAll()
         chart.add(series)
-        chart.xLabels = xLabels
+        
+        formatDefaultIntervalType()
+        chart.xLabels = xAxisLabels()
         chart.yLabels = yAxisLabels()
         chart.xLabelsFormatter = { self.dateStringFromInt(Int($1))}
         chart.axesColor = UIColor.white.withAlphaComponent(0.2)
@@ -220,21 +223,16 @@ class BDCStockChart: UIView {
     private func firstInQuarterIndices() -> [Float] {
         
         var firstInQuarter : [Float] = []
-        
         let firstInMonth = firstInMonthIndices()
-        let firstIndex = Int(firstInMonth[0])
-        let firstDate = sortedData[firstIndex].x
-        let firstMonth = calendar.component(.month, from: firstDate)
-        
-        for index in firstInMonth {
+        for index in 0...firstInMonth.count-1  {
             
-            let idx = Int(index)
-            let date = sortedData[idx].x
-            let month = calendar.component(.month, from: date)
-            let adjustedMonth = month < firstMonth ? month + 12 : month
-            if adjustedMonth % firstMonth == 0 {
-                firstInQuarter.append(Float(idx))
+            if index == 0 {
+                firstInQuarter.append(firstInMonth[index])
+            } else if (index) % 3 == 0 {
+                firstInQuarter.append(firstInMonth[index])
             }
+            
+
         }
         
         return firstInQuarter
@@ -281,9 +279,9 @@ class BDCStockChart: UIView {
         let months = lastDate.interval(ofComponent: .month, fromDate: startDate)
         let days = lastDate.interval(ofComponent: .day, fromDate: startDate)
         
-        if years > 0 {
+        if months > 12 {
             dateIntervalType = .yearly
-        } else if months >= 6 {
+        } else if months >= 7 {
             dateIntervalType = .quarterly
         } else if days <= 7 {
             dateIntervalType = .daily
@@ -295,18 +293,18 @@ class BDCStockChart: UIView {
         
     }
     
-    private func formatDefaultXAxisLabels() {
+    private func xAxisLabels() -> [Float] {
         switch dateIntervalType {
         case .daily:
-            xLabels = firstInDayIndices()
+            return firstInDayIndices()
         case .weekly:
-            xLabels = firstInWeekIndices()
+            return firstInWeekIndices()
         case .monthly:
-            xLabels = firstInMonthIndices()
+            return firstInMonthIndices()
         case .quarterly:
-            xLabels = firstInQuarterIndices()
+            return firstInQuarterIndices()
         case .yearly:
-            xLabels = firstInYearIndices()
+            return firstInYearIndices()
         }
     }
     

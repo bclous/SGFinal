@@ -20,14 +20,12 @@ class CurrentStock: Stock {
     var hasShortPriceHistory : Bool
     var hasLongPriceHistory : Bool
     var hasIntraDayPriceHistory: Bool
-    var currentPriceAPIKey : String
-    var lastClosePriceAPIKey : String
-    var sincePeriodBeginAPIKey : String
     let currentPriceKey = "currentPrice"
     let lastClosePriceKey = "lastClosePrice"
     let sincePeriodBeginPriceKey = "sincePeriodStartPrice"
     var stockPriceDays : [StockPriceDay]
     var lastToggleSegment : IndividualSegmentType = .sixMonths
+    var cachedResponse : [String : [ String : String]] = [:]
     
     override init() {
         self.isTrading = true
@@ -40,9 +38,6 @@ class CurrentStock: Stock {
         self.hasShortPriceHistory = false
         self.hasLongPriceHistory = false
         self.hasIntraDayPriceHistory = false
-        self.currentPriceAPIKey = ""
-        self.lastClosePriceAPIKey = ""
-        self.sincePeriodBeginAPIKey = ""
         self.stockPriceDays = []
         super.init()
     }
@@ -71,13 +66,21 @@ class CurrentStock: Stock {
     }
     
     public func updatePricesWithResponse(_ response: [String : Any], callType: AlphaVantageCallType) {
-        updateAPIKeysWithResponse(response)
-        let priceDictionary = response["Time Series (Daily)"] as? [String : Any]
-        updateCurrentPrice(timeSeries: priceDictionary)
-        updateLastClosePrice(timeSeries: priceDictionary)
-        updateSincePeriodBegin(timeSeries: priceDictionary)
-        updateStockPriceDays(timeSeries: priceDictionary)
+        
+        let priceDictionary = response["Time Series (Daily)"] as? [String : [String : String]]
+        cacheResponse(priceDictionary)
+        updateMainPrices()
+        updateStockPriceDays()
         updateHistoryFlags(timeSeries: priceDictionary, callType: callType)
+    }
+    
+    public func cacheResponse(_ response: [String : [String : String]]?) {
+        if let response = response {
+            for (key, value) in response {
+                cachedResponse.updateValue(value, forKey: key)
+            }
+        }
+        
     }
 
     public func percentageReturn(isTodayReturn: Bool) -> Float {
@@ -127,62 +130,50 @@ class CurrentStock: Stock {
         }
     }
     
-    private func updateStockPriceDays(timeSeries: [String : Any]?) {
+    private func updateStockPriceDays() {
         
-        if let timeSeries = timeSeries {
-            stockPriceDays.removeAll()
-            for (key, value) in timeSeries {
-                let stockPriceDate = StockPriceDay(dateKey: key, responseValue: value as! [String : String])
-                stockPriceDays.append(stockPriceDate)
-            }
+        stockPriceDays.removeAll()
+        for (key, value) in cachedResponse {
+            let spDay = StockPriceDay(dateKey: key, responseValue: value)
+            stockPriceDays.append(spDay)
+            
         }
         stockPriceDays.sort(by: {$0.date > $1.date})
 
     }
     
-    private func updateCurrentPrice(timeSeries: [String : Any]?) {
-        let dayDictionary = timeSeries?[currentPriceAPIKey] as? [String : Any]
-        let priceString =  dayDictionary?["5. adjusted close"] as? String ?? ""
-        adjPriceCurrent = Float(priceString) ?? 0
+    private func updateMainPrices() {
+        
+        let availableDates = availableDatesFromResponse()
+        let currentKey = currentPriceKey(availableDates: availableDates) ?? ""
+        let lastCloseKey = lastClosePriceKey(availableDates: availableDates) ?? ""
+        let sinceStartDateKey = sinceStartPeriodPriceKey(availableDates: availableDates) ?? ""
+        
+        adjPriceCurrent = adjustedCloseFromDateKey(currentKey)
+        adjPriceLastClose = adjustedCloseFromDateKey(lastCloseKey)
+        adjPriceStartDate = adjustedCloseFromDateKey(sinceStartDateKey)
+        
     }
     
-    private func updateLastClosePrice(timeSeries: [String : Any]?) {
-        let dayDictionary = timeSeries?[lastClosePriceAPIKey] as? [String : Any]
-        let priceString =  dayDictionary?["5. adjusted close"] as? String ?? ""
-        adjPriceLastClose = Float(priceString) ?? 0
+    private func adjustedCloseFromDateKey(_ key: String) -> Float {
+        let dayDictionary = cachedResponse[key]
+        let priceString =  dayDictionary?["5. adjusted close"] ?? ""
+        return Float(priceString) ?? 0
     }
     
-    private func updateSincePeriodBegin(timeSeries: [String : Any]?) {
-        let dayDictionary = timeSeries?[sincePeriodBeginAPIKey] as? [String : Any]
-        let priceString =  dayDictionary?["5. adjusted close"] as? String ?? ""
-        adjPriceStartDate = Float(priceString) ?? 0
-    }
-    
-    private func updateAPIKeysWithResponse(_ response: [String : Any]) {
-        let availableDates = availableDatesFromResponse(response)
-        currentPriceAPIKey = currentPriceKey(availableDates: availableDates) ?? ""
-        lastClosePriceAPIKey = lastClosePriceKey(availableDates: availableDates) ?? ""
-        sincePeriodBeginAPIKey = sinceStartPeriodPriceKey(availableDates: availableDates) ?? ""
-    }
-
-    private func availableDatesFromResponse(_ response: [String : Any]) -> [Date] {
+    private func availableDatesFromResponse() -> [Date] {
         
         var dates : [Date] = []
-        
-        let timeSeries = response["Time Series (Daily)"] as? [String : Any]
-        let keys = timeSeries?.keys
-        if let keys = keys {
-            for key in keys {
-                let date = Date.dateFromString(key, dateFormat: "yyyy-MM-dd")
-                if let date = date {
-                    dates.append(date)
-                }
+        let keys = cachedResponse.keys
+        for key in keys {
+            let date = Date.dateFromString(key, dateFormat: "yyyy-MM-dd")
+            if let date = date {
+                dates.append(date)
             }
         }
         
         dates.sort(by: {$0 > $1})
         return dates
-        
     }
     
     private func currentPriceKey(availableDates: [Date]) -> String? {

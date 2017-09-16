@@ -88,15 +88,24 @@ class ToggleSegmentView: UIView {
     }
     
     public func formatSegment(chosen: Bool) {
+        
+         print("ind toggle view format segment called from delegate")
+        
         containerView.backgroundColor = chosen ? SGConstants.mainBlueColor : SGConstants.mainBlackColor
         segmentButton.isEnabled = !chosen
     }
     
     @IBAction func segmentButtonTapped(_ sender: Any) {
-        delegate?.segmentTapped(type: segmentType)
+        
+        
+        //delegate?.segmentTapped(type: segmentType)
         
     
     }
     
+    @IBAction func segmentButtonTappedDown(_ sender: Any) {
+        print("segment Button Tapped\n\n\n")
+        delegate?.segmentTapped(type: segmentType)
+    }
 
 }

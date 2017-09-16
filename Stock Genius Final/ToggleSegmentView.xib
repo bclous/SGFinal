@@ -35,6 +35,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             <connections>
                                 <action selector="segmentButtonTapped:" destination="-1" eventType="touchUpInside" id="CQ0-4F-ovo"/>
+                                <action selector="segmentButtonTappedDown:" destination="-1" eventType="touchDown" id="i6Z-lz-fcL"/>
                             </connections>
                         </button>
                     </subviews>

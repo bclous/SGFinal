@@ -76,15 +76,17 @@ class BDCStockPerformanceView: UIView, IndividualToggleViewDelegate {
     
     public func formatView() {
         
+        print("formattingView")
+        
         if let stocks = stocks {
             currentToggleChoice = stocks.stock.lastToggleSegment
             toggleView.formatToggleViewForType(currentToggleChoice)
-            chartView.data = stocks.stock.graphDataFromType(currentToggleChoice)
             
             let haveData = haveGraphDataForStock(stocks.stock)
             
             if haveData {
-                
+                print("have data")
+                chartView.formatChartWithData(stocks.stock.graphDataFromType(currentToggleChoice))
                 formatViewForGraphDisplayType(.dataAvailable)
                 
             } else {
@@ -93,6 +95,7 @@ class BDCStockPerformanceView: UIView, IndividualToggleViewDelegate {
                 AlphaVantageClient.shared.pullPricesForStock(stocks.stock, callType: chartDataTypeFromToggleChoice(), completion: { (success) in
                     
                     if success {
+                        DispatchQueue.main.async{self.chartView.formatChartWithData(stocks.stock.graphDataFromType(self.currentToggleChoice))}
                         DispatchQueue.main.async {self.formatViewForGraphDisplayType(.dataAvailable)}
                     } else {
                         DispatchQueue.main.async {self.formatViewForGraphDisplayType(.failedToRetrieveTryAgain)}
@@ -122,6 +125,9 @@ class BDCStockPerformanceView: UIView, IndividualToggleViewDelegate {
     }
     
     internal func toggleChosen(type: IndividualSegmentType) {
+        
+         print("toggle chosen delegate running from performance view")
+        
         currentToggleChoice = type
         
         if let stocks = stocks {
@@ -162,7 +168,7 @@ class BDCStockPerformanceView: UIView, IndividualToggleViewDelegate {
     }
     
     private func formatViewForGraphDisplayType(_ type: GraphDisplayType) {
-        
+        print("started formatViewForGraphDisplayType")
         switch type {
         case .dataAvailable:
             retrievingView.isHidden = true
@@ -177,6 +183,8 @@ class BDCStockPerformanceView: UIView, IndividualToggleViewDelegate {
             unableToConnectView.isHidden = false
             performanceView.formatViewForLoadingData()
         }
+        
+        print("finished formatViewForGraphDisplayType")
         
     }
     
