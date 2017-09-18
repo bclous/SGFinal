@@ -76,37 +76,58 @@ class BDCStockPerformanceView: UIView, IndividualToggleViewDelegate {
     
     public func formatView() {
         
-        print("formattingView")
-        
         if let stocks = stocks {
             currentToggleChoice = stocks.stock.lastToggleSegment
             toggleView.formatToggleViewForType(currentToggleChoice)
             
-            let haveData = haveGraphDataForStock(stocks.stock)
-            
-            if haveData {
-                print("have data")
-                chartView.formatChartWithData(stocks.stock.graphDataFromType(currentToggleChoice))
+            let haveStockData = haveGraphDataForStock(stocks.stock)
+            let haveIndexData = haveGraphDataForStock(stocks.index)
+            if haveStockData && haveIndexData {
+                stocks.stock.updateGraphData()
+                stocks.index.updateGraphData()
+                chartView.formatChartWithData(stocks.stock.graphData, type: currentToggleChoice)
                 formatViewForGraphDisplayType(.dataAvailable)
-                
             } else {
                 formatViewForGraphDisplayType(.retrievingData)
-                
-                AlphaVantageClient.shared.pullPricesForStock(stocks.stock, callType: chartDataTypeFromToggleChoice(), completion: { (success) in
-                    
+                retrieveGraphData(stock: !haveStockData, index: !haveIndexData, completion: { (success) in
                     if success {
-                        DispatchQueue.main.async{self.chartView.formatChartWithData(stocks.stock.graphDataFromType(self.currentToggleChoice))}
+                        stocks.stock.updateGraphData()
+                        stocks.index.updateGraphData()
+                        DispatchQueue.main.async{self.chartView.formatChartWithData(stocks.stock.graphData, type: self.currentToggleChoice)}
                         DispatchQueue.main.async {self.formatViewForGraphDisplayType(.dataAvailable)}
                     } else {
                         DispatchQueue.main.async {self.formatViewForGraphDisplayType(.failedToRetrieveTryAgain)}
                     }
-                    
                 })
             }
         }
+    }
+    
+    private func retrieveGraphData(stock: Bool, index: Bool, completion: @escaping (_ success: Bool) -> ()) {
+        
+        // change this to GCD thing?
         
         
-        
+        if stock {
+            AlphaVantageClient.shared.pullPricesForStock(stocks!.stock, callType: chartDataTypeFromToggleChoice(), completion: { (success) in
+                if !success {
+                     completion(false)
+                } else {
+                    if index {
+                        AlphaVantageClient.shared.pullPricesForStock(self.stocks!.stock, callType: self.chartDataTypeFromToggleChoice(), completion: { (success) in
+                            completion(success)
+                        })
+                    } else {
+                        completion(success)
+                    }
+                }
+            })
+        } else {
+            AlphaVantageClient.shared.pullPricesForStock(self.stocks!.stock, callType: self.chartDataTypeFromToggleChoice(), completion: { (success) in
+                completion(success)
+            })
+
+        }
     }
     
     private func haveGraphDataForStock(_ stock: CurrentStock) -> Bool {
@@ -125,8 +146,6 @@ class BDCStockPerformanceView: UIView, IndividualToggleViewDelegate {
     }
     
     internal func toggleChosen(type: IndividualSegmentType) {
-        
-         print("toggle chosen delegate running from performance view")
         
         currentToggleChoice = type
         
@@ -168,7 +187,7 @@ class BDCStockPerformanceView: UIView, IndividualToggleViewDelegate {
     }
     
     private func formatViewForGraphDisplayType(_ type: GraphDisplayType) {
-        print("started formatViewForGraphDisplayType")
+        
         switch type {
         case .dataAvailable:
             retrievingView.isHidden = true
@@ -183,8 +202,6 @@ class BDCStockPerformanceView: UIView, IndividualToggleViewDelegate {
             unableToConnectView.isHidden = false
             performanceView.formatViewForLoadingData()
         }
-        
-        print("finished formatViewForGraphDisplayType")
         
     }
     

@@ -20,6 +20,7 @@ class BDCHelper {
 
 extension Date {
     
+    
     public static func dateFromString(_ dateString: String, dateFormat: String) -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat

@@ -76,8 +76,7 @@ class IndividualToggleView: UIView, IndividualSegmentDelegate {
     
     func segmentTapped(type: IndividualSegmentType) {
         
-        print("\(Date()) segment Button delegate call in toggle view\n\n\n\n")
-        print("\(Date()) finished updateing toggleviews")
+        NSLog("delegate method beginnign in indv toggle view")
         
         delegate?.toggleChosen(type: type)
         

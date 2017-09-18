@@ -48,12 +48,12 @@ class IndividualPerformanceViewSegment: UIView {
         
     }
     
-    public func formatViewForStock(_ stock: CurrentStock, segmentType: IndividualSegmentType) {
-        
+    public func formatViewForStock(_ stock: CurrentStock, segmentType: IndividualSegmentType, noEarlierThan date: Date?) {
         stockLabel.text = stock.ticker == "SPY" ? "S&P 500 Index" : stock.ticker
-        percentageChangeLabel.text = stock.performanceReturnFromType(segmentType)
-        percentageChangeContainerView.backgroundColor = stock.performanceColorFromType(segmentType)
-        percentageChangeSuppView.backgroundColor = percentageChangeContainerView.backgroundColor
+        let values = stock.performanceInfoFromType(segmentType, noEarlierThan: date)
+        percentageChangeLabel.text = values.return
+        percentageChangeContainerView.backgroundColor = values.color
+        percentageChangeSuppView.backgroundColor = values.color
         
     }
     

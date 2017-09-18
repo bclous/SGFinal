@@ -21,6 +21,7 @@ class BDCStockChart: UIView {
     
     let chart = Chart()
     public var data : [(x: Date, y: Float)] = []
+    private var currentSegmentType : IndividualSegmentType = .sixMonths
     
     public var chartBackgroundColor = UIColor.black {
         didSet {
@@ -78,25 +79,23 @@ class BDCStockChart: UIView {
         backgroundColor = SGConstants.mainBlackColor
     }
     
-    public func formatChartWithData(_ data: [(x: Date, y: Float)]) {
+    public func formatChartWithData(_ data: [(x: Date, y: Float)], type: IndividualSegmentType) {
+
         if !data.isEmpty {
             self.data = data
             sortedData = data.sorted(by: {$0.x < $1.x})
+            currentSegmentType = type
             formatChart()
         }
-        
-        print("finished Formatting Chart")
     }
     
     private func formatChart() {
-        
         
         createChartData()
         let series = ChartSeries(data: chartData)
         series.area = true
         chart.series.removeAll()
         chart.add(series)
-        
         formatDefaultIntervalType()
         chart.xLabels = xAxisLabels()
         chart.yLabels = yAxisLabels()
@@ -108,6 +107,7 @@ class BDCStockChart: UIView {
         chart.axesColor = SGConstants.mainBlackColor
         chart.yLabelsOnRightSide = true
         chart.xLabelsSkipLast = true
+ 
 
     }
     
@@ -115,7 +115,6 @@ class BDCStockChart: UIView {
         
         let adjusted = sortedData.count - 1 == int ? int : int + 1
         let date = sortedData[adjusted].x
-        print("\(date)")
         return date.string(withFormat: xAxisDateFormat)!
     
     }
@@ -271,26 +270,18 @@ class BDCStockChart: UIView {
     }
     
     private func formatDefaultIntervalType() {
-        
-        let startDate = sortedData[0].x
-        let lastDate = sortedData[sortedData.count - 1].x
 
-        let years  = lastDate.interval(ofComponent: .year, fromDate: startDate)
-        let months = lastDate.interval(ofComponent: .month, fromDate: startDate)
-        let days = lastDate.interval(ofComponent: .day, fromDate: startDate)
-        
-        if months > 12 {
-            dateIntervalType = .yearly
-        } else if months >= 7 {
-            dateIntervalType = .quarterly
-        } else if days <= 7 {
+        if sortedData.count <= 6 {
             dateIntervalType = .daily
-        } else if days < 42 {
+        } else if sortedData.count <= 30 {
             dateIntervalType = .weekly
-        } else {
+        } else if sortedData.count <= 135 {
             dateIntervalType = .monthly
+        } else if sortedData.count <= 255 {
+            dateIntervalType = .quarterly
+        } else {
+            dateIntervalType = .yearly
         }
-        
     }
     
     private func xAxisLabels() -> [Float] {

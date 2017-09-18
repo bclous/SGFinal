@@ -41,9 +41,9 @@ class IndividualPerformanceView: UIView {
     
     public func formatViewForStocks(_ stocks: (stock: CurrentStock, index: CurrentStock), segmentType: IndividualSegmentType) {
         
-        stockView.formatViewForStock(stocks.stock, segmentType: segmentType)
-        indexView.formatViewForStock(stocks.index, segmentType: segmentType)
-        
+        let firstStockDate = stocks.stock.graphData[0].x
+        stockView.formatViewForStock(stocks.stock, segmentType: segmentType, noEarlierThan: nil)
+        indexView.formatViewForStock(stocks.index, segmentType: segmentType, noEarlierThan: firstStockDate)
     }
     
     public func formatViewForLoadingData() {
