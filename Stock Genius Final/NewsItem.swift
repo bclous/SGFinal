@@ -32,9 +32,31 @@ class NewsItem: NSObject {
         let headline = articleResponse["headline"] ?? ""
         let source = articleResponse["source"] ?? ""
         let summary = articleResponse["summary"] ?? ""
+        
+        let adjustedSummary = summary.trimmingCharacters(in: .whitespaces)
+        let finalSummary = adjustedSummary == "No summary available." ? "" : adjustedSummary
 
-        self.init(date: articleDate, url: url, headline: headline, source: source, summary: summary)
+        self.init(date: articleDate, url: url, headline: headline, source: source, summary: finalSummary)
     }
+    
+    public func createdAtString() -> String? {
+        
+        let datesAreSameDay = Date.datesAreSameDay(date1: Date(), date2: date)
+        if datesAreSameDay {
+            let seconds = Int(Date().timeIntervalSince(date))
+            
+            if seconds < 60 {
+                return String(seconds) + "s"
+            } else if seconds < 3600 {
+                return String(seconds/60) + "m"
+            } else {
+                return date.string(withFormat: "h:mm a")
+            }
+        } else {
+            return date.string(withFormat: "M/d/yyyy, h:mm a")
+        }
+    }
+
     
     
 

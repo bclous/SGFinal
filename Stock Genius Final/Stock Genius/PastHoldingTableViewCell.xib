@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="56" id="GmM-Mx-S1t" customClass="PastHoldingTableViewCell" customModule="Stock_Genius" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GmM-Mx-S1t" id="iox-LM-0ew">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="55.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view alpha="0.050000000000000003" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PCL-vC-QPR" userLabel="backgroundView">
+                        <rect key="frame" x="-1" y="0.0" width="376" height="53.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H0A-qW-hLp" userLabel="priceChangeLabel">
+                        <rect key="frame" x="168" y="18" width="37.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nRO-vR-hs7" userLabel="percentageChangeLabel">
+                        <rect key="frame" x="325.5" y="18" width="37.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IjU-Ff-saJ">
+                        <rect key="frame" x="9" y="17.5" width="37.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="IjU-Ff-saJ" firstAttribute="leading" secondItem="PCL-vC-QPR" secondAttribute="leading" constant="10" id="3Bd-E4-97U"/>
+                    <constraint firstItem="PCL-vC-QPR" firstAttribute="top" secondItem="iox-LM-0ew" secondAttribute="top" id="4zV-jj-DS1"/>
+                    <constraint firstItem="nRO-vR-hs7" firstAttribute="centerY" secondItem="PCL-vC-QPR" secondAttribute="centerY" id="O9Y-Tp-yvb"/>
+                    <constraint firstItem="PCL-vC-QPR" firstAttribute="leading" secondItem="iox-LM-0ew" secondAttribute="leading" constant="-1" id="SdR-G5-QY5"/>
+                    <constraint firstItem="IjU-Ff-saJ" firstAttribute="centerY" secondItem="PCL-vC-QPR" secondAttribute="centerY" id="fCe-WY-d9U"/>
+                    <constraint firstAttribute="trailing" secondItem="PCL-vC-QPR" secondAttribute="trailing" id="fvH-UL-Hzn"/>
+                    <constraint firstAttribute="bottom" secondItem="PCL-vC-QPR" secondAttribute="bottom" constant="2" id="hG8-tQ-HBD"/>
+                    <constraint firstItem="H0A-qW-hLp" firstAttribute="centerX" secondItem="PCL-vC-QPR" secondAttribute="centerX" id="hqk-LK-UOT"/>
+                    <constraint firstItem="nRO-vR-hs7" firstAttribute="trailing" secondItem="PCL-vC-QPR" secondAttribute="trailing" constant="-12" id="pUQ-ce-pUL"/>
+                    <constraint firstItem="H0A-qW-hLp" firstAttribute="centerY" secondItem="PCL-vC-QPR" secondAttribute="centerY" id="uSo-nf-VEB"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="percentageChangeLabel" destination="nRO-vR-hs7" id="jGv-HE-2fl"/>
+                <outlet property="priceChangeLabel" destination="H0A-qW-hLp" id="r5z-Kx-63b"/>
+                <outlet property="tickerLabel" destination="IjU-Ff-saJ" id="bE0-5z-uvq"/>
+            </connections>
+            <point key="canvasLocation" x="-14.5" y="66"/>
+        </tableViewCell>
+    </objects>
+</document>

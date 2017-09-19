@@ -78,6 +78,9 @@
 		0FDB582D1F5F4C3F00990628 /* UnableToConnectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDB582C1F5F4C3E00990628 /* UnableToConnectVC.swift */; };
 		0FDCCBE41F6C0E6000D08C09 /* BDCStockPerformanceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FDCCBE31F6C0E6000D08C09 /* BDCStockPerformanceView.xib */; };
 		0FDCCBE61F6C0E7C00D08C09 /* BDCStockPerformanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDCCBE51F6C0E7C00D08C09 /* BDCStockPerformanceView.swift */; };
+		0FDCCBEC1F716DEA00D08C09 /* WebBrowserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDCCBEB1F716DEA00D08C09 /* WebBrowserVC.swift */; };
+		0FDCCBEE1F716DF400D08C09 /* BrowserFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDCCBED1F716DF400D08C09 /* BrowserFooterView.swift */; };
+		0FDCCBF01F716DFD00D08C09 /* BrowserFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FDCCBEF1F716DFD00D08C09 /* BrowserFooterView.xib */; };
 		0FFB6F311F10325C00FD8BC1 /* PastPicksNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFB6F2F1F10325C00FD8BC1 /* PastPicksNoteCell.swift */; };
 		0FFB6F321F10325C00FD8BC1 /* PastPicksNoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FFB6F301F10325C00FD8BC1 /* PastPicksNoteCell.xib */; };
 		0FFB6F3B1F13CF7100FD8BC1 /* RemainingCashCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FFB6F3A1F13CF6F00FD8BC1 /* RemainingCashCell.xib */; };
@@ -182,6 +185,9 @@
 		0FDB582C1F5F4C3E00990628 /* UnableToConnectVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnableToConnectVC.swift; sourceTree = "<group>"; };
 		0FDCCBE31F6C0E6000D08C09 /* BDCStockPerformanceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDCStockPerformanceView.xib; sourceTree = "<group>"; };
 		0FDCCBE51F6C0E7C00D08C09 /* BDCStockPerformanceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDCStockPerformanceView.swift; sourceTree = "<group>"; };
+		0FDCCBEB1F716DEA00D08C09 /* WebBrowserVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebBrowserVC.swift; sourceTree = "<group>"; };
+		0FDCCBED1F716DF400D08C09 /* BrowserFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserFooterView.swift; sourceTree = "<group>"; };
+		0FDCCBEF1F716DFD00D08C09 /* BrowserFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrowserFooterView.xib; sourceTree = "<group>"; };
 		0FFB6F2F1F10325C00FD8BC1 /* PastPicksNoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastPicksNoteCell.swift; sourceTree = "<group>"; };
 		0FFB6F301F10325C00FD8BC1 /* PastPicksNoteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PastPicksNoteCell.xib; sourceTree = "<group>"; };
 		0FFB6F3A1F13CF6F00FD8BC1 /* RemainingCashCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RemainingCashCell.xib; sourceTree = "<group>"; };
@@ -277,6 +283,9 @@
 				0FDCCBE51F6C0E7C00D08C09 /* BDCStockPerformanceView.swift */,
 				0F3A156F1F55B7B000EFB79F /* NewsItemCell.swift */,
 				0F3A15701F55B7B000EFB79F /* NewsItemCell.xib */,
+				0FDCCBEB1F716DEA00D08C09 /* WebBrowserVC.swift */,
+				0FDCCBED1F716DF400D08C09 /* BrowserFooterView.swift */,
+				0FDCCBEF1F716DFD00D08C09 /* BrowserFooterView.xib */,
 			);
 			name = IndividualStock;
 			sourceTree = "<group>";
@@ -530,6 +539,7 @@
 				AB2FB9A71F029D6C00CA72B2 /* TabBar.xib in Resources */,
 				0FDCCBE41F6C0E6000D08C09 /* BDCStockPerformanceView.xib in Resources */,
 				0FFB6F561F1676BB00FD8BC1 /* GirlView.xib in Resources */,
+				0FDCCBF01F716DFD00D08C09 /* BrowserFooterView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,6 +630,7 @@
 				0FFB6F431F15308300FD8BC1 /* SplashScreenVC.swift in Sources */,
 				0F3A15531F54600C00EFB79F /* Article.swift in Sources */,
 				0F2651E81F053E4600754D0F /* Stock.swift in Sources */,
+				0FDCCBEE1F716DF400D08C09 /* BrowserFooterView.swift in Sources */,
 				0F3A15711F55B7B000EFB79F /* NewsItemCell.swift in Sources */,
 				0FFB6F541F166AA700FD8BC1 /* IntroSplashScreen.swift in Sources */,
 				AB2FB9921F029BB700CA72B2 /* AppDelegate.swift in Sources */,
@@ -649,6 +660,7 @@
 				0F2651E11F053A4C00754D0F /* CurrentPortfolio.swift in Sources */,
 				AB2FB9A91F02BB2800CA72B2 /* TabBar.swift in Sources */,
 				0F2651E31F053AF600754D0F /* PastPortfolio.swift in Sources */,
+				0FDCCBEC1F716DEA00D08C09 /* WebBrowserVC.swift in Sources */,
 				0F17B77A1F17CA180064533F /* InvalidSubscriptionVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

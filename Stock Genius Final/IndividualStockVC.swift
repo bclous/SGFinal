@@ -18,6 +18,7 @@ class IndividualStockVC: UIViewController, IndividualHeaderViewDelegate {
     var timePeriod : IndividualSegmentType = .sinceStartDate
     let performanceView = BDCStockPerformanceView()
     let sectionClearView = SectionHeaderClearView()
+    var chosenNewsItem : NewsItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +33,7 @@ class IndividualStockVC: UIViewController, IndividualHeaderViewDelegate {
         if let stock = stock {
             headerView.formatHeaderViewWithStock(stock)
             AlphaVantageClient.shared.pullNewsForStock(stock, numberOfArticles: 5, completion: { (success) in
-                print("got the news articles: \(stock.newsItems.count)")
+                self.mainTableView.reloadData()
             })
         }
         
@@ -50,6 +51,12 @@ class IndividualStockVC: UIViewController, IndividualHeaderViewDelegate {
     func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! WebBrowserVC
+        destinationVC.ticker = stock!.ticker
+        destinationVC.newsItem = chosenNewsItem
+    }
 
 }
 
@@ -62,12 +69,16 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource, Section
         mainTableView.register(UINib(nibName: "NewsItemCell", bundle: nil), forCellReuseIdentifier: "newsCell")
         mainTableView.register(UINib(nibName: "GraphTableViewCell", bundle: nil), forCellReuseIdentifier: "graphCell")
         mainTableView.separatorStyle = .none
+        mainTableView.estimatedRowHeight = 150.0
+        mainTableView.rowHeight = UITableViewAutomaticDimension
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell") as! NewsItemCell
+            cell.formatCellWithNewsItem(stock!.newsItems[indexPath.row])
             return cell
         } else {
             let cell = UITableViewCell()
@@ -87,10 +98,9 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource, Section
             return 0
         case 2:
             if let stock = stock {
-                return 5
-                //return stock.newsItems.count
+                return stock.newsItems.count
             } else {
-                return 5
+                return 0
             }
         default:
             return 0
@@ -104,7 +114,7 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource, Section
         case 1:
             return 0
         case 2:
-            return 150
+            return UITableViewAutomaticDimension
         default:
             return 100
         }
@@ -136,18 +146,17 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource, Section
         }
     }
     
-    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         headerView.adjustIndividualHeaderViewForOffset(scrollView.contentOffset.y)
-        print("\(scrollView.contentOffset.y)")
-        
     }
     
     func sectionHeaderButtonTapped(_ button: SectionHeaderButton) {
         navigationController?.popViewController(animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        chosenNewsItem = stock!.newsItems[indexPath.row]
+        performSegue(withIdentifier: "newsSegue", sender: nil)
     }
     
     

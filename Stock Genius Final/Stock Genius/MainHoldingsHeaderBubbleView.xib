@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16E2193" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainHoldingsHeaderBubbleView" customModule="Stock_Genius" customModuleProvider="target">
+            <connections>
+                <outlet property="bubbleContainerView" destination="L5V-nj-96o" id="xas-PY-GO7"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="U5u-vk-k26"/>
+                <outlet property="currentPicksIdentifiedLabel" destination="PfB-JT-4VA" id="jqG-Ec-fyW"/>
+                <outlet property="darkView" destination="RbA-ld-Iqy" id="CoS-VK-kzI"/>
+                <outlet property="spinner" destination="AIX-03-jh3" id="KHM-cz-WcS"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="374" height="300"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RbA-ld-Iqy">
+                    <rect key="frame" x="0.0" y="0.0" width="374" height="72"/>
+                    <subviews>
+                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="AIX-03-jh3">
+                            <rect key="frame" x="169" y="18" width="37" height="37"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="AIX-03-jh3" firstAttribute="centerX" secondItem="RbA-ld-Iqy" secondAttribute="centerX" id="Bhu-3r-B8q"/>
+                        <constraint firstAttribute="height" constant="72" id="BmC-hT-K5A"/>
+                        <constraint firstItem="AIX-03-jh3" firstAttribute="centerY" secondItem="RbA-ld-Iqy" secondAttribute="centerY" id="fHg-pc-qeO"/>
+                    </constraints>
+                </view>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L5V-nj-96o">
+                    <rect key="frame" x="0.0" y="72" width="374" height="228"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ciy-cf-mPp">
+                    <rect key="frame" x="0.0" y="72" width="374" height="228"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="jFg-O4-gCg">
+                        <rect key="frame" x="0.0" y="0.0" width="374" height="228"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Picks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="88i-xN-qlw">
+                                <rect key="frame" x="10" y="93" width="127.5" height="26.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Identified on 03/02/2017 from 13-F data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PfB-JT-4VA">
+                                <rect key="frame" x="10" y="121" width="223.5" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="PfB-JT-4VA" firstAttribute="leading" secondItem="88i-xN-qlw" secondAttribute="leading" id="6Kj-cx-WUO"/>
+                            <constraint firstItem="88i-xN-qlw" firstAttribute="leading" secondItem="jFg-O4-gCg" secondAttribute="leading" constant="10" id="Igc-zF-LYS"/>
+                            <constraint firstItem="PfB-JT-4VA" firstAttribute="top" secondItem="88i-xN-qlw" secondAttribute="bottom" constant="1.5" id="Kkf-lb-OIX"/>
+                            <constraint firstItem="88i-xN-qlw" firstAttribute="centerY" secondItem="jFg-O4-gCg" secondAttribute="centerY" constant="-8" id="kKd-Nx-JmQ"/>
+                        </constraints>
+                    </view>
+                    <blurEffect style="dark"/>
+                </visualEffectView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="RbA-ld-Iqy" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="4gr-1E-zXl"/>
+                <constraint firstItem="L5V-nj-96o" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="9Bn-ci-2yz"/>
+                <constraint firstItem="ciy-cf-mPp" firstAttribute="height" secondItem="L5V-nj-96o" secondAttribute="height" id="H8E-aM-C79"/>
+                <constraint firstItem="ciy-cf-mPp" firstAttribute="width" secondItem="L5V-nj-96o" secondAttribute="width" id="Paz-zt-VYN"/>
+                <constraint firstItem="RbA-ld-Iqy" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Te4-YU-BxC"/>
+                <constraint firstItem="RbA-ld-Iqy" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="jFa-rZ-VFt"/>
+                <constraint firstItem="ciy-cf-mPp" firstAttribute="centerY" secondItem="L5V-nj-96o" secondAttribute="centerY" id="jHK-pv-nuk"/>
+                <constraint firstItem="L5V-nj-96o" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" constant="-72" id="kD6-z6-whf"/>
+                <constraint firstItem="ciy-cf-mPp" firstAttribute="centerX" secondItem="L5V-nj-96o" secondAttribute="centerX" id="qo2-bM-Bki"/>
+                <constraint firstItem="L5V-nj-96o" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="qou-p2-ff0"/>
+                <constraint firstItem="L5V-nj-96o" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="36" id="vhM-dV-39z"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="2" y="-135"/>
+        </view>
+    </objects>
+</document>
