@@ -56,6 +56,7 @@ class IndividualStockVC: UIViewController, IndividualHeaderViewDelegate {
         let destinationVC = segue.destination as! WebBrowserVC
         destinationVC.ticker = stock!.ticker
         destinationVC.newsItem = chosenNewsItem
+        mainTableView.reloadData()
     }
 
 }
@@ -127,7 +128,7 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource, Section
         case 1:
             return 370
         case 2:
-            return 50
+            return 40
         default:
             return 100
         }

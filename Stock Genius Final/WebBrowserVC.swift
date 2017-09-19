@@ -44,6 +44,9 @@ class WebBrowserVC: UIViewController {
         if let ticker = ticker {
             tickerLabel.text = ticker
         }
+        
+        headerView.backgroundColor = SGConstants.mainBlackColor
+        tickerLabel.font = tickerLabel.font.withSize(15.0)
     }
 }
 
@@ -64,8 +67,9 @@ extension WebBrowserVC: UIWebViewDelegate, BrowserFooterDelegate {
         if let urlString = urlString {
             let url = URL(string: urlString)
             if let url = url {
-                var newRequest = URLRequest(url: url)
-                newRequest.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.6 Safari/537.11", forHTTPHeaderField: "User-Agent")
+                let userAgent = newsItem!.source == "SeekingAlpha" ? "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/603.3.8 (KHTML, like Gecko) Version/10.1.2 Safari/603.3.8" : "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.3 Mobile/14E277 Safari/603.1.30"
+                let newRequest = URLRequest(url: url)
+                UserDefaults.standard.register(defaults: ["UserAgent" : userAgent])
                 webView.scalesPageToFit = true
                 webView.loadRequest(newRequest)
             }
