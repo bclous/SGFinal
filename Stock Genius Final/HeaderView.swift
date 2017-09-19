@@ -22,7 +22,6 @@ class HeaderView: UIView {
     @IBOutlet weak var secondaryLabel: UILabel!
     @IBOutlet weak var refreshButton: UIButton!
     @IBOutlet weak var refreshImage: UIImageView!
-    @IBOutlet weak var progressView: UIProgressView!
     var shouldAnimate = false
     weak var delegate : HeaderViewDelegate?
     var maxRefreshImageAlpha : CGFloat = 0.9
@@ -50,9 +49,6 @@ class HeaderView: UIView {
         
         secondaryLabel.textColor = SGConstants.fontColorWhiteSecondary
         contentView.backgroundColor = SGConstants.mainBlackColor
-        progressView.trackTintColor = UIColor.white.withAlphaComponent(0.2)
-        progressView.progressTintColor = SGConstants.mainBlueColor
-        progressView.progress = 0
        
         
     }
@@ -104,19 +100,16 @@ class HeaderView: UIView {
         case .currentPicks:
             mainLabel.text = "Current Picks"
             secondaryLabel.text = "Identified from 13-F data on 3/31/17"
-            progressView.alpha = 1
             refreshButton.isEnabled = true
             refreshImage.alpha = 0.9
         case .calculator:
             mainLabel.text = "Share Calculator"
             secondaryLabel.text = "Tap to edit investment amount"
-            progressView.alpha = 0
             refreshButton.isEnabled = false
             refreshImage.alpha = 0
         case .pastPicks:
             mainLabel.text = "Past Picks"
             secondaryLabel.text = "1/1/2010 - 3/1/2010 (24 quarters)"
-            progressView.alpha = 0
             refreshButton.isEnabled = false
             refreshImage.alpha = 0
         }
@@ -128,7 +121,6 @@ class HeaderView: UIView {
         
         maxRefreshImageAlpha = 0.4
         refreshImage.alpha = maxRefreshImageAlpha
-        progressView.alpha = 1
         shouldAnimate = true
         refreshButton.isEnabled = false
         rotateView(targetView: refreshImage, duration: 0.25, delay: 0.25, shouldAnimate: shouldAnimate)
@@ -139,9 +131,7 @@ class HeaderView: UIView {
         maxRefreshImageAlpha = 0.9
         refreshImage.alpha = 0.9
         shouldAnimate = false
-        progressView.alpha = 0
         refreshButton.isEnabled = true
-        progressView.progress = 0
     }
     
     private func rotateView(targetView: UIView, duration: Double, delay: Double, shouldAnimate: Bool) {

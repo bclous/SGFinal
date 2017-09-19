@@ -12,7 +12,7 @@ import Firebase
 import StoreKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, DataStoreDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var isTestMode = false
@@ -30,7 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, DataStoreDelegate {
     
     func checkForFirstTime() {
         if !userHasPictures() {
-            DataStore.shared.delegate = self
             introVC.isTestMode = isTestMode
             window?.rootViewController = introVC
             FirebaseClient.shared.downloadImagesFromStorage(completion: { (success) in

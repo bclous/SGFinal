@@ -14,12 +14,12 @@ class CurrentStock: Stock {
     var adjPriceStartDate : Float
     var adjPriceLastClose : Float
     var isTrading : Bool
-    var acquiredPrice : Float
     var startingPriceHardCode : Float
     var availableDates : [Date] = []
     var hasShortPriceHistory : Bool
     var hasLongPriceHistory : Bool
     var hasIntraDayPriceHistory: Bool
+    var acquiredPrice : Float = 0
     let currentPriceKey = "currentPrice"
     let lastClosePriceKey = "lastClosePrice"
     let sincePeriodBeginPriceKey = "sincePeriodStartPrice"
@@ -34,7 +34,6 @@ class CurrentStock: Stock {
         self.adjPriceCurrent = 0
         self.adjPriceStartDate = 0
         self.adjPriceLastClose = 0
-        self.acquiredPrice = 0
         self.startingPriceHardCode = 0
         self.priceHistory = [:]
         self.hasShortPriceHistory = false
@@ -43,8 +42,8 @@ class CurrentStock: Stock {
         super.init()
     }
 
-    
-    public func updatePricesFromCache() {
+        public func updatePricesFromCache() {
+
         let cacheDictionary = UserDefaults.standard.object(forKey: DataStore.shared.currentPricesKey) as? [String : [String : Float]]
         let stockDictionary = cacheDictionary?[ticker]
         let cachedCurrentPrice = stockDictionary?[currentPriceKey] ?? 0.0
@@ -61,8 +60,8 @@ class CurrentStock: Stock {
         note = dictionary["note"] as? String ?? ""
         rankInPortfolio = dictionary["rank"] as? Int ?? 99
         ticker = dictionary["ticker"] as? String ?? ""
-        acquiredPrice = dictionary["acquiredPrice"] as? Float ?? 0.0
-        startingPriceHardCode = dictionary["startingPriceHardCode"] as? Float ?? 0.0
+        acquiredPrice = dictionary["acquiredPrice"] as? Float ?? 0
+        adjPriceStartDate = dictionary["startingPriceHardCode"] as? Float ?? adjPriceStartDate
     }
     
     public func updatePricesWithResponse(_ response: [String : Any], callType: AlphaVantageCallType) {
@@ -71,6 +70,25 @@ class CurrentStock: Stock {
         updateHistoryFlagsFromResponse(response, callType: callType)
         updateAvailablePriceHistoryDates()
         updateMainPrices()
+    }
+    
+    public func updatePricesWithInvestorsExchangeResponse(_ response: [String : Any]) -> Bool {
+        
+        let currentPrice = response["latestPrice"] as? Float ?? 0
+        let lastClosePrice = response["previousClose"] as? Float ?? 0
+        
+        print("ticker: \(self.ticker): current - \(currentPrice), lastClose - \(lastClosePrice)")
+        
+        let isGoodResponse = currentPrice != 0 && lastClosePrice != 0
+        
+        if isGoodResponse {
+            adjPriceCurrent = currentPrice
+            adjPriceLastClose = lastClosePrice
+            return true
+        } else {
+            return false
+        }
+
     }
     
     private func updatePriceHistoryFromResponse(_ response: [String : Any]) {

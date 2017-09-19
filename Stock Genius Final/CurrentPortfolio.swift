@@ -65,8 +65,47 @@ class CurrentPortfolio: NSObject {
         
     }
     
+    public func updatePricesFromResponse(_ response: [Any]) {
+        for result in response {
+            let stockResponse = result as? [String : Any]
+            let ticker = stockResponse?["symbol"] as? String ?? ""
+            let lastPriceString = stockResponse?["lastSalePrice"] as? String ?? ""
+            let lastPrice = Float(lastPriceString)
+            let currentStock = currentHoldingFromTicker(ticker)
+            
+            if let currentStock = currentStock {
+                currentStock.adjPriceCurrent = lastPrice ?? currentStock.adjPriceCurrent
+            }
+        }
+        
+    }
+    
+    private func currentHoldingFromTicker(_ ticker: String) -> CurrentStock? {
+        
+        for stock in holdings {
+            if stock.ticker == ticker {
+                return stock
+            }
+        }
+        if index.ticker == ticker {
+            return index
+        }
+        return nil
+    }
+
+    
     public func cachePrices() {
        UserDefaults.standard.set(priceCacheDictionary(), forKey: DataStore.shared.currentPricesKey)
+    }
+    
+    public func allTickerStringForPricePull() -> String {
+        var stocks = ""
+        for stock in holdings {
+            let stockString = stock.ticker + ","
+            stocks.append(stockString)
+        }
+        stocks.append(index.ticker)
+        return stocks
     }
     
     public func updatePricesFromCache() {

@@ -9,22 +9,18 @@
 import UIKit
 import FirebaseDatabase
 
-protocol DataStoreDelegate: class {
-    func pricePullInProgress(percentageComplete: Float)
-}
 
-class DataStore: NSObject, AlphaVantageClientDelegate {
+class DataStore: NSObject  {
     
     static let shared = DataStore()
-    var currentPortfolio : CurrentPortfolio
-    var pastPortfolios : [PastPortfolio]
-    var ref : DatabaseReference
-    weak var delegate : DataStoreDelegate?
+    var currentPortfolio : CurrentPortfolio = CurrentPortfolio()
+    var pastPortfolios : [PastPortfolio] = []
+    var ref : DatabaseReference = Database.database().reference()
     var pricePullComplete = false
     var firebasePullComplete = false
     var APIKey = "5875"
-    var totalIndexPerformance : Float
-    var totalStockGeniusPerformance : Float
+    var totalIndexPerformance : Float = 300
+    var totalStockGeniusPerformance : Float = 200
     var imageNames = ["page1Background", "girl", "mainPage1", "mainPage2", "mainPage3", "mainPage4", "mainPage5", "mainPage6","graphicPage1", "graphicPage2", "otherBackground"]
     var individualToggleState : IndividualSegmentType = .sinceStartDate
     let currentPricesKey = "currentPortfolioPrices"
@@ -38,10 +34,23 @@ class DataStore: NSObject, AlphaVantageClientDelegate {
         self.totalIndexPerformance = 300
         self.totalStockGeniusPerformance = 200
         super.init()
-        AlphaVantageClient.shared.delegate = self
     }
     
-    public func performInitialFirebasePull(completion: @escaping(_ success: Bool) -> ()) {
+    public func collectAppDataForLaunch(completion: @escaping(_ success: Bool) -> ()) {
+        
+        performInitialFirebasePull { (success) in
+            if !success {
+                completion(false)
+            } else {
+                self.updatePricesFromIEX(completion: { (success) in
+                    completion(success)
+                })
+            }
+        }
+ 
+    }
+    
+    private func performInitialFirebasePull(completion: @escaping(_ success: Bool) -> ()) {
         
         FirebaseClient.shared.performInitialDatabasePull { (success, result) in
             if success {
@@ -53,14 +62,15 @@ class DataStore: NSObject, AlphaVantageClientDelegate {
         }
     }
     
-    public func performUpdatePricesPull(completion: @escaping(_ success: Bool) -> ()) {
-        AlphaVantageClient.shared.updatePricesForCurrentPortfolio { (success) in
-            if success {
-                self.currentPortfolio.cachePrices()
-            }
-            completion(success)
+    private func updatePricesFromIEX(completion: @escaping(_ success: Bool) -> ()) {
+        
+        AlphaVantageClient.shared.pullPriceAndLastCloseFromIEXForCurrentPortfolio { (goodStocks, badStocks) in
+            self.currentPortfolio.cachePrices()
+            completion(badStocks.count < 4)
         }
+        
     }
+    
     
     public func appNeedsFullUpdateOnSplashScreen() -> Bool {
         
@@ -73,10 +83,6 @@ class DataStore: NSObject, AlphaVantageClientDelegate {
         }
     }
     
-    public func pricePullInProgressFromAV(percentageComplete: Float) {
-        delegate?.pricePullInProgress(percentageComplete: percentageComplete)
-    }
-    
     public func priceCacheExists() -> Bool {
         if UserDefaults.standard.object(forKey: currentPricesKey) != nil {
             return true
@@ -84,8 +90,7 @@ class DataStore: NSObject, AlphaVantageClientDelegate {
             return false
         }
     }
-    
-    
+
     public func pastPortfoliosString() -> String {
         
         if pastPortfolios.count == 0 {
@@ -98,8 +103,7 @@ class DataStore: NSObject, AlphaVantageClientDelegate {
         }
     }
     
-    
-    
+
     
     // private helper methods
     

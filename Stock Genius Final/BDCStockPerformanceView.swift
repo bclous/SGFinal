@@ -104,17 +104,14 @@ class BDCStockPerformanceView: UIView, IndividualToggleViewDelegate {
     }
     
     private func retrieveGraphData(stock: Bool, index: Bool, completion: @escaping (_ success: Bool) -> ()) {
-        
-        // change this to GCD thing?
-        
-        
+    
         if stock {
             AlphaVantageClient.shared.pullPricesForStock(stocks!.stock, callType: chartDataTypeFromToggleChoice(), completion: { (success) in
                 if !success {
                      completion(false)
                 } else {
                     if index {
-                        AlphaVantageClient.shared.pullPricesForStock(self.stocks!.stock, callType: self.chartDataTypeFromToggleChoice(), completion: { (success) in
+                        AlphaVantageClient.shared.pullPricesForStock(self.stocks!.index, callType: self.chartDataTypeFromToggleChoice(), completion: { (success) in
                             completion(success)
                         })
                     } else {
@@ -123,10 +120,9 @@ class BDCStockPerformanceView: UIView, IndividualToggleViewDelegate {
                 }
             })
         } else {
-            AlphaVantageClient.shared.pullPricesForStock(self.stocks!.stock, callType: self.chartDataTypeFromToggleChoice(), completion: { (success) in
+            AlphaVantageClient.shared.pullPricesForStock(self.stocks!.index, callType: self.chartDataTypeFromToggleChoice(), completion: { (success) in
                 completion(success)
             })
-
         }
     }
     
@@ -142,7 +138,7 @@ class BDCStockPerformanceView: UIView, IndividualToggleViewDelegate {
         case .longHistory:
             return stock.hasLongPriceHistory
         }
-    
+
     }
     
     internal func toggleChosen(type: IndividualSegmentType) {
@@ -183,7 +179,7 @@ class BDCStockPerformanceView: UIView, IndividualToggleViewDelegate {
     
     @IBAction func tryAgainTapped(_ sender: Any) {
         
-        
+         // do this
     }
     
     private func formatViewForGraphDisplayType(_ type: GraphDisplayType) {

@@ -32,53 +32,82 @@ class AlphaVantageClient: NSObject {
     let apiKeySegment = "&apikey="
     var apiKey = "5875"
     
-
+    let iexSingleStockPrefix = "https://api.iextrading.com/1.0/stock/"
+    let iexSingStockSuffix = "/quote"
+    let iexMultipleStockPrefix = "https://api.iextrading.com/1.0/tops?symbols="
     
-    public func updatePricesForCurrentPortfolio(completion: @escaping (_ success: Bool) -> ()) {
+    public func pullPriceAndLastCloseFromIEXForCurrentPortfolio(completion: @escaping (_ goodStocks: [CurrentStock], _ badStocks: [CurrentStock]) -> ()) {
         
-        successfulPulls = 0
-        var holdingsPlusIndex : [CurrentStock] = DataStore.shared.currentPortfolio.holdings
-        holdingsPlusIndex.append(DataStore.shared.currentPortfolio.index)
+        var holdings = DataStore.shared.currentPortfolio.holdings
+        var tradingHoldings : [CurrentStock] = []
         
-        updatePricesForStocks(holdingsPlusIndex) { (goodStocks, badStocks) in
-            
-            if badStocks.isEmpty {
-                DispatchQueue.main.async { completion(true) }
-            } else {
-                DispatchQueue.main.async { completion(false) }
+        for stock in holdings {
+            if stock.isTrading {
+                tradingHoldings.append(stock)
             }
         }
         
+        let index = DataStore.shared.currentPortfolio.index
+        var goodStocks : [CurrentStock] = []
+        var badStocks : [CurrentStock] = []
+        
+        tradingHoldings.append(index)
+        
+        let group = DispatchGroup()
+        
+        for index in 0...holdings.count - 1 {
+            group.enter()
+            iexDataForSingleStock(tradingHoldings[index], completion: { (success) in
+                if success {
+                    goodStocks.append(holdings[index])
+                } else {
+                    badStocks.append(holdings[index])
+                }
+                group.leave()
+            })
+        }
+        
+        group.notify(queue: .main) {
+            completion(goodStocks, badStocks)
+        }
+        
     }
     
-    public func updatePricesForStocks(_ stocks: [CurrentStock], completion: @escaping (_ successfulStocks: [CurrentStock], _ unsucessfullStocks : [CurrentStock]) -> ()) {
+    public func updateCurrentPriceOnlyForCurrentPortfolio(completion: @escaping (_ success: Bool) -> ()) {
+    
+        let requestURL = iexMultipleStockPrefix + DataStore.shared.currentPortfolio.allTickerStringForPricePull()
+        let request = Alamofire.request(requestURL)
         
-        var successfulStocks : [CurrentStock] = []
-        var unsuccessfulStocks : [CurrentStock] = []
-        
-        for stock in stocks {
-            let callType : AlphaVantageCallType = stock.ticker == "SPY" ? .longHistory : .shortHistory
-            pullPricesForStock(stock, callType: callType, completion: { (success) in
-                if success {
-                    successfulStocks.append(stock)
-                    self.successfulPulls += 1
-                    let percentageComplete = Float(self.successfulPulls) / 31.0
-                    DispatchQueue.main.async {self.delegate?.pricePullInProgressFromAV(percentageComplete: percentageComplete )}
-                    print("\(percentageComplete)")
-                    if successfulStocks.count + unsuccessfulStocks.count == stocks.count {
-                        completion(successfulStocks, unsuccessfulStocks)
-                    }
-                } else {
-                    unsuccessfulStocks.append(stock)
-                    if successfulStocks.count + unsuccessfulStocks.count == stocks.count {
-                        completion(successfulStocks, unsuccessfulStocks)
-                    }
-                    
-                }
-            })
+        request.responseJSON { (response) in
+            
+            if response.result.isFailure {
+                completion(false)
+            } else {
+                let responseArray : [Any] = response.value as? [Any] ?? [ ]
+                DataStore.shared.currentPortfolio.updatePricesFromResponse(responseArray)
+                completion(true)
+            }
         }
     }
     
+    public func iexDataForSingleStock(_ stock: CurrentStock, completion: @escaping (_ success: Bool) -> ()) {
+        
+        let requestURL = iexSingleStockPrefix + stock.ticker + iexSingStockSuffix
+        let request = Alamofire.request(requestURL)
+        
+        request.responseJSON { (response) in
+            if response.result.isFailure {
+                completion(false)
+            } else {
+                print("\(response.value!)")
+                let result = stock.updatePricesWithInvestorsExchangeResponse(response.value as! [String : Any])
+                completion(result)
+            }
+        }
+
+    }
+    
+
     public func pullPricesForStock(_ stock: CurrentStock, callType: AlphaVantageCallType, completion: @escaping (_ success: Bool) -> ()) {
         let requestURL = urlStringForStock(stock, type: callType)
         let request = Alamofire.request(requestURL)
@@ -91,10 +120,12 @@ class AlphaVantageClient: NSObject {
             
             if isGoodResponse {
                 stock.updatePricesWithResponse(responseDictionary!, callType : callType)
+                NSLog("updated prices for: \(stock.ticker)")
                 completion(true)
             } else {
                 completion(false)
-                print("failed for: \(stock.ticker)")
+                let data = response.debugDescription
+                print("\n\n\nfailed for: \(stock.ticker)\n\nResponse: \n\n \(data)")
             }
         }
     }

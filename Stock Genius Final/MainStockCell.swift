@@ -45,7 +45,7 @@ class MainStockCell: UITableViewCell {
     
     func formatCellWithStock(_ stock: CurrentStock, isOneDayReturn: Bool) {
         
-        let startPeriodPrice = stock.isTrading ? stock.adjPriceStartDate : stock.startingPriceHardCode
+        let startPeriodPrice = stock.adjPriceStartDate
         let startingPx = isOneDayReturn ? stock.adjPriceLastClose : startPeriodPrice
         let isPositive = stock.isTrading ? stock.adjPriceCurrent >= startingPx : stock.acquiredPrice >= startingPx
         tickerLabel.text = stock.ticker

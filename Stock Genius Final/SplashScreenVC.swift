@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SplashScreenVC: UIViewController, DataStoreDelegate {
+class SplashScreenVC: UIViewController {
 
     @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet weak var noEyesLogoImage: UIImageView!
@@ -29,30 +29,16 @@ class SplashScreenVC: UIViewController, DataStoreDelegate {
         super.viewDidLoad()
         formatView()
         formatUnableToConnectView()
-        refreshSplashView()
+        collectAppData()
         labelScrollView.isHidden = true
         progressView.isHidden = true
         
     }
     
-    func refreshSplashView() {
+    func collectAppData() {
         
-        progressView.progress = 0.0
-        DataStore.shared.performInitialFirebasePull { (success) in
-            
-            if DataStore.shared.appNeedsFullUpdateOnSplashScreen() {
-                self.labelScrollView.isHidden = false
-                self.progressView.isHidden = false
-                DataStore.shared.performUpdatePricesPull(completion: { (success) in
-                    
-                    self.readyToPresent(success)
-                })
-            } else {
-                DataStore.shared.currentPortfolio.updatePricesFromCache()
-                self.currentPicksNeedsPriceUpdate = success
-                self.readyToPresent(success)
-            }
-            
+        DataStore.shared.collectAppDataForLaunch { (success) in
+            self.readyToPresent(success)
         }
     }
     
@@ -65,43 +51,10 @@ class SplashScreenVC: UIViewController, DataStoreDelegate {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! TabBarController
-        destinationVC.currentPicksNeedsUpate = currentPicksNeedsPriceUpdate
-    }
-    
     private func formatView() {
         view.backgroundColor = SGConstants.mainBlackColor
-        DataStore.shared.delegate = self
-        progressView.progress = 0.0
-        progressView.progressTintColor = SGConstants.mainBlueColor
     }
 
-    
-    func pricePullInProgress(percentageComplete: Float) {
-        DispatchQueue.main.async {
-            self.progressView.setProgress(percentageComplete, animated: true)
-            
-            if percentageComplete > 0.15 && percentageComplete < 0.45 {
-                
-                if self.currentLabelPage != 1 {
-                    self.labelScrollView.adjustScrollViewToPage(1, animated: true)
-                    self.currentLabelPage = 1
-                }
-            } else if percentageComplete >= 0.45 && percentageComplete < 0.80 {
-                if self.currentLabelPage != 2 {
-                    self.labelScrollView.adjustScrollViewToPage(2, animated: true)
-                    self.currentLabelPage = 2
-                }
-            } else if percentageComplete >= 0.80 {
-                if self.currentLabelPage != 3 {
-                    self.labelScrollView.adjustScrollViewToPage(3, animated: true)
-                    self.currentLabelPage = 3
-                }
-            }
-        }
-    }
-    
  
     // helper methods
     
@@ -121,7 +74,7 @@ extension SplashScreenVC : UnableToConnectVCDelegate {
     }
     
     func tryAgainTapped() {
-        refreshSplashView()
+        collectAppData()
         unableToConnectVC.dismiss(animated: false, completion: nil)
     }
 }

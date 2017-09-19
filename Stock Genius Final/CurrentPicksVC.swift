@@ -21,7 +21,6 @@ class CurrentPicksVC: UIViewController {
     var ready = true
     @IBOutlet weak var nextUpdateView: NextUpdateView!
     weak var delegate : CurrentPicksVCDelegate?
-    var needsPriceUpdate = false
     let sectionHeaderClearView = SectionHeaderClearView()
     
     override func viewDidLoad() {
@@ -29,11 +28,8 @@ class CurrentPicksVC: UIViewController {
         formatTableView()
         formatHeaderView()
         formatSectionHeaderClearView()
-        formatAlphaVantageSingleton()
         view.backgroundColor = SGConstants.mainBlackColor
-        if needsPriceUpdate {
-            refreshPrices()
-        }
+    
     }
     
     func formatHeaderView() {
@@ -52,17 +48,13 @@ class CurrentPicksVC: UIViewController {
         sectionHeaderClearView.rightButton.isEnabled = false
         headerView.startCurrentPicksPriceRefresh()
         
-        DataStore.shared.performUpdatePricesPull { (success) in
-            if success {
-                self.headerView.priceRefreshFinished()
-                self.mainTableView.reloadData()
-                self.sectionHeaderClearView.rightButton.isEnabled = true
-            } else {
-                self.headerView.priceRefreshFinished()
-                self.mainTableView.reloadData()
-                self.sectionHeaderClearView.rightButton.isEnabled = true
-            }
+        AlphaVantageClient.shared.updateCurrentPriceOnlyForCurrentPortfolio { (success) in
+            print("we got here!")
+            self.headerView.priceRefreshFinished()
+            self.mainTableView.reloadData()
+            self.sectionHeaderClearView.rightButton.isEnabled = true
         }
+
     }
 }
 
@@ -135,7 +127,6 @@ extension CurrentPicksVC : UITableViewDelegate, UITableViewDataSource, CurrentPi
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         headerView.adjustHeaderViewForOffset(scrollView.contentOffset.y)
-        print("\(scrollView.contentOffset.y)")
         sectionHeaderClearView.rightButton.isEnabled = scrollView.contentOffset.y <= 0
     }
     
@@ -206,14 +197,3 @@ extension CurrentPicksVC : SectionHeaderClearViewDelegate {
     }
 }
 
-extension CurrentPicksVC : AlphaVantageClientDelegate {
-    
-    func formatAlphaVantageSingleton() {
-        AlphaVantageClient.shared.delegate = self
-    }
-    
-    func pricePullInProgressFromAV(percentageComplete: Float) {
-        
-        headerView.progressView.setProgress(percentageComplete, animated: true)
-    }
-}
