@@ -17,6 +17,7 @@ class IndividualStockVC: UIViewController, IndividualHeaderViewDelegate {
     var isTodayReturn = true
     var timePeriod : IndividualSegmentType = .sinceStartDate
     let performanceView = BDCStockPerformanceView()
+    let sectionClearView = SectionHeaderClearView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,9 @@ class IndividualStockVC: UIViewController, IndividualHeaderViewDelegate {
         headerView.delegate = self
         if let stock = stock {
             headerView.formatHeaderViewWithStock(stock)
+            AlphaVantageClient.shared.pullNewsForStock(stock, numberOfArticles: 5, completion: { (success) in
+                print("got the news articles: \(stock.newsItems.count)")
+            })
         }
         
     }
@@ -49,7 +53,7 @@ class IndividualStockVC: UIViewController, IndividualHeaderViewDelegate {
 
 }
 
-extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource {
+extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource, SectionHeaderClearViewDelegate {
     
     
     func formatTableView() {
@@ -121,9 +125,9 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
-            let view = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-            view.backgroundColor = UIColor.clear
-            view.isUserInteractionEnabled = false
+            let view = sectionClearView
+            view.delegate = self
+            view.formatForIndividualStock()
             return view
         } else if section == 1{
             return performanceView
@@ -140,6 +144,10 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource {
         headerView.adjustIndividualHeaderViewForOffset(scrollView.contentOffset.y)
         print("\(scrollView.contentOffset.y)")
         
+    }
+    
+    func sectionHeaderButtonTapped(_ button: SectionHeaderButton) {
+        navigationController?.popViewController(animated: true)
     }
     
     

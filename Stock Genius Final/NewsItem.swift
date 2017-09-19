@@ -12,15 +12,33 @@ class NewsItem: NSObject {
     
     var articleURL : String
     var headline : String
-    var pictureName : String
-    var rank : Int
+    var date : Date
+    var source : String
+    var summary : String
     
-    override init() {
-        self.articleURL = ""
-        self.headline = ""
-        self.pictureName = ""
-        self.rank = 0
-        super.init()
+    
+    init(date: Date, url: String, headline: String, source: String, summary: String) {
+        self.date = date
+        self.articleURL = url
+        self.headline = headline
+        self.source = source
+        self.summary = summary
     }
+    
+    convenience init(articleResponse: [String : String]) {
+        let dateString = articleResponse["datetime"] ?? ""
+        let articleDate = Date.isoDateFromString(dateString) ?? Date()
+        let url = articleResponse["url"] ?? ""
+        let headline = articleResponse["headline"] ?? ""
+        let source = articleResponse["source"] ?? ""
+        let summary = articleResponse["summary"] ?? ""
+
+        self.init(date: articleDate, url: url, headline: headline, source: source, summary: summary)
+    }
+    
+    
+
+
+    
 
 }

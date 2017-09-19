@@ -36,6 +36,8 @@ class AlphaVantageClient: NSObject {
     let iexSingStockSuffix = "/quote"
     let iexMultipleStockPrefix = "https://api.iextrading.com/1.0/tops?symbols="
     
+   
+    
     public func pullPriceAndLastCloseFromIEXForCurrentPortfolio(completion: @escaping (_ goodStocks: [CurrentStock], _ badStocks: [CurrentStock]) -> ()) {
         
         var holdings = DataStore.shared.currentPortfolio.holdings
@@ -102,6 +104,27 @@ class AlphaVantageClient: NSObject {
                 print("\(response.value!)")
                 let result = stock.updatePricesWithInvestorsExchangeResponse(response.value as! [String : Any])
                 completion(result)
+            }
+        }
+
+    }
+    
+    public func pullNewsForStock(_ stock: CurrentStock, numberOfArticles: Int, completion: @escaping (_ success: Bool) -> ()) {
+
+        let requestURL = iexSingleStockPrefix + stock.ticker + "/news/last/" + String(numberOfArticles)
+        let request = Alamofire.request(requestURL)
+        
+        request.responseJSON { (response) in
+            if response.result.isFailure {
+                completion(false)
+            } else {
+                let newsResponse = response.value as? [[String : String]] ?? []
+                if newsResponse.count > 0 {
+                    stock.updateNewsItemsWithResponse(newsResponse)
+                    completion(true)
+                } else {
+                    completion(false)
+                }
             }
         }
 

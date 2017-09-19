@@ -10,15 +10,15 @@ import UIKit
 
 class CurrentStock: Stock {
     
-    var adjPriceCurrent : Float
-    var adjPriceStartDate : Float
-    var adjPriceLastClose : Float
-    var isTrading : Bool
-    var startingPriceHardCode : Float
+    var adjPriceCurrent : Float = 0
+    var adjPriceStartDate : Float = 0
+    var adjPriceLastClose : Float = 0
+    var isTrading : Bool = true
+    var startingPriceHardCode : Float = 0
     var availableDates : [Date] = []
-    var hasShortPriceHistory : Bool
-    var hasLongPriceHistory : Bool
-    var hasIntraDayPriceHistory: Bool
+    var hasShortPriceHistory : Bool = false
+    var hasLongPriceHistory : Bool = false
+    var hasIntraDayPriceHistory: Bool = false
     var acquiredPrice : Float = 0
     let currentPriceKey = "currentPrice"
     let lastClosePriceKey = "lastClosePrice"
@@ -27,23 +27,11 @@ class CurrentStock: Stock {
     var graphData : [(x: Date, y: Float)] = []
     var graphShortHistory : [Date : Float] = [:]
     var graphLongHistory : [Date : Float] = [:]
-    var priceHistory : [String : Float]
+    var priceHistory : [String : Float] = [:]
+    var newsItems: [NewsItem] = []
     
-    override init() {
-        self.isTrading = true
-        self.adjPriceCurrent = 0
-        self.adjPriceStartDate = 0
-        self.adjPriceLastClose = 0
-        self.startingPriceHardCode = 0
-        self.priceHistory = [:]
-        self.hasShortPriceHistory = false
-        self.hasLongPriceHistory = false
-        self.hasIntraDayPriceHistory = false
-        super.init()
-    }
 
-        public func updatePricesFromCache() {
-
+    public func updatePricesFromCache() {
         let cacheDictionary = UserDefaults.standard.object(forKey: DataStore.shared.currentPricesKey) as? [String : [String : Float]]
         let stockDictionary = cacheDictionary?[ticker]
         let cachedCurrentPrice = stockDictionary?[currentPriceKey] ?? 0.0
@@ -89,6 +77,16 @@ class CurrentStock: Stock {
             return false
         }
 
+    }
+    
+    public func updateNewsItemsWithResponse(_ response: [[String : String]]) {
+        
+        newsItems.removeAll()
+        for newsItemResponse in response {
+            let newsItem = NewsItem(articleResponse: newsItemResponse)
+            newsItems.append(newsItem)
+        }
+        newsItems.sort(by: {$0.date > $1.date})
     }
     
     private func updatePriceHistoryFromResponse(_ response: [String : Any]) {

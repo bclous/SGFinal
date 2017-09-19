@@ -50,6 +50,11 @@ class SectionHeaderClearView: UIView {
         leftButton.isEnabled = false
         rightButton.isEnabled = true
     }
+    
+    public func formatForIndividualStock() {
+        leftButton.isEnabled = true
+        rightButton.isEnabled = false
+    }
 
     @IBAction func rightButtonTapped(_ sender: Any) {
         delegate?.sectionHeaderButtonTapped(.right)

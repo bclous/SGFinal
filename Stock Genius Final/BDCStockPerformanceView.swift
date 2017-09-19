@@ -178,8 +178,7 @@ class BDCStockPerformanceView: UIView, IndividualToggleViewDelegate {
     }
     
     @IBAction func tryAgainTapped(_ sender: Any) {
-        
-         // do this
+         formatView()
     }
     
     private func formatViewForGraphDisplayType(_ type: GraphDisplayType) {

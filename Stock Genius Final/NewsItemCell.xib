@@ -18,43 +18,21 @@
                 <rect key="frame" x="0.0" y="0.0" width="477" height="313.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screen Shot 2017-08-29 at 11.02.40 AM" translatesAutoresizingMaskIntoConstraints="NO" id="FFL-GZ-oY7">
-                        <rect key="frame" x="0.0" y="0.0" width="477" height="313.5"/>
-                    </imageView>
-                    <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tzg-iu-n60">
-                        <rect key="frame" x="0.0" y="253.5" width="477" height="60"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's up this is hte motherfucking headllineeeeee whats up my brosefs and my ladysefsssss" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ikg-In-Ub8">
-                                <rect key="frame" x="10" y="10" width="457" height="40"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y2e-6n-C10">
+                        <rect key="frame" x="136" y="162" width="240" height="128"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ikg-In-Ub8" firstAttribute="height" secondItem="Tzg-iu-n60" secondAttribute="height" constant="-20" id="Ccj-ZT-WP2"/>
-                            <constraint firstItem="ikg-In-Ub8" firstAttribute="centerX" secondItem="Tzg-iu-n60" secondAttribute="centerX" id="DoQ-lH-GI2"/>
-                            <constraint firstAttribute="height" constant="60" id="gqy-dz-QMk"/>
-                            <constraint firstItem="ikg-In-Ub8" firstAttribute="width" secondItem="Tzg-iu-n60" secondAttribute="width" constant="-20" id="k8H-wo-Gvw"/>
-                            <constraint firstItem="ikg-In-Ub8" firstAttribute="centerY" secondItem="Tzg-iu-n60" secondAttribute="centerY" id="uDA-XN-4KA"/>
+                            <constraint firstAttribute="height" constant="1" id="Mj9-rh-b1Q"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="Tzg-iu-n60" secondAttribute="trailing" id="1B7-cK-Lbj"/>
-                    <constraint firstItem="FFL-GZ-oY7" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="3u3-NI-t92"/>
-                    <constraint firstItem="FFL-GZ-oY7" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" id="5nB-YN-QM8"/>
-                    <constraint firstAttribute="bottom" secondItem="Tzg-iu-n60" secondAttribute="bottom" id="IcC-KL-xvB"/>
-                    <constraint firstItem="FFL-GZ-oY7" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" id="fcB-ho-UZV"/>
-                    <constraint firstItem="FFL-GZ-oY7" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="gER-82-iba"/>
-                    <constraint firstItem="Tzg-iu-n60" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="qxH-DR-O1y"/>
+                    <constraint firstItem="y2e-6n-C10" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="ImE-FO-R8d"/>
+                    <constraint firstItem="y2e-6n-C10" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" id="c5E-Bb-6Ht"/>
+                    <constraint firstAttribute="bottom" secondItem="y2e-6n-C10" secondAttribute="bottom" id="qWn-k0-OXV"/>
                 </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="-120.5" y="-161"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="Screen Shot 2017-08-29 at 11.02.40 AM" width="1994" height="1026"/>
-    </resources>
 </document>

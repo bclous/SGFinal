@@ -15,7 +15,6 @@ class Stock: NSObject {
     var note : String
     var rankInPortfolio : Int
     var yahooURL : String
-    var newsItems : [NewsItem]
     
     override init() {
         self.ticker = ""
@@ -23,7 +22,6 @@ class Stock: NSObject {
         self.note = ""
         self.rankInPortfolio = 0
         self.yahooURL = ""
-        self.newsItems = []
         super.init()
     }
     
