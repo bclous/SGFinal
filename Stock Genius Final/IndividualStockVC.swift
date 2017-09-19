@@ -32,7 +32,7 @@ class IndividualStockVC: UIViewController, IndividualHeaderViewDelegate {
         headerView.delegate = self
         if let stock = stock {
             headerView.formatHeaderViewWithStock(stock)
-            AlphaVantageClient.shared.pullNewsForStock(stock, numberOfArticles: 5, completion: { (success) in
+            AlphaVantageClient.shared.pullNewsForStock(stock, numberOfArticles: 10, completion: { (success) in
                 self.mainTableView.reloadData()
             })
         }
