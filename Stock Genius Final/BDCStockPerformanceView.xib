@@ -13,7 +13,6 @@
             <connections>
                 <outlet property="chartView" destination="ne8-Y2-BSG" id="aFN-g3-Fpx"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="wOh-kR-p1o"/>
-                <outlet property="performanceView" destination="hGH-Ir-e7E" id="bMH-kB-1rR"/>
                 <outlet property="retrievingView" destination="xbO-wr-0wd" id="83q-P1-Wb4"/>
                 <outlet property="spinner" destination="XvH-eB-er9" id="WEf-GT-TGf"/>
                 <outlet property="toggleView" destination="NSv-hD-Ail" id="Ivz-Cf-aBa"/>
@@ -84,26 +83,16 @@
                         <constraint firstItem="Ma4-Ty-BzA" firstAttribute="centerY" secondItem="NJS-hs-7S0" secondAttribute="centerY" constant="-10" id="tCW-e4-Ngi"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hGH-Ir-e7E" customClass="IndividualPerformanceView" customModule="Stock_Genius_Final" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="285" width="375" height="85"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="85" id="jN6-MX-3ld"/>
-                    </constraints>
-                </view>
             </subviews>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="hGH-Ir-e7E" secondAttribute="trailing" id="2T5-9D-kc4"/>
                 <constraint firstItem="xbO-wr-0wd" firstAttribute="width" secondItem="ne8-Y2-BSG" secondAttribute="width" id="3sJ-Kb-kgq"/>
                 <constraint firstItem="xbO-wr-0wd" firstAttribute="centerX" secondItem="ne8-Y2-BSG" secondAttribute="centerX" id="BhY-Ff-Cyk"/>
                 <constraint firstItem="NSv-hD-Ail" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="CEt-sj-oiW"/>
-                <constraint firstItem="hGH-Ir-e7E" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="CZ6-od-jvM"/>
                 <constraint firstItem="NJS-hs-7S0" firstAttribute="centerX" secondItem="ne8-Y2-BSG" secondAttribute="centerX" id="Hsx-xy-VWo"/>
                 <constraint firstItem="ne8-Y2-BSG" firstAttribute="top" secondItem="NSv-hD-Ail" secondAttribute="bottom" id="IAn-65-lwc"/>
                 <constraint firstItem="xbO-wr-0wd" firstAttribute="centerY" secondItem="ne8-Y2-BSG" secondAttribute="centerY" id="ImL-L6-iCN"/>
                 <constraint firstAttribute="trailing" secondItem="NSv-hD-Ail" secondAttribute="trailing" id="SgP-oW-3f9"/>
                 <constraint firstItem="NJS-hs-7S0" firstAttribute="centerY" secondItem="ne8-Y2-BSG" secondAttribute="centerY" id="TLk-TM-BfI"/>
-                <constraint firstItem="hGH-Ir-e7E" firstAttribute="top" secondItem="ne8-Y2-BSG" secondAttribute="bottom" id="VnZ-eE-mP9"/>
                 <constraint firstItem="NJS-hs-7S0" firstAttribute="height" secondItem="ne8-Y2-BSG" secondAttribute="height" id="W2l-cl-lcO"/>
                 <constraint firstItem="NJS-hs-7S0" firstAttribute="width" secondItem="ne8-Y2-BSG" secondAttribute="width" id="XZP-7j-vS9"/>
                 <constraint firstItem="xbO-wr-0wd" firstAttribute="height" secondItem="ne8-Y2-BSG" secondAttribute="height" id="cwW-36-Ub2"/>
@@ -111,7 +100,7 @@
                 <constraint firstItem="NSv-hD-Ail" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="iVX-3h-HTa"/>
                 <constraint firstAttribute="trailing" secondItem="ne8-Y2-BSG" secondAttribute="trailing" id="wJY-bv-GY5"/>
             </constraints>
-            <point key="canvasLocation" x="315" y="116"/>
+            <point key="canvasLocation" x="-111" y="109"/>
         </view>
         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="9Vz-mx-Pue">
             <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>

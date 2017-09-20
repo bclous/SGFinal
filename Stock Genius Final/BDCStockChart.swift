@@ -21,8 +21,6 @@ class BDCStockChart: UIView {
     
     let chart = Chart()
     public var data : [(x: Date, y: Float)] = []
-    private var currentSegmentType : IndividualSegmentType = .sixMonths
-    
     public var chartBackgroundColor = UIColor.black {
         didSet {
             chart.backgroundColor = chartBackgroundColor
@@ -79,12 +77,11 @@ class BDCStockChart: UIView {
         backgroundColor = SGConstants.mainBlackColor
     }
     
-    public func formatChartWithData(_ data: [(x: Date, y: Float)], type: IndividualSegmentType) {
+    public func formatChartWithData(_ data: [(x: Date, y: Float)]) {
 
         if !data.isEmpty {
             self.data = data
             sortedData = data.sorted(by: {$0.x < $1.x})
-            currentSegmentType = type
             formatChart()
         }
     }
@@ -132,8 +129,7 @@ class BDCStockChart: UIView {
                 chartData.append(value)
             }
         }
-        
-     
+  
     }
     
     private func firstInDayIndices() -> [Float] {

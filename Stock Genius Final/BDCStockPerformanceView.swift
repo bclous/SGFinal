@@ -16,9 +16,8 @@ enum GraphDisplayType {
 
 class BDCStockPerformanceView: UIView, IndividualToggleViewDelegate {
     
-    var stocks : (stock : CurrentStock, index: CurrentStock)?
-        
-
+    var stock : CurrentStock?
+    
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var unableToConectLabel: UILabel!
     @IBOutlet weak var unableToConnectView: UIView!
@@ -26,7 +25,6 @@ class BDCStockPerformanceView: UIView, IndividualToggleViewDelegate {
     @IBOutlet weak var retrievingView: UIView!
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var toggleView: IndividualToggleView!
-    @IBOutlet weak var performanceView: IndividualPerformanceView!
     @IBOutlet weak var chartView: BDCStockChart!
     var currentToggleChoice: IndividualSegmentType = .sixMonths
     
@@ -53,7 +51,6 @@ class BDCStockPerformanceView: UIView, IndividualToggleViewDelegate {
         
         formatUnableToConect()
         formatRetrievingView()
-        formatView()
         
     }
     
@@ -74,111 +71,46 @@ class BDCStockPerformanceView: UIView, IndividualToggleViewDelegate {
         
     }
     
-    public func formatView() {
+    
+    public func formatGraphForStock(_ stock: CurrentStock, durationType: IndividualSegmentType) {
         
-        if let stocks = stocks {
-            currentToggleChoice = stocks.stock.lastToggleSegment
-            toggleView.formatToggleViewForType(currentToggleChoice)
-            
-            let haveStockData = haveGraphDataForStock(stocks.stock)
-            let haveIndexData = haveGraphDataForStock(stocks.index)
-            if haveStockData && haveIndexData {
-                stocks.stock.updateGraphData()
-                stocks.index.updateGraphData()
-                chartView.formatChartWithData(stocks.stock.graphData, type: currentToggleChoice)
-                formatViewForGraphDisplayType(.dataAvailable)
-            } else {
-                formatViewForGraphDisplayType(.retrievingData)
-                retrieveGraphData(stock: !haveStockData, index: !haveIndexData, completion: { (success) in
-                    if success {
-                        stocks.stock.updateGraphData()
-                        stocks.index.updateGraphData()
-                        DispatchQueue.main.async{self.chartView.formatChartWithData(stocks.stock.graphData, type: self.currentToggleChoice)}
-                        DispatchQueue.main.async {self.formatViewForGraphDisplayType(.dataAvailable)}
-                    } else {
-                        DispatchQueue.main.async {self.formatViewForGraphDisplayType(.failedToRetrieveTryAgain)}
-                    }
-                })
-            }
-        }
-    }
-    
-    private func retrieveGraphData(stock: Bool, index: Bool, completion: @escaping (_ success: Bool) -> ()) {
-    
-        if stock {
-            AlphaVantageClient.shared.pullPricesForStock(stocks!.stock, callType: chartDataTypeFromToggleChoice(), completion: { (success) in
-                if !success {
-                     completion(false)
+        self.stock = stock
+        let durationType = stock.lastToggleSegment ?? durationType
+        toggleView.formatToggleViewForType(durationType)
+        
+        if stock.graphHistory.isEmpty {
+            formatViewForGraphDisplayType(.retrievingData)
+            stock.pullGraphData(completion: { (success) in
+                if success {
+                    self.formatViewForGraphDisplayType(.dataAvailable)
+                    self.chartView.formatChartWithData(stock.graphDataForDuration(durationType))
                 } else {
-                    if index {
-                        AlphaVantageClient.shared.pullPricesForStock(self.stocks!.index, callType: self.chartDataTypeFromToggleChoice(), completion: { (success) in
-                            completion(success)
-                        })
-                    } else {
-                        completion(success)
-                    }
+                    self.formatViewForGraphDisplayType(.failedToRetrieveTryAgain)
                 }
             })
         } else {
-            AlphaVantageClient.shared.pullPricesForStock(self.stocks!.index, callType: self.chartDataTypeFromToggleChoice(), completion: { (success) in
-                completion(success)
-            })
+            self.chartView.formatChartWithData(stock.graphDataForDuration(durationType))
         }
-    }
-    
-    private func haveGraphDataForStock(_ stock: CurrentStock) -> Bool {
-        
-         let historyType = chartDataTypeFromToggleChoice()
-        
-        switch historyType {
-        case .intraday:
-            return stock.hasShortPriceHistory
-        case .shortHistory:
-            return stock.hasShortPriceHistory
-        case .longHistory:
-            return stock.hasLongPriceHistory
-        }
-
     }
     
     internal func toggleChosen(type: IndividualSegmentType) {
         
         currentToggleChoice = type
         
-        if let stocks = stocks {
-            let stock = stocks.stock
+        if let stock = stock {
             stock.lastToggleSegment = type
+            formatGraphForStock(stock, durationType: type)
         }
-        
-        formatView()
     }
+
     
-    private func chartDataTypeFromToggleChoice() -> AlphaVantageCallType {
-       
-        switch currentToggleChoice {
-        case .today:
-            return .shortHistory
-        case .sinceStartDate:
-            return .shortHistory
-        case .oneWeek:
-            return .shortHistory
-        case .oneMonth:
-            return .shortHistory
-        case .threeMonths:
-            return .shortHistory
-        case .sixMonths:
-            return .longHistory
-        case .oneYear:
-            return .longHistory
-        case .threeYears:
-            return .longHistory
-        case .fiveYears:
-            return .longHistory
-        }
-    }
     
     @IBAction func tryAgainTapped(_ sender: Any) {
-         formatView()
+        
+        if let stock = stock {
+            formatGraphForStock(stock, durationType: currentToggleChoice)
+        }
+        
     }
     
     private func formatViewForGraphDisplayType(_ type: GraphDisplayType) {
@@ -187,25 +119,16 @@ class BDCStockPerformanceView: UIView, IndividualToggleViewDelegate {
         case .dataAvailable:
             retrievingView.isHidden = true
             unableToConnectView.isHidden = true
-            formatViewForDataAvailable()
         case .retrievingData:
             unableToConnectView.isHidden = true
             retrievingView.isHidden = false
-            performanceView.formatViewForLoadingData()
         case .failedToRetrieveTryAgain:
             retrievingView.isHidden = true
             unableToConnectView.isHidden = false
-            performanceView.formatViewForLoadingData()
         }
         
     }
     
-    private func formatViewForDataAvailable() {
-        if let stocks = stocks {
-            performanceView.formatViewForStocks(stocks, segmentType: currentToggleChoice)
-        }
-    }
-
 }
 
 

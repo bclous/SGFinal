@@ -10,7 +10,8 @@ import UIKit
 
 class IndividualStockVC: UIViewController, IndividualHeaderViewDelegate {
     
-    var stock : CurrentStock?
+    var stock : CurrentStock = CurrentStock()
+    var toggleOnMainPicks : IndividualSegmentType = .sixMonths
     
     @IBOutlet weak var headerView: IndividualHeaderView!
     @IBOutlet weak var mainTableView: UITableView!
@@ -24,28 +25,26 @@ class IndividualStockVC: UIViewController, IndividualHeaderViewDelegate {
         super.viewDidLoad()
         formatTableView()
         formatHeaderView()
-        formatPerformanceView()
+        updateNewsSection()
+        updateGraphSection()
         view.backgroundColor = SGConstants.mainBlackColor
     }
     
     func formatHeaderView() {
         headerView.delegate = self
-        if let stock = stock {
-            headerView.formatHeaderViewWithStock(stock)
-            AlphaVantageClient.shared.pullNewsForStock(stock, numberOfArticles: 10, completion: { (success) in
+        headerView.formatHeaderViewWithStock(stock)
+    }
+    
+    func updateNewsSection() {
+        if stock.newsItems.isEmpty {
+            stock.pullNewsData(numberOfArticles: 10, completion: { (success) in
                 self.mainTableView.reloadData()
             })
         }
-        
     }
     
-    func formatPerformanceView() {
-        
-        if let stock = stock {
-            performanceView.stocks = (stock: stock, index: DataStore.shared.currentPortfolio.index)
-            performanceView.formatView()
-        }
- 
+    func updateGraphSection() {
+       performanceView.formatGraphForStock(stock, durationType: toggleOnMainPicks)
     }
     
     func backButtonTapped() {
@@ -54,7 +53,7 @@ class IndividualStockVC: UIViewController, IndividualHeaderViewDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! WebBrowserVC
-        destinationVC.ticker = stock!.ticker
+        destinationVC.ticker = stock.ticker
         destinationVC.newsItem = chosenNewsItem
         mainTableView.reloadData()
     }
@@ -79,7 +78,7 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource, Section
         
         if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell") as! NewsItemCell
-            cell.formatCellWithNewsItem(stock!.newsItems[indexPath.row])
+            cell.formatCellWithNewsItem(stock.newsItems[indexPath.row])
             return cell
         } else {
             let cell = UITableViewCell()
@@ -98,11 +97,7 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource, Section
         case 1:
             return 0
         case 2:
-            if let stock = stock {
-                return stock.newsItems.count
-            } else {
-                return 0
-            }
+            return stock.newsItems.count
         default:
             return 0
         }
@@ -156,7 +151,7 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource, Section
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        chosenNewsItem = stock!.newsItems[indexPath.row]
+        chosenNewsItem = stock.newsItems[indexPath.row]
         performSegue(withIdentifier: "newsSegue", sender: nil)
     }
     

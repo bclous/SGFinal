@@ -35,6 +35,7 @@ class AlphaVantageClient: NSObject {
     let iexSingleStockPrefix = "https://api.iextrading.com/1.0/stock/"
     let iexSingStockSuffix = "/quote"
     let iexMultipleStockPrefix = "https://api.iextrading.com/1.0/tops?symbols="
+    let iexGraphSuffix = "/chart/5y"
     
    
     
@@ -130,6 +131,28 @@ class AlphaVantageClient: NSObject {
 
     }
     
+    public func pullGraphDataForStock(_ stock: CurrentStock, completion: @escaping (_ success: Bool) -> () ) {
+        
+        let requestURL = iexSingleStockPrefix + stock.ticker + iexGraphSuffix
+        
+        let request = Alamofire.request(requestURL)
+        
+        request.responseJSON { (response) in
+            if response.result.isFailure {
+                completion(false)
+            } else {
+                let graphData = response.value as? [[String : Any]] ?? []
+                if graphData.count > 0 {
+                    stock.updateGraphDataWithIEXResponse(graphData)
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            }
+        }
+
+        
+    }
 
     public func pullPricesForStock(_ stock: CurrentStock, callType: AlphaVantageCallType, completion: @escaping (_ success: Bool) -> ()) {
         let requestURL = urlStringForStock(stock, type: callType)
@@ -142,7 +165,7 @@ class AlphaVantageClient: NSObject {
             let isGoodResponse = !response.result.isFailure && responseDictionary?.count ?? 0 > 0 && responseDictionary != nil
             
             if isGoodResponse {
-                stock.updatePricesWithResponse(responseDictionary!, callType : callType)
+                //stock.updatePricesWithResponse(responseDictionary!, callType : callType)
                 NSLog("updated prices for: \(stock.ticker)")
                 completion(true)
             } else {

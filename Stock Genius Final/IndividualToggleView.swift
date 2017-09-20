@@ -70,19 +70,12 @@ class IndividualToggleView: UIView, IndividualSegmentDelegate {
             let chosen = type == view.segmentType
             view.formatSegment(chosen: chosen)
         }
-        
-        
+
     }
     
     func segmentTapped(type: IndividualSegmentType) {
-        
-        NSLog("delegate method beginnign in indv toggle view")
-        
+        formatToggleViewForType(type)
         delegate?.toggleChosen(type: type)
-        
-        
-        
-        
         
     }
 
