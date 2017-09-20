@@ -11,8 +11,6 @@ import UIKit
 class IndividualStockVC: UIViewController, IndividualHeaderViewDelegate {
     
     var stock : CurrentStock = CurrentStock()
-    var toggleOnMainPicks : IndividualSegmentType = .sixMonths
-    
     @IBOutlet weak var headerView: IndividualHeaderView!
     @IBOutlet weak var mainTableView: UITableView!
     var isTodayReturn = true
@@ -44,7 +42,9 @@ class IndividualStockVC: UIViewController, IndividualHeaderViewDelegate {
     }
     
     func updateGraphSection() {
-       performanceView.formatGraphForStock(stock, durationType: toggleOnMainPicks)
+        let mainPicksToggle : IndividualSegmentType = isTodayReturn ? .today : .sinceStartDate
+        let originalToggle = stock.lastToggleSegment ?? mainPicksToggle
+        performanceView.formatGraphForStock(stock, durationType: originalToggle)
     }
     
     func backButtonTapped() {
@@ -121,7 +121,7 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource, Section
         case 0:
             return 60
         case 1:
-            return 370
+            return 285
         case 2:
             return 40
         default:

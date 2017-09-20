@@ -36,6 +36,7 @@ class AlphaVantageClient: NSObject {
     let iexSingStockSuffix = "/quote"
     let iexMultipleStockPrefix = "https://api.iextrading.com/1.0/tops?symbols="
     let iexGraphSuffix = "/chart/5y"
+    let iexDailyGraphSuffix = "/chart/1d"
     
    
     
@@ -102,7 +103,6 @@ class AlphaVantageClient: NSObject {
             if response.result.isFailure {
                 completion(false)
             } else {
-                print("\(response.value!)")
                 let result = stock.updatePricesWithInvestorsExchangeResponse(response.value as! [String : Any])
                 completion(result)
             }
@@ -151,46 +151,26 @@ class AlphaVantageClient: NSObject {
             }
         }
 
-        
-    }
-
-    public func pullPricesForStock(_ stock: CurrentStock, callType: AlphaVantageCallType, completion: @escaping (_ success: Bool) -> ()) {
-        let requestURL = urlStringForStock(stock, type: callType)
-        let request = Alamofire.request(requestURL)
-        let queue = DispatchQueue(label: "com.cnoon.response-queue", qos: .utility, attributes: [.concurrent])
-        
-        request.response(queue: queue, responseSerializer: DataRequest.jsonResponseSerializer()) { (response) in
-            
-            let responseDictionary = response.value as? [String : Any]
-            let isGoodResponse = !response.result.isFailure && responseDictionary?.count ?? 0 > 0 && responseDictionary != nil
-            
-            if isGoodResponse {
-                //stock.updatePricesWithResponse(responseDictionary!, callType : callType)
-                NSLog("updated prices for: \(stock.ticker)")
-                completion(true)
-            } else {
-                completion(false)
-                let data = response.debugDescription
-                print("\n\n\nfailed for: \(stock.ticker)\n\nResponse: \n\n \(data)")
-            }
-        }
     }
     
-    private func urlStringForStock(_ stock: CurrentStock, type: AlphaVantageCallType) -> String {
+    public func pullDailyGraphDataForStock(_ stock: CurrentStock, completion: @escaping (_ success: Bool) -> ()) {
         
-        let ticker = stock.ticker
+        let requestURL = iexSingleStockPrefix + stock.ticker + iexDailyGraphSuffix
+        let request = Alamofire.request(requestURL)
         
-        switch type {
-        case .intraday:
-            return apiPrefix + ticker + apiKeySegment + apiKey
-        case .shortHistory:
-            return apiPrefix + ticker + apiKeySegment + apiKey
-        case .longHistory:
-            print ("\(apiPrefix)\(ticker)outputsize=full\(apiKeySegment)\(apiKey)")
-            return apiPrefix + ticker + "&outputsize=full" + apiKeySegment + apiKey
-            
+        request.responseJSON { (response) in
+            if response.result.isFailure {
+                completion(false)
+            } else {
+                let graphData = response.value as? [[String : Any]] ?? []
+                if graphData.count > 0 {
+                    stock.updateDailyGraphDataWithIEXResponse(graphData)
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            }
         }
-        
     }
     
 }

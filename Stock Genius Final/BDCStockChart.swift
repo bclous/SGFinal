@@ -10,6 +10,7 @@ import UIKit
 import SwiftChart
 
 enum DateIntervalType {
+    case intraday
     case daily
     case weekly
     case monthly
@@ -42,6 +43,8 @@ class BDCStockChart: UIView {
                 xAxisDateFormat = "MMM"
             case .yearly:
                 xAxisDateFormat = "yyyy"
+            case .intraday:
+                xAxisDateFormat = "h a"
             }
         }
     }
@@ -77,23 +80,23 @@ class BDCStockChart: UIView {
         backgroundColor = SGConstants.mainBlackColor
     }
     
-    public func formatChartWithData(_ data: [(x: Date, y: Float)]) {
+    public func formatChartWithData(_ data: [(x: Date, y: Float)], isDaily: Bool) {
 
         if !data.isEmpty {
             self.data = data
             sortedData = data.sorted(by: {$0.x < $1.x})
-            formatChart()
+            formatChart(isDaily: isDaily)
         }
     }
     
-    private func formatChart() {
+    private func formatChart(isDaily: Bool) {
         
         createChartData()
         let series = ChartSeries(data: chartData)
         series.area = true
         chart.series.removeAll()
         chart.add(series)
-        formatDefaultIntervalType()
+        formatDefaultIntervalType(isDaily: isDaily)
         chart.xLabels = xAxisLabels()
         chart.yLabels = yAxisLabels()
         chart.xLabelsFormatter = { self.dateStringFromInt(Int($1))}
@@ -129,7 +132,6 @@ class BDCStockChart: UIView {
                 chartData.append(value)
             }
         }
-  
     }
     
     private func firstInDayIndices() -> [Float] {
@@ -261,13 +263,31 @@ class BDCStockChart: UIView {
 
     }
     
+    private func intraDayIndices() -> [Float] {
+        
+        var indices: [Float] = []
+        
+        for index in 0...sortedData.count - 1 {
+            
+            let date = sortedData[index].x
+            let minuteString = date.string(withFormat: "mm")
+            if minuteString == "00" {
+                indices.append(Float(index))
+            }
+        }
+        
+        return indices
+    }
+    
     private func adjustedWeekday(component: Int) -> Int {
         return component == 1 ? 7 : component - 1
     }
     
-    private func formatDefaultIntervalType() {
-
-        if sortedData.count <= 6 {
+    private func formatDefaultIntervalType(isDaily: Bool) {
+        
+        if isDaily {
+            dateIntervalType = .intraday
+        } else if sortedData.count <= 6 {
             dateIntervalType = .daily
         } else if sortedData.count <= 30 {
             dateIntervalType = .weekly
@@ -292,6 +312,8 @@ class BDCStockChart: UIView {
             return firstInQuarterIndices()
         case .yearly:
             return firstInYearIndices()
+        case .intraday:
+            return intraDayIndices()
         }
     }
     

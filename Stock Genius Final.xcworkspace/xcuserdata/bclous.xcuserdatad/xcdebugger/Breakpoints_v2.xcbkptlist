@@ -16,97 +16,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Stock Genius Final/WebBrowserVC.swift"
-            timestampString = "527540398.816348"
+            filePath = "Stock Genius Final/BDCStockChart.swift"
+            timestampString = "527638368.096881"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "webViewDidFinishLoad(_:)"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "dateStringFromInt(_:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Stock Genius Final/BDCStockPerformanceView.swift"
-            timestampString = "527624820.525687"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "formatGraphForStock(_:durationType:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Stock Genius Final/CurrentPortfolio.swift"
-            timestampString = "527626352.369605"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "updatePricesFromResponse(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Stock Genius Final/CurrentPortfolio.swift"
-            timestampString = "527626560.534175"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
-            landmarkName = "updatePricesFromResponse(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Stock_Genius_Final.CurrentPortfolio.updatePricesFromResponse (Swift.Array&lt;Any&gt;) -&gt; ()"
-                  moduleName = "Stock Genius Final"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bclous/Desktop/SGFinal/Stock%20Genius%20Final/CurrentPortfolio.swift"
-                  timestampString = "527626560.673868"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "76"
-                  endingLineNumber = "76"
-                  offsetFromSymbolStart = "1352">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Stock_Genius_Final.CurrentPortfolio.(updatePricesFromResponse (Swift.Array&lt;Any&gt;) -&gt; ()).(implicit closure #2)"
-                  moduleName = "Stock Genius Final"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bclous/Desktop/SGFinal/Stock%20Genius%20Final/CurrentPortfolio.swift"
-                  timestampString = "527626560.675007"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "76"
-                  endingLineNumber = "76"
-                  offsetFromSymbolStart = "28">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

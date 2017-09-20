@@ -19,8 +19,8 @@
             <rect key="frame" x="0.0" y="0.0" width="392" height="40"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suggested Reading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QNo-ke-phg">
-                    <rect key="frame" x="129.5" y="11" width="134" height="18"/>
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suggested Reading" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QNo-ke-phg">
+                    <rect key="frame" x="10.5" y="0.0" width="372" height="40"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -39,7 +39,9 @@
                 <constraint firstItem="QNo-ke-phg" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ASw-Bt-U43"/>
                 <constraint firstItem="QNo-ke-phg" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="G4p-uu-qL2"/>
                 <constraint firstItem="SOF-TG-CoQ" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" constant="-20" id="VZY-RC-LZK"/>
+                <constraint firstItem="QNo-ke-phg" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="kU4-te-Bjx"/>
                 <constraint firstItem="SOF-TG-CoQ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="udl-js-FZi"/>
+                <constraint firstItem="QNo-ke-phg" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" constant="-20" id="zJO-Pn-rR7"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="59" y="-260"/>

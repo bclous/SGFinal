@@ -75,21 +75,34 @@ class BDCStockPerformanceView: UIView, IndividualToggleViewDelegate {
     public func formatGraphForStock(_ stock: CurrentStock, durationType: IndividualSegmentType) {
         
         self.stock = stock
-        let durationType = stock.lastToggleSegment ?? durationType
         toggleView.formatToggleViewForType(durationType)
         
-        if stock.graphHistory.isEmpty {
-            formatViewForGraphDisplayType(.retrievingData)
-            stock.pullGraphData(completion: { (success) in
-                if success {
-                    self.formatViewForGraphDisplayType(.dataAvailable)
-                    self.chartView.formatChartWithData(stock.graphDataForDuration(durationType))
-                } else {
-                    self.formatViewForGraphDisplayType(.failedToRetrieveTryAgain)
-                }
-            })
+        let haveData = durationType == .today ? !stock.dailyHistory.isEmpty : !stock.graphHistory.isEmpty
+        
+        if haveData {
+            self.chartView.formatChartWithData(stock.graphDataForDuration(durationType), isDaily: durationType == .today)
         } else {
-            self.chartView.formatChartWithData(stock.graphDataForDuration(durationType))
+            self.formatViewForGraphDisplayType(.retrievingData)
+            if durationType == .today {
+                stock.pullDailyGraphData(completion: { (success) in
+                    if success {
+                        self.chartView.formatChartWithData(stock.graphDataForDuration(durationType), isDaily: true)
+                        self.formatViewForGraphDisplayType(.dataAvailable)
+                    } else {
+                        self.formatViewForGraphDisplayType(.failedToRetrieveTryAgain)
+                    }
+                })
+            } else {
+                stock.pullGraphData(completion: { (success) in
+                    if success {
+                        self.chartView.formatChartWithData(stock.graphDataForDuration(durationType), isDaily: false)
+                        self.formatViewForGraphDisplayType(.dataAvailable)
+                    } else {
+                        self.formatViewForGraphDisplayType(.failedToRetrieveTryAgain)
+                    }
+                })
+            }
+
         }
     }
     

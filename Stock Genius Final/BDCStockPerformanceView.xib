@@ -83,6 +83,13 @@
                         <constraint firstItem="Ma4-Ty-BzA" firstAttribute="centerY" secondItem="NJS-hs-7S0" secondAttribute="centerY" constant="-10" id="tCW-e4-Ngi"/>
                     </constraints>
                 </view>
+                <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HpP-0y-VaB">
+                    <rect key="frame" x="10" y="284" width="355" height="1"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="RIy-jz-mRE"/>
+                    </constraints>
+                </view>
             </subviews>
             <constraints>
                 <constraint firstItem="xbO-wr-0wd" firstAttribute="width" secondItem="ne8-Y2-BSG" secondAttribute="width" id="3sJ-Kb-kgq"/>
@@ -91,6 +98,7 @@
                 <constraint firstItem="NJS-hs-7S0" firstAttribute="centerX" secondItem="ne8-Y2-BSG" secondAttribute="centerX" id="Hsx-xy-VWo"/>
                 <constraint firstItem="ne8-Y2-BSG" firstAttribute="top" secondItem="NSv-hD-Ail" secondAttribute="bottom" id="IAn-65-lwc"/>
                 <constraint firstItem="xbO-wr-0wd" firstAttribute="centerY" secondItem="ne8-Y2-BSG" secondAttribute="centerY" id="ImL-L6-iCN"/>
+                <constraint firstItem="HpP-0y-VaB" firstAttribute="width" secondItem="ne8-Y2-BSG" secondAttribute="width" constant="-20" id="JE0-qu-S16"/>
                 <constraint firstAttribute="trailing" secondItem="NSv-hD-Ail" secondAttribute="trailing" id="SgP-oW-3f9"/>
                 <constraint firstItem="NJS-hs-7S0" firstAttribute="centerY" secondItem="ne8-Y2-BSG" secondAttribute="centerY" id="TLk-TM-BfI"/>
                 <constraint firstItem="NJS-hs-7S0" firstAttribute="height" secondItem="ne8-Y2-BSG" secondAttribute="height" id="W2l-cl-lcO"/>
@@ -98,7 +106,9 @@
                 <constraint firstItem="xbO-wr-0wd" firstAttribute="height" secondItem="ne8-Y2-BSG" secondAttribute="height" id="cwW-36-Ub2"/>
                 <constraint firstItem="ne8-Y2-BSG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="e71-9y-zDX"/>
                 <constraint firstItem="NSv-hD-Ail" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="iVX-3h-HTa"/>
+                <constraint firstItem="HpP-0y-VaB" firstAttribute="bottom" secondItem="ne8-Y2-BSG" secondAttribute="bottom" id="seJ-cC-ob8"/>
                 <constraint firstAttribute="trailing" secondItem="ne8-Y2-BSG" secondAttribute="trailing" id="wJY-bv-GY5"/>
+                <constraint firstItem="HpP-0y-VaB" firstAttribute="centerX" secondItem="ne8-Y2-BSG" secondAttribute="centerX" id="xFq-9f-Jr1"/>
             </constraints>
             <point key="canvasLocation" x="-111" y="109"/>
         </view>

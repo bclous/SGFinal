@@ -15,7 +15,6 @@ class CurrentStock: Stock {
     var adjPriceLastClose : Float = 0
     var isTrading : Bool = true
     var startingPriceHardCode : Float = 0
-    var availableDates : [Date] = []
     var hasShortPriceHistory : Bool = false
     var hasLongPriceHistory : Bool = false
     var hasIntraDayPriceHistory: Bool = false
@@ -25,6 +24,7 @@ class CurrentStock: Stock {
     let sincePeriodBeginPriceKey = "sincePeriodStartPrice"
     var lastToggleSegment : IndividualSegmentType?
     var graphHistory : [Date : Float] = [:]
+    var dailyHistory : [Date : Float] = [:]
     var newsItems: [NewsItem] = []
     
 
@@ -55,6 +55,12 @@ class CurrentStock: Stock {
         }
     }
     
+    public func pullDailyGraphData(completion: @escaping (_ success: Bool) -> ()) {
+        AlphaVantageClient.shared.pullDailyGraphDataForStock(self) { (success) in
+            completion(success)
+        }
+    }
+    
     public func pullNewsData(numberOfArticles: Int, completion: @escaping (_ success: Bool) -> ()) {
         AlphaVantageClient.shared.pullNewsForStock(self, numberOfArticles: numberOfArticles) { (success) in
             completion(success)
@@ -65,9 +71,6 @@ class CurrentStock: Stock {
         
         let currentPrice = response["latestPrice"] as? Float ?? 0
         let lastClosePrice = response["previousClose"] as? Float ?? 0
-        
-        print("ticker: \(self.ticker): current - \(currentPrice), lastClose - \(lastClosePrice)")
-        
         let isGoodResponse = currentPrice != 0 && lastClosePrice != 0
         
         if isGoodResponse {
@@ -78,6 +81,21 @@ class CurrentStock: Stock {
             return false
         }
 
+    }
+    
+    private func availableDates(mostRecentFirst: Bool) -> [Date] {
+        
+        var availableDates : [Date] = []
+        
+        for (key, _ ) in graphHistory {
+            availableDates.append(key)
+        }
+        
+        availableDates.sort(by: { (firstDate, secondDate) -> Bool in
+            return mostRecentFirst ? secondDate < firstDate : firstDate < secondDate
+        })
+        
+        return availableDates
     }
     
     public func updateGraphDataWithIEXResponse(_ response: [[String : Any]]) {
@@ -97,22 +115,58 @@ class CurrentStock: Stock {
         
     }
     
+    public func updateDailyGraphDataWithIEXResponse(_ response: [[String : Any]]) {
+        
+        dailyHistory.removeAll()
+        var mostRecentTrade = adjPriceLastClose
+        
+        for quote in response {
+            let numberOfTrades = quote["numberOfTrades"] as? Int ?? 0
+            let todayString = Date().string(withFormat: "yyyy-MM-dd") ?? ""
+            let minuteString = quote["minute"] as? String ?? ""
+            let dateString = todayString + " " + minuteString
+            let quoteDate = Date.dateFromString(dateString, dateFormat: "yyyy-MM-dd HH:mm")
+            let price = quote["average"] as? Float ?? 0
+            let adjustedPrice = numberOfTrades > 0 ? price : mostRecentTrade
+
+            if let quoteDate = quoteDate {
+                dailyHistory.updateValue(adjustedPrice, forKey: quoteDate)
+            }
+            mostRecentTrade = adjustedPrice
+        }
+    }
+    
     public func graphDataForDuration(_ duration: IndividualSegmentType) -> [(x: Date, y: Float)] {
         
-        var graphData : [(x: Date, y: Float)] = []
-        
-        let startingDate = startingDateForSegmentType(duration) ?? Date()
-        
-        for (key, value) in graphHistory {
-            if key >= startingDate {
-                let day = (x: key, y: value)
-                graphData.append(day)
+        if duration == .today {
+            return dailyGraphData()
+        } else {
+            var graphData : [(x: Date, y: Float)] = []
+            let startingDate = startingDateForSegmentType(duration) ?? Date()
+            
+            for (key, value) in graphHistory {
+                if key >= startingDate {
+                    let day = (x: key, y: value)
+                    graphData.append(day)
+                }
             }
+            
+            graphData.sort(by: {$0.x < $1.x})
+            return graphData
+        }
+    }
+    
+    private func dailyGraphData() -> [(x: Date, y: Float)] {
+        
+        var dailyData : [(x: Date, y: Float)] = []
+        for (date, value) in dailyHistory {
+            let quote = (x: date, y: value)
+            dailyData.append(quote)
         }
         
-        graphData.sort(by: {$0.x < $1.x})
-        return graphData
+        dailyData.sort(by: {$0.x < $1.x})
         
+        return dailyData
     }
     
     public func updateNewsItemsWithResponse(_ response: [[String : String]]) {
@@ -139,50 +193,6 @@ class CurrentStock: Stock {
         }
     }
     
-
-    // helper methods to update prices
-    
-    
-
-    private func currentPriceKey(availableDates: [Date]) -> String? {
-        if availableDates.count > 0 {
-            let key = availableDates[0].string(withFormat: "yyyy-MM-dd")
-            return key
-        } else {
-            return nil
-        }
-    }
-    
-    private func lastClosePriceKey(availableDates: [Date]) -> String? {
-        if availableDates.count > 1 {
-            
-            if Date().timeIntervalSince(availableDates[0]) > 388800 {
-                let key = availableDates[0].string(withFormat: "yyyy-MM-dd")
-                return key
-            } else {
-                let key = availableDates[1].string(withFormat: "yyyy-MM-dd")
-                return key
-            }
-        } else {
-            return nil
-        }
-    }
-    
-    private func sinceStartPeriodPriceKey(availableDates: [Date]) -> String? {
-        let startDate = DataStore.shared.currentPortfolio.dateForPeriodBegin()
-        if let startDate = startDate {
-            for date in availableDates {
-                if date <= startDate {
-                    return date.string(withFormat: "yyyy-MM-dd")
-                }
-            }
-            return nil
-        } else {
-            return nil
-        }
-        
-    }
-    
     
     // functions for graph
     
@@ -190,13 +200,13 @@ class CurrentStock: Stock {
     private func startingDateForSegmentType(_ type: IndividualSegmentType) -> Date? {
     
         let today = Date()
+        let availableDays = availableDates(mostRecentFirst: true)
         
         switch type {
         case .today:
-            let dateString = lastClosePriceKey(availableDates: availableDates) ?? ""
-            return Date.dateFromString(dateString, dateFormat: "yyyy-MM-dd") ?? today.dateByAdding(value: -1, component: .day)
+            return today
         case .oneWeek:
-            return availableDates.count >= 6 ? availableDates[5] : today.dateByAdding(value: -7, component: .day)
+            return availableDays.count >= 6 ? availableDays[5] : today.dateByAdding(value: -7, component: .day)
         case .oneMonth:
             return today.dateByAdding(value: -1, component: .month)
         case .threeMonths:

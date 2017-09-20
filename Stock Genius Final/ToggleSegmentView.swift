@@ -102,7 +102,6 @@ class ToggleSegmentView: UIView {
     }
     
     @IBAction func segmentButtonTappedDown(_ sender: Any) {
-        NSLog("\n\n\nsegment button tapped")
         delegate?.segmentTapped(type: segmentType)
     }
 
