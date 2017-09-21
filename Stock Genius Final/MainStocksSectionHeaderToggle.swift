@@ -52,8 +52,8 @@ class MainStocksSectionHeaderToggle: UIView {
         rightView.layer.cornerRadius = 5
         leftView.layer.borderColor = SGConstants.mainBlueColor.cgColor
         rightView.layer.borderColor = SGConstants.mainBlueColor.cgColor
-        leftView.layer.borderWidth = 2
-        rightView.layer.borderWidth = 2
+        leftView.layer.borderWidth = 1
+        rightView.layer.borderWidth = 1 
         leftLabel.text = "TODAY"
         rightLabel.text = "SINCE 3/14/2015"
         formatView(todayChosen: true)

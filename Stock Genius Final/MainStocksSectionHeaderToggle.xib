@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -23,20 +23,20 @@
             <rect key="frame" x="0.0" y="0.0" width="465" height="50"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tZs-QJ-xnc">
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="tZs-QJ-xnc">
                     <rect key="frame" x="10" y="10" width="445" height="30"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KKF-ye-8L9">
-                            <rect key="frame" x="0.0" y="0.0" width="217.5" height="30"/>
+                            <rect key="frame" x="0.0" y="0.0" width="220" height="30"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4nv-Hw-Gb3">
-                                    <rect key="frame" x="5" y="0.5" width="207.5" height="30"/>
+                                    <rect key="frame" x="5" y="0.5" width="210" height="30"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iBE-PH-Z9I">
-                                    <rect key="frame" x="0.0" y="0.0" width="217.5" height="30"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="220" height="30"/>
                                     <connections>
                                         <action selector="buttonTapped:" destination="-1" eventType="touchUpInside" id="0HE-1d-bdQ"/>
                                     </connections>
@@ -55,16 +55,16 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ib-hX-gVn">
-                            <rect key="frame" x="227.5" y="0.0" width="217.5" height="30"/>
+                            <rect key="frame" x="225" y="0.0" width="220" height="30"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XZv-Dl-bHY">
-                                    <rect key="frame" x="5" y="0.5" width="207.5" height="30"/>
+                                    <rect key="frame" x="5" y="0.5" width="210" height="30"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0JE-zL-dNn">
-                                    <rect key="frame" x="0.0" y="0.0" width="217.5" height="30"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="220" height="30"/>
                                     <connections>
                                         <action selector="buttonTapped:" destination="-1" eventType="touchUpInside" id="VNa-y2-mas"/>
                                     </connections>
@@ -93,7 +93,7 @@
                 <constraint firstItem="tZs-QJ-xnc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="aUQ-oO-bx0"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-0.5" y="-502"/>
+            <point key="canvasLocation" x="-90" y="-504"/>
         </view>
     </objects>
 </document>
