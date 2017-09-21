@@ -343,8 +343,8 @@
 		0FFB6F441F15582800FD8BC1 /* SplashScreen */ = {
 			isa = PBXGroup;
 			children = (
-				0F17B7791F17CA180064533F /* InvalidSubscriptionVC.swift */,
 				0FFB6F421F15308300FD8BC1 /* SplashScreenVC.swift */,
+				0F17B7791F17CA180064533F /* InvalidSubscriptionVC.swift */,
 				0FFB6F461F15586000FD8BC1 /* IndividualLabelView.xib */,
 				0FFB6F4A1F15590200FD8BC1 /* LabelScrollView.xib */,
 				0FFB6F4C1F1559B700FD8BC1 /* LabelScrollView.swift */,

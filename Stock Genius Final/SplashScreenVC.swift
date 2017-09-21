@@ -44,7 +44,6 @@ class SplashScreenVC: UIViewController {
     
     func readyToPresent(_ ready: Bool) {
         if ready {
-            progressView.progress = 1.0
             performSegue(withIdentifier: "mainSegue", sender: nil)
         } else {
             present(unableToConnectVC, animated: false, completion: nil)
@@ -74,7 +73,7 @@ extension SplashScreenVC : UnableToConnectVCDelegate {
     }
     
     func tryAgainTapped() {
-        collectAppData()
         unableToConnectVC.dismiss(animated: false, completion: nil)
+        collectAppData()
     }
 }
