@@ -10,11 +10,11 @@ import Foundation
 import UIKit
 
 
-class BDCHelper {
+extension Float {
     
-    
-    
-    
+    public func stringWithDecimals(_ decimals: UInt) -> String {
+        return String(format: "%.\(decimals)f", self)
+    }
 }
 
 

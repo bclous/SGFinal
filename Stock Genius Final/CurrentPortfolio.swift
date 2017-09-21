@@ -69,11 +69,13 @@ class CurrentPortfolio: NSObject {
         for result in response {
             let stockResponse = result as? [String : Any]
             let ticker = stockResponse?["symbol"] as? String ?? ""
-            let lastPrice = stockResponse?["lastSalePrice"] as? Float
+            let lastPrice = stockResponse?["lastSalePrice"] as? Float ?? 0
             let currentStock = currentHoldingFromTicker(ticker)
             
             if let currentStock = currentStock {
-                currentStock.adjPriceCurrent = lastPrice ?? currentStock.adjPriceCurrent
+                if lastPrice != 0 {
+                    currentStock.adjPriceCurrent = lastPrice
+                }
             }
         }
         

@@ -18,7 +18,7 @@ enum DateIntervalType {
     case yearly
 }
 
-class BDCStockChart: UIView {
+class BDCStockChart: UIView, ChartDelegate {
     
     let chart = Chart()
     public var data : [(x: Date, y: Float)] = []
@@ -28,6 +28,7 @@ class BDCStockChart: UIView {
         }
     }
     public var xAxisDateFormat = "M/yy"
+    private var lineLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 40, height: 8))
     
     public var dateIntervalType : DateIntervalType = .weekly {
         didSet {
@@ -44,7 +45,7 @@ class BDCStockChart: UIView {
             case .yearly:
                 xAxisDateFormat = "yyyy"
             case .intraday:
-                xAxisDateFormat = "h a"
+                xAxisDateFormat = xAxisLabels().count < 4 ? "h:mm a" : "h a"
             }
         }
     }
@@ -66,8 +67,28 @@ class BDCStockChart: UIView {
         self.commonInit()
     }
     
+    func didTouchChart(_ chart: Chart, indexes: [Int?], x: Float, left: CGFloat) {
+       
+        let index : Int = indexes[0] ?? 0
+        let value = chart.valueForSeries(0, atIndex: index)
+        if let value = value {
+            lineLabel.isHidden = false
+            lineLabel.text = value.stringWithDecimals(2)
+            lineLabel.frame.origin.x = left < 3 ? left : left - 3
+        }
+    }
+    
+    func didFinishTouchingChart(_ chart: Chart) {
+        print("hi")
+    }
+    
+    func didEndTouchingChart(_ chart: Chart) {
+        print("hi")
+    }
+    
     private func commonInit() {
         self.addSubview(chart)
+        chart.delegate = self
         chart.translatesAutoresizingMaskIntoConstraints = false
         chart.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
         chart.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
@@ -78,16 +99,30 @@ class BDCStockChart: UIView {
         
         chartBackgroundColor = SGConstants.mainBlackColor
         backgroundColor = SGConstants.mainBlackColor
+        formatLineLabel()
     }
+    
+    private func formatLineLabel() {
+        
+        addSubview(lineLabel)
+        lineLabel.text = "444.44"
+        lineLabel.textColor = SGConstants.fontColorWhiteSecondary
+        lineLabel.font = lineLabel.font.withSize(10.0)
+        
+    }
+    
     
     public func formatChartWithData(_ data: [(x: Date, y: Float)], isDaily: Bool) {
 
+        lineLabel.isHidden = true
         if !data.isEmpty {
             self.data = data
             sortedData = data.sorted(by: {$0.x < $1.x})
             formatChart(isDaily: isDaily)
         }
     }
+    
+    
     
     private func formatChart(isDaily: Bool) {
         
@@ -114,7 +149,8 @@ class BDCStockChart: UIView {
     private func dateStringFromInt(_ int: Int) -> String {
         
         let adjusted = sortedData.count - 1 == int ? int : int + 1
-        let date = sortedData[adjusted].x
+        let adjustedForDaily = dateIntervalType == .intraday ? int : adjusted
+        let date = sortedData[adjustedForDaily].x
         return date.string(withFormat: xAxisDateFormat)!
     
     }
@@ -265,7 +301,29 @@ class BDCStockChart: UIView {
     
     private func intraDayIndices() -> [Float] {
         
+        if sortedData.count < 45 {
+            return firstIndex()
+        } else if sortedData.count <= 75 {
+            return firstInHourIndices(includeFirst: true)
+        } else {
+            return firstInHourIndices(includeFirst: false)
+        }
+
+    }
+    
+    private func firstIndex() -> [Float] {
+        let firstIndex : Float = 0
+        return [firstIndex]
+    }
+    
+    private func firstInHourIndices(includeFirst: Bool) -> [Float] {
+        
         var indices: [Float] = []
+        
+        if includeFirst {
+            let firstIndex : Float = 0
+            indices.append(firstIndex)
+        }
         
         for index in 0...sortedData.count - 1 {
             
@@ -277,7 +335,10 @@ class BDCStockChart: UIView {
         }
         
         return indices
+        
     }
+    
+    
     
     private func adjustedWeekday(component: Int) -> Int {
         return component == 1 ? 7 : component - 1

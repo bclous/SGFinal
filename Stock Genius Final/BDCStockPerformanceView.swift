@@ -12,12 +12,14 @@ enum GraphDisplayType {
     case dataAvailable
     case retrievingData
     case failedToRetrieveTryAgain
+    case noDailyData
 }
 
 class BDCStockPerformanceView: UIView, IndividualToggleViewDelegate {
     
     var stock : CurrentStock?
     
+    @IBOutlet weak var noDataView: UIView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var unableToConectLabel: UILabel!
     @IBOutlet weak var unableToConnectView: UIView!
@@ -51,7 +53,13 @@ class BDCStockPerformanceView: UIView, IndividualToggleViewDelegate {
         
         formatUnableToConect()
         formatRetrievingView()
+        formatNoDataView()
         
+    }
+    
+    private func formatNoDataView() {
+        noDataView.backgroundColor = SGConstants.mainBlackColor
+        noDataView.isHidden = true
     }
     
     private func formatUnableToConect() {
@@ -86,15 +94,21 @@ class BDCStockPerformanceView: UIView, IndividualToggleViewDelegate {
             if durationType == .today {
                 stock.pullDailyGraphData(completion: { (success) in
                     if success {
-                        self.chartView.formatChartWithData(stock.graphDataForDuration(durationType), isDaily: true)
-                        self.formatViewForGraphDisplayType(.dataAvailable)
+                        let data = stock.graphDataForDuration(durationType)
+                        if data.count < 2 {
+                            self.formatViewForGraphDisplayType(.noDailyData)
+                        } else {
+                            self.chartView.formatChartWithData(stock.graphDataForDuration(durationType), isDaily: true)
+                            self.formatViewForGraphDisplayType(.dataAvailable)
+                        }
                     } else {
                         self.formatViewForGraphDisplayType(.failedToRetrieveTryAgain)
                     }
                 })
             } else {
                 stock.pullGraphData(completion: { (success) in
-                    if success {
+                    let data = stock.graphDataForDuration(durationType)
+                    if success && !data.isEmpty {
                         self.chartView.formatChartWithData(stock.graphDataForDuration(durationType), isDaily: false)
                         self.formatViewForGraphDisplayType(.dataAvailable)
                     } else {
@@ -112,6 +126,7 @@ class BDCStockPerformanceView: UIView, IndividualToggleViewDelegate {
         
         if let stock = stock {
             stock.lastToggleSegment = type
+            self.formatViewForGraphDisplayType(.dataAvailable)
             formatGraphForStock(stock, durationType: type)
         }
     }
@@ -132,12 +147,20 @@ class BDCStockPerformanceView: UIView, IndividualToggleViewDelegate {
         case .dataAvailable:
             retrievingView.isHidden = true
             unableToConnectView.isHidden = true
+            noDataView.isHidden = true
         case .retrievingData:
             unableToConnectView.isHidden = true
             retrievingView.isHidden = false
+            noDataView.isHidden = true
         case .failedToRetrieveTryAgain:
             retrievingView.isHidden = true
             unableToConnectView.isHidden = false
+            noDataView.isHidden = true
+        case .noDailyData:
+            retrievingView.isHidden = true
+            unableToConnectView.isHidden = true
+            noDataView.isHidden = false
+            
         }
         
     }

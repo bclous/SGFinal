@@ -33,10 +33,8 @@ class CurrentPicksVC: UIViewController {
     }
     
     func formatHeaderView() {
-        let headerDateString = DataStore.shared.currentPortfolio.startDateString()
-        headerView.secondaryLabel.text = "Identified from 13-F data on \(headerDateString)"
+        headerView.formatHeaderViewForVC(.currentPicks)
         headerView.delegate = self
-        
     }
     
     func formatSectionHeaderClearView() {
@@ -48,8 +46,7 @@ class CurrentPicksVC: UIViewController {
         sectionHeaderClearView.rightButton.isEnabled = false
         headerView.startCurrentPicksPriceRefresh()
         
-        AlphaVantageClient.shared.updateCurrentPriceOnlyForCurrentPortfolio { (success) in
-            print("we got here!")
+        DataStore.shared.updatePricesFromIEX { (success) in
             self.headerView.priceRefreshFinished()
             self.mainTableView.reloadData()
             self.sectionHeaderClearView.rightButton.isEnabled = true
@@ -192,7 +189,6 @@ extension CurrentPicksVC : HeaderViewDelegate {
 
 extension CurrentPicksVC : SectionHeaderClearViewDelegate {
     func sectionHeaderButtonTapped(_ button: SectionHeaderButton) {
-        
         refreshPrices()
     }
 }

@@ -62,7 +62,7 @@ class DataStore: NSObject  {
         }
     }
     
-    private func updatePricesFromIEX(completion: @escaping(_ success: Bool) -> ()) {
+    public func updatePricesFromIEX(completion: @escaping(_ success: Bool) -> ()) {
         
         AlphaVantageClient.shared.pullPriceAndLastCloseFromIEXForCurrentPortfolio { (goodStocks, badStocks) in
             self.currentPortfolio.cachePrices()

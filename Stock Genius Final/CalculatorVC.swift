@@ -23,7 +23,7 @@ class CalculatorVC: UIViewController, CalculatorInputDelegate, CalcHeaderViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       headerView.formatHeaderViewForVC(.calculator)
+        headerView.formatHeaderViewForVC(.calculator)
         formatTableView()
         formatCalcInputView()
         view.backgroundColor = SGConstants.mainBlackColor

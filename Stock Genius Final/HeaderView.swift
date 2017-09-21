@@ -25,6 +25,7 @@ class HeaderView: UIView {
     var shouldAnimate = false
     weak var delegate : HeaderViewDelegate?
     var maxRefreshImageAlpha : CGFloat = 0.9
+    var showRefreshBar = false
     
     @IBOutlet weak var seperatorView: UIView!
     override init(frame: CGRect) { // for using CustomView in code
@@ -55,12 +56,14 @@ class HeaderView: UIView {
     
     public func adjustHeaderViewForOffset(_ offset: CGFloat) {
         
+      
+            
         if offset >= 0 && offset <= 60 {
             refreshButton.isEnabled = offset == 0
             if offset <= 20 {
                 let percentage : CGFloat = 1.0 - offset / 20.0
                 secondaryLabel.alpha = percentage
-                refreshImage.alpha = percentage * maxRefreshImageAlpha
+                refreshImage.alpha = showRefreshBar ? percentage * maxRefreshImageAlpha : 0
             } else {
                 secondaryLabel.alpha = 0
             }
@@ -74,8 +77,8 @@ class HeaderView: UIView {
             mainLabel.font = mainLabel.font.withSize(fontSize)
             
         } else if offset < 0 {
-            refreshButton.isEnabled = true
-            refreshImage.alpha = maxRefreshImageAlpha
+            refreshButton.isEnabled = showRefreshBar
+            refreshImage.alpha = showRefreshBar ? maxRefreshImageAlpha : 0
             mainLabel.font = mainLabel.font.withSize(36.0)
             secondaryLabel.alpha = 1
             adjustableViewBottomConstraint.constant = 0
@@ -85,12 +88,14 @@ class HeaderView: UIView {
             mainLabel.font = mainLabel.font.withSize(15.0)
             secondaryLabel.alpha = 0
             refreshImage.alpha = 0
-
             adjustableViewBottomConstraint.constant = 60
             mainLabelTopConstraint.constant = 15
         }
         
         layoutIfNeeded()
+
+      
+        
         
     }
     
@@ -98,20 +103,25 @@ class HeaderView: UIView {
         
         switch type {
         case .currentPicks:
+            
+            let headerDateString = DataStore.shared.currentPortfolio.startDateString()
+            secondaryLabel.text = "Identified from 13-F data on \(headerDateString)"
             mainLabel.text = "Current Picks"
-            secondaryLabel.text = "Identified from 13-F data on 3/31/17"
             refreshButton.isEnabled = true
             refreshImage.alpha = 0.9
+            showRefreshBar = true
         case .calculator:
             mainLabel.text = "Share Calculator"
             secondaryLabel.text = "Tap to edit investment amount"
             refreshButton.isEnabled = false
             refreshImage.alpha = 0
+            showRefreshBar = false
         case .pastPicks:
             mainLabel.text = "Past Picks"
-            secondaryLabel.text = "1/1/2010 - 3/1/2010 (24 quarters)"
+            secondaryLabel.text = DataStore.shared.pastPortfoliosString()
             refreshButton.isEnabled = false
             refreshImage.alpha = 0
+            showRefreshBar = false
         }
         
         

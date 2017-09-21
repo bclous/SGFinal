@@ -19,13 +19,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Stock Genius Final/BDCStockChart.swift"
-            timestampString = "527638368.096881"
+            filePath = "Pods/SwiftChart/Source/Chart.swift"
+            timestampString = "527693908.384979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
-            landmarkName = "dateStringFromInt(_:)"
+            startingLineNumber = "385"
+            endingLineNumber = "385"
+            landmarkName = "getMinMax()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

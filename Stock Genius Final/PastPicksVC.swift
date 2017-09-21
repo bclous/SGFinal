@@ -20,7 +20,7 @@ class PastPicksVC: UIViewController {
         view.backgroundColor = SGConstants.mainBlackColor
         formatTableView()
         performanceView.formatPerformanceHeaderView(performance: [DataStore.shared.totalStockGeniusPerformance, DataStore.shared.totalIndexPerformance], frameWidth: view.frame.width)
-        headerView.secondaryLabel.text = DataStore.shared.pastPortfoliosString()
+        headerView.formatHeaderViewForVC(.pastPicks)
         
     }
 
