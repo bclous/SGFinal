@@ -22,6 +22,7 @@ class WebBrowserVC: UIViewController {
     var newsItem : NewsItem?
     var ticker : String?
     var delegate : WebBrowserViewControllerDelegate?
+    var blockedRequests : [String] = ["https://www.google.com/recaptcha", "about:blank", "https://tpc.googlesyndication.com", "https://www.dianomi.com", "https://us-u.openx.net", "https://ssum-sec.casalemedia.com", "https://s0.2mdn.net", "https://tpc.googlesyndication.com", "https://ad.doubleclick.net", "https://www.wsoddata.com/", "https://js-sec.indexww.com", "https://acdn.adnxs.com", "https://staticxx.facebook.com", "about:srcdoc", "https://pixel.sitescout.com", "https://pixel.sitescout.com", "https://bh.contextweb.com", "https://pixel.quantserve.com", "https://connexity.net", ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +57,7 @@ extension WebBrowserVC: UIWebViewDelegate, BrowserFooterDelegate {
         webView.delegate = self
         browserFooterView.delegate = self
         loadWebview()
+        webView.suppressesIncrementalRendering = true
         
     }
     
@@ -77,8 +79,15 @@ extension WebBrowserVC: UIWebViewDelegate, BrowserFooterDelegate {
 
     }
     
-    func webViewDidFinishLoad(_ webView: UIWebView) {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         
+        NSLog("\n\nrequesting:\(request.url?.absoluteString)")
+        return allowRequest(request)
+
+    }
+    
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        NSLog("\n\nfinished load\n\n")
         browserFooterView.formatBrowserFooter(backAvailable: webView.canGoBack, forwardAvailable: webView.canGoForward)
     }
     
@@ -104,5 +113,20 @@ extension WebBrowserVC: UIWebViewDelegate, BrowserFooterDelegate {
                 })
             }
         }
+    }
+    
+    private func allowRequest(_ request: URLRequest) -> Bool {
+        
+        if let requestString = request.url?.absoluteString {
+            for prohibitedString in blockedRequests {
+                if requestString.contains(prohibitedString) {
+                    NSLog("denied")
+                    return false
+                }
+            }
+        }
+        
+        NSLog("accepted")
+        return true
     }
 }

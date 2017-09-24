@@ -22,15 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
-        updateUserAgent()
         checkForFirstTime()
         SKPaymentQueue.default().add(self)
         IAPClient.shared.fetchProducts()
         return true
-    }
-    
-    func updateUserAgent() {
-        //UserDefaults.standard.register(defaults: ["UserAgent" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/603.3.8 (KHTML, like Gecko) Version/10.1.2 Safari/603.3.8"])
     }
     
     func checkForFirstTime() {

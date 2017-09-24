@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class IndividualStockVC: UIViewController, IndividualHeaderViewDelegate {
     
@@ -152,7 +153,16 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource, Section
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         chosenNewsItem = stock.newsItems[indexPath.row]
-        performSegue(withIdentifier: "newsSegue", sender: nil)
+        if let news = chosenNewsItem {
+            let url = URL(string: news.articleURL)
+            if let url = url {
+                let svc = SFSafariViewController(url: url)
+                present(svc, animated: true, completion: { 
+                    self.mainTableView.reloadData()
+                })
+            }
+
+        }
     }
     
     
