@@ -26,6 +26,7 @@ class CurrentStock: Stock {
     var graphHistory : [Date : Float] = [:]
     var dailyHistory : [Date : Float] = [:]
     var newsItems: [NewsItem] = []
+    var stockTwitsMessages : [String : STMessage] = [:]
     
 
     public func updatePricesFromCache() {

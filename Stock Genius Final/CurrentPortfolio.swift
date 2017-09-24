@@ -10,25 +10,15 @@ import UIKit
 
 class CurrentPortfolio: NSObject {
     
-    var startDate : String
-    var endDate : String
-    var name : String
-    var note : String
-    var holdings : [CurrentStock]
-    var index : CurrentStock
-    var calcStocks : [CalculatorStock]
+    var startDate : String = ""
+    var endDate : String = ""
+    var name : String = ""
+    var note : String = ""
+    var holdings : [CurrentStock] = []
+    var index : CurrentStock = CurrentStock()
+    var calcStocks : [CalculatorStock] = []
     var remainingCash : Float = 0
-    
-    override init() {
-        self.startDate = ""
-        self.endDate = ""
-        self.name = ""
-        self.note = ""
-        self.holdings = []
-        self.index = CurrentStock()
-        self.calcStocks = []
-        super.init()
-    }
+    var stockTwitsUsers : [String : STUser] = [:]
     
     
     public func updateCurrentPortfolioValues(dictionary: Dictionary<String, Any>) {
@@ -63,6 +53,15 @@ class CurrentPortfolio: NSObject {
         updateCalcStocks()
         updatePricesFromCache()
         
+    }
+    
+    public func stockTwitsUserFromUserID(_ id: String) -> STUser? {
+        return stockTwitsUsers["id"]
+    }
+    
+    public func addStockTwitsUserToDatabase(_ user: STUser) {
+        let key = user.id
+        stockTwitsUsers.updateValue(user, forKey: key)
     }
     
     public func updatePricesFromResponse(_ response: [Any]) {
