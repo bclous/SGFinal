@@ -43,7 +43,6 @@
 		0F2651EE1F05583E00754D0F /* MainStockSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2651ED1F05583E00754D0F /* MainStockSummaryCell.swift */; };
 		0F2651F01F055D3C00754D0F /* PastPicksSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2651EF1F055D3C00754D0F /* PastPicksSectionHeaderView.swift */; };
 		0F3333EA1F60303400FBE4BF /* BDCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3333E91F60303400FBE4BF /* BDCHelper.swift */; };
-		0F3A15531F54600C00EFB79F /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3A15521F54600C00EFB79F /* Article.swift */; };
 		0F3A15571F54847C00EFB79F /* IndividualStockVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3A15561F54847C00EFB79F /* IndividualStockVC.swift */; };
 		0F3A155A1F54A35800EFB79F /* IndividualHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F3A15591F54A35800EFB79F /* IndividualHeaderView.xib */; };
 		0F3A155C1F54A96000EFB79F /* IndividualHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3A155B1F54A96000EFB79F /* IndividualHeaderView.swift */; };
@@ -153,7 +152,6 @@
 		0F2651ED1F05583E00754D0F /* MainStockSummaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainStockSummaryCell.swift; sourceTree = "<group>"; };
 		0F2651EF1F055D3C00754D0F /* PastPicksSectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastPicksSectionHeaderView.swift; sourceTree = "<group>"; };
 		0F3333E91F60303400FBE4BF /* BDCHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDCHelper.swift; sourceTree = "<group>"; };
-		0F3A15521F54600C00EFB79F /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		0F3A15561F54847C00EFB79F /* IndividualStockVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndividualStockVC.swift; sourceTree = "<group>"; };
 		0F3A15591F54A35800EFB79F /* IndividualHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IndividualHeaderView.xib; sourceTree = "<group>"; };
 		0F3A155B1F54A96000EFB79F /* IndividualHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndividualHeaderView.swift; sourceTree = "<group>"; };
@@ -251,21 +249,28 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		0F2651E61F053C2500754D0F /* Model */ = {
+		0F032B141F783EA8006DF60E /* StockTwits */ = {
 			isa = PBXGroup;
 			children = (
-				0F2651DC1F05374900754D0F /* CurrentStock.swift */,
-				0F5AE2251F66C4DE000DA6C0 /* StockPriceDay.swift */,
-				0F3A15521F54600C00EFB79F /* Article.swift */,
-				0F2651E41F053BAE00754D0F /* NewsItem.swift */,
-				0F2651E01F053A4C00754D0F /* CurrentPortfolio.swift */,
 				0F032B0C1F781267006DF60E /* STMessage.swift */,
 				0F032B121F782C01006DF60E /* STImage.swift */,
 				0F032B101F782BA6006DF60E /* STLink.swift */,
 				0F032B0E1F7812E7006DF60E /* STUser.swift */,
-				0F2651E71F053E4600754D0F /* Stock.swift */,
+			);
+			name = StockTwits;
+			sourceTree = "<group>";
+		};
+		0F2651E61F053C2500754D0F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0F2651E01F053A4C00754D0F /* CurrentPortfolio.swift */,
+				0F2651DC1F05374900754D0F /* CurrentStock.swift */,
+				0F5AE2251F66C4DE000DA6C0 /* StockPriceDay.swift */,
+				0F2651E41F053BAE00754D0F /* NewsItem.swift */,
 				0F2651E21F053AF600754D0F /* PastPortfolio.swift */,
 				0F2651DE1F05390A00754D0F /* PastStock.swift */,
+				0F2651E71F053E4600754D0F /* Stock.swift */,
+				0F032B141F783EA8006DF60E /* StockTwits */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -637,7 +642,6 @@
 				0F3E2E3B1F3144AB004B8CD9 /* CalculatorInputView.swift in Sources */,
 				0FFB6F401F13D03500FD8BC1 /* DisclosureCell.swift in Sources */,
 				0FFB6F431F15308300FD8BC1 /* SplashScreenVC.swift in Sources */,
-				0F3A15531F54600C00EFB79F /* Article.swift in Sources */,
 				0F2651E81F053E4600754D0F /* Stock.swift in Sources */,
 				0FDCCBEE1F716DF400D08C09 /* BrowserFooterView.swift in Sources */,
 				0F3A15711F55B7B000EFB79F /* NewsItemCell.swift in Sources */,

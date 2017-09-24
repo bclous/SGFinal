@@ -50,6 +50,12 @@ class CurrentStock: Stock {
         adjPriceStartDate = dictionary["startingPriceHardCode"] as? Float ?? adjPriceStartDate
     }
     
+    public func updateStockTwitsMessagesFromResponse(_ response: [String : Any]) {
+        
+        // start here!!
+        
+    }
+    
     public func pullGraphData(completion: @escaping (_ success: Bool) -> ()) {
         AlphaVantageClient.shared.pullGraphDataForStock(self) { (success) in
             completion(success)
