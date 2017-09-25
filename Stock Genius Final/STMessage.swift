@@ -39,6 +39,7 @@ class STMessage: NSObject {
         
         let id = response["id"] as? Int ?? 0
         let body = response["body"] as? String ?? ""
+        let newBody = STMessage.adjustedBodyText(body: body)
         let dateCreatedString = response["created_at"] as? String ?? ""
         let dateCreated = Date.isoDateFromString(dateCreatedString) ?? Date()
         
@@ -53,7 +54,7 @@ class STMessage: NSObject {
         let sentimentDictionary = entitiesDictionary?["sentiment"] as? [String : Any]
         let sentiment = STMessage.sentimentFromSentimentResponse(sentimentDictionary)
         
-        self.init(id: id, body: body, dateCreated: dateCreated, user: user, sentiment: sentiment, links: links, image: image)
+        self.init(id: id, body: newBody, dateCreated: dateCreated, user: user, sentiment: sentiment, links: links, image: image)
 
     }
     
@@ -178,6 +179,12 @@ class STMessage: NSObject {
         }
         
         return nil
+    }
+    
+    public static func adjustedBodyText(body: String) -> String {
+    
+        let newBody = body.replacingOccurrences(of: "&#39;", with: "'")
+        return newBody
     }
     
 

@@ -18,7 +18,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="507" height="206.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y2e-6n-C10">
+                    <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KVo-6C-nsx">
+                        <rect key="frame" x="0.0" y="0.0" width="507" height="204.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <view hidden="YES" alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y2e-6n-C10">
                         <rect key="frame" x="10" y="205.5" width="487" height="1"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -26,13 +30,13 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="This is the mother fucking headline you got that broself and ladiesef?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ck7-y2-2hq">
-                        <rect key="frame" x="10" y="10" width="487" height="48"/>
-                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                        <rect key="frame" x="10" y="10" width="487" height="36"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                         <color key="textColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="MH6-ah-qDl">
-                        <rect key="frame" x="10" y="59" width="487" height="15"/>
+                        <rect key="frame" x="10" y="47" width="487" height="15"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seeking Alpha" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZA-Mf-k6J">
                                 <rect key="frame" x="0.0" y="0.0" width="243.5" height="15"/>
@@ -51,9 +55,9 @@
                             <constraint firstAttribute="height" constant="15" id="XJU-rz-bUr"/>
                         </constraints>
                     </stackView>
-                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.65000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is hte mother fucking summmmarryyyyyyy  hey hey hey hey hey hey hey hey yes it isss!!!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B31-Vi-dLB">
-                        <rect key="frame" x="10" y="88" width="487" height="33.5"/>
-                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is hte mother fucking summmmarryyyyyyy  hey hey hey hey hey hey hey hey yes it isss!!!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B31-Vi-dLB">
+                        <rect key="frame" x="10" y="76" width="487" height="29"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -66,9 +70,13 @@
                     <constraint firstAttribute="trailing" secondItem="MH6-ah-qDl" secondAttribute="trailing" constant="10" id="HOR-8H-FsR"/>
                     <constraint firstItem="y2e-6n-C10" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="ImE-FO-R8d"/>
                     <constraint firstItem="MH6-ah-qDl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="J7A-3D-JUa"/>
+                    <constraint firstItem="KVo-6C-nsx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="W9e-qy-gdH"/>
                     <constraint firstItem="B31-Vi-dLB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Zs9-sw-FSE"/>
+                    <constraint firstItem="KVo-6C-nsx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="anR-Ak-dC7"/>
                     <constraint firstItem="y2e-6n-C10" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" constant="-20" id="c5E-Bb-6Ht"/>
+                    <constraint firstAttribute="bottom" secondItem="KVo-6C-nsx" secondAttribute="bottom" constant="2" id="e45-IQ-9Qd"/>
                     <constraint firstItem="Ck7-y2-2hq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="eKb-4e-agM"/>
+                    <constraint firstAttribute="trailing" secondItem="KVo-6C-nsx" secondAttribute="trailing" id="iHj-8G-Otb"/>
                     <constraint firstItem="B31-Vi-dLB" firstAttribute="top" secondItem="MH6-ah-qDl" secondAttribute="bottom" constant="14" id="pBQ-rw-O1B"/>
                     <constraint firstItem="MH6-ah-qDl" firstAttribute="top" secondItem="Ck7-y2-2hq" secondAttribute="bottom" constant="1" id="qS7-n4-zKu"/>
                     <constraint firstAttribute="bottom" secondItem="y2e-6n-C10" secondAttribute="bottom" id="qWn-k0-OXV"/>

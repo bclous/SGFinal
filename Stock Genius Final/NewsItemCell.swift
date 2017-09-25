@@ -34,6 +34,10 @@ class NewsItemCell: UITableViewCell {
         sourceLabel.text = newsItem.source
         summaryLabel.text = newsItem.summary
         timeStampLabel.text = newsItem.date.timeStamp()
+        headlineLabel.textColor = SGConstants.fontColorWhitePrimary
+        sourceLabel.textColor = SGConstants.fontColorWhiteSecondary
+        timeStampLabel.textColor = SGConstants.fontColorWhiteSecondary
+        summaryLabel.textColor = SGConstants.fontColorWhitePrimary
         
     }
     

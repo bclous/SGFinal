@@ -46,9 +46,6 @@ class STLink: NSObject {
         let videoURL = linksResponse["video_url"] as? String
         let sourceDictionary = linksResponse["source"] as? [String: String]
         let source = sourceDictionary?["name"]
-        
-        print("\(imageURL)")
-        
         self.init(title: title, url: url, shortenedURL: shortenedURL, shortenedExpandedURL: shortenedExpandedURL, summary: summary, imageURL: imageURL, dateCreated: dateCreated, videoURL: videoURL, source: source)
     }
 

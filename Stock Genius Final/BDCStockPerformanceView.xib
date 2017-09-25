@@ -100,7 +100,7 @@
                         <constraint firstItem="Ma4-Ty-BzA" firstAttribute="centerY" secondItem="NJS-hs-7S0" secondAttribute="centerY" constant="-10" id="tCW-e4-Ngi"/>
                     </constraints>
                 </view>
-                <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HpP-0y-VaB" userLabel="borderView">
+                <view hidden="YES" alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HpP-0y-VaB" userLabel="borderView">
                     <rect key="frame" x="10" y="284" width="355" height="1"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>

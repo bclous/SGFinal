@@ -156,9 +156,24 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource, Section
             return view
         } else if section == 1{
             return performanceView
-        } else  {
+        } else if section == 2 {
             return NewsSectionHeaderView()
+        } else {
+            let header = NewsSectionHeaderView()
+            header.headerLabel.text = "Recent Chatter"
+            header.secondaryLabel.text = "StockTwits"
+            return header
         }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let clearView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        clearView.backgroundColor = UIColor.clear
+        return clearView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return section == 0 ? 0 : 30
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {

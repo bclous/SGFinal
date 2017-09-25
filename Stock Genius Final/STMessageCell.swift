@@ -32,7 +32,7 @@ class STMessageCell: UITableViewCell {
         avatarImageView.clipsToBounds = true
         userNameLabel.textColor = SGConstants.fontColorWhitePrimary
         timeStampLabel.textColor = SGConstants.fontColorWhiteSecondary
-        messageBodyLabel.textColor = SGConstants.fontColorWhiteSecondary
+        messageBodyLabel.textColor = SGConstants.fontColorWhitePrimary
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -10,7 +10,9 @@ import UIKit
 
 class NewsSectionHeaderView: UIView {
 
+    @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet var contentView: UIView!
+    @IBOutlet weak var secondaryLabel: UILabel!
     
     override init(frame: CGRect) { // for using CustomView in code
         super.init(frame: frame)
@@ -32,6 +34,7 @@ class NewsSectionHeaderView: UIView {
         content.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         content.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         contentView.backgroundColor = SGConstants.mainBlackColor
+        secondaryLabel.textColor = SGConstants.fontColorWhiteSecondary
         
         
     }
