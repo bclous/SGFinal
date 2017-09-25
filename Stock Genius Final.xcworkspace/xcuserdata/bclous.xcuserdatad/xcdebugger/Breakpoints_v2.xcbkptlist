@@ -45,5 +45,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Stock Genius Final/STImage.swift"
+            timestampString = "528045114.418756"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "init(chartResponse:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Stock_Genius_Final.STImage.init (chartResponse : Swift.Dictionary&lt;Swift.String, Swift.String&gt;) -&gt; Stock_Genius_Final.STImage"
+                  moduleName = "Stock Genius Final"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclous/Desktop/SGFinal/Stock%20Genius%20Final/STImage.swift"
+                  timestampString = "528045746.064712"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "58">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Stock_Genius_Final.STImage.(init (chartResponse : Swift.Dictionary&lt;Swift.String, Swift.String&gt;) -&gt; Stock_Genius_Final.STImage).(implicit closure #1)"
+                  moduleName = "Stock Genius Final"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bclous/Desktop/SGFinal/Stock%20Genius%20Final/STImage.swift"
+                  timestampString = "528045746.066035"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

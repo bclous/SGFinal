@@ -26,7 +26,7 @@ class CurrentStock: Stock {
     var graphHistory : [Date : Float] = [:]
     var dailyHistory : [Date : Float] = [:]
     var newsItems: [NewsItem] = []
-    var stockTwitsMessages : [String : STMessage] = [:]
+    var stockTwitsMessages : [Int : STMessage] = [:]
     
 
     public func updatePricesFromCache() {
@@ -51,9 +51,35 @@ class CurrentStock: Stock {
     }
     
     public func updateStockTwitsMessagesFromResponse(_ response: [String : Any]) {
+        let messagesDictionary = response["messages"] as? [[String : Any]] ?? [[:]]
+        for messageResponse in messagesDictionary {
+            let messageID = messageResponse["id"] as? Int ?? 0
+            let message = STMessage(response: messageResponse)
+            stockTwitsMessages.updateValue(message, forKey: messageID)
+        }
         
-        // start here!!
+    }
+    
+    public func stockTwitsMessagesInOrder(mostRecentFirst: Bool) -> [STMessage] {
+
+        var messages : [STMessage] = []
+        for (_, value) in stockTwitsMessages {
+            messages.append(value)
+        }
         
+        if mostRecentFirst {
+            messages.sort(by: {$0.dateCreated > $1.dateCreated})
+        } else {
+            messages.sort(by: {$0.dateCreated < $1.dateCreated})
+        }
+
+        return messages
+    }
+    
+    public func pullStockTwitsMessages(completion: @escaping (_ success: Bool) -> ()) {
+        StockTwitsClient.pullMessagesForStock(self) { (success) in
+            completion(success)
+        }
     }
     
     public func pullGraphData(completion: @escaping (_ success: Bool) -> ()) {

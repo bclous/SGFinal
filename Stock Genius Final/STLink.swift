@@ -26,7 +26,7 @@ class STLink: NSObject {
         self.url = url
         self.shortenedURL = shortenedURL
         self.shortenedExpandedURL = shortenedExpandedURL
-        self.summary = description
+        self.summary = summary
         self.imageURL = imageURL
         self.dateCreated = dateCreated
         self.videoURL = videoURL

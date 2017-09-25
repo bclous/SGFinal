@@ -25,6 +25,7 @@ class IndividualStockVC: UIViewController, IndividualHeaderViewDelegate {
         formatTableView()
         formatHeaderView()
         updateNewsSection()
+        updateMessagesSection()
         updateGraphSection()
         view.backgroundColor = SGConstants.mainBlackColor
     }
@@ -39,6 +40,12 @@ class IndividualStockVC: UIViewController, IndividualHeaderViewDelegate {
             stock.pullNewsData(numberOfArticles: 10, completion: { (success) in
                 self.mainTableView.reloadData()
             })
+        }
+    }
+    
+    func updateMessagesSection() {
+        stock.pullStockTwitsMessages { (success) in
+            self.mainTableView.reloadData()
         }
     }
     
@@ -69,8 +76,9 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource, Section
         mainTableView.dataSource = self
         mainTableView.register(UINib(nibName: "NewsItemCell", bundle: nil), forCellReuseIdentifier: "newsCell")
         mainTableView.register(UINib(nibName: "GraphTableViewCell", bundle: nil), forCellReuseIdentifier: "graphCell")
+        mainTableView.register(UINib(nibName: "STMessageCell", bundle: nil), forCellReuseIdentifier: "messageCell")
         mainTableView.separatorStyle = .none
-        mainTableView.estimatedRowHeight = 150.0
+        mainTableView.estimatedRowHeight = 400.0
         mainTableView.rowHeight = UITableViewAutomaticDimension
         
     }
@@ -81,6 +89,10 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource, Section
             let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell") as! NewsItemCell
             cell.formatCellWithNewsItem(stock.newsItems[indexPath.row])
             return cell
+        } else if indexPath.section == 3 {
+            let cell  = tableView.dequeueReusableCell(withIdentifier: "messageCell") as! STMessageCell
+            cell.formatCellWithMessage(stock.stockTwitsMessagesInOrder(mostRecentFirst: true)[indexPath.row])
+            return cell
         } else {
             let cell = UITableViewCell()
             return cell
@@ -88,7 +100,7 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource, Section
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -99,6 +111,8 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource, Section
             return 0
         case 2:
             return stock.newsItems.count
+        case 3:
+            return stock.stockTwitsMessages.count
         default:
             return 0
         }
@@ -110,7 +124,7 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource, Section
             return 0
         case 1:
             return 0
-        case 2:
+        case 2,3:
             return UITableViewAutomaticDimension
         default:
             return 100
@@ -123,7 +137,7 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource, Section
             return 60
         case 1:
             return 285
-        case 2:
+        case 2,3:
             return 40
         default:
             return 100

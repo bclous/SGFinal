@@ -34,50 +34,25 @@ class StockTwitsClient {
         }
     }
     
-    public static func pullMessagesForSymbol(_ symbol: String, completionHandler: @escaping(_ success: Bool) -> ()) {
+    public static func pullMessagesForStock(_ stock: CurrentStock, completionHandler: @escaping(_ success: Bool) -> ()) {
         
-        let requestURL = symbolURLPrefix + symbol + ".json"
+        let requestURL = symbolURLPrefix + stock.ticker + ".json"
         let request = Alamofire.request(requestURL)
         request.responseJSON { (response) in
             
             if response.result.isFailure {
                 completionHandler(false)
             } else {
-                let responseDictionary = response.value as? [String : Any]
-                let responseArray = responseDictionary?["messages"] as? [[String : Any]]
-               // let stock = DataStore.shared.stockFromSymbol(symbol)
-                if let stock = stock, let responseArray = responseArray {
-                    addMessagesToStock(stock, responseArray: responseArray)
-                    completionHandler(true)
-                } else {
+                let responseDictionary = response.value as? [String : Any] ?? [:]
+                if responseDictionary.isEmpty {
                     completionHandler(false)
+                } else {
+                    stock.updateStockTwitsMessagesFromResponse(responseDictionary)
+                    completionHandler(true)
                 }
             }
         }
     }
     
-//    
-//    private static func addStocksToStoreFromResponse(_ responseArray: [[String : Any]]) {
-//        
-//        DataStore.shared.emptyTrendingStocks()
-//        for stockDataResponse in responseArray {
-//            let stock = Stock(response: stockDataResponse)
-//            DataStore.shared.trendingStocks.append(stock)
-//        }
-//    }
-//    
-//    private static func addMessagesToStock(_ stock: Stock, responseArray: [[String : Any]]) {
-//        
-//        stock.clearAllMessages()
-//        for messageResponse in responseArray {
-//            let message = Message(messageResponse: messageResponse)
-//            stock.messages.append(message)
-//            let user = message.user
-//            if !DataStore.shared.isUserInDatabase(userID: user.id) {
-//                DataStore.shared.users.append(user)
-//            }
-//        }
-//        stock.sortMessages(reverseChrono: true)
-//    }
 }
 

@@ -33,7 +33,7 @@ class NewsItemCell: UITableViewCell {
         headlineLabel.text = newsItem.headline
         sourceLabel.text = newsItem.source
         summaryLabel.text = newsItem.summary
-        timeStampLabel.text = newsItem.createdAtString()
+        timeStampLabel.text = newsItem.date.timeStamp()
         
     }
     

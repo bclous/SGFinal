@@ -47,7 +47,6 @@ class DataStore: NSObject  {
                 })
             }
         }
- 
     }
     
     private func performInitialFirebasePull(completion: @escaping(_ success: Bool) -> ()) {

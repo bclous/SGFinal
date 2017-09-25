@@ -18,7 +18,7 @@ class CurrentPortfolio: NSObject {
     var index : CurrentStock = CurrentStock()
     var calcStocks : [CalculatorStock] = []
     var remainingCash : Float = 0
-    var stockTwitsUsers : [String : STUser] = [:]
+    var stockTwitsUsers : [Int : STUser] = [:]
     
     
     public func updateCurrentPortfolioValues(dictionary: Dictionary<String, Any>) {
@@ -55,8 +55,8 @@ class CurrentPortfolio: NSObject {
         
     }
     
-    public func stockTwitsUserFromUserID(_ id: String) -> STUser? {
-        return stockTwitsUsers["id"]
+    public func stockTwitsUserFromUserID(_ id: Int) -> STUser? {
+        return stockTwitsUsers[id]
     }
     
     public func addStockTwitsUserToDatabase(_ user: STUser) {

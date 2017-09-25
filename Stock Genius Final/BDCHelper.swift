@@ -20,6 +20,26 @@ extension Float {
 
 extension Date {
     
+    public func timeStamp() -> String {
+        
+        let datesAreSameDay = Date.datesAreSameDay(date1: Date(), date2: self)
+        if datesAreSameDay {
+            let seconds = Int(Date().timeIntervalSince(self))
+            
+            if seconds < 60 {
+                return String(seconds) + "s"
+            } else if seconds < 3600 {
+                return String(seconds/60) + "m"
+            } else {
+                return self.string(withFormat: "h:mm a") ?? ""
+            }
+        } else {
+            return self.string(withFormat: "M/d/yyyy, h:mm a") ?? ""
+        }
+
+        
+    }
+    
 
     public static func dateFromString(_ dateString: String, dateFormat: String) -> Date? {
         let dateFormatter = DateFormatter()
