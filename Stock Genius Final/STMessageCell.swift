@@ -9,6 +9,10 @@
 import UIKit
 import Alamofire
 
+protocol STMessageCellDelegate : class {
+    func pictureTapped(message: STMessage)
+}
+
 class STMessageCell: UITableViewCell {
 
     @IBOutlet weak var avatarImageView: UIImageView!
@@ -17,6 +21,8 @@ class STMessageCell: UITableViewCell {
     @IBOutlet weak var messageBodyLabel: UILabel!
     @IBOutlet weak var messageImageImageView: UIImageView!
     @IBOutlet weak var messageImageViewHeightConstraint: NSLayoutConstraint!
+    var message : STMessage?
+    weak var delegate : STMessageCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,16 +41,16 @@ class STMessageCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func formatCellWithMessage(_ message: STMessage) {
+    func formatCellWithMessage(_ message: STMessage, cellWidth: CGFloat) {
         
+        self.message = message
         userNameLabel.text = message.user.userName
-        messageBodyLabel.text = message.body
+        messageBodyLabel.attributedText = message.finalMessageString()
         timeStampLabel.text = message.dateCreated.timeStamp()
         formatAvatarImageFromMessage(message)
-        messageImageImageView.image = UIImage(named:"emily")
-        formatImageHeightFromMessage(message)
-        
-        
+        formatMessageImageFromMessage(message)
+        formatImageHeightFromMessage(message, cellWidth: cellWidth)
+
     }
     
     private func formatAvatarImageFromMessage(_ message: STMessage) {
@@ -62,19 +68,57 @@ class STMessageCell: UITableViewCell {
         }
     }
     
-    private func formatImageHeightFromMessage(_ message: STMessage) {
+    private func formatMessageImageFromMessage(_ message: STMessage) {
         
-        if let imageURL = message.primaryImageAddress() {
-            messageImageViewHeightConstraint.constant = 130
-            
-        } else {
-            messageImageViewHeightConstraint.constant = 0
+        messageImageImageView.isUserInteractionEnabled = false
+        
+        let primaryImageAddress = message.primaryImageAddress()
+        if let address = primaryImageAddress {
+            let image = message.messageImage(isLowRes: true)
+            if let image = image {
+                messageImageImageView.image = image
+                messageImageImageView.isUserInteractionEnabled = true
+            } else {
+                Alamofire.request(address).responseData(completionHandler: { (response) in
+                    if let data = response.result.value {
+                        self.messageImageImageView.image = UIImage(data: data)
+                        if let _ = message.image {
+                            message.cacheMessageImage(UIImage(data: data)!, isLowRes: true)
+                        } else {
+                            message.cacheMessageImage(UIImage(data: data)!, isLowRes: true)
+                            message.cacheMessageImage(UIImage(data: data)!, isLowRes: false)
+                        }
+                        
+                        self.messageImageImageView.isUserInteractionEnabled = true
+                    }
+                })
+            }
         }
-        
-        //contentView.layoutIfNeeded()
         
     }
     
+    private func formatImageHeightFromMessage(_ message: STMessage, cellWidth: CGFloat) {
+        
+        let imageWidth = cellWidth - 75.0
+        let imageHeight = 0.56 * imageWidth
+        
+        if let _ = message.primaryImageAddress() {
+            messageImageViewHeightConstraint.constant = imageHeight
+            messageImageImageView.layer.cornerRadius = 5
+            messageImageImageView.layer.borderColor = UIColor.white.withAlphaComponent(0.2).cgColor
+            messageImageImageView.layer.borderWidth = 1
+            
+        } else {
+            messageImageViewHeightConstraint.constant = 0
+            messageImageImageView.layer.cornerRadius = 5
+            messageImageImageView.layer.borderWidth = 0
+        }
+        
+        contentView.layoutIfNeeded()
+    }
     
-    
+    @IBAction func pictureTapped(_ sender: Any) {
+        delegate?.pictureTapped(message: message!)
+    }
+
 }

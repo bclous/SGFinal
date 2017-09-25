@@ -22,6 +22,8 @@ class STMessage: NSObject {
     let sentiment : STSentiment?
     let links : [STLink]?
     let image : STImage?
+    var lowResImage : UIImage?
+    var highResImage : UIImage?
     
     init(id: Int, body: String, dateCreated: Date, user: STUser, sentiment: STSentiment?, links: [STLink]?, image: STImage?) {
         self.id = id
@@ -45,7 +47,6 @@ class STMessage: NSObject {
     
         let linksDictionary = response["links"] as? [[String : Any]]
         let links = STMessage.linksFromLinkResponse(linksDictionary)
-
         let entitiesDictionary = response["entities"] as? [String: Any]
         let imageDictionary = entitiesDictionary?["chart"] as? [String : String]
         let image = STMessage.imageFromChartResponse(imageDictionary)
@@ -56,12 +57,20 @@ class STMessage: NSObject {
 
     }
     
+    public func firstLinkAddress() -> String? {
+        if let links = self.links {
+            return links[0].url
+        } else {
+            return nil
+        }
+    }
+    
     public func primaryImageAddress() -> String? {
         
         if let image = image {
-            return image.thumb
+            return image.url
         } else if let links = links {
-            return links[0].url
+            return links[0].imageURL
         } else {
             return nil
         }
@@ -78,16 +87,39 @@ class STMessage: NSObject {
         }
     }
     
+    public func finalMessageString() -> NSAttributedString {
+        
+        if let links = self.links {
+            let firstLink = links[0]
+            let longURL = firstLink.url
+            let shortURL = firstLink.shortenedExpandedURL
+            let newBody = body.replacingOccurrences(of: longURL, with: shortURL)
+            
+            let range = (newBody as NSString).range(of: shortURL)
+            let attributedBody = NSMutableAttributedString(string: newBody)
+            attributedBody.addAttribute(NSUnderlineStyleAttributeName, value: NSNumber(value: 1), range: range)
+            attributedBody.addAttribute(NSUnderlineColorAttributeName, value: SGConstants.mainBlueColor, range: range)
+            attributedBody.addAttribute(NSForegroundColorAttributeName, value: SGConstants.mainBlueColor, range: range)
+      
+            return attributedBody
+        } else {
+            return NSAttributedString(string: body)
+        }
+        
+    }
+    
     private static func linksFromLinkResponse(_ response: [[String : Any]]?) -> [STLink]? {
         
-        var links: [STLink]?
+        var messageLinks: [STLink] = []
         if let response = response {
             for link in response {
                 let thisLink = STLink(linksResponse: link)
-                links?.append(thisLink)
+                messageLinks.append(thisLink)
             }
+            return messageLinks
+        } else {
+            return nil
         }
-        return links
     }
     
     private static func imageFromChartResponse(_ response: [String : String]?) -> STImage? {
@@ -125,6 +157,30 @@ class STMessage: NSObject {
         }
         
     }
+    
+    public func cacheMessageImage(_ image: UIImage, isLowRes: Bool) {
+        do {
+            let pathComponent = isLowRes ? "\(id)-lowRes.png" : "\(id)-highRes.png"
+            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let fileURL = documentsURL.appendingPathComponent(pathComponent)
+            if let pngImageData = UIImagePNGRepresentation(image) {
+                try pngImageData.write(to: fileURL, options: .atomic)
+            }
+        } catch { }
+    }
+    
+    public func messageImage(isLowRes: Bool) -> UIImage? {
+        let pathComponent = isLowRes ? "\(id)-lowRes.png" : "\(id)-highRes.png"
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let filePath = documentsURL.appendingPathComponent(pathComponent).path
+        if FileManager.default.fileExists(atPath: filePath) {
+            return UIImage(contentsOfFile: filePath)
+        }
+        
+        return nil
+    }
+    
+
     
     
     

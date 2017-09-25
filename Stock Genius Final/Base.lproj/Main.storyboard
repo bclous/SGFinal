@@ -763,6 +763,48 @@
             </objects>
             <point key="canvasLocation" x="2878" y="-134"/>
         </scene>
+        <!--PictureVC-->
+        <scene sceneID="Q1G-4K-vjR">
+            <objects>
+                <viewController storyboardIdentifier="pictureVC" id="eve-1X-B5L" customClass="PictureVC" customModule="Stock_Genius_Final" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TMk-rv-FMN"/>
+                        <viewControllerLayoutGuide type="bottom" id="E1Q-Ub-74N"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="z5T-HO-2sJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X0j-bX-qR6">
+                                <rect key="frame" x="0.0" y="50" width="375" height="587"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hD5-YH-cUe">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <connections>
+                                    <action selector="screenTapped:" destination="eve-1X-B5L" eventType="touchUpInside" id="75n-pi-Xpn"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hD5-YH-cUe" firstAttribute="centerX" secondItem="z5T-HO-2sJ" secondAttribute="centerX" id="7dK-A1-bum"/>
+                            <constraint firstItem="X0j-bX-qR6" firstAttribute="centerX" secondItem="z5T-HO-2sJ" secondAttribute="centerX" id="GhR-aG-C4r"/>
+                            <constraint firstItem="X0j-bX-qR6" firstAttribute="top" secondItem="TMk-rv-FMN" secondAttribute="bottom" constant="30" id="OeI-z0-dQN"/>
+                            <constraint firstItem="hD5-YH-cUe" firstAttribute="width" secondItem="z5T-HO-2sJ" secondAttribute="width" id="YDY-ZL-mFX"/>
+                            <constraint firstItem="hD5-YH-cUe" firstAttribute="centerY" secondItem="z5T-HO-2sJ" secondAttribute="centerY" id="nCW-K6-qMc"/>
+                            <constraint firstItem="E1Q-Ub-74N" firstAttribute="top" secondItem="X0j-bX-qR6" secondAttribute="bottom" constant="30" id="pdQ-B7-Aqn"/>
+                            <constraint firstItem="hD5-YH-cUe" firstAttribute="height" secondItem="z5T-HO-2sJ" secondAttribute="height" id="zu8-op-nxw"/>
+                            <constraint firstItem="X0j-bX-qR6" firstAttribute="width" secondItem="z5T-HO-2sJ" secondAttribute="width" id="zvq-EB-jke"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mainImageView" destination="X0j-bX-qR6" id="qrf-aC-LyN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WB0-yQ-gKO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3663" y="-825"/>
+        </scene>
         <!--Individual StockVC-->
         <scene sceneID="aoF-ch-AEj">
             <objects>

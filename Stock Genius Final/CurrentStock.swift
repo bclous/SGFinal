@@ -30,14 +30,15 @@ class CurrentStock: Stock {
     
 
     public func updatePricesFromCache() {
+        
         let cacheDictionary = UserDefaults.standard.object(forKey: DataStore.shared.currentPricesKey) as? [String : [String : Float]]
         let stockDictionary = cacheDictionary?[ticker]
-        let cachedCurrentPrice = stockDictionary?[currentPriceKey] ?? 0.0
-        let cachedlastClosePrice = stockDictionary?[lastClosePriceKey] ?? 0.0
-        let cachedSinceStartDatePrice = stockDictionary?[sincePeriodBeginPriceKey] ?? 0.0
-        adjPriceCurrent = cachedCurrentPrice
-        adjPriceLastClose = cachedlastClosePrice
-        adjPriceStartDate = cachedSinceStartDatePrice
+        let cachedCurrentPrice = stockDictionary?[currentPriceKey]
+        let cachedlastClosePrice = stockDictionary?[lastClosePriceKey]
+        let cachedSinceStartDatePrice = stockDictionary?[sincePeriodBeginPriceKey]
+        adjPriceCurrent = cachedCurrentPrice ?? adjPriceCurrent
+        adjPriceLastClose = cachedlastClosePrice ?? adjPriceLastClose
+        adjPriceStartDate = cachedSinceStartDatePrice ?? adjPriceStartDate
     }
     
     public func updateCurrentStockValues(dictionary: Dictionary<String, Any>) {

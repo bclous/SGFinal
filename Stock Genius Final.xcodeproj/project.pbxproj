@@ -79,6 +79,7 @@
 		0F5BECA71F5EFA8200DF7F50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0F5BECA61F5EFA8200DF7F50 /* GoogleService-Info.plist */; };
 		0FC57FE81F7940AF005BAAE4 /* STMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC57FE61F7940AF005BAAE4 /* STMessageCell.swift */; };
 		0FC57FE91F7940AF005BAAE4 /* STMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FC57FE71F7940AF005BAAE4 /* STMessageCell.xib */; };
+		0FC57FEB1F79AE3D005BAAE4 /* PictureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC57FEA1F79AE3D005BAAE4 /* PictureVC.swift */; };
 		0FDB582D1F5F4C3F00990628 /* UnableToConnectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDB582C1F5F4C3E00990628 /* UnableToConnectVC.swift */; };
 		0FDCCBE41F6C0E6000D08C09 /* BDCStockPerformanceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FDCCBE31F6C0E6000D08C09 /* BDCStockPerformanceView.xib */; };
 		0FDCCBE61F6C0E7C00D08C09 /* BDCStockPerformanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDCCBE51F6C0E7C00D08C09 /* BDCStockPerformanceView.swift */; };
@@ -190,6 +191,7 @@
 		0F5BECA61F5EFA8200DF7F50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0FC57FE61F7940AF005BAAE4 /* STMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STMessageCell.swift; sourceTree = "<group>"; };
 		0FC57FE71F7940AF005BAAE4 /* STMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STMessageCell.xib; sourceTree = "<group>"; };
+		0FC57FEA1F79AE3D005BAAE4 /* PictureVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureVC.swift; sourceTree = "<group>"; };
 		0FDB582C1F5F4C3E00990628 /* UnableToConnectVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnableToConnectVC.swift; sourceTree = "<group>"; };
 		0FDCCBE31F6C0E6000D08C09 /* BDCStockPerformanceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDCStockPerformanceView.xib; sourceTree = "<group>"; };
 		0FDCCBE51F6C0E7C00D08C09 /* BDCStockPerformanceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDCStockPerformanceView.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 				0F3A15651F55B2AA00EFB79F /* IndividualPerformanceView.swift */,
 				0F3A15771F55FB6700EFB79F /* IndividualPerformanceViewSegment.xib */,
 				0F3A15791F55FD8600EFB79F /* IndividualPerformanceViewSegment.swift */,
+				0FC57FEA1F79AE3D005BAAE4 /* PictureVC.swift */,
 				0FC57FE61F7940AF005BAAE4 /* STMessageCell.swift */,
 				0FC57FE71F7940AF005BAAE4 /* STMessageCell.xib */,
 				0F3A15671F55B2FD00EFB79F /* NewsSectionHeaderView.xib */,
@@ -623,6 +626,7 @@
 				0FDB582D1F5F4C3F00990628 /* UnableToConnectVC.swift in Sources */,
 				0F16DF911F0D1AAE006C531E /* ShareCalcHeaderView.swift in Sources */,
 				0F17B7741F16CEF20064533F /* Page1.swift in Sources */,
+				0FC57FEB1F79AE3D005BAAE4 /* PictureVC.swift in Sources */,
 				0F2651F01F055D3C00754D0F /* PastPicksSectionHeaderView.swift in Sources */,
 				0F16DF8F1F0D1820006C531E /* PastPicksVC.swift in Sources */,
 				0F17B7821F1912470064533F /* CircleTabView.swift in Sources */,
