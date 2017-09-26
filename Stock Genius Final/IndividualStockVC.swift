@@ -40,7 +40,7 @@ class IndividualStockVC: UIViewController, IndividualHeaderViewDelegate {
     
     func updateNewsSection() {
         if stock.newsItems.isEmpty {
-            stock.pullNewsData(numberOfArticles: 10, completion: { (success) in
+            stock.pullNewsData(numberOfArticles: 50, completion: { (success) in
                 self.mainTableView.reloadData()
             })
         }
@@ -114,7 +114,7 @@ extension IndividualStockVC: UITableViewDelegate, UITableViewDataSource, Section
         case 1:
             return 0
         case 2:
-            return stock.newsItems.count
+            return min(stock.newsItems.count,5)
         case 3:
             return stock.stockTwitsMessages.count
         default:

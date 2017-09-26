@@ -208,9 +208,29 @@ class CurrentStock: Stock {
         newsItems.removeAll()
         for newsItemResponse in response {
             let newsItem = NewsItem(articleResponse: newsItemResponse)
-            newsItems.append(newsItem)
+                newsItems.append(newsItem)
+            
         }
         newsItems.sort(by: {$0.date > $1.date})
+        filterNewsItems()
+    }
+    
+    private func filterNewsItems() {
+        
+        var sourceDictionary : [String : Int] = [:]
+        var filteredNewsItems :[NewsItem] = []
+        
+        for item in newsItems {
+            let amount = sourceDictionary[item.source] ?? 0
+            if amount < 3 {
+                sourceDictionary.updateValue(amount+1, forKey: item.source)
+                filteredNewsItems.append(item)
+            }
+            
+        }
+        
+        newsItems = filteredNewsItems
+
     }
     
 

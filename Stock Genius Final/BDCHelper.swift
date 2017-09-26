@@ -9,6 +9,23 @@
 import Foundation
 import UIKit
 
+class TextAdjuster {
+    
+    private static let adjustmentDatabase = ["amp;" : "", "&#39;" : "'"]
+    
+    public static func adjustedString(_ string: String) -> String {
+        
+        var newString = string
+        
+        for (badString, goodString) in TextAdjuster.adjustmentDatabase {
+            newString = newString.replacingOccurrences(of: badString, with: goodString)
+        }
+        
+        return newString
+        
+    }
+}
+
 
 extension Float {
     
