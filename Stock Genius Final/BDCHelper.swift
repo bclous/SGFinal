@@ -11,7 +11,7 @@ import UIKit
 
 class TextAdjuster {
     
-    private static let adjustmentDatabase = ["amp;" : "", "&#39;" : "'"]
+    private static let adjustmentDatabase = ["amp;" : "", "&#39;" : "'", "&quot;":"\""]
     
     public static func adjustedString(_ string: String) -> String {
         

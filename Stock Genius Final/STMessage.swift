@@ -89,6 +89,8 @@ class STMessage: NSObject {
     
     public func finalMessageString() -> NSAttributedString {
         
+        let newBody = TextAdjuster.adjustedString(body)
+        
         if let links = self.links {
             let firstLink = links[0]
             let longURL = firstLink.url
@@ -96,7 +98,6 @@ class STMessage: NSObject {
             
             let adjustedLongURL = TextAdjuster.adjustedString(longURL)
             let adjustedShortURL = TextAdjuster.adjustedString(shortURL)
-            let newBody = TextAdjuster.adjustedString(body)
             let newShortBody = newBody.replacingOccurrences(of: adjustedLongURL, with: adjustedShortURL)
             
             let range = (newShortBody as NSString).range(of: shortURL)
@@ -107,7 +108,7 @@ class STMessage: NSObject {
       
             return attributedBody
         } else {
-            return NSAttributedString(string: body)
+            return NSAttributedString(string: newBody)
         }
         
     }
