@@ -41,10 +41,8 @@ class DataStore: NSObject  {
     }
     
     public func updateWatchListPortfolioFromCoreData() {
-        watchList = CDClient.fetchPortfolioWithName("watchlist") ?? watchList
+       watchList = CDClient.fetchPortfolioWithName("watchlist") ?? watchList
     }
-    
-    
     
     public func collectAppDataForLaunch(completion: @escaping(_ success: Bool) -> ()) {
         

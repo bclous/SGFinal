@@ -36,10 +36,46 @@ class WatchListPortfolio: NSObject {
         self.init(name: name, lastUpdated: lastUpdated, holdings: holdings)
     }
     
-    public func saveToCoreData() {
+    public func updatePricesForStocks(_ stocks: [CurrentStock] , completion: @escaping (_ success: Bool) -> ()) {
         
-        CDClie
+        // update prices here
+        // if successful
+            // save to core data
+            // send back success
+        // else send back not success
+        
+        
         
     }
-
+    
+    public func saveToCoreData() {
+        CDClient.saveWatchlistPortfolio(self)
+    }
+    
+    public func addStockToWatchList(_ stock: CurrentStock) -> Bool {
+        let contains = holdings.contains(stock)
+        if contains {
+            return false
+        } else {
+            holdings.append(stock)
+            return true
+        }
+        
+        saveToCoreData()
+    }
+    
+    public func removeStockFromWatchList(_ stock: CurrentStock) -> Bool {
+        
+        let indexOfStock = holdings.index(of: stock)
+        
+        if let index = indexOfStock {
+            holdings.remove(at: index)
+            return true
+        } else {
+            return false
+        }
+        
+        saveToCoreData()
+    }
+    
 }

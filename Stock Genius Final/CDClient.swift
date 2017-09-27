@@ -11,7 +11,7 @@ import UIKit
 class CDClient: NSObject {
     
     
-    private static func fetchPortfolioWithName(_ name: String) -> SGPortfolio? {
+        public static func fetchPortfolioWithName(_ name: String) -> SGPortfolio? {
         
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         

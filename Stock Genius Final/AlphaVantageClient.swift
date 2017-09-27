@@ -59,6 +59,17 @@ class AlphaVantageClient: NSObject {
             }
         }   
     }
+    
+    public func updatePricesForStocks(_ stocks: [CurrentStock]) {
+        
+        "https://api.iextrading.com/1.0/stock/market/batch?symbols=aapl,fb&types=quote"
+        
+        let tickerString = tickerStringFromStocks(stocks)
+        let url = iexSingStockSuffix + "market/batch?symbols=" + tickerString + "=quote"
+        let request = Alamo
+        
+        
+    }
    
     
     public func pullPriceAndLastCloseFromIEXForCurrentPortfolio(completion: @escaping (_ goodStocks: [CurrentStock], _ badStocks: [CurrentStock]) -> ()) {
@@ -192,6 +203,20 @@ class AlphaVantageClient: NSObject {
                 }
             }
         }
+    }
+    
+    private func tickerStringFromStocks(_ stocks: [CurrentStock]) -> String {
+        var tickerString = ""
+        for index in 0...stocks.count - 1 {
+            let isLastStock = index == stocks.count - 1
+            let stock = stocks[index]
+            tickerString.append(stock.ticker)
+            if !isLastStock {
+                tickerString.append(",")
+            }
+        }
+        
+        return tickerString
     }
     
 }
