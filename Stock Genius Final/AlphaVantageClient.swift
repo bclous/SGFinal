@@ -37,7 +37,28 @@ class AlphaVantageClient: NSObject {
     let iexMultipleStockPrefix = "https://api.iextrading.com/1.0/tops?symbols="
     let iexGraphSuffix = "/chart/5y"
     let iexDailyGraphSuffix = "/chart/1d"
+    let symbolsEndpoint = "https://api.iextrading.com/1.0/ref-data/symbols"
     
+    
+    public func pullAvailableTickersFromIEX(completion: @escaping (_ success: Bool) -> ()) {
+        
+        let requestURL = symbolsEndpoint
+        let request =  Alamofire.request(requestURL)
+        
+        request.responseJSON { (response) in
+            if response.result.isFailure {
+                completion(false)
+            } else {
+                let symbolsArray : [[String : Any]] = response.value as? [[String : Any]] ?? [[:]]
+                if symbolsArray.isEmpty {
+                    completion(false)
+                } else {
+                    DataStore.shared.updateAvailableSymbolsFromResponse(symbolsArray)
+                    completion(true)
+                }
+            }
+        }   
+    }
    
     
     public func pullPriceAndLastCloseFromIEXForCurrentPortfolio(completion: @escaping (_ goodStocks: [CurrentStock], _ badStocks: [CurrentStock]) -> ()) {

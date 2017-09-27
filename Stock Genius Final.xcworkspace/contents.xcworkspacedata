@@ -2,6 +2,18 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:SGStock+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:SGStock+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
+      location = "group:SGPortfolio+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:SGPortfolio+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
       location = "group:Stock Genius Final.xcodeproj">
    </FileRef>
    <FileRef

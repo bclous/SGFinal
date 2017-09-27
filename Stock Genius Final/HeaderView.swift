@@ -122,6 +122,12 @@ class HeaderView: UIView {
             refreshButton.isEnabled = false
             refreshImage.alpha = 0
             showRefreshBar = false
+        case .watchlist:
+            secondaryLabel.text = "Last Price Update: Today: 9:00 AM"
+            mainLabel.text = "Watchlist"
+            refreshButton.isEnabled = false
+            refreshImage.alpha = 0
+            showRefreshBar = false
         }
         
         

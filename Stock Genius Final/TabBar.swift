@@ -12,6 +12,7 @@ enum TabBarChoice {
     case pastPicks
     case currentPicks
     case calculator
+    case watchlist
 }
 
 protocol TabBarDelegate : class {
@@ -27,6 +28,9 @@ class TabBar: UIView {
     @IBOutlet weak var index0ImageView: UIImageView!
     @IBOutlet weak var index0Label: UILabel!
     @IBOutlet var contentView: UIView!
+    @IBOutlet weak var index3Label: UILabel!
+    @IBOutlet weak var index3ImageView: UIImageView!
+    
     weak var delegate : TabBarDelegate?
     var currentChoice : TabBarChoice = .currentPicks
     var activeImageAlpha : CGFloat = 1.0
@@ -67,6 +71,8 @@ class TabBar: UIView {
             currentChoice = .currentPicks
         case 2:
             currentChoice = .calculator
+        case 3:
+            currentChoice = .watchlist
         default:
             currentChoice = .currentPicks
         }
@@ -79,9 +85,11 @@ class TabBar: UIView {
         index0ImageView.alpha = index == .pastPicks ? activeImageAlpha : inactiveImageAlpha
         index1ImageView.alpha = index == .currentPicks ? activeImageAlpha : inactiveImageAlpha
         index2ImageView.alpha = index == .calculator ? activeImageAlpha : inactiveImageAlpha
+        index3ImageView.alpha = index == .watchlist ? activeImageAlpha : inactiveImageAlpha
         index0Label.alpha = index == .pastPicks ? activeLabelAlpha : inactiveLabelAlpha
         index1Label.alpha = index == .currentPicks ? activeLabelAlpha : inactiveLabelAlpha
         index2Label.alpha = index == .calculator ? activeLabelAlpha : inactiveLabelAlpha
+        index3Label.alpha = index == .watchlist ? activeImageAlpha : inactiveImageAlpha
        
     }
 

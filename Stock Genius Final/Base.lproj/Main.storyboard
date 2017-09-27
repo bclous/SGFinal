@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6El-mJ-Gim">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6El-mJ-Gim">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -53,6 +53,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fAQ-1S-J5a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3593" y="707"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="cQu-xf-JeD">
+            <objects>
+                <viewController id="N3d-pR-5eT" customClass="WatchlistVC" customModule="Stock_Genius_Final" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4eN-lp-6QQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="JY5-wK-aI4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1J6-eT-88t">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C2e-l4-7ut" customClass="HeaderView" customModule="Stock_Genius_Final" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="375" height="110"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="YPY-d6-B37"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="C2e-l4-7ut" firstAttribute="top" secondItem="4eN-lp-6QQ" secondAttribute="bottom" constant="-20" id="0By-bB-kMu"/>
+                            <constraint firstItem="C2e-l4-7ut" firstAttribute="width" secondItem="1J6-eT-88t" secondAttribute="width" id="7GG-Hq-pVH"/>
+                            <constraint firstItem="C2e-l4-7ut" firstAttribute="centerX" secondItem="1J6-eT-88t" secondAttribute="centerX" id="fap-wr-cKr"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="Xso-ic-ETz"/>
+                    <connections>
+                        <outlet property="headerView" destination="C2e-l4-7ut" id="Ksz-20-RtE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KM6-zd-RP9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4268" y="704"/>
         </scene>
         <!--Item-->
         <scene sceneID="yIl-x8-aO8">
@@ -665,7 +701,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6El-mJ-Gim" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" hidden="YES" contentMode="scaleToFill" id="iRz-vi-0gY">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -757,6 +793,7 @@
                         <segue destination="h2R-2s-HGS" kind="relationship" relationship="viewControllers" id="gHH-Ob-fM6"/>
                         <segue destination="n4x-we-uY2" kind="relationship" relationship="viewControllers" id="SuA-iv-mmf"/>
                         <segue destination="CnD-JG-jIp" kind="show" identifier="individualStockSegue" id="7Pf-LS-ykw"/>
+                        <segue destination="N3d-pR-5eT" kind="relationship" relationship="viewControllers" id="xVO-mp-oQ6"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tQe-1U-8Ca" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -825,7 +862,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pp9-NX-an9">
-                                <rect key="frame" x="0.0" y="94" width="375" height="524"/>
+                                <rect key="frame" x="0.0" y="94" width="375" height="573"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
@@ -909,14 +946,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cjy-88-67l" customClass="BrowserFooterView" customModule="Stock_Genius_Final" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="578" width="375" height="40"/>
+                                <rect key="frame" x="0.0" y="627" width="375" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="iPE-xw-C6E"/>
                                 </constraints>
                             </view>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOt-fm-fj0">
-                                <rect key="frame" x="0.0" y="94" width="375" height="484"/>
+                                <rect key="frame" x="0.0" y="94" width="375" height="533"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                         </subviews>

@@ -15,6 +15,7 @@ class DataStore: NSObject  {
     static let shared = DataStore()
     var currentPortfolio : CurrentPortfolio = CurrentPortfolio()
     var pastPortfolios : [PastPortfolio] = []
+    var availableSymbols : [SymbolResult] = []
     var ref : DatabaseReference = Database.database().reference()
     var pricePullComplete = false
     var firebasePullComplete = false
@@ -25,6 +26,8 @@ class DataStore: NSObject  {
     var individualToggleState : IndividualSegmentType = .sinceStartDate
     let currentPricesKey = "currentPortfolioPrices"
     let startDateKey = "currentPortfolioStartDate"
+    
+    var userSavedSymbols : [String] = ["AAPL", "FB", "BRKB", "TSLA"]
 
     
     private override init() {
@@ -34,6 +37,13 @@ class DataStore: NSObject  {
         self.totalIndexPerformance = 300
         self.totalStockGeniusPerformance = 200
         super.init()
+    }
+    
+    public func collectAppDataForWatchlistLaunch(completion: @escaping(_ success: Bool) -> ()) {
+        
+        
+        
+        
     }
     
     public func collectAppDataForLaunch(completion: @escaping(_ success: Bool) -> ()) {
@@ -99,6 +109,14 @@ class DataStore: NSObject  {
             let endDateString = pastPortfolios[0].endDateString()
             
             return startString! + " - " + endDateString + " (\(pastPortfolios.count) quarters)"
+        }
+    }
+    
+    public func updateAvailableSymbolsFromResponse(_ response: [[String : Any]]) {
+        availableSymbols.removeAll()
+        for symbol in response {
+            let availableSymbol = SymbolResult(response: symbol)
+            availableSymbols.append(availableSymbol)
         }
     }
     

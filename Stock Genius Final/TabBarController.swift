@@ -42,6 +42,8 @@ class TabBarController: UITabBarController, TabBarDelegate, CurrentPicksVCDelega
             selectedIndex = 2
         case .pastPicks:
             selectedIndex = 1
+        case .watchlist:
+            selectedIndex = 3
         }
     }
     

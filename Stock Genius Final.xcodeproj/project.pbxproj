@@ -58,6 +58,8 @@
 		0F3A15761F55CA5700EFB79F /* ToggleSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3A15751F55CA5700EFB79F /* ToggleSegmentView.swift */; };
 		0F3A15781F55FB6700EFB79F /* IndividualPerformanceViewSegment.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F3A15771F55FB6700EFB79F /* IndividualPerformanceViewSegment.xib */; };
 		0F3A157A1F55FD8600EFB79F /* IndividualPerformanceViewSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3A15791F55FD8600EFB79F /* IndividualPerformanceViewSegment.swift */; };
+		0F3B365B1F7C2553004488D3 /* CDClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3B365A1F7C2553004488D3 /* CDClient.swift */; };
+		0F3B365D1F7C291D004488D3 /* WatchListPortfolio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3B365C1F7C291D004488D3 /* WatchListPortfolio.swift */; };
 		0F3E2E2F1F31445E004B8CD9 /* MainStockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F3E2E2E1F31445E004B8CD9 /* MainStockCell.xib */; };
 		0F3E2E311F314472004B8CD9 /* MainStockSummaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F3E2E301F314472004B8CD9 /* MainStockSummaryCell.xib */; };
 		0F3E2E331F31447B004B8CD9 /* NextUpdateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F3E2E321F31447B004B8CD9 /* NextUpdateView.xib */; };
@@ -77,6 +79,8 @@
 		0F5BE8FD1F07F5E200607D87 /* MainStocksSectionHeaderToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5BE8FC1F07F5E200607D87 /* MainStocksSectionHeaderToggle.swift */; };
 		0F5BE8FF1F07FCBC00607D87 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5BE8FE1F07FCBC00607D87 /* TabBarController.swift */; };
 		0F5BECA71F5EFA8200DF7F50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0F5BECA61F5EFA8200DF7F50 /* GoogleService-Info.plist */; };
+		0F6491051F7BF25E0017355F /* SymbolResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6491041F7BF25E0017355F /* SymbolResult.swift */; };
+		0F6491091F7C0D390017355F /* WatchlistVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6491081F7C0D390017355F /* WatchlistVC.swift */; };
 		0FC57FE81F7940AF005BAAE4 /* STMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC57FE61F7940AF005BAAE4 /* STMessageCell.swift */; };
 		0FC57FE91F7940AF005BAAE4 /* STMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FC57FE71F7940AF005BAAE4 /* STMessageCell.xib */; };
 		0FC57FEB1F79AE3D005BAAE4 /* PictureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC57FEA1F79AE3D005BAAE4 /* PictureVC.swift */; };
@@ -170,6 +174,8 @@
 		0F3A15751F55CA5700EFB79F /* ToggleSegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleSegmentView.swift; sourceTree = "<group>"; };
 		0F3A15771F55FB6700EFB79F /* IndividualPerformanceViewSegment.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IndividualPerformanceViewSegment.xib; sourceTree = "<group>"; };
 		0F3A15791F55FD8600EFB79F /* IndividualPerformanceViewSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndividualPerformanceViewSegment.swift; sourceTree = "<group>"; };
+		0F3B365A1F7C2553004488D3 /* CDClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDClient.swift; sourceTree = "<group>"; };
+		0F3B365C1F7C291D004488D3 /* WatchListPortfolio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListPortfolio.swift; sourceTree = "<group>"; };
 		0F3E2E2E1F31445E004B8CD9 /* MainStockCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainStockCell.xib; sourceTree = "<group>"; };
 		0F3E2E301F314472004B8CD9 /* MainStockSummaryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainStockSummaryCell.xib; sourceTree = "<group>"; };
 		0F3E2E321F31447B004B8CD9 /* NextUpdateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NextUpdateView.xib; sourceTree = "<group>"; };
@@ -189,6 +195,8 @@
 		0F5BE8FC1F07F5E200607D87 /* MainStocksSectionHeaderToggle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainStocksSectionHeaderToggle.swift; sourceTree = "<group>"; };
 		0F5BE8FE1F07FCBC00607D87 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		0F5BECA61F5EFA8200DF7F50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0F6491041F7BF25E0017355F /* SymbolResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolResult.swift; sourceTree = "<group>"; };
+		0F6491081F7C0D390017355F /* WatchlistVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistVC.swift; sourceTree = "<group>"; };
 		0FC57FE61F7940AF005BAAE4 /* STMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STMessageCell.swift; sourceTree = "<group>"; };
 		0FC57FE71F7940AF005BAAE4 /* STMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STMessageCell.xib; sourceTree = "<group>"; };
 		0FC57FEA1F79AE3D005BAAE4 /* PictureVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureVC.swift; sourceTree = "<group>"; };
@@ -270,6 +278,8 @@
 			isa = PBXGroup;
 			children = (
 				0F2651E01F053A4C00754D0F /* CurrentPortfolio.swift */,
+				0F3B365C1F7C291D004488D3 /* WatchListPortfolio.swift */,
+				0F6491041F7BF25E0017355F /* SymbolResult.swift */,
 				0F2651DC1F05374900754D0F /* CurrentStock.swift */,
 				0F5AE2251F66C4DE000DA6C0 /* StockPriceDay.swift */,
 				0F2651E41F053BAE00754D0F /* NewsItem.swift */,
@@ -436,6 +446,7 @@
 				0F032B0A1F780FC3006DF60E /* StockTwitsClient.swift */,
 				0F16DF9C1F0D9461006C531E /* DataStore.swift */,
 				0F16DF9E1F0D980A006C531E /* FirebaseClient.swift */,
+				0F3B365A1F7C2553004488D3 /* CDClient.swift */,
 				0F5BE8FE1F07FCBC00607D87 /* TabBarController.swift */,
 				0F3E2E441F31454F004B8CD9 /* IAPClient.swift */,
 				AB2FB9AC1F02CF8300CA72B2 /* SGConstants.swift */,
@@ -445,6 +456,7 @@
 				AB2FB9AE1F02E5E600CA72B2 /* HeaderView.swift */,
 				0FDB582C1F5F4C3E00990628 /* UnableToConnectVC.swift */,
 				0F3333E91F60303400FBE4BF /* BDCHelper.swift */,
+				0F6491081F7C0D390017355F /* WatchlistVC.swift */,
 				0F3A15581F54848400EFB79F /* IndividualStock */,
 				0FFB6F501F166A4F00FD8BC1 /* Intro */,
 				0FFB6F441F15582800FD8BC1 /* SplashScreen */,
@@ -633,6 +645,7 @@
 				0F2651DF1F05390A00754D0F /* PastStock.swift in Sources */,
 				0F032B111F782BA6006DF60E /* STLink.swift in Sources */,
 				0F3A15571F54847C00EFB79F /* IndividualStockVC.swift in Sources */,
+				0F6491051F7BF25E0017355F /* SymbolResult.swift in Sources */,
 				0F16DF931F0D1C1C006C531E /* ShareCalcCell.swift in Sources */,
 				0F3E2E451F31454F004B8CD9 /* IAPClient.swift in Sources */,
 				0F5BE8FD1F07F5E200607D87 /* MainStocksSectionHeaderToggle.swift in Sources */,
@@ -657,6 +670,7 @@
 				0FDCCBEE1F716DF400D08C09 /* BrowserFooterView.swift in Sources */,
 				0F3A15711F55B7B000EFB79F /* NewsItemCell.swift in Sources */,
 				0FFB6F541F166AA700FD8BC1 /* IntroSplashScreen.swift in Sources */,
+				0F6491091F7C0D390017355F /* WatchlistVC.swift in Sources */,
 				AB2FB9921F029BB700CA72B2 /* AppDelegate.swift in Sources */,
 				0F3A157A1F55FD8600EFB79F /* IndividualPerformanceViewSegment.swift in Sources */,
 				0F3A156A1F55B36600EFB79F /* NewsSectionHeaderView.swift in Sources */,
@@ -682,9 +696,11 @@
 				0FDCCBE61F6C0E7C00D08C09 /* BDCStockPerformanceView.swift in Sources */,
 				0F032B0D1F781267006DF60E /* STMessage.swift in Sources */,
 				0F2651EE1F05583E00754D0F /* MainStockSummaryCell.swift in Sources */,
+				0F3B365B1F7C2553004488D3 /* CDClient.swift in Sources */,
 				0F1DE2CF1F62DC2500CFC09E /* SectionHeaderClearView.swift in Sources */,
 				0F5AE2281F671704000DA6C0 /* BDCStockChart.swift in Sources */,
 				0FC57FE81F7940AF005BAAE4 /* STMessageCell.swift in Sources */,
+				0F3B365D1F7C291D004488D3 /* WatchListPortfolio.swift in Sources */,
 				0F2651E11F053A4C00754D0F /* CurrentPortfolio.swift in Sources */,
 				AB2FB9A91F02BB2800CA72B2 /* TabBar.swift in Sources */,
 				0F2651E31F053AF600754D0F /* PastPortfolio.swift in Sources */,

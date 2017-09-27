@@ -15,9 +15,6 @@ class CurrentStock: Stock {
     var adjPriceLastClose : Float = 0
     var isTrading : Bool = true
     var startingPriceHardCode : Float = 0
-    var hasShortPriceHistory : Bool = false
-    var hasLongPriceHistory : Bool = false
-    var hasIntraDayPriceHistory: Bool = false
     var acquiredPrice : Float = 0
     let currentPriceKey = "currentPrice"
     let lastClosePriceKey = "lastClosePrice"
@@ -28,6 +25,26 @@ class CurrentStock: Stock {
     var newsItems: [NewsItem] = []
     var stockTwitsMessages : [Int : STMessage] = [:]
     
+    // company info
+    var industry : String = "-"
+    var website : String = "-"
+    var companyDescription : String = ""
+    var ceo : String = "-"
+    var sector : String = "-"
+    
+    
+    public func updateValuesFromCoreDataStock(_ sgStock: SGStock) {
+        adjPriceCurrent = SGStock.lastPrice
+        ticker = SGStock.ticker
+        companyName = SGStock.companyName
+        adjPriceLastClose = SGStock.previousClose
+        rankInPortfolio = SGStock.indexInPortfolio
+    }
+    
+    public func updateCurrentStockWithIEXResponse(_ response: [String : [String : String]]) {
+        
+        
+    }
 
     public func updatePricesFromCache() {
         
