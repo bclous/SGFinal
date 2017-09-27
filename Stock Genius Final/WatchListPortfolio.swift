@@ -38,6 +38,7 @@ class WatchListPortfolio: NSObject {
     
     public func saveToCoreData() {
         
+        CDClie
         
     }
 

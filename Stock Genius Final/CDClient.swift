@@ -31,10 +31,24 @@ class CDClient: NSObject {
     public static func saveWatchlistPortfolio(_ portfolio: WatchListPortfolio) {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let watchlist = SGPortfolio(context: context)
-        
         watchlist.name = portfolio.name
+        watchlist.lastPriceUpdate = portfolio.lastUpdated as? NSDate
+        for holding in portfolio.holdings {
+            let newStock = SGStock(context: context)
+            newStock.ticker = holding.ticker
+            newStock.companyName = holding.companyName
+            newStock.lastPrice = holding.adjPriceCurrent
+            newStock.previousClose = holding.adjPriceLastClose
+            newStock.indexInPortfolio = Int64(holding.rankInPortfolio)
+            newStock.portfolio = watchlist
+            watchlist.addToHoldings(newStock)
+        }
+        CDClient.saveContext()
 
-        
+    }
+    
+    private static func saveContext() {
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
     }
     
     private func deleteAllWatchlistPortfolioData() {

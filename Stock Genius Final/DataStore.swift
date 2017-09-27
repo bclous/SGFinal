@@ -26,6 +26,7 @@ class DataStore: NSObject  {
     var individualToggleState : IndividualSegmentType = .sinceStartDate
     let currentPricesKey = "currentPortfolioPrices"
     let startDateKey = "currentPortfolioStartDate"
+    let watchList : WatchListPortfolio = WatchListPortfolio(name: "watchlist", lastUpdated: nil, holdings: [])
     
     var userSavedSymbols : [String] = ["AAPL", "FB", "BRKB", "TSLA"]
 
@@ -39,12 +40,11 @@ class DataStore: NSObject  {
         super.init()
     }
     
-    public func collectAppDataForWatchlistLaunch(completion: @escaping(_ success: Bool) -> ()) {
-        
-        
-        
-        
+    public func updateWatchListPortfolioFromCoreData() {
+        watchList = CDClient.fetchPortfolioWithName("watchlist") ?? watchList
     }
+    
+    
     
     public func collectAppDataForLaunch(completion: @escaping(_ success: Bool) -> ()) {
         
