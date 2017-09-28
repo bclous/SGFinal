@@ -215,9 +215,16 @@ extension AppDelegate: SKPaymentTransactionObserver {
     
     func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
         
-        
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: IAPClient.restoreSuccessfulNotification, object: nil)
+            if self.isInMainWindow {
+                DispatchQueue.main.async {
+                    self.updateUserSubscriptionStatusForNewPurchase()
+                    NotificationCenter.default.post(name: IAPClient.restoreSuccessfulNotification, object: nil)
+                }
+            } else {
+                self.purchaseComplete()
+            }
         }
     }
     

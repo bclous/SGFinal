@@ -11,6 +11,7 @@ import CoreData
 
 @objc(SGStock)
 public class SGStock: NSManagedObject {
+    
 
     
 }

@@ -2,7 +2,7 @@
 //  SGPortfolio+CoreDataProperties.swift
 //  
 //
-//  Created by Brian Clouser on 9/27/17.
+//  Created by Brian Clouser on 9/28/17.
 //
 //
 

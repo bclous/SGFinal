@@ -31,19 +31,24 @@ class CurrentStock: Stock {
     var companyDescription : String = ""
     var ceo : String = "-"
     var sector : String = "-"
+    var marketCap : Float = 0
+    var peRatio : Float = 0
+    var fiftyTwoWeekHigh : Float = 0
+    var fiftyTwoWeekLow : Float = 0
+    var ytdChange : Float = 0
     
     
-    public func updateValuesFromCoreDataStock(_ sgStock: SGStock) {
-        adjPriceCurrent = SGStock.lastPrice
-        ticker = SGStock.ticker
-        companyName = SGStock.companyName
-        adjPriceLastClose = SGStock.previousClose
-        rankInPortfolio = SGStock.indexInPortfolio
+    public func updateValuesFromCoreDataStock(_ stock: SGStock) {
+        adjPriceCurrent = stock.lastPrice
+        ticker = stock.ticker ?? ticker
+        companyName = stock.companyName ?? companyName
+        adjPriceLastClose = stock.previousClose
+        rankInPortfolio = Int(stock.indexInPortfolio)
     }
     
-    public func updateCurrentStockWithIEXResponse(_ response: [String : [String : String]]) {
-        
-        
+    public func updateValuesFromSymbolResult(_ result: SymbolResult) {
+        ticker = result.ticker
+        companyName = result.name
     }
 
     public func updatePricesFromCache() {
@@ -122,16 +127,24 @@ class CurrentStock: Stock {
         
         let currentPrice = response["latestPrice"] as? Float ?? 0
         let lastClosePrice = response["previousClose"] as? Float ?? 0
-        let isGoodResponse = currentPrice != 0 && lastClosePrice != 0
+        let companySector = response["sector"] as? String ?? sector
+        let mktCap = response["marketCap"] as? Float ?? marketCap
+        let pe = response["peRatio"] as? Float ?? peRatio
+        let high52 = response["week52High"] as? Float ?? fiftyTwoWeekHigh
+        let low52 = response["week52Low"] as? Float ?? fiftyTwoWeekLow
+        let yearToDateChange = response["ytdChange"] as? Float ?? ytdChange
         
-        if isGoodResponse {
-            adjPriceCurrent = currentPrice
-            adjPriceLastClose = lastClosePrice
-            return true
-        } else {
-            return false
-        }
-
+        adjPriceCurrent = currentPrice == 0 ? adjPriceCurrent : currentPrice
+        adjPriceLastClose = lastClosePrice == 0 ? adjPriceLastClose : lastClosePrice
+        
+        sector = companySector
+        marketCap = mktCap
+        peRatio = pe
+        fiftyTwoWeekHigh = high52
+        fiftyTwoWeekLow = low52
+        ytdChange = yearToDateChange
+        
+        return (response["latestPrice"] != nil)
     }
     
     private func availableDates(mostRecentFirst: Bool) -> [Date] {

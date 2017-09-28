@@ -14,6 +14,7 @@ class WatchlistVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        DataStore.shared.updateWatchListPortfolioFromCoreData()
 
         headerView.formatHeaderViewForVC(.watchlist)
     }
@@ -28,4 +29,19 @@ class WatchlistVC: UIViewController {
     }
     */
 
+    @IBAction func addStockButtonTapped(_ sender: Any) {
+        
+        let addStockVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "addStockVC") as! AddStockVC
+        addStockVC.delegate = self
+        present(addStockVC, animated: false, completion: nil)
+    }
+    
+}
+
+extension WatchlistVC : AddStockVCDelegate {
+    
+    func dismissRequired(_ viewController: UIViewController) {
+        viewController.dismiss(animated: false, completion: nil)
+        print("\(DataStore.shared.watchlistPortfolio.holdings.count)")
+    }
 }

@@ -13,6 +13,9 @@
 		0F032B111F782BA6006DF60E /* STLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F032B101F782BA6006DF60E /* STLink.swift */; };
 		0F032B131F782C01006DF60E /* STImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F032B121F782C01006DF60E /* STImage.swift */; };
 		0F113C0F1F2143E600D832D6 /* TermsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F113C0E1F2143E600D832D6 /* TermsVC.swift */; };
+		0F1662EE1F7D3C18006F4E14 /* AddStockVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1662ED1F7D3C18006F4E14 /* AddStockVC.swift */; };
+		0F1662F11F7D3E23006F4E14 /* AddStockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1662EF1F7D3E23006F4E14 /* AddStockCell.swift */; };
+		0F1662F21F7D3E24006F4E14 /* AddStockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F1662F01F7D3E23006F4E14 /* AddStockCell.xib */; };
 		0F16DF8D1F0D1815006C531E /* CalculatorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DF8C1F0D1815006C531E /* CalculatorVC.swift */; };
 		0F16DF8F1F0D1820006C531E /* PastPicksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DF8E1F0D1820006C531E /* PastPicksVC.swift */; };
 		0F16DF911F0D1AAE006C531E /* ShareCalcHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16DF901F0D1AAE006C531E /* ShareCalcHeaderView.swift */; };
@@ -129,6 +132,9 @@
 		0F032B101F782BA6006DF60E /* STLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STLink.swift; sourceTree = "<group>"; };
 		0F032B121F782C01006DF60E /* STImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STImage.swift; sourceTree = "<group>"; };
 		0F113C0E1F2143E600D832D6 /* TermsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsVC.swift; sourceTree = "<group>"; };
+		0F1662ED1F7D3C18006F4E14 /* AddStockVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStockVC.swift; sourceTree = "<group>"; };
+		0F1662EF1F7D3E23006F4E14 /* AddStockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStockCell.swift; sourceTree = "<group>"; };
+		0F1662F01F7D3E23006F4E14 /* AddStockCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddStockCell.xib; sourceTree = "<group>"; };
 		0F16DF8C1F0D1815006C531E /* CalculatorVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorVC.swift; sourceTree = "<group>"; };
 		0F16DF8E1F0D1820006C531E /* PastPicksVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastPicksVC.swift; sourceTree = "<group>"; };
 		0F16DF901F0D1AAE006C531E /* ShareCalcHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCalcHeaderView.swift; sourceTree = "<group>"; };
@@ -272,6 +278,17 @@
 				0F032B0E1F7812E7006DF60E /* STUser.swift */,
 			);
 			name = StockTwits;
+			sourceTree = "<group>";
+		};
+		0F1662EC1F7D3ADE006F4E14 /* Watchlist */ = {
+			isa = PBXGroup;
+			children = (
+				0F6491081F7C0D390017355F /* WatchlistVC.swift */,
+				0F1662ED1F7D3C18006F4E14 /* AddStockVC.swift */,
+				0F1662EF1F7D3E23006F4E14 /* AddStockCell.swift */,
+				0F1662F01F7D3E23006F4E14 /* AddStockCell.xib */,
+			);
+			name = Watchlist;
 			sourceTree = "<group>";
 		};
 		0F2651E61F053C2500754D0F /* Model */ = {
@@ -456,7 +473,7 @@
 				AB2FB9AE1F02E5E600CA72B2 /* HeaderView.swift */,
 				0FDB582C1F5F4C3E00990628 /* UnableToConnectVC.swift */,
 				0F3333E91F60303400FBE4BF /* BDCHelper.swift */,
-				0F6491081F7C0D390017355F /* WatchlistVC.swift */,
+				0F1662EC1F7D3ADE006F4E14 /* Watchlist */,
 				0F3A15581F54848400EFB79F /* IndividualStock */,
 				0FFB6F501F166A4F00FD8BC1 /* Intro */,
 				0FFB6F441F15582800FD8BC1 /* SplashScreen */,
@@ -566,6 +583,7 @@
 				AB2FB9971F029BB700CA72B2 /* Main.storyboard in Resources */,
 				0F3E2E331F31447B004B8CD9 /* NextUpdateView.xib in Resources */,
 				0FFB6F411F13D03500FD8BC1 /* DisclosureCell.xib in Resources */,
+				0F1662F21F7D3E24006F4E14 /* AddStockCell.xib in Resources */,
 				0F3E2E431F3144F6004B8CD9 /* PastPicksSectionHeaderView.xib in Resources */,
 				0F3A15781F55FB6700EFB79F /* IndividualPerformanceViewSegment.xib in Resources */,
 				0F17B77E1F1911840064533F /* CircleTabView.xib in Resources */,
@@ -646,6 +664,8 @@
 				0F032B111F782BA6006DF60E /* STLink.swift in Sources */,
 				0F3A15571F54847C00EFB79F /* IndividualStockVC.swift in Sources */,
 				0F6491051F7BF25E0017355F /* SymbolResult.swift in Sources */,
+				0F1662F11F7D3E23006F4E14 /* AddStockCell.swift in Sources */,
+				0F1662EE1F7D3C18006F4E14 /* AddStockVC.swift in Sources */,
 				0F16DF931F0D1C1C006C531E /* ShareCalcCell.swift in Sources */,
 				0F3E2E451F31454F004B8CD9 /* IAPClient.swift in Sources */,
 				0F5BE8FD1F07F5E200607D87 /* MainStocksSectionHeaderToggle.swift in Sources */,

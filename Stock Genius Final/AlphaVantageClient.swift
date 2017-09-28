@@ -60,14 +60,41 @@ class AlphaVantageClient: NSObject {
         }   
     }
     
-    public func updatePricesForStocks(_ stocks: [CurrentStock]) {
-        
-        "https://api.iextrading.com/1.0/stock/market/batch?symbols=aapl,fb&types=quote"
+    public func updatePricesForStocks(_ stocks: [CurrentStock], completion: @escaping (_ success: Bool) -> ()) {
         
         let tickerString = tickerStringFromStocks(stocks)
-        let url = iexSingStockSuffix + "market/batch?symbols=" + tickerString + "=quote"
-        let request = Alamo
+        let requestURL = iexSingStockSuffix + "market/batch?symbols=" + tickerString + "=quote"
+        let request = Alamofire.request(requestURL)
+    
+        request.responseJSON { (response) in
+            if response.result.isFailure {
+                completion(false)
+            } else {
+                let tickerDictionary = response.value as? [String : [String : [String : Any]]] ?? [:]
+                for (key, value) in tickerDictionary {
+                    let stockForKey = self.stockFromTickerFromArrayOfStocks(stocks, ticker: key)
+                    if let stock = stockForKey {
+                        let stockDictionary = value["quote"] ?? [:]
+                        if !stockDictionary.isEmpty {
+                            let result = stock.updatePricesWithInvestorsExchangeResponse(stockDictionary)
+                        }
+                    }
+                }
+                completion(true)
+            }
+        }
+    }
+    
+    private func stockFromTickerFromArrayOfStocks(_ stocks: [CurrentStock], ticker: String) -> CurrentStock? {
         
+        let matchingStocks = stocks.filter { (stock) -> Bool in
+            stock.ticker == ticker
+        }
+        if matchingStocks.count > 0 {
+            return matchingStocks[0]
+        } else {
+            return nil
+        }
         
     }
    

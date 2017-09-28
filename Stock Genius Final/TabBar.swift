@@ -59,7 +59,7 @@ class TabBar: UIView {
         content.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         content.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         
-        adjustTabBarForChoice(.currentPicks)
+        adjustTabBarForChoice(.watchlist)
     }
 
     @IBAction func buttonTapped(_ sender: UIButton) {

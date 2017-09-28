@@ -19,6 +19,10 @@ class TabBarController: UITabBarController, TabBarDelegate, CurrentPicksVCDelega
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        selectedIndex = 3
+    }
+    
     private func addCustomTabBar() {
         let customTabBar = TabBar()
         view.addSubview(customTabBar)
@@ -30,7 +34,6 @@ class TabBarController: UITabBarController, TabBarDelegate, CurrentPicksVCDelega
         customTabBar.delegate = self
         let currentPicksVC = self.viewControllers?[0] as! CurrentPicksVC
         currentPicksVC.delegate = self
-        
         
     }
     

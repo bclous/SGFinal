@@ -26,11 +26,10 @@ class DataStore: NSObject  {
     var individualToggleState : IndividualSegmentType = .sinceStartDate
     let currentPricesKey = "currentPortfolioPrices"
     let startDateKey = "currentPortfolioStartDate"
-    let watchList : WatchListPortfolio = WatchListPortfolio(name: "watchlist", lastUpdated: nil, holdings: [])
-    
+    var watchlistPortfolio = WatchListPortfolio(name: "watchlist", lastUpdated: Date(), holdings: [])
+
     var userSavedSymbols : [String] = ["AAPL", "FB", "BRKB", "TSLA"]
 
-    
     private override init() {
         self.currentPortfolio = CurrentPortfolio()
         self.pastPortfolios = []
@@ -40,8 +39,21 @@ class DataStore: NSObject  {
         super.init()
     }
     
+    public func updateAvailableSymbols(completion: @escaping (_ success: Bool) -> ()) {
+        AlphaVantageClient.shared.pullAvailableTickersFromIEX { (success) in
+            completion(success)
+        }
+    }
+    
     public func updateWatchListPortfolioFromCoreData() {
-       watchList = CDClient.fetchPortfolioWithName("watchlist") ?? watchList
+        let coreDataPortfolio =  CDClient.fetchWatchListPortfolio()
+        watchlistPortfolio = WatchListPortfolio(fromCoreData: coreDataPortfolio)
+    }
+    
+    public func updatePricesForStocks(_ stocks: [CurrentStock], completion: @escaping (_ success: Bool) -> ()) {
+        AlphaVantageClient.shared.updatePricesForStocks(stocks) { (success) in
+            completion(success)
+        }
     }
     
     public func collectAppDataForLaunch(completion: @escaping(_ success: Bool) -> ()) {

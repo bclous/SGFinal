@@ -2,7 +2,7 @@
 //  SGStock+CoreDataProperties.swift
 //  
 //
-//  Created by Brian Clouser on 9/27/17.
+//  Created by Brian Clouser on 9/28/17.
 //
 //
 
@@ -16,11 +16,11 @@ extension SGStock {
         return NSFetchRequest<SGStock>(entityName: "SGStock")
     }
 
-    @NSManaged public var ticker: String?
     @NSManaged public var companyName: String?
+    @NSManaged public var indexInPortfolio: Int64
     @NSManaged public var lastPrice: Float
     @NSManaged public var previousClose: Float
-    @NSManaged public var indexInPortfolio: Int64
+    @NSManaged public var ticker: String?
     @NSManaged public var portfolio: SGPortfolio?
 
 }

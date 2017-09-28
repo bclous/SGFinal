@@ -14,7 +14,7 @@ class WatchListPortfolio: NSObject {
     var lastUpdated : Date?
     var holdings : [CurrentStock] = []
     
-    init(name: name, lastUpdated: Date?, holdings : [CurrentStock]) {
+    init(name: String, lastUpdated: Date, holdings : [CurrentStock]) {
         self.name = name
         self.lastUpdated = lastUpdated
         self.holdings = holdings
@@ -22,30 +22,38 @@ class WatchListPortfolio: NSObject {
     
     convenience init(fromCoreData portfolio: SGPortfolio) {
         
-        let name = portfolio.name
-        let lastUpdated : Date? = portfolio.lastPriceUpdate as? Date
+        var lastUpdated : Date = Date()
+        let date = portfolio.lastPriceUpdate as Date?
+        if date != nil {
+            lastUpdated = date!
+        }
+        let name = portfolio.name ?? ""
         var holdings : [CurrentStock] = []
+        let coreDataHoldings : [SGStock] = portfolio.holdings?.allObjects as? [SGStock] ?? []
         
-        for stock in portfolio.holdings {
+        for stock in coreDataHoldings {
             let currentStock = CurrentStock()
             currentStock.updateValuesFromCoreDataStock(stock)
             holdings.append(currentStock)
         }
-        holdings.sort(by: {$0.rank < $1.rank})
+        holdings.sort(by: {$0.rankInPortfolio < $1.rankInPortfolio})
         
         self.init(name: name, lastUpdated: lastUpdated, holdings: holdings)
     }
     
-    public func updatePricesForStocks(_ stocks: [CurrentStock] , completion: @escaping (_ success: Bool) -> ()) {
-        
-        // update prices here
-        // if successful
-            // save to core data
-            // send back success
-        // else send back not success
-        
-        
-        
+    public func updatePrices(completion: @escaping (_ success: Bool) -> ()) {
+        DataStore.shared.updatePricesForStocks(holdings) { (success) in
+            if success {
+                self.saveToCoreData()
+            }
+            completion(success)
+        }
+    }
+    
+    func addStockToWatchListFromSymbolResult(_ result: SymbolResult) -> Bool {
+        let stock = CurrentStock()
+        stock.updateValuesFromSymbolResult(result)
+        return addStockToWatchList(stock)
     }
     
     public func saveToCoreData() {
@@ -53,15 +61,14 @@ class WatchListPortfolio: NSObject {
     }
     
     public func addStockToWatchList(_ stock: CurrentStock) -> Bool {
-        let contains = holdings.contains(stock)
+        let contains = holdings.contains(stock)   // this isn't workign it's not the same object have to just check the ticker, also only show tickers we don't have
         if contains {
             return false
         } else {
             holdings.append(stock)
+            saveToCoreData()
             return true
         }
-        
-        saveToCoreData()
     }
     
     public func removeStockFromWatchList(_ stock: CurrentStock) -> Bool {
@@ -70,12 +77,13 @@ class WatchListPortfolio: NSObject {
         
         if let index = indexOfStock {
             holdings.remove(at: index)
+            saveToCoreData()
             return true
         } else {
             return false
         }
         
-        saveToCoreData()
+        
     }
     
 }
