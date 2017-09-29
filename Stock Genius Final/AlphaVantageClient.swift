@@ -63,7 +63,7 @@ class AlphaVantageClient: NSObject {
     public func updatePricesForStocks(_ stocks: [CurrentStock], completion: @escaping (_ success: Bool) -> ()) {
         
         let tickerString = tickerStringFromStocks(stocks)
-        let requestURL = iexSingStockSuffix + "market/batch?symbols=" + tickerString + "=quote"
+        let requestURL = iexSingleStockPrefix + "market/batch?symbols=" + tickerString + "&types=quote"
         let request = Alamofire.request(requestURL)
     
         request.responseJSON { (response) in
@@ -234,15 +234,19 @@ class AlphaVantageClient: NSObject {
     
     private func tickerStringFromStocks(_ stocks: [CurrentStock]) -> String {
         var tickerString = ""
-        for index in 0...stocks.count - 1 {
-            let isLastStock = index == stocks.count - 1
-            let stock = stocks[index]
-            tickerString.append(stock.ticker)
-            if !isLastStock {
-                tickerString.append(",")
+        
+        if stocks.isEmpty {
+            return tickerString
+        } else {
+            for index in 0...stocks.count - 1 {
+                let isLastStock = index == stocks.count - 1
+                let stock = stocks[index]
+                tickerString.append(stock.ticker)
+                if !isLastStock {
+                    tickerString.append(",")
+                }
             }
         }
-        
         return tickerString
     }
     

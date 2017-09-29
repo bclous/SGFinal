@@ -56,8 +56,6 @@ class HeaderView: UIView {
     
     public func adjustHeaderViewForOffset(_ offset: CGFloat) {
         
-      
-            
         if offset >= 0 && offset <= 60 {
             refreshButton.isEnabled = offset == 0
             if offset <= 20 {
@@ -93,10 +91,7 @@ class HeaderView: UIView {
         }
         
         layoutIfNeeded()
-
-      
-        
-        
+  
     }
     
     public func formatHeaderViewForVC(_ type: TabBarChoice) {
@@ -125,9 +120,10 @@ class HeaderView: UIView {
         case .watchlist:
             secondaryLabel.text = "Last Price Update: Today: 9:00 AM"
             mainLabel.text = "Watchlist"
-            refreshButton.isEnabled = false
-            refreshImage.alpha = 0
-            showRefreshBar = false
+            refreshButton.isEnabled = true
+            refreshImage.alpha = 0.9
+            refreshImage.image = UIImage(named: "ic_add_white")
+            showRefreshBar = true
         }
         
         

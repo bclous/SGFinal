@@ -126,7 +126,9 @@ class DataStore: NSObject  {
         availableSymbols.removeAll()
         for symbol in response {
             let availableSymbol = SymbolResult(response: symbol)
-            availableSymbols.append(availableSymbol)
+            if availableSymbol.type != "N/A" {
+                availableSymbols.append(availableSymbol)
+            }
         }
     }
     
