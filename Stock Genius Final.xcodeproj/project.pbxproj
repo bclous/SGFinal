@@ -87,6 +87,10 @@
 		0FC57FE81F7940AF005BAAE4 /* STMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC57FE61F7940AF005BAAE4 /* STMessageCell.swift */; };
 		0FC57FE91F7940AF005BAAE4 /* STMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FC57FE71F7940AF005BAAE4 /* STMessageCell.xib */; };
 		0FC57FEB1F79AE3D005BAAE4 /* PictureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC57FEA1F79AE3D005BAAE4 /* PictureVC.swift */; };
+		0FD38B2A1F7E914B00405FCC /* WatchlistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38B281F7E914B00405FCC /* WatchlistCell.swift */; };
+		0FD38B2B1F7E914B00405FCC /* WatchlistCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FD38B291F7E914B00405FCC /* WatchlistCell.xib */; };
+		0FD38B2D1F7E92FD00405FCC /* WatchListCellContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FD38B2C1F7E92FD00405FCC /* WatchListCellContentView.xib */; };
+		0FD38B2F1F7E931B00405FCC /* WatchListCellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38B2E1F7E931B00405FCC /* WatchListCellContentView.swift */; };
 		0FDB582D1F5F4C3F00990628 /* UnableToConnectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDB582C1F5F4C3E00990628 /* UnableToConnectVC.swift */; };
 		0FDCCBE41F6C0E6000D08C09 /* BDCStockPerformanceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FDCCBE31F6C0E6000D08C09 /* BDCStockPerformanceView.xib */; };
 		0FDCCBE61F6C0E7C00D08C09 /* BDCStockPerformanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDCCBE51F6C0E7C00D08C09 /* BDCStockPerformanceView.swift */; };
@@ -206,6 +210,10 @@
 		0FC57FE61F7940AF005BAAE4 /* STMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STMessageCell.swift; sourceTree = "<group>"; };
 		0FC57FE71F7940AF005BAAE4 /* STMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STMessageCell.xib; sourceTree = "<group>"; };
 		0FC57FEA1F79AE3D005BAAE4 /* PictureVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureVC.swift; sourceTree = "<group>"; };
+		0FD38B281F7E914B00405FCC /* WatchlistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistCell.swift; sourceTree = "<group>"; };
+		0FD38B291F7E914B00405FCC /* WatchlistCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WatchlistCell.xib; sourceTree = "<group>"; };
+		0FD38B2C1F7E92FD00405FCC /* WatchListCellContentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WatchListCellContentView.xib; sourceTree = "<group>"; };
+		0FD38B2E1F7E931B00405FCC /* WatchListCellContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchListCellContentView.swift; sourceTree = "<group>"; };
 		0FDB582C1F5F4C3E00990628 /* UnableToConnectVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnableToConnectVC.swift; sourceTree = "<group>"; };
 		0FDCCBE31F6C0E6000D08C09 /* BDCStockPerformanceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BDCStockPerformanceView.xib; sourceTree = "<group>"; };
 		0FDCCBE51F6C0E7C00D08C09 /* BDCStockPerformanceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDCStockPerformanceView.swift; sourceTree = "<group>"; };
@@ -286,6 +294,10 @@
 				0F6491081F7C0D390017355F /* WatchlistVC.swift */,
 				0F1662ED1F7D3C18006F4E14 /* AddStockVC.swift */,
 				0F1662EF1F7D3E23006F4E14 /* AddStockCell.swift */,
+				0FD38B281F7E914B00405FCC /* WatchlistCell.swift */,
+				0FD38B291F7E914B00405FCC /* WatchlistCell.xib */,
+				0FD38B2C1F7E92FD00405FCC /* WatchListCellContentView.xib */,
+				0FD38B2E1F7E931B00405FCC /* WatchListCellContentView.swift */,
 				0F1662F01F7D3E23006F4E14 /* AddStockCell.xib */,
 			);
 			name = Watchlist;
@@ -567,6 +579,7 @@
 				0FFB6F521F166A6200FD8BC1 /* IntroSplashScreen.xib in Resources */,
 				0F3E2E3D1F3144E2004B8CD9 /* PastPicksStockCell.xib in Resources */,
 				0FFB6F4B1F15590200FD8BC1 /* LabelScrollView.xib in Resources */,
+				0FD38B2B1F7E914B00405FCC /* WatchlistCell.xib in Resources */,
 				0FFB6F321F10325C00FD8BC1 /* PastPicksNoteCell.xib in Resources */,
 				0F3A15641F55B28700EFB79F /* IndividualPerformanceView.xib in Resources */,
 				0F17B77C1F1904170064533F /* Page1.xib in Resources */,
@@ -584,6 +597,7 @@
 				0F3E2E331F31447B004B8CD9 /* NextUpdateView.xib in Resources */,
 				0FFB6F411F13D03500FD8BC1 /* DisclosureCell.xib in Resources */,
 				0F1662F21F7D3E24006F4E14 /* AddStockCell.xib in Resources */,
+				0FD38B2D1F7E92FD00405FCC /* WatchListCellContentView.xib in Resources */,
 				0F3E2E431F3144F6004B8CD9 /* PastPicksSectionHeaderView.xib in Resources */,
 				0F3A15781F55FB6700EFB79F /* IndividualPerformanceViewSegment.xib in Resources */,
 				0F17B77E1F1911840064533F /* CircleTabView.xib in Resources */,
@@ -712,6 +726,8 @@
 				0F2651EC1F05542A00754D0F /* PastPicksSummaryCell.swift in Sources */,
 				0F5AE2261F66C4DE000DA6C0 /* StockPriceDay.swift in Sources */,
 				0FFB6F4F1F15642200FD8BC1 /* IntroVC.swift in Sources */,
+				0FD38B2F1F7E931B00405FCC /* WatchListCellContentView.swift in Sources */,
+				0FD38B2A1F7E914B00405FCC /* WatchlistCell.swift in Sources */,
 				0F16DFA11F0E6B8C006C531E /* AlphaVantageClient.swift in Sources */,
 				0FDCCBE61F6C0E7C00D08C09 /* BDCStockPerformanceView.swift in Sources */,
 				0F032B0D1F781267006DF60E /* STMessage.swift in Sources */,

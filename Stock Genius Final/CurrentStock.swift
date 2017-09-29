@@ -309,5 +309,45 @@ class CurrentStock: Stock {
         
     }
     
+}
+
+extension CurrentStock {
+    
+    public func priceLabelText(decimals: UInt) -> String {
+        return adjPriceCurrent.stringWithDecimals(decimals)
+    }
+    
+    public func priceChangeImage(isTodayReturn: Bool) -> UIImage? {
+        let startPrice = isTodayReturn ? adjPriceLastClose : adjPriceStartDate
+        return dollarChangeImage(startPx: startPrice, endPx: adjPriceCurrent)
+    }
+    
+    public func percentageChangeString(isTodayReturn: Bool, decimalPlaces: Int) -> String {
+        let startPrice = isTodayReturn ? adjPriceLastClose : adjPriceStartDate
+        return percentageString(startPx: startPrice, endPx: adjPriceCurrent, decimalPlaces: decimalPlaces)
+    }
+    
+    public func percentageChangeDirectionString(isTodayReturn: Bool) -> String {
+        let startPrice = isTodayReturn ? adjPriceLastClose : adjPriceStartDate
+        return adjPriceCurrent >= startPrice ? "+" : "-"
+    }
+    
+    public func percentageChangeContainerColor(isTodayReturn: Bool) -> UIColor {
+        let startPrice = isTodayReturn ? adjPriceLastClose : adjPriceStartDate
+        return adjPriceCurrent >= startPrice ? SGConstants.mainGreenColor : SGConstants.mainRedColor
+    }
+    
+    public func priceChangeString(isTodayReturn: Bool, decimalPlaces: UInt) -> String {
+        
+        let startPrice = isTodayReturn ? adjPriceLastClose : adjPriceStartDate
+        let change = abs(adjPriceCurrent - startPrice)
+        return change.stringWithDecimals(decimalPlaces)
+    }
+    
+    public func priceDirectionImage(isTodayReturn: Bool) -> UIImage? {
+        let startPrice = isTodayReturn ? adjPriceLastClose : adjPriceStartDate
+        return adjPriceCurrent >= startPrice ? UIImage(named: "upImage") : UIImage(named: "downImage")
+        
+    }
     
 }

@@ -14,6 +14,9 @@ class WatchlistVC: UIViewController , SectionHeaderClearViewDelegate {
     @IBOutlet weak var mainTableView: UITableView!
     @IBOutlet weak var headerView: HeaderView!
     
+    var isEditInProgress : Bool = false
+    var indexEditInInProgress = 0
+    
     let sectionHeaderClearView : SectionHeaderClearView = SectionHeaderClearView()
     
     override func viewDidLoad() {
@@ -76,15 +79,21 @@ extension WatchlistVC : UITableViewDelegate, UITableViewDataSource {
     func formatTableView() {
         mainTableView.delegate = self
         mainTableView.dataSource = self
-        mainTableView.register(UINib(nibName: "MainStockCell", bundle: nil), forCellReuseIdentifier: "mainStockCell")
+        mainTableView.register(UINib(nibName: "WatchlistCell", bundle: nil), forCellReuseIdentifier: "watchlistCell")
         mainTableView.separatorStyle = .none
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "mainStockCell") as! MainStockCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "watchlistCell") as! WatchlistCell
         let stock = DataStore.shared.watchlistPortfolio.holdings[indexPath.row]
-        cell.formatCellWithStock(stock, isOneDayReturn: true)
+        cell.delegate = self
+        
+        if isEditInProgress {
+            cell.formatCellForEditModeWithStock(stock, isInEditMode: indexPath.row == indexEditInInProgress)
+        } else {
+            cell.formatCellWithStock(stock, index: indexPath.row, isEditingAllowed: true)
+        }
         return cell
     }
     
@@ -104,7 +113,25 @@ extension WatchlistVC : UITableViewDelegate, UITableViewDataSource {
         headerView.adjustHeaderViewForOffset(scrollView.contentOffset.y)
         sectionHeaderClearView.rightButton.isEnabled = scrollView.contentOffset.y <= 0
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("\(indexPath.row)")
+    }
 
+}
+
+extension WatchlistVC : WatchListCellDelegate {
+    func editingInProgressAtIndex(_ index: Int) {
+        isEditInProgress = true
+        indexEditInInProgress = index
+        mainTableView.reloadData()
+ 
+    }
+    
+    func editingComplete() {
+        isEditInProgress = false
+        mainTableView.reloadData()
+    }
 }
 
 extension WatchlistVC : AddStockVCDelegate {
