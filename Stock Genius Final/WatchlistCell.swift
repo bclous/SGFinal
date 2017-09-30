@@ -59,7 +59,7 @@ class WatchlistCell: UITableViewCell, UpDownButtonDelegate, WatchCellContentView
         upBackgroundView.backgroundColor = SGConstants.mainBlueColor
         downBackgroundView.backgroundColor = SGConstants.mainBlueColor
         formatCellForState(state)
-    
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -36,7 +36,8 @@ class WatchlistVC: UIViewController , SectionHeaderClearViewDelegate {
     }
     
     public func updatePrices() {
-            self.mainTableView.reloadData()
+        self.mainTableView.reloadData()
+        self.mainTableView.layoutIfNeeded()
         DataStore.shared.watchlistPortfolio.updatePrices { (success) in
             self.mainTableView.reloadData()
         }
@@ -171,7 +172,8 @@ extension WatchlistVC : WatchListCellDelegate {
         DataStore.shared.watchlistPortfolio.removeStockFromIndex(index)
         isInEditMode = false
         var indexSet = IndexSet([0])
-        mainTableView.reloadSections(indexSet, with: .automatic)
+        mainTableView.reloadData()
+        mainTableView.layoutIfNeeded()
         
         
         
