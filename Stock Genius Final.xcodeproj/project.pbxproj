@@ -45,6 +45,8 @@
 		0F2651EC1F05542A00754D0F /* PastPicksSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2651EB1F05542A00754D0F /* PastPicksSummaryCell.swift */; };
 		0F2651EE1F05583E00754D0F /* MainStockSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2651ED1F05583E00754D0F /* MainStockSummaryCell.swift */; };
 		0F2651F01F055D3C00754D0F /* PastPicksSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2651EF1F055D3C00754D0F /* PastPicksSectionHeaderView.swift */; };
+		0F2E32D21F7FE477006AFF65 /* UpDownButtonsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F2E32D11F7FE477006AFF65 /* UpDownButtonsView.xib */; };
+		0F2E32D41F7FE6A8006AFF65 /* UpDownButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2E32D31F7FE6A8006AFF65 /* UpDownButtonsView.swift */; };
 		0F3333EA1F60303400FBE4BF /* BDCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3333E91F60303400FBE4BF /* BDCHelper.swift */; };
 		0F3A15571F54847C00EFB79F /* IndividualStockVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3A15561F54847C00EFB79F /* IndividualStockVC.swift */; };
 		0F3A155A1F54A35800EFB79F /* IndividualHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F3A15591F54A35800EFB79F /* IndividualHeaderView.xib */; };
@@ -168,6 +170,8 @@
 		0F2651EB1F05542A00754D0F /* PastPicksSummaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastPicksSummaryCell.swift; sourceTree = "<group>"; };
 		0F2651ED1F05583E00754D0F /* MainStockSummaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainStockSummaryCell.swift; sourceTree = "<group>"; };
 		0F2651EF1F055D3C00754D0F /* PastPicksSectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PastPicksSectionHeaderView.swift; sourceTree = "<group>"; };
+		0F2E32D11F7FE477006AFF65 /* UpDownButtonsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UpDownButtonsView.xib; sourceTree = "<group>"; };
+		0F2E32D31F7FE6A8006AFF65 /* UpDownButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpDownButtonsView.swift; sourceTree = "<group>"; };
 		0F3333E91F60303400FBE4BF /* BDCHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BDCHelper.swift; sourceTree = "<group>"; };
 		0F3A15561F54847C00EFB79F /* IndividualStockVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndividualStockVC.swift; sourceTree = "<group>"; };
 		0F3A15591F54A35800EFB79F /* IndividualHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IndividualHeaderView.xib; sourceTree = "<group>"; };
@@ -298,6 +302,8 @@
 				0FD38B291F7E914B00405FCC /* WatchlistCell.xib */,
 				0FD38B2C1F7E92FD00405FCC /* WatchListCellContentView.xib */,
 				0FD38B2E1F7E931B00405FCC /* WatchListCellContentView.swift */,
+				0F2E32D11F7FE477006AFF65 /* UpDownButtonsView.xib */,
+				0F2E32D31F7FE6A8006AFF65 /* UpDownButtonsView.swift */,
 				0F1662F01F7D3E23006F4E14 /* AddStockCell.xib */,
 			);
 			name = Watchlist;
@@ -568,6 +574,7 @@
 				0F3A15681F55B2FD00EFB79F /* NewsSectionHeaderView.xib in Resources */,
 				AB2FB99F1F029BB700CA72B2 /* LaunchScreen.storyboard in Resources */,
 				0F5BE8FB1F07F51400607D87 /* MainStocksSectionHeaderToggle.xib in Resources */,
+				0F2E32D21F7FE477006AFF65 /* UpDownButtonsView.xib in Resources */,
 				0F3A155A1F54A35800EFB79F /* IndividualHeaderView.xib in Resources */,
 				0F3E2E391F31449B004B8CD9 /* CalculatorInputView.xib in Resources */,
 				0F3E2E2F1F31445E004B8CD9 /* MainStockCell.xib in Resources */,
@@ -676,6 +683,7 @@
 				0F17B7821F1912470064533F /* CircleTabView.swift in Sources */,
 				0F2651DF1F05390A00754D0F /* PastStock.swift in Sources */,
 				0F032B111F782BA6006DF60E /* STLink.swift in Sources */,
+				0F2E32D41F7FE6A8006AFF65 /* UpDownButtonsView.swift in Sources */,
 				0F3A15571F54847C00EFB79F /* IndividualStockVC.swift in Sources */,
 				0F6491051F7BF25E0017355F /* SymbolResult.swift in Sources */,
 				0F1662F11F7D3E23006F4E14 /* AddStockCell.swift in Sources */,

@@ -14,8 +14,9 @@ class WatchlistVC: UIViewController , SectionHeaderClearViewDelegate {
     @IBOutlet weak var mainTableView: UITableView!
     @IBOutlet weak var headerView: HeaderView!
     
-    var isEditInProgress : Bool = false
+    var isInEditMode : Bool = false
     var indexEditInInProgress = 0
+    var editType : EditType = .deleting
     
     let sectionHeaderClearView : SectionHeaderClearView = SectionHeaderClearView()
     
@@ -35,6 +36,7 @@ class WatchlistVC: UIViewController , SectionHeaderClearViewDelegate {
     }
     
     public func updatePrices() {
+            self.mainTableView.reloadData()
         DataStore.shared.watchlistPortfolio.updatePrices { (success) in
             self.mainTableView.reloadData()
         }
@@ -43,7 +45,10 @@ class WatchlistVC: UIViewController , SectionHeaderClearViewDelegate {
     func sectionHeaderButtonTapped(_ button: SectionHeaderButton) {
         let addStockVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "addStockVC") as! AddStockVC
         addStockVC.delegate = self
-        present(addStockVC, animated: false, completion: nil)
+        view.isUserInteractionEnabled = false
+        present(addStockVC, animated: true) {
+            self.view.isUserInteractionEnabled = true
+        }
     }
     
     func formatSectionHeaderClearView() {
@@ -89,12 +94,19 @@ extension WatchlistVC : UITableViewDelegate, UITableViewDataSource {
         let stock = DataStore.shared.watchlistPortfolio.holdings[indexPath.row]
         cell.delegate = self
         
-        if isEditInProgress {
-            cell.formatCellForEditModeWithStock(stock, isInEditMode: indexPath.row == indexEditInInProgress)
+        if isInEditMode {
+            let activeEditCellState : WatchListCellState = editType == .deleting ? .editingActiveForDelete : .editingActiveForReorder
+            let cellState = indexPath.row == indexEditInInProgress ? activeEditCellState : .editingInactive
+            cell.formatCellWithStock(stock, index: indexPath.row, cellState: cellState)
         } else {
-            cell.formatCellWithStock(stock, index: indexPath.row, isEditingAllowed: true)
+            cell.formatCellWithStock(stock, index: indexPath.row, cellState: .normal)
         }
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return !isInEditMode
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -121,16 +133,53 @@ extension WatchlistVC : UITableViewDelegate, UITableViewDataSource {
 }
 
 extension WatchlistVC : WatchListCellDelegate {
-    func editingInProgressAtIndex(_ index: Int) {
-        isEditInProgress = true
+    
+    func editingRequestedAtIndex(_ index: Int, editType: EditType) {
+        isInEditMode = true
         indexEditInInProgress = index
+        self.editType = editType
         mainTableView.reloadData()
- 
     }
     
     func editingComplete() {
-        isEditInProgress = false
-        mainTableView.reloadData()
+        if isInEditMode {
+            isInEditMode = false
+            mainTableView.reloadData()
+        }
+    }
+    
+    func reorderRequested(isUp: Bool, index: Int) {
+        let newIndex = isUp ? index - 1 : index + 1
+        let min = 0
+        let max = DataStore.shared.watchlistPortfolio.holdings.count - 1
+        
+        if newIndex >= min && newIndex <= max {
+            DataStore.shared.watchlistPortfolio.switchStockOrderAtIndex(index, withIndex: newIndex)
+            indexEditInInProgress = newIndex
+
+            view.isUserInteractionEnabled = false
+            UIView.transition(with: mainTableView, duration: 2.0, options: .curveEaseIn, animations: {
+                self.mainTableView.reloadData()
+            }, completion: { (success) in
+                self.view.isUserInteractionEnabled = true
+            })
+        }
+            
+    }
+    
+    func deleteRequestedAtIndex(_ index: Int) {
+        DataStore.shared.watchlistPortfolio.removeStockFromIndex(index)
+        isInEditMode = false
+        var indexSet = IndexSet([0])
+        mainTableView.reloadSections(indexSet, with: .automatic)
+        
+        
+        
+//        UIView.transition(with: mainTableView, duration: 2.0, options: .curveEaseIn, animations: {
+//            self.mainTableView.reloadData()
+//        }, completion: { (success) in
+//            self.view.isUserInteractionEnabled = true
+//        })
     }
 }
 

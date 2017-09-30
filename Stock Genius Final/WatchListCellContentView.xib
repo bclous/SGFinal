@@ -21,6 +21,7 @@
                 <outlet property="priceChangeImage" destination="oiL-FH-muk" id="M8c-Ko-4IM"/>
                 <outlet property="priceChangeLabel" destination="mRt-Q8-S1d" id="MAG-0D-uNZ"/>
                 <outlet property="priceLabel" destination="ViM-1q-Ub3" id="0Vu-Um-AGG"/>
+                <outlet property="returnToHomeButton" destination="QEi-W6-2ka" id="Up9-aZ-qSG"/>
                 <outlet property="tickerLabel" destination="WSo-Cf-og7" id="gCu-9M-NYB"/>
             </connections>
         </placeholder>
@@ -125,7 +126,7 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.4%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Dlf-8y-pMx">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.4%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Dlf-8y-pMx">
                                     <rect key="frame" x="21" y="2" width="56" height="37"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -152,6 +153,12 @@
                         <constraint firstAttribute="width" constant="100" id="utf-lp-Ibd"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QEi-W6-2ka">
+                    <rect key="frame" x="-0.5" y="-0.5" width="363" height="61"/>
+                    <connections>
+                        <action selector="returnToHomeTapped:" destination="-1" eventType="touchUpInside" id="jw8-a1-xWF"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -164,8 +171,12 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Nqm-4p-LCf" secondAttribute="trailing" id="XQv-F5-Ed6"/>
                 <constraint firstItem="nG4-Fp-UGF" firstAttribute="leading" secondItem="LLu-yg-wBZ" secondAttribute="trailing" id="a16-4Q-PPB"/>
                 <constraint firstItem="Nqm-4p-LCf" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="auG-ed-lKa"/>
+                <constraint firstItem="QEi-W6-2ka" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="bh4-iv-QA7"/>
+                <constraint firstItem="QEi-W6-2ka" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="dSX-5q-M0u"/>
                 <constraint firstItem="nG4-Fp-UGF" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="ocd-wm-KHM"/>
+                <constraint firstItem="QEi-W6-2ka" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="rIw-eC-a31"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="top" secondItem="nG4-Fp-UGF" secondAttribute="top" id="xfq-OB-UrI"/>
+                <constraint firstItem="QEi-W6-2ka" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="zh1-3g-Jd4"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

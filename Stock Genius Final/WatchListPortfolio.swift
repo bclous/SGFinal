@@ -57,6 +57,7 @@ class WatchListPortfolio: NSObject {
     }
     
     public func saveToCoreData() {
+        updateHoldingIndexRanks()
         CDClient.saveWatchlistPortfolio(self)
     }
     
@@ -71,19 +72,26 @@ class WatchListPortfolio: NSObject {
         }
     }
     
-    public func removeStockFromWatchList(_ stock: CurrentStock) -> Bool {
-        
-        let indexOfStock = holdings.index(of: stock)
-        
-        if let index = indexOfStock {
-            holdings.remove(at: index)
+    public func switchStockOrderAtIndex(_ index: Int, withIndex index2: Int) {
+    
+        let canSwitch = (holdings.count - 1) >= max(index, index2)
+        if canSwitch {
+            holdings.swapAt(index, index2)
             saveToCoreData()
-            return true
-        } else {
-            return false
         }
         
-        
+    }
+    
+    public func removeStockFromIndex(_ index: Int)  {
+            holdings.remove(at: index)
+            saveToCoreData()
+    }
+    
+    private func updateHoldingIndexRanks() {
+        for idx in 0...holdings.count - 1 {
+            let stock = holdings[idx]
+            stock.rankInPortfolio = idx
+        }
     }
     
 }

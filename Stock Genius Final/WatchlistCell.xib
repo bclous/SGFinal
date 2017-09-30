@@ -19,6 +19,71 @@
                 <rect key="frame" x="0.0" y="0.0" width="335" height="56.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p6v-7j-W7X">
+                        <rect key="frame" x="0.0" y="-0.5" width="116" height="55"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="BhQ-IB-Yls">
+                                <rect key="frame" x="0.0" y="0.0" width="116" height="55"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LnC-Yk-dEu">
+                                        <rect key="frame" x="0.0" y="0.0" width="57.5" height="55"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EtR-P3-Iry">
+                                                <rect key="frame" x="-1" y="0.0" width="58" height="55"/>
+                                                <color key="backgroundColor" red="0.26807689109999999" green="0.54880666369999997" blue="0.87033258700000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </view>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_keyboard_arrow_up_white" translatesAutoresizingMaskIntoConstraints="NO" id="l6D-jX-ln9">
+                                                <rect key="frame" x="16.5" y="15" width="25" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="25" id="50Y-3y-6Gd"/>
+                                                    <constraint firstAttribute="height" constant="25" id="8B2-La-GaM"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="EtR-P3-Iry" firstAttribute="width" secondItem="LnC-Yk-dEu" secondAttribute="width" id="07a-rL-urj"/>
+                                            <constraint firstItem="l6D-jX-ln9" firstAttribute="centerY" secondItem="LnC-Yk-dEu" secondAttribute="centerY" id="2MD-8Q-qoj"/>
+                                            <constraint firstItem="EtR-P3-Iry" firstAttribute="centerY" secondItem="LnC-Yk-dEu" secondAttribute="centerY" id="DFI-7e-Zov"/>
+                                            <constraint firstItem="EtR-P3-Iry" firstAttribute="centerX" secondItem="LnC-Yk-dEu" secondAttribute="centerX" id="IXl-g7-rhk"/>
+                                            <constraint firstItem="l6D-jX-ln9" firstAttribute="centerX" secondItem="LnC-Yk-dEu" secondAttribute="centerX" id="U1j-rg-jix"/>
+                                            <constraint firstItem="EtR-P3-Iry" firstAttribute="height" secondItem="LnC-Yk-dEu" secondAttribute="height" id="wao-BU-Fku"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="phL-eQ-9si">
+                                        <rect key="frame" x="58.5" y="0.0" width="57.5" height="55"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zzk-AY-IkO">
+                                                <rect key="frame" x="0.0" y="0.0" width="57.5" height="55"/>
+                                                <color key="backgroundColor" red="0.26807689109999999" green="0.54880666369999997" blue="0.87033258700000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </view>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_keyboard_arrow_down_white" translatesAutoresizingMaskIntoConstraints="NO" id="I9E-Hi-wvb">
+                                                <rect key="frame" x="16.5" y="15" width="25" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="25" id="D65-hE-Y6k"/>
+                                                    <constraint firstAttribute="width" constant="25" id="GWT-G6-ifZ"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="zzk-AY-IkO" firstAttribute="height" secondItem="phL-eQ-9si" secondAttribute="height" id="HAn-0A-HEj"/>
+                                            <constraint firstItem="zzk-AY-IkO" firstAttribute="centerX" secondItem="phL-eQ-9si" secondAttribute="centerX" id="Sfx-2W-6Zf"/>
+                                            <constraint firstItem="zzk-AY-IkO" firstAttribute="width" secondItem="phL-eQ-9si" secondAttribute="width" id="VOV-FA-Dbx"/>
+                                            <constraint firstItem="zzk-AY-IkO" firstAttribute="centerY" secondItem="phL-eQ-9si" secondAttribute="centerY" id="Z8R-PB-01e"/>
+                                            <constraint firstItem="I9E-Hi-wvb" firstAttribute="centerX" secondItem="phL-eQ-9si" secondAttribute="centerX" id="h8L-Vt-0Aq"/>
+                                            <constraint firstItem="I9E-Hi-wvb" firstAttribute="centerY" secondItem="phL-eQ-9si" secondAttribute="centerY" id="uhd-jW-6hF"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="BhQ-IB-Yls" firstAttribute="width" secondItem="p6v-7j-W7X" secondAttribute="width" id="1A7-EE-fOu"/>
+                            <constraint firstItem="BhQ-IB-Yls" firstAttribute="centerX" secondItem="p6v-7j-W7X" secondAttribute="centerX" id="2gS-jB-9RY"/>
+                            <constraint firstItem="BhQ-IB-Yls" firstAttribute="height" secondItem="p6v-7j-W7X" secondAttribute="height" id="A9Y-Nd-uB1"/>
+                            <constraint firstItem="BhQ-IB-Yls" firstAttribute="centerY" secondItem="p6v-7j-W7X" secondAttribute="centerY" id="BoQ-29-LAW"/>
+                            <constraint firstAttribute="width" constant="116" id="m5j-i9-2ZO"/>
+                        </constraints>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OcW-zx-9rg">
                         <rect key="frame" x="277" y="0.0" width="58" height="54.5"/>
                         <subviews>
@@ -41,18 +106,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="335" height="54.5"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pak-Jo-DBl">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="54.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="509" height="54.5"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Wz-Rk-wXE" customClass="UpDownButtonsView" customModule="Stock_Genius_Final" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="116" height="54.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="116" id="z8h-u8-jhY"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kxo-Px-Gz0" customClass="WatchListCellContentView" customModule="Stock_Genius_Final" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="54.5"/>
+                                        <rect key="frame" x="116" y="0.0" width="335" height="54.5"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KjX-ky-2st">
-                                        <rect key="frame" x="335" y="0.0" width="58" height="54.5"/>
+                                        <rect key="frame" x="451" y="0.0" width="58" height="54.5"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G4g-zs-BEJ">
-                                                <rect key="frame" x="6" y="12" width="46" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G4g-zs-BEJ">
+                                                <rect key="frame" x="0.0" y="-0.5" width="58" height="55"/>
                                                 <connections>
-                                                    <action selector="deleteTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="SCx-Jt-VgF"/>
+                                                    <action selector="deleteTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="oG4-EI-xly"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -72,7 +143,7 @@
                             <constraint firstAttribute="trailing" secondItem="pak-Jo-DBl" secondAttribute="trailing" id="3X3-0q-ptt"/>
                             <constraint firstItem="pak-Jo-DBl" firstAttribute="top" secondItem="wpg-jS-Fev" secondAttribute="top" id="M1v-E3-GQB"/>
                             <constraint firstItem="pak-Jo-DBl" firstAttribute="height" secondItem="wpg-jS-Fev" secondAttribute="height" id="cIh-Bc-ftV"/>
-                            <constraint firstItem="pak-Jo-DBl" firstAttribute="width" secondItem="wpg-jS-Fev" secondAttribute="width" constant="58" id="f4V-dC-kGc"/>
+                            <constraint firstItem="pak-Jo-DBl" firstAttribute="width" secondItem="wpg-jS-Fev" secondAttribute="width" constant="174" id="f4V-dC-kGc"/>
                             <constraint firstItem="pak-Jo-DBl" firstAttribute="leading" secondItem="wpg-jS-Fev" secondAttribute="leading" id="o8S-gQ-I9w"/>
                             <constraint firstAttribute="bottom" secondItem="pak-Jo-DBl" secondAttribute="bottom" id="sgI-l6-uhi"/>
                         </constraints>
@@ -91,9 +162,12 @@
                     <constraint firstItem="wpg-jS-Fev" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="V1T-He-OAN"/>
                     <constraint firstAttribute="bottom" secondItem="wpg-jS-Fev" secondAttribute="bottom" constant="2" id="Vww-bB-scx"/>
                     <constraint firstItem="iIv-jC-kz5" firstAttribute="centerX" secondItem="wpg-jS-Fev" secondAttribute="centerX" id="XlO-JU-qoA"/>
+                    <constraint firstItem="p6v-7j-W7X" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="beN-JT-azo"/>
                     <constraint firstAttribute="trailing" secondItem="wpg-jS-Fev" secondAttribute="trailing" id="h0L-1P-2wl"/>
                     <constraint firstItem="wpg-jS-Fev" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="iMC-sp-tUE"/>
                     <constraint firstAttribute="bottom" secondItem="OcW-zx-9rg" secondAttribute="bottom" constant="2" id="kDR-A5-lf9"/>
+                    <constraint firstItem="p6v-7j-W7X" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="p7I-vw-VwG"/>
+                    <constraint firstAttribute="bottom" secondItem="p6v-7j-W7X" secondAttribute="bottom" constant="2" id="tJm-78-zaJ"/>
                     <constraint firstAttribute="trailing" secondItem="OcW-zx-9rg" secondAttribute="trailing" id="zzR-rU-ZJb"/>
                 </constraints>
             </tableViewCellContentView>
@@ -101,14 +175,19 @@
             <connections>
                 <outlet property="deleteButton" destination="G4g-zs-BEJ" id="F5h-Yc-1lf"/>
                 <outlet property="deleteView" destination="OcW-zx-9rg" id="Ktw-VE-C5r"/>
+                <outlet property="downBackgroundView" destination="zzk-AY-IkO" id="9T1-wq-oA9"/>
                 <outlet property="otherCellInEditModeCoverView" destination="iIv-jC-kz5" id="CoM-fb-tKD"/>
                 <outlet property="scrollView" destination="wpg-jS-Fev" id="kdV-k7-jch"/>
                 <outlet property="stockContentView" destination="kxo-Px-Gz0" id="lkV-zO-WZ1"/>
+                <outlet property="upBackgroundView" destination="EtR-P3-Iry" id="WLm-vo-HH9"/>
+                <outlet property="upDownButtonsView" destination="7Wz-Rk-wXE" id="NRn-Wv-VkV"/>
             </connections>
-            <point key="canvasLocation" x="-85" y="9"/>
+            <point key="canvasLocation" x="-273" y="-15"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="ic_clear_white" width="24" height="24"/>
+        <image name="ic_keyboard_arrow_down_white" width="24" height="24"/>
+        <image name="ic_keyboard_arrow_up_white" width="24" height="24"/>
     </resources>
 </document>

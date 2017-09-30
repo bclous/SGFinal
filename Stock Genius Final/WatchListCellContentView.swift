@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol WatchCellContentViewDelegate : class {
+    func returnToHome()
+}
+
 class WatchListCellContentView: UIView {
 
     @IBOutlet var contentView: UIView!
@@ -20,6 +24,14 @@ class WatchListCellContentView: UIView {
     @IBOutlet weak var percentageChangeContainerView: UIView!
     @IBOutlet weak var percentageChangePlusMinusLabel: UILabel!
     @IBOutlet weak var percentageChangeLabel: UILabel!
+    @IBOutlet weak var returnToHomeButton: UIButton!
+    var delegate : WatchCellContentViewDelegate?
+    
+    var isInEditMode : Bool = false {
+        didSet {
+            returnToHomeButton.isEnabled = isInEditMode
+        }
+    }
     
     override init(frame: CGRect) { // for using CustomView in code
         super.init(frame: frame)
@@ -41,8 +53,7 @@ class WatchListCellContentView: UIView {
         content.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         content.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         percentageChangeContainerView.layer.cornerRadius = 10
-        
-        
+
     }
     
     public func formatViewWithStock(_ stock: CurrentStock) {
@@ -57,4 +68,7 @@ class WatchListCellContentView: UIView {
         percentageChangeLabel.text = stock.percentageChangeString(isTodayReturn: true, decimalPlaces: 1)
     }
 
+    @IBAction func returnToHomeTapped(_ sender: Any) {
+        delegate?.returnToHome()
+    }
 }
