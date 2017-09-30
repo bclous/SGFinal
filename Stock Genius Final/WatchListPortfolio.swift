@@ -88,6 +88,11 @@ class WatchListPortfolio: NSObject {
     }
     
     private func updateHoldingIndexRanks() {
+        
+        if holdings.isEmpty {
+            return
+        }
+        
         for idx in 0...holdings.count - 1 {
             let stock = holdings[idx]
             stock.rankInPortfolio = idx
