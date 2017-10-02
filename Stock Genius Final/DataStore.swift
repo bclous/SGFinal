@@ -39,6 +39,15 @@ class DataStore: NSObject  {
         super.init()
     }
     
+    public func watchlistTickers() -> [String] {
+        var tickers : [String] = []
+        for stock in watchlistPortfolio.holdings {
+            tickers.append(stock.ticker)
+        }
+        
+        return tickers
+    }
+    
     public func updateAvailableSymbols(completion: @escaping (_ success: Bool) -> ()) {
         AlphaVantageClient.shared.pullAvailableTickersFromIEX { (success) in
             completion(success)

@@ -21,8 +21,10 @@ class AddStockVC: UIViewController {
     let searchController = UISearchController(searchResultsController: nil)
     var symbols = DataStore.shared.availableSymbols
     var filteredSymbols : [SymbolResult] = []
-    var sortedSymbols : [SymbolResult] = []
     var frame : CGRect = CGRect()
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var unableToConnectLabel: UILabel!
+    @IBOutlet weak var unableToConnectButton: UIButton!
     
     
     override func viewDidLoad() {
@@ -32,18 +34,38 @@ class AddStockVC: UIViewController {
         formatHeaderView()
 
         if symbols.isEmpty {
+            spinner.isHidden = false
+            spinner.startAnimating()
             DataStore.shared.updateAvailableSymbols(completion: { (success) in
-                
                 if success {
                     self.symbols = DataStore.shared.availableSymbols
-                    //self.sortedSymbols = self.symbols.sorted(by: {$0.name.characters.count < $1.name.characters.count})
-                    self.sortedSymbols = self.symbols
+                    self.removeCurrentWatchlistStocksFromSymbols()
                     self.mainTableView.reloadData()
+                    self.spinner.stopAnimating()
+                    self.spinner.isHidden = true
+                    self.mainTableView.isHidden = false
                 } else {
-                    // show can't connect
+                    self.spinner.stopAnimating()
+                    self.spinner.isHidden = true
+                    self.unableToConnectLabel.isHidden = false
+                    self.unableToConnectButton.isHidden = false
                 }
-                
             })
+        } else {
+            mainTableView.reloadData()
+            mainTableView.isHidden = false
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        removeCurrentWatchlistStocksFromSymbols()
+    }
+    
+    func removeCurrentWatchlistStocksFromSymbols() {
+        let currentTickers = DataStore.shared.watchlistTickers()
+        
+        symbols = symbols.filter { (symbol) -> Bool in
+            return !currentTickers.contains(symbol.ticker)
         }
     }
     
@@ -53,13 +75,34 @@ class AddStockVC: UIViewController {
     
     func formatHeaderView() {
         headerView.backgroundColor = SGConstants.mainBlackColor
-        
     }
 
     @IBAction func cancelTapped(_ sender: Any) {
         delegate?.dismissRequired(self)
     }
     
+    @IBAction func tryAgainTapped(_ sender: Any) {
+        unableToConnectLabel.isHidden = true
+        unableToConnectButton.isHidden = true
+        spinner.isHidden = false
+        spinner.startAnimating()
+        
+        DataStore.shared.updateAvailableSymbols { (success) in
+            if success {
+                self.symbols = DataStore.shared.availableSymbols
+                self.removeCurrentWatchlistStocksFromSymbols()
+                self.mainTableView.reloadData()
+                self.spinner.stopAnimating()
+                self.spinner.isHidden = true
+                self.mainTableView.isHidden = false
+            } else {
+                self.spinner.stopAnimating()
+                self.spinner.isHidden = true
+                self.unableToConnectLabel.isHidden = false
+                self.unableToConnectButton.isHidden = false
+            }
+        }
+    }
 }
 
 extension AddStockVC : UISearchResultsUpdating {
@@ -82,7 +125,6 @@ extension AddStockVC : UISearchResultsUpdating {
     
     func filterContentForSearchText(_ searchText: String) {
         
-    
         filteredSymbols = symbols.filter { (symbol) -> Bool in
             return symbol.ticker.lowercased().contains(searchText.lowercased()) || symbol.name.lowercased().contains(searchText.lowercased())
         }
@@ -136,23 +178,6 @@ extension AddStockVC : UISearchResultsUpdating {
     
     func isFiltering() -> Bool {
         return searchController.isActive && !searchBarIsEmpty()
-    }
-    
-    func combineAndFlatten(_ resultArrays: [[SymbolResult]]) -> [SymbolResult] {
-        
-        var results : [SymbolResult] = []
-        
-        for array in resultArrays {
-            
-            for result in array {
-                if !results.contains(result) {
-                    results.append(result)
-                }
-                
-            }
-        }
-        
-        return results
     }
     
 }
