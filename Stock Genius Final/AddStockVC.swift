@@ -21,6 +21,7 @@ class AddStockVC: UIViewController {
     let searchController = UISearchController(searchResultsController: nil)
     var symbols = DataStore.shared.availableSymbols
     var filteredSymbols : [SymbolResult] = []
+    var sortedSymbols : [SymbolResult] = []
     var frame : CGRect = CGRect()
     
     
@@ -32,8 +33,16 @@ class AddStockVC: UIViewController {
 
         if symbols.isEmpty {
             DataStore.shared.updateAvailableSymbols(completion: { (success) in
-                self.symbols = DataStore.shared.availableSymbols
-                self.mainTableView.reloadData()
+                
+                if success {
+                    self.symbols = DataStore.shared.availableSymbols
+                    //self.sortedSymbols = self.symbols.sorted(by: {$0.name.characters.count < $1.name.characters.count})
+                    self.sortedSymbols = self.symbols
+                    self.mainTableView.reloadData()
+                } else {
+                    // show can't connect
+                }
+                
             })
         }
     }
@@ -61,7 +70,6 @@ extension AddStockVC : UISearchResultsUpdating {
         definesPresentationContext = true
         mainTableView.tableHeaderView = searchController.searchBar
         frame = searchController.searchBar.frame
-        
     }
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -74,33 +82,54 @@ extension AddStockVC : UISearchResultsUpdating {
     
     func filterContentForSearchText(_ searchText: String) {
         
-        // exact ticker match first
-        // exact name match second
-        // ticker contains third
-        // name contains fourth sorted by shortest first
+    
+        filteredSymbols = symbols.filter { (symbol) -> Bool in
+            return symbol.ticker.lowercased().contains(searchText.lowercased()) || symbol.name.lowercased().contains(searchText.lowercased())
+        }
+
         
-        let tickerMatches = symbols.filter { (symbol) -> Bool in
-            symbol.ticker.lowercased() == searchText.lowercased()
+        let tickerMatches = filteredSymbols.filter { (symbol) -> Bool in
+            return symbol.ticker.lowercased() == searchText.lowercased()
         }
         
-        let nameMatches = symbols.filter { (symbol) -> Bool in
+        let tickerPartialMatches = filteredSymbols.filter { (symbol) -> Bool in
+            print("\(String(symbol.ticker.characters.prefix(searchText.characters.count)).lowercased())")
+            print("\(searchText.lowercased())")
+            return String(symbol.ticker.characters.prefix(searchText.characters.count)).lowercased() == searchText.lowercased()
+ 
+        }
+        
+        let nameMatches = filteredSymbols.filter { (symbol) -> Bool in
             symbol.name.lowercased() == searchText.lowercased()
         }
         
-        let tickerContains = symbols.filter { (symbol) -> Bool in
-            symbol.ticker.lowercased().contains(searchText.lowercased())
+        if !tickerPartialMatches.isEmpty {
+           
+            for idx in (0...tickerPartialMatches.count - 1).reversed() {
+                let symbol = tickerPartialMatches[idx]
+                let index = filteredSymbols.index(of: symbol)
+                if let index = index {
+                    filteredSymbols.remove(at: index)
+                    filteredSymbols.insert(symbol, at: 0)
+                }
+            }
         }
         
-        var nameContains = symbols.filter { (symbol) -> Bool in
-            symbol.ticker.lowercased().contains(searchText.lowercased())
+        for symbol in nameMatches {
+            let index = filteredSymbols.index(of: symbol)
+            if let index = index {
+                filteredSymbols.remove(at: index)
+                filteredSymbols.insert(symbol, at: 0)
+            }
         }
         
-        nameContains.sort(by: {$0.name.characters.count < $1.name.characters.count})
-
-        let matches : [[SymbolResult]] = [tickerMatches, nameMatches, tickerContains, nameContains]
-        
-
-        filteredSymbols =  combineAndFlatten(matches)
+        for symbol in tickerMatches {
+            let index = filteredSymbols.index(of: symbol)
+            if let index = index {
+                filteredSymbols.remove(at: index)
+                filteredSymbols.insert(symbol, at: 0)
+            }
+        }
     
         mainTableView.reloadData()
     }
