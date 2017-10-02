@@ -74,16 +74,58 @@ extension AddStockVC : UISearchResultsUpdating {
     
     func filterContentForSearchText(_ searchText: String) {
         
-        filteredSymbols = symbols.filter { (symbol) -> Bool in
-            return symbol.ticker.lowercased().contains(searchText.lowercased()) || symbol.name.lowercased().contains(searchText.lowercased())
+        // exact ticker match first
+        // exact name match second
+        // ticker contains third
+        // name contains fourth sorted by shortest first
+        
+        let tickerMatches = symbols.filter { (symbol) -> Bool in
+            symbol.ticker.lowercased() == searchText.lowercased()
         }
         
+        let nameMatches = symbols.filter { (symbol) -> Bool in
+            symbol.name.lowercased() == searchText.lowercased()
+        }
+        
+        let tickerContains = symbols.filter { (symbol) -> Bool in
+            symbol.ticker.lowercased().contains(searchText.lowercased())
+        }
+        
+        var nameContains = symbols.filter { (symbol) -> Bool in
+            symbol.ticker.lowercased().contains(searchText.lowercased())
+        }
+        
+        nameContains.sort(by: {$0.name.characters.count < $1.name.characters.count})
+
+        let matches : [[SymbolResult]] = [tickerMatches, nameMatches, tickerContains, nameContains]
+        
+
+        filteredSymbols =  combineAndFlatten(matches)
+    
         mainTableView.reloadData()
     }
     
     func isFiltering() -> Bool {
         return searchController.isActive && !searchBarIsEmpty()
     }
+    
+    func combineAndFlatten(_ resultArrays: [[SymbolResult]]) -> [SymbolResult] {
+        
+        var results : [SymbolResult] = []
+        
+        for array in resultArrays {
+            
+            for result in array {
+                if !results.contains(result) {
+                    results.append(result)
+                }
+                
+            }
+        }
+        
+        return results
+    }
+    
 }
 
 extension AddStockVC : UITableViewDelegate, UITableViewDataSource {

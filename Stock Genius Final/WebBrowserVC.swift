@@ -81,7 +81,6 @@ extension WebBrowserVC: UIWebViewDelegate, BrowserFooterDelegate {
     
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         
-        NSLog("\n\nrequesting:\(request.url?.absoluteString)")
         return allowRequest(request)
 
     }
