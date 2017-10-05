@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IndexHeaderView" customModule="Stock_Genius_Final" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="s6L-NP-LZm"/>
+                <outlet property="leftIndexView" destination="TNG-C4-qDk" id="eby-Xy-YCc"/>
+                <outlet property="rightIndexView" destination="O46-cP-uuo" id="i3v-j1-Bxe"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="347" height="89"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="NxT-3V-9wQ">
+                    <rect key="frame" x="10" y="10" width="327" height="69"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TNG-C4-qDk" customClass="IndexHeaderSection" customModule="Stock_Genius_Final" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="153" height="69"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O46-cP-uuo" customClass="IndexHeaderSection" customModule="Stock_Genius_Final" customModuleProvider="target">
+                            <rect key="frame" x="174" y="0.0" width="153" height="69"/>
+                        </view>
+                    </subviews>
+                </stackView>
+                <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q9R-er-qu7">
+                    <rect key="frame" x="172.5" y="9.5" width="1" height="69"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="1" id="wDH-DR-dRv"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="NxT-3V-9wQ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="5hH-EW-HFK"/>
+                <constraint firstItem="NxT-3V-9wQ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="6SR-iR-Cv6"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="NxT-3V-9wQ" secondAttribute="bottom" constant="10" id="Cud-lZ-1XD"/>
+                <constraint firstItem="Q9R-er-qu7" firstAttribute="centerX" secondItem="NxT-3V-9wQ" secondAttribute="centerX" id="Daf-gC-Grg"/>
+                <constraint firstItem="Q9R-er-qu7" firstAttribute="centerY" secondItem="NxT-3V-9wQ" secondAttribute="centerY" id="aCC-cc-O7K"/>
+                <constraint firstItem="Q9R-er-qu7" firstAttribute="height" secondItem="NxT-3V-9wQ" secondAttribute="height" id="gKb-h5-YM6"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="NxT-3V-9wQ" secondAttribute="trailing" constant="10" id="pJM-fp-FS8"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="19.5" y="-234.5"/>
+        </view>
+    </objects>
+</document>

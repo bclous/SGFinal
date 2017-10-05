@@ -13,8 +13,9 @@ class WatchListPortfolio: NSObject {
     var name = "watchlist"
     var lastUpdated : Date?
     var holdings : [CurrentStock] = []
+    var trendingStocks : [CurrentStock] = []
     
-    init(name: String, lastUpdated: Date, holdings : [CurrentStock]) {
+    init(name: String, lastUpdated: Date, holdings : [CurrentStock], trendingStocks : [CurrentStock]) {
         self.name = name
         self.lastUpdated = lastUpdated
         self.holdings = holdings
@@ -38,7 +39,18 @@ class WatchListPortfolio: NSObject {
         }
         holdings.sort(by: {$0.rankInPortfolio < $1.rankInPortfolio})
         
-        self.init(name: name, lastUpdated: lastUpdated, holdings: holdings)
+        self.init(name: name, lastUpdated: lastUpdated, holdings: holdings, trendingStocks: [])
+    }
+    
+    public func updateTrendingStocksFromResponse(_ response: [[String : Any]]) {
+        
+        trendingStocks.removeAll()
+        for stockResponse in response {
+            let stock = CurrentStock()
+            stock.updateValesFromTrendingResult(stockResponse)
+            trendingStocks.append(stock)
+        }
+        
     }
     
     public func updatePrices(completion: @escaping (_ success: Bool) -> ()) {

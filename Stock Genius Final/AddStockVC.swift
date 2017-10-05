@@ -135,14 +135,29 @@ extension AddStockVC : UISearchResultsUpdating {
         }
         
         let tickerPartialMatches = filteredSymbols.filter { (symbol) -> Bool in
-            print("\(String(symbol.ticker.characters.prefix(searchText.characters.count)).lowercased())")
-            print("\(searchText.lowercased())")
             return String(symbol.ticker.characters.prefix(searchText.characters.count)).lowercased() == searchText.lowercased()
  
         }
         
+        let namePartialMatches = filteredSymbols.filter { (symbol) -> Bool in
+            return String(symbol.name.characters.prefix(searchText.characters.count)).lowercased() == searchText.lowercased()
+            
+        }
+        
         let nameMatches = filteredSymbols.filter { (symbol) -> Bool in
             symbol.name.lowercased() == searchText.lowercased()
+        }
+        
+        if !namePartialMatches.isEmpty {
+            
+            for idx in (0...namePartialMatches.count - 1).reversed() {
+                let symbol = namePartialMatches[idx]
+                let index = filteredSymbols.index(of: symbol)
+                if let index = index {
+                    filteredSymbols.remove(at: index)
+                    filteredSymbols.insert(symbol, at: 0)
+                }
+            }
         }
         
         if !tickerPartialMatches.isEmpty {

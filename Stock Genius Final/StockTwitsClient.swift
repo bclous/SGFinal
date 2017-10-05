@@ -25,7 +25,7 @@ class StockTwitsClient {
                 let responseDictionary = response.value as? [String : Any]
                 let reponseArray = responseDictionary?["symbols"] as? [[String : Any]]
                 if let responseArray = reponseArray {
-                   // addStocksToStoreFromResponse(responseArray)
+                   DataStore.shared.watchlistPortfolio.updateTrendingStocksFromResponse(responseArray)
                     completionHandler(true)
                 } else {
                     completionHandler(false)

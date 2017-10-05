@@ -26,7 +26,8 @@ class DataStore: NSObject  {
     var individualToggleState : IndividualSegmentType = .sinceStartDate
     let currentPricesKey = "currentPortfolioPrices"
     let startDateKey = "currentPortfolioStartDate"
-    var watchlistPortfolio = WatchListPortfolio(name: "watchlist", lastUpdated: Date(), holdings: [])
+    var watchlistPortfolio = WatchListPortfolio(name: "watchlist", lastUpdated: Date(), holdings: [], trendingStocks: [])
+
 
     var userSavedSymbols : [String] = ["AAPL", "FB", "BRKB", "TSLA"]
 
@@ -47,6 +48,20 @@ class DataStore: NSObject  {
         
         return tickers
     }
+    
+    public func updateTrendingStocks(completion: @escaping (_ success: Bool) -> ()) {
+        StockTwitsClient.pullTrendingSymbols { (success) in
+            if success {
+                let stocks = self.watchlistPortfolio.trendingStocks
+                AlphaVantageClient.shared.updatePricesForStocks(stocks, completion: { (success) in
+                    completion(success)
+                })
+            } else {
+                completion(false)
+            }
+        }
+    }
+    
     
     public func updateAvailableSymbols(completion: @escaping (_ success: Bool) -> ()) {
         AlphaVantageClient.shared.pullAvailableTickersFromIEX { (success) in

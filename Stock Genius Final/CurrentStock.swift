@@ -50,6 +50,11 @@ class CurrentStock: Stock {
         ticker = result.ticker
         companyName = result.name
     }
+    
+    public func updateValesFromTrendingResult(_ result: [String : Any]) {
+        ticker = result["symbol"] as? String ?? ticker
+        companyName = result["title"] as? String ?? companyName
+    }
 
     public func updatePricesFromCache() {
         

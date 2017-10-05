@@ -17,6 +17,7 @@ class WatchlistVC: UIViewController , SectionHeaderClearViewDelegate {
     var isInEditMode : Bool = false
     var indexEditInInProgress = 0
     var editType : EditType = .deleting
+    let trendingStocksView = TrendingStocksView()
     
     let sectionHeaderClearView : SectionHeaderClearView = SectionHeaderClearView()
     
@@ -27,7 +28,6 @@ class WatchlistVC: UIViewController , SectionHeaderClearViewDelegate {
         formatTableView()
         formatSectionHeaderClearView()
         view.backgroundColor = SGConstants.mainBlackColor
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,6 +41,7 @@ class WatchlistVC: UIViewController , SectionHeaderClearViewDelegate {
         DataStore.shared.watchlistPortfolio.updatePrices { (success) in
             self.mainTableView.reloadData()
         }
+        trendingStocksView.updateTrendingStocksView()
     }
     
     func sectionHeaderButtonTapped(_ button: SectionHeaderButton) {
@@ -106,20 +107,29 @@ extension WatchlistVC : UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return !isInEditMode
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DataStore.shared.watchlistPortfolio.holdings.count
+        return section == 0 ? 0 : DataStore.shared.watchlistPortfolio.holdings.count
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60
+        return section == 0 ? 60 : 80
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return sectionHeaderClearView
+        if section == 0 {
+            return sectionHeaderClearView
+        } else {
+            return trendingStocksView
+        }
+ 
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -171,7 +181,7 @@ extension WatchlistVC : WatchListCellDelegate {
     func deleteRequestedAtIndex(_ index: Int) {
         DataStore.shared.watchlistPortfolio.removeStockFromIndex(index)
         isInEditMode = false
-        var indexSet = IndexSet([0])
+        //var indexSet = IndexSet([0])
         mainTableView.reloadData()
         mainTableView.layoutIfNeeded()
         
