@@ -35,10 +35,8 @@ class CurrentStock: Stock {
         let stockDictionary = cacheDictionary?[ticker]
         let cachedCurrentPrice = stockDictionary?[currentPriceKey]
         let cachedlastClosePrice = stockDictionary?[lastClosePriceKey]
-        let cachedSinceStartDatePrice = stockDictionary?[sincePeriodBeginPriceKey]
         adjPriceCurrent = cachedCurrentPrice ?? adjPriceCurrent
         adjPriceLastClose = cachedlastClosePrice ?? adjPriceLastClose
-        adjPriceStartDate = cachedSinceStartDatePrice ?? adjPriceStartDate
     }
     
     public func updateCurrentStockValues(dictionary: Dictionary<String, Any>) {

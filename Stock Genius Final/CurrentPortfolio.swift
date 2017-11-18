@@ -130,12 +130,12 @@ class CurrentPortfolio: NSObject {
         
         for stock in holdings {
             let key = stock.ticker
-            let stockDictionary = ["currentPrice" : stock.adjPriceCurrent, "lastClosePrice" : stock.adjPriceLastClose, "sincePeriodStartPrice" : stock.adjPriceStartDate]
+            let stockDictionary = ["currentPrice" : stock.adjPriceCurrent, "lastClosePrice" : stock.adjPriceLastClose]
             
             priceDictionary.updateValue(stockDictionary, forKey: key)
         }
         
-        let indexDictionary = ["currentPrice" : index.adjPriceCurrent, "lastClosePrice" : index.adjPriceLastClose, "sincePeriodStartPrice" : index.adjPriceStartDate]
+        let indexDictionary = ["currentPrice" : index.adjPriceCurrent, "lastClosePrice" : index.adjPriceLastClose]
         priceDictionary.updateValue(indexDictionary, forKey: index.ticker)
         
         return priceDictionary

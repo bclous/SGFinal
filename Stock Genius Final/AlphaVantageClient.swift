@@ -59,13 +59,13 @@ class AlphaVantageClient: NSObject {
         
         let group = DispatchGroup()
         
-        for index in 0...holdings.count - 1 {
+        for index in 0...tradingHoldings.count - 1 {
             group.enter()
             iexDataForSingleStock(tradingHoldings[index], completion: { (success) in
                 if success {
-                    goodStocks.append(holdings[index])
+                    goodStocks.append(tradingHoldings[index])
                 } else {
-                    badStocks.append(holdings[index])
+                    badStocks.append(tradingHoldings[index])
                 }
                 group.leave()
             })
