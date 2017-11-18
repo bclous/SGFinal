@@ -70,13 +70,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func isPayingUser() -> Bool {
 
-        if UserDefaults.standard.object(forKey: "payingUser") == nil {
-            UserDefaults.standard.set(false, forKey: "payingUser")
-            return false
-        } else {
-            return UserDefaults.standard.object(forKey: "payingUser") as! Bool
-        }
+//        if UserDefaults.standard.object(forKey: "payingUser") == nil {
+//            UserDefaults.standard.set(false, forKey: "payingUser")
+//            return false
+//        } else {
+//            return UserDefaults.standard.object(forKey: "payingUser") as! Bool
+//        }
         
+        return true
     }
     
     func purchaseComplete() {

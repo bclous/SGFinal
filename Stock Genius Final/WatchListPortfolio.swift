@@ -14,11 +14,14 @@ class WatchListPortfolio: NSObject {
     var lastUpdated : Date?
     var holdings : [CurrentStock] = []
     var trendingStocks : [CurrentStock] = []
+    var indices : [CurrentStock] = []
     
     init(name: String, lastUpdated: Date, holdings : [CurrentStock], trendingStocks : [CurrentStock]) {
         self.name = name
         self.lastUpdated = lastUpdated
         self.holdings = holdings
+        super.init()
+        createIndices()
     }
     
     convenience init(fromCoreData portfolio: SGPortfolio) {
@@ -40,6 +43,17 @@ class WatchListPortfolio: NSObject {
         holdings.sort(by: {$0.rankInPortfolio < $1.rankInPortfolio})
         
         self.init(name: name, lastUpdated: lastUpdated, holdings: holdings, trendingStocks: [])
+    }
+    
+    private func createIndices() {
+        let sAndP = CurrentStock()
+        sAndP.companyName = "S&P 500"
+        sAndP.ticker = "INX"
+        let dow = CurrentStock()
+        dow.companyName = "DJIA"
+        dow.ticker = "DJI"
+        indices.append(sAndP)
+        indices.append(dow)
     }
     
     public func updateTrendingStocksFromResponse(_ response: [[String : Any]]) {

@@ -53,19 +53,26 @@ extension TrendingStocksView : UICollectionViewDelegate, UICollectionViewDataSou
         mainCollectionView.delegate = self
         mainCollectionView.dataSource = self
         mainCollectionView.register(TrendingStockCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: "trendingCell")
+        mainCollectionView.register(UINib(nibName: "TrendingTitleCell", bundle: nil), forCellWithReuseIdentifier: "titleCell")
 
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("\(trendingStocks.count)")
-        return trendingStocks.count
+        return DataStore.shared.watchlistPortfolio.trendingStocks.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "trendingCell", for: indexPath) as! TrendingStockCollectionViewCell
-        let stock = trendingStocks[indexPath.row]
-        cell.formatCellWithStock(stock)
-        return cell
+        
+        if indexPath.row == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "titleCell", for: indexPath) as! TrendingTitleCell
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "trendingCell", for: indexPath) as! TrendingStockCollectionViewCell
+            let stock = trendingStocks[indexPath.row - 1]
+            cell.formatCellWithStock(stock)
+            return cell
+        }
+        
     }
     
     

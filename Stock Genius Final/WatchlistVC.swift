@@ -17,8 +17,7 @@ class WatchlistVC: UIViewController , SectionHeaderClearViewDelegate {
     var isInEditMode : Bool = false
     var indexEditInInProgress = 0
     var editType : EditType = .deleting
-    let trendingStocksView = TrendingStocksView()
-    
+    let watchlistHeaderView = IndexHeaderView()
     let sectionHeaderClearView : SectionHeaderClearView = SectionHeaderClearView()
     
     override func viewDidLoad() {
@@ -41,7 +40,13 @@ class WatchlistVC: UIViewController , SectionHeaderClearViewDelegate {
         DataStore.shared.watchlistPortfolio.updatePrices { (success) in
             self.mainTableView.reloadData()
         }
-        trendingStocksView.updateTrendingStocksView()
+        watchlistHeaderView.refreshView()
+        
+        AlphaVantageClient.shared.updateIndexPrices { (success) in
+            
+            self.watchlistHeaderView.formatViewWithIndices(leftIndex: DataStore.shared.watchlistPortfolio.indices[0], rightIndex: DataStore.shared.watchlistPortfolio.indices[1])
+        }
+        
     }
     
     func sectionHeaderButtonTapped(_ button: SectionHeaderButton) {
@@ -87,24 +92,32 @@ extension WatchlistVC : UITableViewDelegate, UITableViewDataSource {
         mainTableView.delegate = self
         mainTableView.dataSource = self
         mainTableView.register(UINib(nibName: "WatchlistCell", bundle: nil), forCellReuseIdentifier: "watchlistCell")
+        mainTableView.register(TrendingStocksCell.classForCoder(), forCellReuseIdentifier: "trendingCell")
         mainTableView.separatorStyle = .none
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "watchlistCell") as! WatchlistCell
-        let stock = DataStore.shared.watchlistPortfolio.holdings[indexPath.row]
-        cell.delegate = self
-        
-        if isInEditMode {
-            let activeEditCellState : WatchListCellState = editType == .deleting ? .editingActiveForDelete : .editingActiveForReorder
-            let cellState = indexPath.row == indexEditInInProgress ? activeEditCellState : .editingInactive
-            cell.formatCellWithStock(stock, index: indexPath.row, cellState: cellState)
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "trendingCell") as! TrendingStocksCell
+            cell.formatCell()
+            return cell
         } else {
-            cell.formatCellWithStock(stock, index: indexPath.row, cellState: .normal)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "watchlistCell") as! WatchlistCell
+            let stock = DataStore.shared.watchlistPortfolio.holdings[indexPath.row]
+            cell.delegate = self
+            
+            if isInEditMode {
+                let activeEditCellState : WatchListCellState = editType == .deleting ? .editingActiveForDelete : .editingActiveForReorder
+                let cellState = indexPath.row == indexEditInInProgress ? activeEditCellState : .editingInactive
+                cell.formatCellWithStock(stock, index: indexPath.row, cellState: cellState)
+            } else {
+                cell.formatCellWithStock(stock, index: indexPath.row, cellState: .normal)
+            }
+            
+            return cell
         }
-        
-        return cell
+
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -115,19 +128,23 @@ extension WatchlistVC : UITableViewDelegate, UITableViewDataSource {
         return !isInEditMode
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return indexPath.section == 0 ? 60 : 60
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 0 : DataStore.shared.watchlistPortfolio.holdings.count
+        return section == 0 ? 1 : DataStore.shared.watchlistPortfolio.holdings.count
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? 60 : 80
+        return section == 0 ? 70 : 60
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             return sectionHeaderClearView
         } else {
-            return trendingStocksView
+            return watchlistHeaderView
         }
  
     }

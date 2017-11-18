@@ -43,13 +43,14 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="NxT-3V-9wQ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="5hH-EW-HFK"/>
                 <constraint firstItem="NxT-3V-9wQ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="6SR-iR-Cv6"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="NxT-3V-9wQ" secondAttribute="bottom" constant="10" id="Cud-lZ-1XD"/>
                 <constraint firstItem="Q9R-er-qu7" firstAttribute="centerX" secondItem="NxT-3V-9wQ" secondAttribute="centerX" id="Daf-gC-Grg"/>
+                <constraint firstItem="Q9R-er-qu7" firstAttribute="height" secondItem="NxT-3V-9wQ" secondAttribute="height" id="Ut8-md-ViR"/>
                 <constraint firstItem="Q9R-er-qu7" firstAttribute="centerY" secondItem="NxT-3V-9wQ" secondAttribute="centerY" id="aCC-cc-O7K"/>
-                <constraint firstItem="Q9R-er-qu7" firstAttribute="height" secondItem="NxT-3V-9wQ" secondAttribute="height" id="gKb-h5-YM6"/>
+                <constraint firstItem="NxT-3V-9wQ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="e7a-pD-1r2"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="NxT-3V-9wQ" secondAttribute="bottom" constant="10" id="n0v-uk-wYJ"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="NxT-3V-9wQ" secondAttribute="trailing" constant="10" id="pJM-fp-FS8"/>
+                <constraint firstItem="Q9R-er-qu7" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="rEl-Ml-Zi3"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

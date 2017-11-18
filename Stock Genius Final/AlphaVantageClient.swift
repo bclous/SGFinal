@@ -31,6 +31,7 @@ class AlphaVantageClient: NSObject {
     let apiPrefix = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol="
     let apiKeySegment = "&apikey="
     var apiKey = "5875"
+    let alphaVantagePriceHistoryPrefix = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol="
     
     let iexSingleStockPrefix = "https://api.iextrading.com/1.0/stock/"
     let iexSingStockSuffix = "/quote"
@@ -94,6 +95,28 @@ class AlphaVantageClient: NSObject {
             return matchingStocks[0]
         } else {
             return nil
+        }
+        
+    }
+    
+    public func updateIndexPrices(completion: @escaping (_ success: Bool) -> ()) {
+        
+        let group = DispatchGroup()
+        for index in 0...DataStore.shared.watchlistPortfolio.indices.count - 1 {
+            let stock = DataStore.shared.watchlistPortfolio.indices[index]
+            let ticker = stock.ticker
+            let url = alphaVantagePriceHistoryPrefix + ticker + "&apikey=" + apiKey
+            let request = Alamofire.request(url)
+            group.enter()
+            request.responseJSON(completionHandler: { (response) in
+                let responseDictionary = response.value as? [String : Any] ?? [:]
+                stock.updatePricesFromAlphaVantageResponse(responseDictionary)
+                group.leave()
+            })
+        }
+        
+        group.notify(queue: .main) {
+            completion(true)
         }
         
     }

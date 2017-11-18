@@ -40,7 +40,7 @@ class TrendingStockIndividualView: UIView {
         tickerLabel.textColor = SGConstants.fontColorWhitePrimary
         priceLabel.textColor = SGConstants.fontColorWhitePrimary
         priceChangeLabel.textColor = SGConstants.fontColorWhiteSecondary
-        backgroundView.backgroundColor = UIColor.white.withAlphaComponent(0.1)
+        backgroundView.backgroundColor = UIColor.white.withAlphaComponent(0.05)
         backgroundView.layer.cornerRadius = 5
         backgroundView.layer.borderWidth = 1
     }

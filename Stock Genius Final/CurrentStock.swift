@@ -68,6 +68,26 @@ class CurrentStock: Stock {
         adjPriceStartDate = cachedSinceStartDatePrice ?? adjPriceStartDate
     }
     
+    public func updatePricesFromAlphaVantageResponse(_ response: [String : Any]) {
+        let priceHistory = response["Time Series (Daily)"] as? [String : [String : String]] ?? [:]
+        var dateCloses : [(date: Date, close: Float)] = []
+        
+        for (dateString, value) in priceHistory {
+            let date = Date.dateFromString(dateString, dateFormat: "yyyy-MM-dd") ?? Date()
+            let closingPrice = value["4. close"] ?? "0"
+            let close = Float(closingPrice) ?? 0
+            let dateClose = (date: date, close: close)
+            dateCloses.append(dateClose)
+        }
+        
+        dateCloses.sort(by: {$0.date > $1.date})
+        
+        if dateCloses.count > 1 {
+            adjPriceCurrent = dateCloses[0].close
+            adjPriceLastClose = dateCloses[1].close
+        }
+    }
+    
     public func updateCurrentStockValues(dictionary: Dictionary<String, Any>) {
         isTrading = dictionary["isTrading"] as? Bool ?? true
         companyName = dictionary["name"] as? String ?? ""

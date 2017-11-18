@@ -62,7 +62,6 @@ class DataStore: NSObject  {
         }
     }
     
-    
     public func updateAvailableSymbols(completion: @escaping (_ success: Bool) -> ()) {
         AlphaVantageClient.shared.pullAvailableTickersFromIEX { (success) in
             completion(success)
@@ -113,7 +112,6 @@ class DataStore: NSObject  {
         }
         
     }
-    
     
     public func appNeedsFullUpdateOnSplashScreen() -> Bool {
         
