@@ -84,12 +84,12 @@
                   moduleName = "Stock Genius Final"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bclous/Desktop/SGFinal/Stock%20Genius%20Final/AlphaVantageClient.swift"
-                  timestampString = "532729654.797044"
+                  timestampString = "532973884.54523"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "55"
                   endingLineNumber = "55"
-                  offsetFromSymbolStart = "959">
+                  offsetFromSymbolStart = "955">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -99,7 +99,7 @@
                   moduleName = "Stock Genius Final"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bclous/Desktop/SGFinal/Stock%20Genius%20Final/AlphaVantageClient.swift"
-                  timestampString = "532729654.798336"
+                  timestampString = "532973884.547133"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "55"
@@ -114,7 +114,7 @@
                   moduleName = "Stock Genius Final"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bclous/Desktop/SGFinal/Stock%20Genius%20Final/AlphaVantageClient.swift"
-                  timestampString = "532729654.799806"
+                  timestampString = "532973884.548903"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "55"

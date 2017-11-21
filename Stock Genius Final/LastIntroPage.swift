@@ -23,6 +23,8 @@ protocol IntroScreenDelegate: class {
 class LastIntroPage: UIView {
 
    
+    @IBOutlet weak var buttonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var labelBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var restoreLabel: UILabel!
     @IBOutlet weak var termsLabel: UILabel!
     @IBOutlet weak var subscribeButton: UIButton!
@@ -30,6 +32,7 @@ class LastIntroPage: UIView {
     @IBOutlet weak var restoreButton: UIButton!
     weak var delegate : IntroScreenDelegate?
     @IBOutlet weak var mainImageView: UIImageView!
+    var haveChangedConstraints = false
  
     
     override init(frame: CGRect) { // for using CustomView in code
@@ -101,5 +104,17 @@ class LastIntroPage: UIView {
     @IBAction func restoreButtonTapped(_ sender: Any) {
         delegate?.introScreenUserInteraction(.restore)
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if (!haveChangedConstraints && frame.height == 812) {
+            labelBottomConstraint.constant = labelBottomConstraint.constant + 45
+            buttonBottomConstraint.constant = buttonBottomConstraint.constant + 45
+            haveChangedConstraints = true
+        }
+        
+        
+    }
+
 
 }

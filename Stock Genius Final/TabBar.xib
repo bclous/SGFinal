@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -60,8 +60,8 @@
                                 <constraint firstItem="EbC-Xh-uOH" firstAttribute="centerX" secondItem="gRZ-zZ-0Fm" secondAttribute="centerX" id="23g-zH-925"/>
                                 <constraint firstItem="gno-uT-tir" firstAttribute="centerX" secondItem="gRZ-zZ-0Fm" secondAttribute="centerX" id="7Lh-nC-vCd"/>
                                 <constraint firstItem="gno-uT-tir" firstAttribute="top" secondItem="gRZ-zZ-0Fm" secondAttribute="top" constant="5" id="IKb-3Y-u7M"/>
-                                <constraint firstAttribute="bottom" secondItem="lFf-rP-8So" secondAttribute="bottom" constant="3" id="P1n-9T-gDt"/>
                                 <constraint firstAttribute="trailing" secondItem="lFf-rP-8So" secondAttribute="trailing" constant="3" id="bBg-mX-K5a"/>
+                                <constraint firstItem="lFf-rP-8So" firstAttribute="top" secondItem="gno-uT-tir" secondAttribute="bottom" constant="2" id="e32-JL-1A1"/>
                                 <constraint firstItem="EbC-Xh-uOH" firstAttribute="width" secondItem="gRZ-zZ-0Fm" secondAttribute="width" id="ep3-hd-1P4"/>
                                 <constraint firstItem="EbC-Xh-uOH" firstAttribute="centerY" secondItem="gRZ-zZ-0Fm" secondAttribute="centerY" id="fAb-YG-hUp"/>
                                 <constraint firstItem="EbC-Xh-uOH" firstAttribute="height" secondItem="gRZ-zZ-0Fm" secondAttribute="height" id="hWa-de-gEX"/>
@@ -96,7 +96,7 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="e84-8W-7ic" secondAttribute="bottom" constant="3" id="Axu-Gb-aPS"/>
+                                <constraint firstItem="e84-8W-7ic" firstAttribute="top" secondItem="oKE-4f-nb9" secondAttribute="bottom" constant="2" id="D0Q-yh-fvm"/>
                                 <constraint firstItem="kUv-rk-WV9" firstAttribute="centerX" secondItem="wnw-S4-ukf" secondAttribute="centerX" id="DkW-sL-yx6"/>
                                 <constraint firstItem="oKE-4f-nb9" firstAttribute="centerX" secondItem="wnw-S4-ukf" secondAttribute="centerX" id="Gq5-kr-MuK"/>
                                 <constraint firstItem="e84-8W-7ic" firstAttribute="leading" secondItem="wnw-S4-ukf" secondAttribute="leading" constant="3" id="I5A-Ar-DS2"/>
@@ -141,7 +141,7 @@
                                 <constraint firstItem="Tjf-Pn-5PQ" firstAttribute="centerX" secondItem="Csx-KV-p19" secondAttribute="centerX" id="he4-e1-Xd8"/>
                                 <constraint firstItem="Ear-4y-Mq2" firstAttribute="leading" secondItem="Csx-KV-p19" secondAttribute="leading" constant="3" id="jNI-Hy-BmT"/>
                                 <constraint firstAttribute="trailing" secondItem="Ear-4y-Mq2" secondAttribute="trailing" constant="3" id="mzi-HS-Sj1"/>
-                                <constraint firstAttribute="bottom" secondItem="Ear-4y-Mq2" secondAttribute="bottom" constant="3" id="o2D-2e-chP"/>
+                                <constraint firstItem="Ear-4y-Mq2" firstAttribute="top" secondItem="Tjf-Pn-5PQ" secondAttribute="bottom" constant="4" id="rvz-PV-JEa"/>
                                 <constraint firstItem="HAc-Io-vMQ" firstAttribute="centerY" secondItem="Csx-KV-p19" secondAttribute="centerY" id="s8J-S6-M3r"/>
                                 <constraint firstItem="HAc-Io-vMQ" firstAttribute="centerX" secondItem="Csx-KV-p19" secondAttribute="centerX" id="xBz-nb-wLr"/>
                             </constraints>
